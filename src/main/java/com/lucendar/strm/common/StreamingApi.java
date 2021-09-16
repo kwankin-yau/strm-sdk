@@ -24,9 +24,10 @@ import java.util.List;
 
 public class StreamingApi {
 
-    public static final int PROTO__HTTP_FLV = 0;
-    public static final int PROTO__RTMP = 1;
-    public static final int PROTO__HLS = 2;
+    public static final byte PROTO__HTTP_FLV = 0;
+    public static final byte PROTO__RTMP = 1;
+    public static final byte PROTO__HLS = 2;
+    public static final byte PROTO__RAW = 3;
 
     public static final String CHANNEL_TYPE__LIVE = "live";
     public static final String CHANNEL_TYPE__REPLAY = "replay";
@@ -49,6 +50,25 @@ public class StreamingApi {
 
     public static String encodeStreamName(String simNo, short channelId, boolean live) {
         return normalizeSimNo(simNo) + "_" + channelId + "_" + (live ? "1" : "0");
+    }
+
+    /**
+     * Check whether an given `reqId` is valid.
+     *
+     * @param reqId
+     * @return
+     */
+    public static boolean isValidReqId(String reqId) {
+        if (reqId == null || reqId.isEmpty())
+            return false;
+
+        for (int i = 0; i < reqId.length(); i++) {
+            char c = reqId.charAt(i);
+            if (!Character.isDigit(c) && !Character.isLetter(c) && c != '-' && c != '_' && c != '.')
+                return false;
+        }
+
+        return true;
     }
 
     public static class TimedToken {
@@ -590,6 +610,14 @@ public class StreamingApi {
         public static final byte CODE_STREAM__PRIMARY = 0;
         public static final byte CODE_STREAM__SUB = 1;
 
+        public static final int MIN_INTERVAL__FLV = 10;
+        public static final int DEFAULT_INTERVAL__FLV = 20;
+        public static final int MAX_INTERVAL__FLV = 30 * 60;
+
+        public static final int MIN_INTERVAL__HLS = 15;
+        public static final int DEFAULT_INTERVAL__HLS = 20;
+        public static final int MAX_INTERVAL__HLS = 30 * 60;
+
         public static boolean dataTypeContainsServerAudio(int dataType) {
             switch (dataType) {
                 case DATA_TYPE__TALK:
@@ -613,13 +641,15 @@ public class StreamingApi {
         private int dataTyp;
         private byte codeStrm;
         private boolean recordOnServer;
+        private Integer keepInterval;
 
         public SubscribeChannelReq() {
         }
 
         public SubscribeChannelReq(
                 String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
-                byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm, boolean recordOnServer) {
+                byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm, boolean recordOnServer,
+                Integer keepInterval) {
             this.reqId = reqId;
             this.callback = callback;
             this.user = user;
@@ -632,6 +662,7 @@ public class StreamingApi {
             this.dataTyp = dataTyp;
             this.codeStrm = codeStrm;
             this.recordOnServer = recordOnServer;
+            this.keepInterval = keepInterval;
         }
 
         public String getReqId() {
@@ -749,14 +780,27 @@ public class StreamingApi {
             this.recordOnServer = recordOnServer;
         }
 
+        public Integer getKeepInterval() {
+            return keepInterval;
+        }
+
+        public void setKeepInterval(Integer keepInterval) {
+            this.keepInterval = keepInterval;
+        }
+
         /**
          * Validate the request parameters.
          *
          * @return error message, null for OK.
          */
         public String validate() {
-            if (callback == null)
-                return "callback";
+            if (reqId != null) {
+                if (!isValidReqId(reqId))
+                    return "reqId";
+            }
+
+//            if (callback == null)
+//                return "callback";
 
             if (user == null)
                 return "user";
@@ -788,7 +832,46 @@ public class StreamingApi {
                     return "codeStrm";
             }
 
+            switch (proto) {
+                case PROTO__HLS:
+                    if (keepInterval != null) {
+                        if (keepInterval < MIN_INTERVAL__HLS || keepInterval > MAX_INTERVAL__HLS)
+                            return "keepInterval";
+                    }
+                    break;
+
+                case PROTO__HTTP_FLV:
+                    if (keepInterval != null) {
+                        if (keepInterval < MIN_INTERVAL__FLV || keepInterval > MAX_INTERVAL__FLV)
+                            return "keepInterval";
+                    }
+                    break;
+
+                case PROTO__RTMP:
+                    break;
+
+                default:
+                    return "proto";
+            }
+
+
             return null;
+        }
+
+        public static int defaultKeepInterval(int proto) {
+            switch (proto) {
+                case PROTO__HTTP_FLV:
+                    return DEFAULT_INTERVAL__FLV;
+
+                case PROTO__HLS:
+                    return DEFAULT_INTERVAL__HLS;
+
+                case PROTO__RTMP:
+                    return 0;
+
+                default:
+                    throw new RuntimeException("Invalid parameter: `proto`.");
+            }
         }
 
         @Override
@@ -806,6 +889,7 @@ public class StreamingApi {
                     ", dataTyp=" + dataTyp +
                     ", codeStrm=" + codeStrm +
                     ", recordOnServer=" + recordOnServer +
+                    ", keepInterval=" + keepInterval +
                     '}';
         }
     }
@@ -2057,6 +2141,7 @@ public class StreamingApi {
         public static final int CLOSE_CAUSE__exceptionCaught = 4;
         public static final int CLOSE_CAUSE__keepTimeout = 5;
         public static final int CLOSE_CAUSE__termDataTimeout = 6;
+        public static final int CLOSE_CAUSE__badStrmFormat = 7;
 
 
         private String act;
@@ -2252,6 +2337,10 @@ public class StreamingApi {
 
                         case CLOSE_CAUSE__termStrmClose:
                             closeReason = "Terminal connection closed.";
+                            break;
+
+                        case CLOSE_CAUSE__badStrmFormat:
+                            closeReason = "Bad stream format.";
                             break;
 
                         default:
