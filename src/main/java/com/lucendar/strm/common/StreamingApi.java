@@ -607,8 +607,16 @@ public class StreamingApi {
         public static final int DATA_TYPE__LISTEN = 3;
         public static final int DATA_TYPE__BROADCAST = 4;
 
-        public static final byte CODE_STREAM__PRIMARY = 0;
-        public static final byte CODE_STREAM__SUB = 1;
+        public static final byte LIVE_CODE_STREAM__PRIMARY = 0;
+        public static final byte LIVE_CODE_STREAM__SUB = 1;
+
+        public static final byte REPLAY_CODE_STREAM__ANY = 0;
+        public static final byte REPLAY_CODE_STREAM__PRIMARY = 1;
+        public static final byte REPLAY_CODE_STREAM__SUB = 2;
+
+        public static final byte REPLAY_STORAGE_TYPE__ANY = 0;
+        public static final byte REPLAY_STORAGE_TYPE__PRIMARY = 1;
+        public static final byte REPLAY_STORAGE_TYPE__BACKUP = 2;
 
         public static final int MIN_INTERVAL__FLV = 10;
         public static final int DEFAULT_INTERVAL__FLV = 20;
@@ -745,6 +753,7 @@ public class StreamingApi {
         public boolean isLive() {
             return CHANNEL_TYPE__LIVE.equals(typ);
         }
+        public boolean isReplay() { return CHANNEL_TYPE__REPLAY.equals(typ); }
 
         public String streamName() {
             return encodeStreamName(simNo, channelId, isLive());
@@ -805,7 +814,13 @@ public class StreamingApi {
             if (user == null)
                 return "user";
 
-            if (typ == null || (!typ.equals(CHANNEL_TYPE__LIVE) && !typ.equals(CHANNEL_TYPE__REPLAY)))
+
+
+            if (typ == null)
+                return "typ";
+
+            boolean live = isLive();
+            if (!live && !isReplay())
                 return "typ";
 
             if (simNo == null || simNo.isEmpty() || simNo.contains(":"))
@@ -823,13 +838,25 @@ public class StreamingApi {
                     return "dataTyp";
             }
 
-            switch (codeStrm) {
-                case CODE_STREAM__PRIMARY:
-                case CODE_STREAM__SUB:
-                    break;
+            if (live) {
+                switch (codeStrm) {
+                    case LIVE_CODE_STREAM__PRIMARY:
+                    case LIVE_CODE_STREAM__SUB:
+                        break;
 
-                default:
-                    return "codeStrm";
+                    default:
+                        return "codeStrm";
+                }
+            } else {
+                switch (codeStrm) {
+                    case REPLAY_CODE_STREAM__ANY:
+                    case REPLAY_CODE_STREAM__PRIMARY:
+                    case REPLAY_CODE_STREAM__SUB:
+                        break;
+
+                    default:
+                        return "codeStrm";
+                }
             }
 
             switch (proto) {
