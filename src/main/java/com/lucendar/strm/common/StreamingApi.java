@@ -163,16 +163,18 @@ public class StreamingApi {
         private long reqTm;
         private int proto;
         private int closeCause;
+        private long lastKeep;
 
         public ReqStat() {
         }
 
-        public ReqStat(String reqId, String userId, long reqTm, int proto, int closeCause) {
+        public ReqStat(String reqId, String userId, long reqTm, int proto, int closeCause, long lastKeep) {
             this.reqId = reqId;
             this.userId = userId;
             this.reqTm = reqTm;
             this.proto = proto;
             this.closeCause = closeCause;
+            this.lastKeep = lastKeep;
         }
 
         public String getReqId() {
@@ -215,6 +217,14 @@ public class StreamingApi {
             this.closeCause = closeCause;
         }
 
+        public long getLastKeep() {
+            return lastKeep;
+        }
+
+        public void setLastKeep(long lastKeep) {
+            this.lastKeep = lastKeep;
+        }
+
         @Override
         public String toString() {
             return "ReqStat{" +
@@ -223,6 +233,7 @@ public class StreamingApi {
                     ", reqTm=" + reqTm +
                     ", proto=" + proto +
                     ", closeCause=" + closeCause +
+                    ", lastKeep=" + lastKeep +
                     '}';
         }
     }
@@ -2100,8 +2111,8 @@ public class StreamingApi {
     public static class StreamingConfig {
         private int maxLivePlayTimeInSeconds;
         private String externalServerAddr;
-        private int govLiveStrmPort;
-        private int govReplayStrmPort;
+//        private int govLiveStrmPort;
+//        private int govReplayStrmPort;
 
 
         public int getMaxLivePlayTimeInSeconds() {
@@ -2120,29 +2131,27 @@ public class StreamingApi {
             this.externalServerAddr = externalServerAddr;
         }
 
-        public int getGovLiveStrmPort() {
-            return govLiveStrmPort;
-        }
-
-        public void setGovLiveStrmPort(int govLiveStrmPort) {
-            this.govLiveStrmPort = govLiveStrmPort;
-        }
-
-        public int getGovReplayStrmPort() {
-            return govReplayStrmPort;
-        }
-
-        public void setGovReplayStrmPort(int govReplayStrmPort) {
-            this.govReplayStrmPort = govReplayStrmPort;
-        }
+//        public int getGovLiveStrmPort() {
+//            return govLiveStrmPort;
+//        }
+//
+//        public void setGovLiveStrmPort(int govLiveStrmPort) {
+//            this.govLiveStrmPort = govLiveStrmPort;
+//        }
+//
+//        public int getGovReplayStrmPort() {
+//            return govReplayStrmPort;
+//        }
+//
+//        public void setGovReplayStrmPort(int govReplayStrmPort) {
+//            this.govReplayStrmPort = govReplayStrmPort;
+//        }
 
         @Override
         public String toString() {
             return "StreamingConfig{" +
                     "maxLivePlayTimeInSeconds=" + maxLivePlayTimeInSeconds +
                     ", externalServerAddr='" + externalServerAddr + '\'' +
-                    ", govLiveStrmPort=" + govLiveStrmPort +
-                    ", govReplayStrmPort=" + govReplayStrmPort +
                     '}';
         }
     }
