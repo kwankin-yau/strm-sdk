@@ -7,6 +7,8 @@
  *******************************************************************************/
 package com.lucendar.strm.common;
 
+import com.lucendar.strm.common.strm.UriScheme;
+
 import javax.management.Attribute;
 import javax.management.AttributeList;
 import javax.management.InstanceNotFoundException;
@@ -621,6 +623,11 @@ public class StreamingApi {
         public static final byte LIVE_CODE_STREAM__PRIMARY = 0;
         public static final byte LIVE_CODE_STREAM__SUB = 1;
 
+        public static final byte REPLAY_MEDIA_TYPE__AV = 0;
+        public static final byte REPLAY_MEDIA_TYPE__AUDIO = 1;
+        public static final byte REPLAY_MEDIA_TYPE__VIDEO = 2;
+        public static final byte REPLAY_MEDIA_TYPE__AUDIO_OR_VIDEO = 3;
+
         public static final byte REPLAY_CODE_STREAM__ANY = 0;
         public static final byte REPLAY_CODE_STREAM__PRIMARY = 1;
         public static final byte REPLAY_CODE_STREAM__SUB = 2;
@@ -661,6 +668,7 @@ public class StreamingApi {
         private byte codeStrm;
         private boolean recordOnServer;
         private Integer keepInterval;
+        private String uriScheme;
 
         public SubscribeChannelReq() {
         }
@@ -668,7 +676,8 @@ public class StreamingApi {
         public SubscribeChannelReq(
                 String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
                 byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm, boolean recordOnServer,
-                Integer keepInterval) {
+                Integer keepInterval,
+                String uriScheme) {
             this.reqId = reqId;
             this.callback = callback;
             this.user = user;
@@ -682,6 +691,7 @@ public class StreamingApi {
             this.codeStrm = codeStrm;
             this.recordOnServer = recordOnServer;
             this.keepInterval = keepInterval;
+            this.uriScheme = uriScheme;
         }
 
         public String getReqId() {
@@ -771,10 +781,13 @@ public class StreamingApi {
         }
 
         /**
-         * Requested data type of the channel. One of `DATA_TYPE__XXXX`.
-         * Only valid for `live` channel.
+         * Return requested data type (for live) or media type (for replay) of the channel.
+         * <ul>
+         *     <li>For live channel, then value domain of the fields is one of `DATA_TYPE__XXXX`.</li>
+         *     <li>For replay channel, then value domain of the fields is one of `REPLAY_MEDIA_TYPE__XXX`.</li>
+         * </ul>
          *
-         * @return
+         * @return data type (for live) or media type (for replay) of the channel
          */
         public int getDataTyp() {
             return dataTyp;
@@ -808,6 +821,21 @@ public class StreamingApi {
             this.keepInterval = keepInterval;
         }
 
+        public String getUriScheme() {
+            return uriScheme;
+        }
+
+        public void setUriScheme(String uriScheme) {
+            this.uriScheme = uriScheme;
+        }
+
+        public UriScheme uriScheme(UriScheme defaultValue) {
+            if (this.uriScheme == null)
+                return defaultValue;
+            else
+                return UriScheme.of(this.uriScheme);
+        }
+
         /**
          * Validate the request parameters.
          *
@@ -837,16 +865,29 @@ public class StreamingApi {
             if (simNo == null || simNo.isEmpty() || simNo.contains(":"))
                 return "simNo";
 
-            switch (dataTyp) {
-                case DATA_TYPE__AV:
-                case DATA_TYPE__VIDEO:
-                case DATA_TYPE__TALK:
-                case DATA_TYPE__LISTEN:
-                case DATA_TYPE__BROADCAST:
-                    break;
+            if (live) {
+                switch (dataTyp) {
+                    case DATA_TYPE__AV:
+                    case DATA_TYPE__VIDEO:
+                    case DATA_TYPE__TALK:
+                    case DATA_TYPE__LISTEN:
+                    case DATA_TYPE__BROADCAST:
+                        break;
 
-                default:
-                    return "dataTyp";
+                    default:
+                        return "dataTyp";
+                }
+            } else {
+                switch (dataTyp) {
+                    case REPLAY_MEDIA_TYPE__AV:
+                    case REPLAY_MEDIA_TYPE__AUDIO:
+                    case REPLAY_MEDIA_TYPE__VIDEO:
+                    case REPLAY_MEDIA_TYPE__AUDIO_OR_VIDEO:
+                        break;
+
+                    default:
+                        return "dataTyp";
+                }
             }
 
             if (live) {
@@ -892,6 +933,11 @@ public class StreamingApi {
                     return "proto";
             }
 
+            if (uriScheme != null) {
+                if (!UriScheme.isValid(uriScheme))
+                    return "uriScheme";
+            }
+
 
             return null;
         }
@@ -928,6 +974,7 @@ public class StreamingApi {
                     ", codeStrm=" + codeStrm +
                     ", recordOnServer=" + recordOnServer +
                     ", keepInterval=" + keepInterval +
+                    ", uriScheme='" + uriScheme + '\'' +
                     '}';
         }
     }
