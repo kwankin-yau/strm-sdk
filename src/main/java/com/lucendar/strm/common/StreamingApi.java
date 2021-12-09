@@ -27,8 +27,8 @@ import java.util.List;
 public class StreamingApi {
 
     public static final byte PROTO__HTTP_FLV = 0;
-    public static final byte PROTO__RTMP = 1;
-    public static final byte PROTO__HLS = 2;
+    public static final byte PROTO__HLS = 1;
+    public static final byte PROTO__RTMP = 2;
     public static final byte PROTO__RAW = 3;
 
     public static final String CHANNEL_TYPE__LIVE = "live";
@@ -568,12 +568,18 @@ public class StreamingApi {
         private String userId;
         private int userGrade;
 
+        /**
+         * User access token, used in websocket handler to verify client
+         */
+        private String token;
+
         public StrmUserInfo() {
         }
 
-        public StrmUserInfo(String userId, int userGrade) {
+        public StrmUserInfo(String userId, int userGrade, String token) {
             this.userId = userId;
             this.userGrade = userGrade;
+            this.token = token;
         }
 
         public String getUserId() {
@@ -603,11 +609,20 @@ public class StreamingApi {
             return userGrade == USER_GRADE__GOV;
         }
 
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+
         @Override
         public String toString() {
             return "StrmUserInfo{" +
                     "userId='" + userId + '\'' +
                     ", userGrade=" + userGrade +
+                    ", token='" + token + '\'' +
                     '}';
         }
     }
@@ -669,6 +684,7 @@ public class StreamingApi {
         private boolean recordOnServer;
         private Integer keepInterval;
         private String uriScheme;
+        private Integer talkSendProtoVer;
 
         public SubscribeChannelReq() {
         }
@@ -677,7 +693,8 @@ public class StreamingApi {
                 String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
                 byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm, boolean recordOnServer,
                 Integer keepInterval,
-                String uriScheme) {
+                String uriScheme,
+                Integer talkSendProtoVer) {
             this.reqId = reqId;
             this.callback = callback;
             this.user = user;
@@ -692,6 +709,7 @@ public class StreamingApi {
             this.recordOnServer = recordOnServer;
             this.keepInterval = keepInterval;
             this.uriScheme = uriScheme;
+            this.talkSendProtoVer = talkSendProtoVer;
         }
 
         public String getReqId() {
@@ -836,6 +854,14 @@ public class StreamingApi {
                 return UriScheme.of(this.uriScheme);
         }
 
+        public Integer getTalkSendProtoVer() {
+            return talkSendProtoVer;
+        }
+
+        public void setTalkSendProtoVer(Integer talkSendProtoVer) {
+            this.talkSendProtoVer = talkSendProtoVer;
+        }
+
         /**
          * Validate the request parameters.
          *
@@ -853,7 +879,8 @@ public class StreamingApi {
             if (user == null)
                 return "user";
 
-
+            if (user.token == null || user.token.isEmpty())
+                return "user.token";
 
             if (typ == null)
                 return "typ";
@@ -975,6 +1002,7 @@ public class StreamingApi {
                     ", recordOnServer=" + recordOnServer +
                     ", keepInterval=" + keepInterval +
                     ", uriScheme='" + uriScheme + '\'' +
+                    ", talkSendProtoVer=" + talkSendProtoVer +
                     '}';
         }
     }
@@ -987,6 +1015,7 @@ public class StreamingApi {
         private String mediaTyp;
         private String playUrl;
         private String wsUrl;
+//        private String wssUrl;
         private int keepIntervalSeconds;
         private String host;
         private int port;

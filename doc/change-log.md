@@ -1,3 +1,15 @@
+# 3.3.3 - [2021-11-15]
+## Added
+* `AvUploadNotif`
+* `AvUploadProgressRpt`
+
+## Changed
+- value of `StreamingApi.PROTO__HLS` changed to 1
+- value of `StreamingApi.PROTO__RTMP` changed to 2
+- `QueryInfoResult` implement `Cloneable` interface
+- `SubscribeChannelReq.user` property now is mandatory
+- `StrmUserInfo` add `token` property(mandatory)
+
 # 3.3.2 - [2021-11-07]
 ## Added
 * `UriScheme` enum

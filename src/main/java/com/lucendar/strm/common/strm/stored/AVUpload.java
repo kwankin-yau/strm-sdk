@@ -17,6 +17,10 @@ public class AVUpload implements Cloneable {
     public static final byte STATE__CANCELED = 6;
     public static final byte STATE__TIMEOUT = 7;
 
+    public static boolean isEndingState(int st) {
+        return st > 3;
+    }
+
     private String reqId;
     private String reqTm;
     private int st;

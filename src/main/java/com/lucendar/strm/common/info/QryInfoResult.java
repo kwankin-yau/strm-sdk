@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @since 3.3.1
  */
-public class QryInfoResult {
+public class QryInfoResult implements Cloneable {
 
     private String ver;
     private long startTm;
@@ -71,5 +71,18 @@ public class QryInfoResult {
                 ", instanceId=" + instanceId +
                 ", attrs=" + attrs +
                 '}';
+    }
+
+    @Override
+    public QryInfoResult clone() {
+        try {
+            QryInfoResult clone = (QryInfoResult) super.clone();
+            if (this.attrs != null)
+                clone.attrs = new HashMap<>(this.attrs);
+
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
