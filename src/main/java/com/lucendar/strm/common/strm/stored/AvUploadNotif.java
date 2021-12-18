@@ -7,6 +7,8 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+import java.util.StringJoiner;
+
 /**
  * 录像上传状态通知
  */
@@ -15,6 +17,7 @@ public class AvUploadNotif {
     private int st;
     private Long uploadedSz;
     private String fileName;
+    private String url;
     private String uploadTm;
 
     /**
@@ -69,6 +72,14 @@ public class AvUploadNotif {
         this.fileName = fileName;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     /**
      * 取上传完成时间。仅当`st`为 AVUpload.STATE__UPLOADED时有效
      *
@@ -84,12 +95,13 @@ public class AvUploadNotif {
 
     @Override
     public String toString() {
-        return "AvUploadNotif{" +
-                "reqId='" + reqId + '\'' +
-                ", st=" + st +
-                ", uploadedSz=" + uploadedSz +
-                ", fileName='" + fileName + '\'' +
-                ", uploadTm='" + uploadTm + '\'' +
-                '}';
+        return new StringJoiner(", ", AvUploadNotif.class.getSimpleName() + "[", "]")
+                .add("reqId='" + reqId + "'")
+                .add("st=" + st)
+                .add("uploadedSz=" + uploadedSz)
+                .add("fileName='" + fileName + "'")
+                .add("url='" + url + "'")
+                .add("uploadTm='" + uploadTm + "'")
+                .toString();
     }
 }

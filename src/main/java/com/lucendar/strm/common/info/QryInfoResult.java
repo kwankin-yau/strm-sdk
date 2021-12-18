@@ -7,9 +7,9 @@
  *******************************************************************************/
 package com.lucendar.strm.common.info;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  * 查询流媒体服务信息返回结果
@@ -20,8 +20,7 @@ public class QryInfoResult implements Cloneable {
 
     private String ver;
     private long startTm;
-    // actually is rotateRight(not StartupTime2, 4)
-    private long instanceId;
+    private String nc;
     private Map<String, String> attrs;
 
     public String getVer() {
@@ -40,12 +39,12 @@ public class QryInfoResult implements Cloneable {
         this.startTm = startTm;
     }
 
-    public long getInstanceId() {
-        return instanceId;
+    public String getNc() {
+        return nc;
     }
 
-    public void setInstanceId(long instanceId) {
-        this.instanceId = instanceId;
+    public void setNc(String nc) {
+        this.nc = nc;
     }
 
     public Map<String, String> getAttrs() {
@@ -65,12 +64,12 @@ public class QryInfoResult implements Cloneable {
 
     @Override
     public String toString() {
-        return "QryInfoResult{" +
-                "ver='" + ver + '\'' +
-                ", startTm=" + startTm +
-                ", instanceId=" + instanceId +
-                ", attrs=" + attrs +
-                '}';
+        return new StringJoiner(", ", QryInfoResult.class.getSimpleName() + "[", "]")
+                .add("ver='" + ver + "'")
+                .add("startTm=" + startTm)
+                .add("nc='" + nc + "'")
+                .add("attrs=" + attrs)
+                .toString();
     }
 
     @Override
