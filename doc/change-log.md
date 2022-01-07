@@ -1,3 +1,11 @@
+# 3.3.4 - [2022-01-01]
+## Changed
+- Internal update (forward honor the request uri security)
+- Dependencies:
+  - Bump `spring-boot` from `2.5.4` to `2.5.8`
+  - Bump `spring` from `5.3.9` to `5.3.14`
+  - Bump `gratour-common` from `3.2.2` to `3.2.4`
+
 # 3.3.3 - [2021-11-15]
 ## Added
 * `AvUploadNotif`
