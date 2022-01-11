@@ -1,4 +1,7 @@
 # 3.3.4 - [2022-01-01]
+## Improvement
+- `SubscribeChannelResult` add `taUrl` property
+
 ## Changed
 - Internal update (forward honor the request uri security)
 - Dependencies:

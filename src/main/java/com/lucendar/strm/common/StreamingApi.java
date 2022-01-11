@@ -23,6 +23,7 @@ import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class StreamingApi {
 
@@ -987,23 +988,23 @@ public class StreamingApi {
 
         @Override
         public String toString() {
-            return "SubscribeChannelReq{" +
-                    "reqId='" + reqId + '\'' +
-                    ", callback='" + callback + '\'' +
-                    ", user=" + user +
-                    ", typ='" + typ + '\'' +
-                    ", simNo='" + simNo + '\'' +
-                    ", channelId=" + channelId +
-                    ", proto=" + proto +
-                    ", connIdx=" + connIdx +
-                    ", clientData='" + clientData + '\'' +
-                    ", dataTyp=" + dataTyp +
-                    ", codeStrm=" + codeStrm +
-                    ", recordOnServer=" + recordOnServer +
-                    ", keepInterval=" + keepInterval +
-                    ", uriScheme='" + uriScheme + '\'' +
-                    ", talkSendProtoVer=" + talkSendProtoVer +
-                    '}';
+            return new StringJoiner(", ", SubscribeChannelReq.class.getSimpleName() + "[", "]")
+                    .add("reqId='" + reqId + "'")
+                    .add("callback='" + callback + "'")
+                    .add("user=" + user)
+                    .add("typ='" + typ + "'")
+                    .add("simNo='" + simNo + "'")
+                    .add("channelId=" + channelId)
+                    .add("proto=" + proto)
+                    .add("connIdx=" + connIdx)
+                    .add("clientData='" + clientData + "'")
+                    .add("dataTyp=" + dataTyp)
+                    .add("codeStrm=" + codeStrm)
+                    .add("recordOnServer=" + recordOnServer)
+                    .add("keepInterval=" + keepInterval)
+                    .add("uriScheme='" + uriScheme + "'")
+                    .add("talkSendProtoVer=" + talkSendProtoVer)
+                    .toString();
         }
     }
 
@@ -1015,6 +1016,7 @@ public class StreamingApi {
         private String mediaTyp;
         private String playUrl;
         private String wsUrl;
+        private String taUrl;
 //        private String wssUrl;
         private int keepIntervalSeconds;
         private String host;
@@ -1027,6 +1029,7 @@ public class StreamingApi {
         }
 
         public SubscribeChannelResult(String reqId, boolean ctrl, boolean strmReady, String mediaTyp, String playUrl, String wsUrl,
+                                      String taUrl,
                                       int keepIntervalSeconds, String host, int port, boolean tcp,
                                       int port2019, boolean tcp2019) {
             this.reqId = reqId;
@@ -1035,6 +1038,7 @@ public class StreamingApi {
             this.mediaTyp = mediaTyp;
             this.playUrl = playUrl;
             this.wsUrl = wsUrl;
+            this.taUrl = taUrl;
             this.keepIntervalSeconds = keepIntervalSeconds;
             this.host = host;
             this.port = port;
@@ -1091,6 +1095,14 @@ public class StreamingApi {
             this.wsUrl = wsUrl;
         }
 
+        public String getTaUrl() {
+            return taUrl;
+        }
+
+        public void setTaUrl(String taUrl) {
+            this.taUrl = taUrl;
+        }
+
         public int getKeepIntervalSeconds() {
             return keepIntervalSeconds;
         }
@@ -1141,20 +1153,21 @@ public class StreamingApi {
 
         @Override
         public String toString() {
-            return "SubscribeChannelResult{" +
-                    "reqId='" + reqId + '\'' +
-                    ", ctrl=" + ctrl +
-                    ", strmReady=" + strmReady +
-                    ", mediaTyp='" + mediaTyp + '\'' +
-                    ", playUrl='" + playUrl + '\'' +
-                    ", wsUrl='" + wsUrl + '\'' +
-                    ", keepIntervalSeconds=" + keepIntervalSeconds +
-                    ", host='" + host + '\'' +
-                    ", port=" + port +
-                    ", tcp=" + tcp +
-                    ", port2019=" + port2019 +
-                    ", tcp2019=" + tcp2019 +
-                    '}';
+            return new StringJoiner(", ", SubscribeChannelResult.class.getSimpleName() + "[", "]")
+                    .add("reqId='" + reqId + "'")
+                    .add("ctrl=" + ctrl)
+                    .add("strmReady=" + strmReady)
+                    .add("mediaTyp='" + mediaTyp + "'")
+                    .add("playUrl='" + playUrl + "'")
+                    .add("wsUrl='" + wsUrl + "'")
+                    .add("taUrl='" + taUrl + "'")
+                    .add("keepIntervalSeconds=" + keepIntervalSeconds)
+                    .add("host='" + host + "'")
+                    .add("port=" + port)
+                    .add("tcp=" + tcp)
+                    .add("port2019=" + port2019)
+                    .add("tcp2019=" + tcp2019)
+                    .toString();
         }
     }
 
@@ -2234,6 +2247,8 @@ public class StreamingApi {
 
     public static class StrmMediaNotif {
 
+        public static final String ACT__cmdSent = "cmdSent";
+        public static final String ACT__cmdFailed = "cmdFailed";
         public static final String ACT__id = "id";
         public static final String ACT__strmReady = "strmReady";
         public static final String ACT__strmClosed = "strmClosed";
@@ -2266,6 +2281,7 @@ public class StreamingApi {
         private Byte lostRate;
         private String playUrl;
         private String wsUrl;
+        private String taUrl;
         private Integer closeCause;
         private String closeReason;
         private String mediaTyp;
@@ -2275,7 +2291,7 @@ public class StreamingApi {
 
         public StrmMediaNotif(
                 String act, String reqId, String typ, String servId, String simNo, short chan, Short codeStream,
-                Byte lostRate, String playUrl, String wsUrl, Integer closeCause,
+                Byte lostRate, String playUrl, String wsUrl, String taUrl, Integer closeCause,
                 String mediaTyp) {
             this.act = act;
             this.reqId = reqId;
@@ -2287,6 +2303,7 @@ public class StreamingApi {
             this.lostRate = lostRate;
             this.playUrl = playUrl;
             this.wsUrl = wsUrl;
+            this.taUrl = taUrl;
             this.closeCause = closeCause;
             this.mediaTyp = mediaTyp;
         }
@@ -2376,6 +2393,14 @@ public class StreamingApi {
 
         public void setWsUrl(String wsUrl) {
             this.wsUrl = wsUrl;
+        }
+
+        public String getTaUrl() {
+            return taUrl;
+        }
+
+        public void setTaUrl(String taUrl) {
+            this.taUrl = taUrl;
         }
 
         public Integer getCloseCause() {
@@ -2475,21 +2500,22 @@ public class StreamingApi {
 
         @Override
         public String toString() {
-            return "StrmMediaNotif{" +
-                    "act='" + act + '\'' +
-                    ", reqId='" + reqId + '\'' +
-                    ", typ='" + typ + '\'' +
-                    ", servId='" + servId + '\'' +
-                    ", simNo='" + simNo + '\'' +
-                    ", chan=" + chan +
-                    ", codeStream=" + codeStream +
-                    ", lostRate=" + lostRate +
-                    ", playUrl='" + playUrl + '\'' +
-                    ", wsUrl='" + wsUrl + '\'' +
-                    ", closeCause=" + closeCause +
-                    ", closeReason='" + closeReason + '\'' +
-                    ", mediaTyp='" + mediaTyp + '\'' +
-                    '}';
+            return new StringJoiner(", ", StrmMediaNotif.class.getSimpleName() + "[", "]")
+                    .add("act='" + act + "'")
+                    .add("reqId='" + reqId + "'")
+                    .add("typ='" + typ + "'")
+                    .add("servId='" + servId + "'")
+                    .add("simNo='" + simNo + "'")
+                    .add("chan=" + chan)
+                    .add("codeStream=" + codeStream)
+                    .add("lostRate=" + lostRate)
+                    .add("playUrl='" + playUrl + "'")
+                    .add("wsUrl='" + wsUrl + "'")
+                    .add("taUrl='" + taUrl + "'")
+                    .add("closeCause=" + closeCause)
+                    .add("closeReason='" + closeReason + "'")
+                    .add("mediaTyp='" + mediaTyp + "'")
+                    .toString();
         }
     }
 
