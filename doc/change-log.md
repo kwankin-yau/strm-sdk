@@ -1,9 +1,19 @@
 # 3.3.4 - [2022-01-01]
 ## Improvement
 - `SubscribeChannelResult` add `taUrl` property
+- Introduce `ReleaseChannelsReq2`
+- `StrmMediaNotif` implemented `Cloneable`
 
 ## Changed
 - Internal update (forward honor the request uri security)
+- `StrmMediaNotif`: `codeStream` property rename to `codeStrm`
+- `StrmMediaNotif.act` value domain changed:
+  - `cmdSent` => `sent`
+  - `cmdFailed` => `failed`
+  - `strmReady` => `ready`
+  - `strmClosed` => `closed`
+  - `strmPaused` => `paused`
+  - `strmResumed` => `resumed`
 - Dependencies:
   - Bump `spring-boot` from `2.5.4` to `2.5.8`
   - Bump `spring` from `5.3.9` to `5.3.14`
