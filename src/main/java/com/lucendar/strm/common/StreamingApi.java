@@ -2254,8 +2254,8 @@ public class StreamingApi {
         public static final String ACT__strmClosed = "closed";
         public static final String ACT__qualityReport = "qr";
         public static final String ACT__seeking = "seeking";
-        public static final String ACT__strmPaused = "paused";
-        public static final String ACT__strmResumed = "resumed";
+        public static final String ACT__strmPause = "pause";
+        public static final String ACT__strmResume = "resume";
         public static final String ACT__ctrlGot = "ctrlGot";
         public static final String ACT__changeCodeStrm = "changeCodeStrm";
 
