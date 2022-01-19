@@ -2245,18 +2245,20 @@ public class StreamingApi {
         }
     }
 
-    public static class StrmMediaNotif {
+    public static class StrmMediaNotif implements Cloneable {
 
-        public static final String ACT__cmdSent = "cmdSent";
-        public static final String ACT__cmdFailed = "cmdFailed";
+        public static final String ACT__cmdSent = "sent";
+        public static final String ACT__cmdFailed = "failed";
         public static final String ACT__id = "id";
-        public static final String ACT__strmReady = "strmReady";
-        public static final String ACT__strmClosed = "strmClosed";
+        public static final String ACT__strmReady = "ready";
+        public static final String ACT__strmClosed = "closed";
         public static final String ACT__qualityReport = "qr";
         public static final String ACT__seeking = "seeking";
-        public static final String ACT__strmPaused = "strmPaused";
-        public static final String ACT__strmResumed = "strmResumed";
+        public static final String ACT__strmPaused = "paused";
+        public static final String ACT__strmResumed = "resumed";
         public static final String ACT__ctrlGot = "ctrlGot";
+        public static final String ACT__changeCodeStrm = "changeCodeStrm";
+
 
         public static final String TYP_none = "";
         public static final String TYP_live = "live";
@@ -2269,6 +2271,7 @@ public class StreamingApi {
         public static final int CLOSE_CAUSE__keepTimeout = 5;
         public static final int CLOSE_CAUSE__termDataTimeout = 6;
         public static final int CLOSE_CAUSE__badStrmFormat = 7;
+        public static final int CLOSE_CAUSE__noConnection = 8;
 
 
         private String act;
@@ -2277,7 +2280,7 @@ public class StreamingApi {
         private String servId;
         private String simNo;
         private short chan;
-        private Short codeStream;
+        private Short codeStrm;
         private Byte lostRate;
         private String playUrl;
         private String wsUrl;
@@ -2290,7 +2293,7 @@ public class StreamingApi {
         }
 
         public StrmMediaNotif(
-                String act, String reqId, String typ, String servId, String simNo, short chan, Short codeStream,
+                String act, String reqId, String typ, String servId, String simNo, short chan, Short codeStrm,
                 Byte lostRate, String playUrl, String wsUrl, String taUrl, Integer closeCause,
                 String mediaTyp) {
             this.act = act;
@@ -2299,7 +2302,7 @@ public class StreamingApi {
             this.servId = servId;
             this.simNo = simNo;
             this.chan = chan;
-            this.codeStream = codeStream;
+            this.codeStrm = codeStrm;
             this.lostRate = lostRate;
             this.playUrl = playUrl;
             this.wsUrl = wsUrl;
@@ -2339,6 +2342,10 @@ public class StreamingApi {
                 typ = TYP_replay;
         }
 
+        public boolean isLive() {
+            return TYP_live.equals(typ);
+        }
+
         public String getServId() {
             return servId;
         }
@@ -2363,12 +2370,12 @@ public class StreamingApi {
             this.chan = chan;
         }
 
-        public Short getCodeStream() {
-            return codeStream;
+        public Short getCodeStrm() {
+            return codeStrm;
         }
 
-        public void setCodeStream(Short codeStream) {
-            this.codeStream = codeStream;
+        public void setCodeStrm(Short codeStrm) {
+            this.codeStrm = codeStrm;
         }
 
         public Byte getLostRate() {
@@ -2439,6 +2446,9 @@ public class StreamingApi {
                 case CLOSE_CAUSE__termStrmClose:
                     return "Terminal connection closed.";
 
+                case CLOSE_CAUSE__noConnection:
+                    return "No connection";
+
                 default:
                     return "Unknown";
             }
@@ -2480,14 +2490,16 @@ public class StreamingApi {
                             closeReason = "Bad stream format.";
                             break;
 
+                        case CLOSE_CAUSE__noConnection:
+                            closeReason = "No connection";
+                            break;
+
                         default:
-                            closeReason = "unknown";
+                            closeReason = "Unknown";
                             break;
                     }
-                } else
-                    closeReason = null;
-            } else
-                closeReason = null;
+                }
+            }
         }
 
         public String getMediaTyp() {
@@ -2499,6 +2511,15 @@ public class StreamingApi {
         }
 
         @Override
+        public StrmMediaNotif clone() {
+            try {
+                return (StrmMediaNotif) super.clone();
+            } catch (CloneNotSupportedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        @Override
         public String toString() {
             return new StringJoiner(", ", StrmMediaNotif.class.getSimpleName() + "[", "]")
                     .add("act='" + act + "'")
@@ -2507,7 +2528,7 @@ public class StreamingApi {
                     .add("servId='" + servId + "'")
                     .add("simNo='" + simNo + "'")
                     .add("chan=" + chan)
-                    .add("codeStream=" + codeStream)
+                    .add("codeStream=" + codeStrm)
                     .add("lostRate=" + lostRate)
                     .add("playUrl='" + playUrl + "'")
                     .add("wsUrl='" + wsUrl + "'")
