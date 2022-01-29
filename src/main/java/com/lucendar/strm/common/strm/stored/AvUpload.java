@@ -7,7 +7,7 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
-public class AVUpload implements Cloneable {
+public class AvUpload implements Cloneable {
 
     public static final byte STATE__REQUESTED = 1;
     public static final byte STATE__ACK = 2;
@@ -20,6 +20,7 @@ public class AVUpload implements Cloneable {
     public static boolean isEndingState(int st) {
         return st > 3;
     }
+    public static boolean isAckOrEndingState(int st) { return st >= 2; }
 
     private String reqId;
     private String reqTm;
@@ -60,6 +61,14 @@ public class AVUpload implements Cloneable {
 
     public void setSt(int st) {
         this.st = st;
+    }
+
+    public boolean endingState() {
+        return isEndingState(st);
+    }
+
+    public boolean ackOrEndingState() {
+        return isAckOrEndingState(st);
     }
 
     public String getSimNo() {
@@ -221,9 +230,9 @@ public class AVUpload implements Cloneable {
     }
 
     @Override
-    public AVUpload clone() {
+    public AvUpload clone() {
         try {
-            return (AVUpload) super.clone();
+            return (AvUpload) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }

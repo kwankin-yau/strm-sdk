@@ -7,7 +7,7 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
-public class AVStoreLog {
+public class AvStoreLog {
 
     private String reqId;
     private String reqTm;
@@ -19,10 +19,10 @@ public class AVStoreLog {
     private long sz;
     private String url;
 
-    public AVStoreLog() {
+    public AvStoreLog() {
     }
 
-    public AVStoreLog(String reqId, String reqTm, String simNo, int chan, boolean live, String path, String ext, long sz) {
+    public AvStoreLog(String reqId, String reqTm, String simNo, int chan, boolean live, String path, String ext, long sz) {
         this.reqId = reqId;
         this.reqTm = reqTm;
         this.simNo = simNo;
@@ -105,8 +105,8 @@ public class AVStoreLog {
         this.url = url;
     }
 
-    public AVStoreLog copyWithNewSz(long newSz) {
-        AVStoreLog r = new AVStoreLog();
+    public AvStoreLog copyWithNewSz(long newSz) {
+        AvStoreLog r = new AvStoreLog();
         r.reqId = reqId;
         r.reqTm = reqTm;
         r.simNo = simNo;

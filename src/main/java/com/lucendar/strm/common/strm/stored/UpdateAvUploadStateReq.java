@@ -7,7 +7,7 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
-public class UpdateAVUploadStateReq {
+public class UpdateAvUploadStateReq {
     private String startTime;
     private String reqId;
     private int st;

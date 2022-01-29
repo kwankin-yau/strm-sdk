@@ -7,7 +7,7 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
-public class AVUploadReq {
+public class AvUploadReq {
     private String simNo;
     private int channel;
     private String startTime;
