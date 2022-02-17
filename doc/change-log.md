@@ -14,10 +14,6 @@
   - `strmClosed` => `closed`
   - `strmPaused` => `paused`
   - `strmResumed` => `resumed`
-- Dependencies:
-  - Bump `spring-boot` from `2.5.4` to `2.5.8`
-  - Bump `spring` from `5.3.9` to `5.3.14`
-  - Bump `gratour-common` from `3.2.2` to `3.2.4`
 
 # 3.3.3 - [2021-11-15]
 ## Added
