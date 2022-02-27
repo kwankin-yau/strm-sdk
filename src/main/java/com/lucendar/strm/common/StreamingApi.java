@@ -166,18 +166,18 @@ public class StreamingApi {
         private long reqTm;
         private int proto;
         private int closeCause;
-        private long lastKeep;
+        private long lastKeepTm;
 
         public ReqStat() {
         }
 
-        public ReqStat(String reqId, String userId, long reqTm, int proto, int closeCause, long lastKeep) {
+        public ReqStat(String reqId, String userId, long reqTm, int proto, int closeCause, long lastKeepTm) {
             this.reqId = reqId;
             this.userId = userId;
             this.reqTm = reqTm;
             this.proto = proto;
             this.closeCause = closeCause;
-            this.lastKeep = lastKeep;
+            this.lastKeepTm = lastKeepTm;
         }
 
         public String getReqId() {
@@ -220,24 +220,24 @@ public class StreamingApi {
             this.closeCause = closeCause;
         }
 
-        public long getLastKeep() {
-            return lastKeep;
+        public long getLastKeepTm() {
+            return lastKeepTm;
         }
 
-        public void setLastKeep(long lastKeep) {
-            this.lastKeep = lastKeep;
+        public void setLastKeepTm(long lastKeepTm) {
+            this.lastKeepTm = lastKeepTm;
         }
 
         @Override
         public String toString() {
-            return "ReqStat{" +
-                    "reqId='" + reqId + '\'' +
-                    ", userId='" + userId + '\'' +
-                    ", reqTm=" + reqTm +
-                    ", proto=" + proto +
-                    ", closeCause=" + closeCause +
-                    ", lastKeep=" + lastKeep +
-                    '}';
+            return new StringJoiner(", ", ReqStat.class.getSimpleName() + "[", "]")
+                    .add("reqId='" + reqId + "'")
+                    .add("userId='" + userId + "'")
+                    .add("reqTm=" + reqTm)
+                    .add("proto=" + proto)
+                    .add("closeCause=" + closeCause)
+                    .add("lastKeepTm=" + lastKeepTm)
+                    .toString();
         }
     }
 
@@ -450,26 +450,26 @@ public class StreamingApi {
 
         @Override
         public String toString() {
-            return "ChannelStat{" +
-                    "simNo='" + simNo + '\'' +
-                    ", chanId=" + chanId +
-                    ", live=" + live +
-                    ", liveDataTyp=" + liveDataTyp +
-                    ", codeStrm=" + codeStrm +
-                    ", createTm=" + createTm +
-                    ", srcDetectTm=" + srcDetectTm +
-                    ", strmReady=" + strmReady +
-                    ", strmReadyTm=" + strmReadyTm +
-                    ", strmClosed=" + strmClosed +
-                    ", recvFromTerm=" + recvFromTerm +
-                    ", recvFromTermByteRate=" + recvFromTermByteRate +
-                    ", sendToClnt=" + sendToClnt +
-                    ", audioFmt='" + audioFmt + '\'' +
-                    ", videoFmt='" + videoFmt + '\'' +
-                    ", videoRes='" + videoRes + '\'' +
-                    ", mediaTyp='" + mediaTyp + '\'' +
-                    ", requests=" + Arrays.toString(requests) +
-                    '}';
+            return new StringJoiner(", ", ChannelStat.class.getSimpleName() + "[", "]")
+                    .add("simNo='" + simNo + "'")
+                    .add("chanId=" + chanId)
+                    .add("live=" + live)
+                    .add("liveDataTyp=" + liveDataTyp)
+                    .add("codeStrm=" + codeStrm)
+                    .add("createTm=" + createTm)
+                    .add("srcDetectTm=" + srcDetectTm)
+                    .add("strmReady=" + strmReady)
+                    .add("strmReadyTm=" + strmReadyTm)
+                    .add("strmClosed=" + strmClosed)
+                    .add("recvFromTerm=" + recvFromTerm)
+                    .add("recvFromTermByteRate=" + recvFromTermByteRate)
+                    .add("sendToClnt=" + sendToClnt)
+                    .add("audioFmt='" + audioFmt + "'")
+                    .add("videoFmt='" + videoFmt + "'")
+                    .add("videoRes='" + videoRes + "'")
+                    .add("mediaTyp='" + mediaTyp + "'")
+                    .add("requests=" + Arrays.toString(requests))
+                    .toString();
         }
     }
 

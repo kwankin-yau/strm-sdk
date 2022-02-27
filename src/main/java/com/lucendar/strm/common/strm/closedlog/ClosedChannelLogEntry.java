@@ -8,6 +8,7 @@
 package com.lucendar.strm.common.strm.closedlog;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class ClosedChannelLogEntry {
 
@@ -15,6 +16,7 @@ public class ClosedChannelLogEntry {
     private short chanId;
     private boolean live;
     private Integer liveDataTyp;
+    private Integer codeStrm;
     private long createTm;
     private Long srcDetectTm;
     private boolean strmReady;
@@ -24,6 +26,7 @@ public class ClosedChannelLogEntry {
     private long sendToClient;
     private String audioFmt;
     private String videoFmt;
+    private String videoRes;
     private String mediaTyp;
     private List<ClosedReqLogEntry> requests;
 
@@ -57,6 +60,14 @@ public class ClosedChannelLogEntry {
 
     public void setLiveDataTyp(Integer liveDataTyp) {
         this.liveDataTyp = liveDataTyp;
+    }
+
+    public Integer getCodeStrm() {
+        return codeStrm;
+    }
+
+    public void setCodeStrm(Integer codeStrm) {
+        this.codeStrm = codeStrm;
     }
 
     public long getCreateTm() {
@@ -131,6 +142,14 @@ public class ClosedChannelLogEntry {
         this.videoFmt = videoFmt;
     }
 
+    public String getVideoRes() {
+        return videoRes;
+    }
+
+    public void setVideoRes(String videoRes) {
+        this.videoRes = videoRes;
+    }
+
     public String getMediaTyp() {
         return mediaTyp;
     }
@@ -164,22 +183,24 @@ public class ClosedChannelLogEntry {
 
     @Override
     public String toString() {
-        return "ClosedChannelLogEntry{" +
-                "simNo='" + simNo + '\'' +
-                ", chanId=" + chanId +
-                ", live=" + live +
-                ", liveDataTyp=" + liveDataTyp +
-                ", createTm=" + createTm +
-                ", srcDetectTm=" + srcDetectTm +
-                ", strmReady=" + strmReady +
-                ", strmReadyTm=" + strmReadyTm +
-                ", closeTm=" + closeTm +
-                ", recvFromTerm=" + recvFromTerm +
-                ", sendToClient=" + sendToClient +
-                ", audioFmt='" + audioFmt + '\'' +
-                ", videoFmt='" + videoFmt + '\'' +
-                ", mediaTyp='" + mediaTyp + '\'' +
-                ", requests=" + requests +
-                '}';
+        return new StringJoiner(", ", ClosedChannelLogEntry.class.getSimpleName() + "[", "]")
+                .add("simNo='" + simNo + "'")
+                .add("chanId=" + chanId)
+                .add("live=" + live)
+                .add("liveDataTyp=" + liveDataTyp)
+                .add("codeStrm=" + codeStrm)
+                .add("createTm=" + createTm)
+                .add("srcDetectTm=" + srcDetectTm)
+                .add("strmReady=" + strmReady)
+                .add("strmReadyTm=" + strmReadyTm)
+                .add("closeTm=" + closeTm)
+                .add("recvFromTerm=" + recvFromTerm)
+                .add("sendToClient=" + sendToClient)
+                .add("audioFmt='" + audioFmt + "'")
+                .add("videoFmt='" + videoFmt + "'")
+                .add("videoRes='" + videoRes + "'")
+                .add("mediaTyp='" + mediaTyp + "'")
+                .add("requests=" + requests)
+                .toString();
     }
 }

@@ -7,11 +7,13 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.closedlog;
 
+import java.util.StringJoiner;
+
 public class ClosedReqLogEntry {
 
     private String reqId;
     private String userId;
-    private long requestTm;
+    private long reqTm;
     private long lastKeepTm;
     private Long strmReadyTm;
     private int proto;
@@ -34,12 +36,12 @@ public class ClosedReqLogEntry {
         this.userId = userId;
     }
 
-    public long getRequestTm() {
-        return requestTm;
+    public long getReqTm() {
+        return reqTm;
     }
 
-    public void setRequestTm(long requestTm) {
-        this.requestTm = requestTm;
+    public void setReqTm(long reqTm) {
+        this.reqTm = reqTm;
     }
 
     public long getLastKeepTm() {
@@ -84,15 +86,15 @@ public class ClosedReqLogEntry {
 
     @Override
     public String toString() {
-        return "ClosedReqLogEntry{" +
-                "reqId='" + reqId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", requestTm=" + requestTm +
-                ", lastKeepTm=" + lastKeepTm +
-                ", strmReadyTm=" + strmReadyTm +
-                ", proto=" + proto +
-                ", closeCause=" + closeCause +
-                ", closeTm=" + closeTm +
-                '}';
+        return new StringJoiner(", ", ClosedReqLogEntry.class.getSimpleName() + "[", "]")
+                .add("reqId='" + reqId + "'")
+                .add("userId='" + userId + "'")
+                .add("reqTm=" + reqTm)
+                .add("lastKeepTm=" + lastKeepTm)
+                .add("strmReadyTm=" + strmReadyTm)
+                .add("proto=" + proto)
+                .add("closeCause=" + closeCause)
+                .add("closeTm=" + closeTm)
+                .toString();
     }
 }
