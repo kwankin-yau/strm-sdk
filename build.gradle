@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.lucendar.strm'
-version '3.3.4'
+version '3.3.5'
 
 compileJava.options.encoding = 'UTF-8'
 
