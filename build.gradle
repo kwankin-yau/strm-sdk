@@ -1,11 +1,10 @@
 plugins {
     id 'java-library'
-    id 'scala'
     id 'maven-publish'
 }
 
 group 'com.lucendar.strm'
-version '3.3.5'
+version '4.0.0'
 
 compileJava.options.encoding = 'UTF-8'
 
