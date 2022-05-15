@@ -7,7 +7,10 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.closedlog;
 
-public class QryClosedLogReq {
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
+public class QryClosedLogReq implements StrmMsg {
 
     private String reqId;
     private String simNo;
@@ -34,5 +37,10 @@ public class QryClosedLogReq {
                 "reqId='" + reqId + '\'' +
                 ", simNo='" + simNo + '\'' +
                 '}';
+    }
+
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__QryClosedLogReq;
     }
 }

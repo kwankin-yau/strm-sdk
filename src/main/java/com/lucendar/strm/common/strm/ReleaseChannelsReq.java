@@ -1,9 +1,12 @@
 package com.lucendar.strm.common.strm;
 
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class ReleaseChannelsReq {
+public class ReleaseChannelsReq implements StrmMsg {
         private String[] reqIds;
 
         public ReleaseChannelsReq() {
@@ -26,5 +29,10 @@ public class ReleaseChannelsReq {
         return new StringJoiner(", ", ReleaseChannelsReq.class.getSimpleName() + "[", "]")
                 .add("reqIds=" + Arrays.toString(reqIds))
                 .toString();
+    }
+
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__ReleaseChannelsReq;
     }
 }

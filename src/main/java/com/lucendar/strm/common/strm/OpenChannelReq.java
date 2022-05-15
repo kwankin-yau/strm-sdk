@@ -1,5 +1,8 @@
 package com.lucendar.strm.common.strm;
 
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
 import java.util.StringJoiner;
 
 import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__LIVE;
@@ -10,7 +13,7 @@ import static com.lucendar.strm.common.StreamingApi.PROTO__RTMP;
 import static com.lucendar.strm.common.StreamingApi.encodeStreamName;
 import static com.lucendar.strm.common.StreamingApi.isValidReqId;
 
-public class SubscribeChannelReq {
+public class OpenChannelReq implements StrmMsg {
 
         public static final int DATA_TYPE__AV = 0;
         public static final int DATA_TYPE__VIDEO = 1;
@@ -53,6 +56,41 @@ public class SubscribeChannelReq {
             }
         }
 
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__OpenChannelReq;
+    }
+
+    public static class RtspSource {
+            private String url;
+            private String username;
+            private String password;
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public String getUsername() {
+                return username;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
+
+            public String getPassword() {
+                return password;
+            }
+
+            public void setPassword(String password) {
+                this.password = password;
+            }
+        }
+
         private String reqId;
         private String callback;
         private StrmUserInfo user;
@@ -68,31 +106,10 @@ public class SubscribeChannelReq {
         private Integer keepInterval;
         private String uriScheme;
         private Integer talkSendProtoVer;
+        private RtspSource rtspSrc;
 
-        public SubscribeChannelReq() {
-        }
 
-        public SubscribeChannelReq(
-                String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
-                byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm, boolean recordOnServer,
-                Integer keepInterval,
-                String uriScheme,
-                Integer talkSendProtoVer) {
-            this.reqId = reqId;
-            this.callback = callback;
-            this.user = user;
-            this.typ = typ;
-            this.simNo = simNo;
-            this.channelId = channelId;
-            this.proto = proto;
-            this.connIdx = connIdx;
-            this.clientData = clientData;
-            this.dataTyp = dataTyp;
-            this.codeStrm = codeStrm;
-            this.recordOnServer = recordOnServer;
-            this.keepInterval = keepInterval;
-            this.uriScheme = uriScheme;
-            this.talkSendProtoVer = talkSendProtoVer;
+        public OpenChannelReq() {
         }
 
         public String getReqId() {
@@ -349,6 +366,10 @@ public class SubscribeChannelReq {
                     return "uriScheme";
             }
 
+            if (rtspSrc != null) {
+                if (rtspSrc.url == null)
+                    return "rtspSrc.url";
+            }
 
             return null;
         }
@@ -371,7 +392,7 @@ public class SubscribeChannelReq {
 
         @Override
         public String toString() {
-            return new StringJoiner(", ", SubscribeChannelReq.class.getSimpleName() + "[", "]")
+            return new StringJoiner(", ", OpenChannelReq.class.getSimpleName() + "[", "]")
                     .add("reqId='" + reqId + "'")
                     .add("callback='" + callback + "'")
                     .add("user=" + user)
@@ -387,6 +408,7 @@ public class SubscribeChannelReq {
                     .add("keepInterval=" + keepInterval)
                     .add("uriScheme='" + uriScheme + "'")
                     .add("talkSendProtoVer=" + talkSendProtoVer)
+                    .add("rtspSrc=" + rtspSrc)
                     .toString();
         }
     }

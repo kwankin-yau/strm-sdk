@@ -7,10 +7,13 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.closedlog;
 
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
 import java.util.List;
 import java.util.StringJoiner;
 
-public class ClosedChannelLogEntry {
+public class ClosedChannelLogEntry implements StrmMsg {
 
     private String simNo;
     private short chanId;
@@ -202,5 +205,10 @@ public class ClosedChannelLogEntry {
                 .add("mediaTyp='" + mediaTyp + "'")
                 .add("requests=" + requests)
                 .toString();
+    }
+
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__ClosedChannelLogEntry;
     }
 }

@@ -1,9 +1,12 @@
 package com.lucendar.strm.common.strm;
 
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class KeepChannelReq {
+public class KeepChannelReq implements StrmMsg {
     private String[] reqIds;
     private ServerHint strmServerHint;
 
@@ -43,5 +46,10 @@ public class KeepChannelReq {
                     .add("reqIds=" + Arrays.toString(reqIds))
                     .toString();
 
+    }
+
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__KeepChannelReq;
     }
 }

@@ -7,7 +7,10 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
-public class AvStoreLog {
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
+public class AvStoreLog implements StrmMsg {
 
     private String reqId;
     private String reqTm;
@@ -133,5 +136,10 @@ public class AvStoreLog {
                 ", sz=" + sz +
                 ", url='" + url + '\'' +
                 '}';
+    }
+
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__AvStoreLog;
     }
 }

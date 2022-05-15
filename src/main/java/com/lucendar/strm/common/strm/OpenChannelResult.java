@@ -2,7 +2,7 @@ package com.lucendar.strm.common.strm;
 
 import java.util.StringJoiner;
 
-public class SubscribeChannelResult {
+public class OpenChannelResult {
 
         private String reqId;
         private boolean ctrl;
@@ -19,13 +19,13 @@ public class SubscribeChannelResult {
         private int port2019;
         private boolean tcp2019;
 
-        public SubscribeChannelResult() {
+        public OpenChannelResult() {
         }
 
-        public SubscribeChannelResult(String reqId, boolean ctrl, boolean strmReady, String mediaTyp, String playUrl, String wsUrl,
-                                      String taUrl,
-                                      int keepIntervalSeconds, String host, int port, boolean tcp,
-                                      int port2019, boolean tcp2019) {
+        public OpenChannelResult(String reqId, boolean ctrl, boolean strmReady, String mediaTyp, String playUrl, String wsUrl,
+                                 String taUrl,
+                                 int keepIntervalSeconds, String host, int port, boolean tcp,
+                                 int port2019, boolean tcp2019) {
             this.reqId = reqId;
             this.ctrl = ctrl;
             this.strmReady = strmReady;
@@ -147,7 +147,7 @@ public class SubscribeChannelResult {
 
         @Override
         public String toString() {
-            return new StringJoiner(", ", SubscribeChannelResult.class.getSimpleName() + "[", "]")
+            return new StringJoiner(", ", OpenChannelResult.class.getSimpleName() + "[", "]")
                     .add("reqId='" + reqId + "'")
                     .add("ctrl=" + ctrl)
                     .add("strmReady=" + strmReady)

@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright (c) 2019, 2021 lucendar.com.
+ *  Copyright (c) 2019, 2022 lucendar.com.
  *  All rights reserved.
  *
  *  Contributors:
@@ -7,6 +7,8 @@
  *******************************************************************************/
 package com.lucendar.strm.common;
 
-public class StrmConsts {
+public interface StrmMsg {
 
+    int msgId();
+    
 }

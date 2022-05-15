@@ -7,9 +7,12 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stat;
 
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
 import java.util.StringJoiner;
 
-public class QryStrmActSegReq {
+public class QryStrmActSegReq implements StrmMsg {
 
     private String dateFrom;
     private String dateTo;
@@ -36,5 +39,10 @@ public class QryStrmActSegReq {
                 .add("dateFrom='" + dateFrom + "'")
                 .add("dateTo='" + dateTo + "'")
                 .toString();
+    }
+
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__QryStrmActSegReq;
     }
 }

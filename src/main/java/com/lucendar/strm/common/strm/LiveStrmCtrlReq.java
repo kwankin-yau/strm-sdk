@@ -1,8 +1,11 @@
 package com.lucendar.strm.common.strm;
 
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
 import java.util.StringJoiner;
 
-public class LiveStrmCtrlReq {
+public class LiveStrmCtrlReq implements StrmMsg {
 
     public static final byte CTRL__CLOSE = 0;
     public static final byte CTRL__SWITCH_CODE_STREAM = 1;
@@ -118,4 +121,8 @@ public class LiveStrmCtrlReq {
                 .toString();
     }
 
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__LiveStrmCtrlReq;
+    }
 }
