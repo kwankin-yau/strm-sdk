@@ -1,3 +1,7 @@
+# 3.4.0 - [2022-05-12]
+## Changed
+- Move inner class from StreamingApi to upper level
+
 # 3.3.5 - [2022-05-05]
 Nothing changed, just change version.
 
