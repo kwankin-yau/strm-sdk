@@ -90,6 +90,15 @@ public class OpenChannelReq implements StrmMsg {
         public void setPassword(String password) {
             this.password = password;
         }
+
+        @Override
+        public String toString() {
+            return new StringJoiner(", ", RtspSource.class.getSimpleName() + "[", "]")
+                    .add("url='" + url + "'")
+                    .add("username='" + username + "'")
+                    .add("password='" + password + "'")
+                    .toString();
+        }
     }
 
     private String reqId;
@@ -111,6 +120,28 @@ public class OpenChannelReq implements StrmMsg {
 
 
     public OpenChannelReq() {
+    }
+
+    public OpenChannelReq(String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
+                          byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm,
+                          boolean recordOnServer, Integer keepInterval, String uriScheme, Integer talkSendProtoVer,
+                          RtspSource rtspSrc) {
+        this.reqId = reqId;
+        this.callback = callback;
+        this.user = user;
+        this.typ = typ;
+        this.simNo = simNo;
+        this.channelId = channelId;
+        this.proto = proto;
+        this.connIdx = connIdx;
+        this.clientData = clientData;
+        this.dataTyp = dataTyp;
+        this.codeStrm = codeStrm;
+        this.recordOnServer = recordOnServer;
+        this.keepInterval = keepInterval;
+        this.uriScheme = uriScheme;
+        this.talkSendProtoVer = talkSendProtoVer;
+        this.rtspSrc = rtspSrc;
     }
 
     public String getReqId() {
