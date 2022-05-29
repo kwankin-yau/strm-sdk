@@ -116,6 +116,7 @@ public class OpenChannelReq implements StrmMsg {
     private Integer keepInterval;
     private String uriScheme;
     private Integer talkSendProtoVer;
+    private AudioConfig2 audioCfg;
     private RtspSource rtspSrc;
 
 
@@ -125,6 +126,7 @@ public class OpenChannelReq implements StrmMsg {
     public OpenChannelReq(String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
                           byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm,
                           boolean recordOnServer, Integer keepInterval, String uriScheme, Integer talkSendProtoVer,
+                          AudioConfig2 audioCfg,
                           RtspSource rtspSrc) {
         this.reqId = reqId;
         this.callback = callback;
@@ -141,6 +143,7 @@ public class OpenChannelReq implements StrmMsg {
         this.keepInterval = keepInterval;
         this.uriScheme = uriScheme;
         this.talkSendProtoVer = talkSendProtoVer;
+        this.audioCfg = audioCfg;
         this.rtspSrc = rtspSrc;
     }
 
@@ -407,6 +410,14 @@ public class OpenChannelReq implements StrmMsg {
         if (uriScheme != null) {
             if (!UriScheme.isValid(uriScheme))
                 return "uriScheme";
+        }
+
+        if (audioCfg != null) {
+            if (!AudioConfig2.isValidSampleRate(audioCfg.getSampleRate()))
+                return "audioCfg.sampleRate";
+
+            if (!AudioConfig2.isValidChannels(audioCfg.getChannels()))
+                return "audioCfg.channels";
         }
 
         if (rtspSrc != null) {
