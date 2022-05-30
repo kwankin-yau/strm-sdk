@@ -9,7 +9,7 @@ package com.lucendar.strm.common.strm;
 
 import java.util.StringJoiner;
 
-public class AudioConfig2 implements Cloneable {
+public class AudioConfig implements Cloneable {
 
     public static final int SAMPLE_RATE__8K = 8000;
     public static final int SAMPLE_RATE__11K = 11025;
@@ -45,7 +45,12 @@ public class AudioConfig2 implements Cloneable {
     private int sampleRate;
     private int channels;
 
-    public AudioConfig2(int sampleRate, int channels) {
+    public AudioConfig() {
+        this.sampleRate = SAMPLE_RATE__8K;
+        this.channels = CHANNELS__MONO;
+    }
+
+    public AudioConfig(int sampleRate, int channels) {
         this.sampleRate = sampleRate;
         this.channels = channels;
     }
@@ -66,12 +71,66 @@ public class AudioConfig2 implements Cloneable {
         this.channels = channels;
     }
 
+    public boolean stereo() {
+        return channels > CHANNELS__MONO;
+    }
+
+    public static int mp4SamplingFrequencyIndexMap(int sampleRate) {
+        switch (sampleRate) {
+            case 8000:
+                return 11;
+            case 11024:
+                return 10;
+            case 44100:
+                return 4;
+            case 96000:
+                return 0;
+            case 88200:
+                return 1;
+            case 64000:
+                return 2;
+            case 48000:
+                return 3;
+            case 32000:
+                return 5;
+            case 24000:
+                return 6;
+            case 22050:
+                return 7;
+            case 16000:
+                return 8;
+            case 12000:
+                return 9;
+            case 7350:
+                return 12;
+            default:
+                throw new RuntimeException("Sample rate does not supported: " + sampleRate);
+        }
+    }
+
+    public int mp4SamplingFrequencyIndex() {
+        return mp4SamplingFrequencyIndexMap(sampleRate);
+    }
+
+    public static int mp4ChannelConfigurationMap(int channels) {
+        if (channels >= 1 && channels <= 6)
+            return channels;
+        else if (channels == 8)
+            return 7;
+        else
+            throw new RuntimeException("Channels does not supported: " + channels);
+    }
+
+    public int mp4ChannelConfiguration() {
+        return mp4ChannelConfigurationMap(channels);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AudioConfig2 that = (AudioConfig2) o;
+        AudioConfig that = (AudioConfig) o;
 
         if (sampleRate != that.sampleRate) return false;
         return channels == that.channels;
@@ -86,16 +145,16 @@ public class AudioConfig2 implements Cloneable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", AudioConfig2.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", AudioConfig.class.getSimpleName() + "[", "]")
                 .add("sampleRate=" + sampleRate)
                 .add("channels=" + channels)
                 .toString();
     }
 
     @Override
-    public AudioConfig2 clone() {
+    public AudioConfig clone() {
         try {
-            return (AudioConfig2) super.clone();
+            return (AudioConfig) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }

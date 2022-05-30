@@ -116,7 +116,7 @@ public class OpenChannelReq implements StrmMsg {
     private Integer keepInterval;
     private String uriScheme;
     private Integer talkSendProtoVer;
-    private AudioConfig2 audioCfg;
+    private AudioConfig audioCfg;
     private RtspSource rtspSrc;
 
 
@@ -126,7 +126,7 @@ public class OpenChannelReq implements StrmMsg {
     public OpenChannelReq(String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
                           byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm,
                           boolean recordOnServer, Integer keepInterval, String uriScheme, Integer talkSendProtoVer,
-                          AudioConfig2 audioCfg,
+                          AudioConfig audioCfg,
                           RtspSource rtspSrc) {
         this.reqId = reqId;
         this.callback = callback;
@@ -300,6 +300,14 @@ public class OpenChannelReq implements StrmMsg {
         this.talkSendProtoVer = talkSendProtoVer;
     }
 
+    public AudioConfig getAudioCfg() {
+        return audioCfg;
+    }
+
+    public void setAudioCfg(AudioConfig audioCfg) {
+        this.audioCfg = audioCfg;
+    }
+
     public RtspSource getRtspSrc() {
         return rtspSrc;
     }
@@ -413,10 +421,10 @@ public class OpenChannelReq implements StrmMsg {
         }
 
         if (audioCfg != null) {
-            if (!AudioConfig2.isValidSampleRate(audioCfg.getSampleRate()))
+            if (!AudioConfig.isValidSampleRate(audioCfg.getSampleRate()))
                 return "audioCfg.sampleRate";
 
-            if (!AudioConfig2.isValidChannels(audioCfg.getChannels()))
+            if (!AudioConfig.isValidChannels(audioCfg.getChannels()))
                 return "audioCfg.channels";
         }
 
@@ -462,6 +470,7 @@ public class OpenChannelReq implements StrmMsg {
                 .add("keepInterval=" + keepInterval)
                 .add("uriScheme='" + uriScheme + "'")
                 .add("talkSendProtoVer=" + talkSendProtoVer)
+                .add("audioCfg=" + audioCfg)
                 .add("rtspSrc=" + rtspSrc)
                 .toString();
     }

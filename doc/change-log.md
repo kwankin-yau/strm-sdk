@@ -2,6 +2,7 @@
 ## Changed
 - Move inner class from StreamingApi to upper level
 - `SubscribeChannelReq` rename to `OpenChannelReq`
+- Introduce new `AudioConfig` class
 - `OpenChannelReq` add `audioCfg`, `rtspSrc` properties
 
 # 3.3.5 - [2022-05-05]
