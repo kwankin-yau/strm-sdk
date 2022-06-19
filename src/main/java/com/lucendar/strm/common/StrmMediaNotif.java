@@ -24,7 +24,7 @@ public class StrmMediaNotif implements Cloneable {
     public static final int CLOSE_CAUSE__clientReq = 1;
     public static final int CLOSE_CAUSE__termStrmClose = 2;
     public static final int CLOSE_CAUSE__connectStrmServerFailed = 3;
-    public static final int CLOSE_CAUSE__exceptionCaught = 4;
+    public static final int CLOSE_CAUSE__exceptionCaught = 4; // internal error
     public static final int CLOSE_CAUSE__keepTimeout = 5;
     public static final int CLOSE_CAUSE__termDataTimeout = 6;
     public static final int CLOSE_CAUSE__badStrmFormat = 7;
