@@ -2,18 +2,18 @@ package com.lucendar.strm.common.strm.stat;
 
 import java.util.StringJoiner;
 
-public class ReqStat {
+public class StrmReqStatus {
         private String reqId;
         private String userId;
         private long reqTm;
         private int proto;
-        private int closeCause;
+        private Integer closeCause;
         private long lastKeepTm;
 
-        public ReqStat() {
+        public StrmReqStatus() {
         }
 
-        public ReqStat(String reqId, String userId, long reqTm, int proto, int closeCause, long lastKeepTm) {
+        public StrmReqStatus(String reqId, String userId, long reqTm, int proto, Integer closeCause, long lastKeepTm) {
             this.reqId = reqId;
             this.userId = userId;
             this.reqTm = reqTm;
@@ -54,11 +54,11 @@ public class ReqStat {
             this.proto = proto;
         }
 
-        public int getCloseCause() {
+        public Integer getCloseCause() {
             return closeCause;
         }
 
-        public void setCloseCause(int closeCause) {
+        public void setCloseCause(Integer closeCause) {
             this.closeCause = closeCause;
         }
 
@@ -72,7 +72,7 @@ public class ReqStat {
 
         @Override
         public String toString() {
-            return new StringJoiner(", ", ReqStat.class.getSimpleName() + "[", "]")
+            return new StringJoiner(", ", StrmReqStatus.class.getSimpleName() + "[", "]")
                     .add("reqId='" + reqId + "'")
                     .add("userId='" + userId + "'")
                     .add("reqTm=" + reqTm)

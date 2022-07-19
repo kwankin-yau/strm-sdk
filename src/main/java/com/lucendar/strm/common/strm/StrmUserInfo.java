@@ -10,7 +10,7 @@ public class StrmUserInfo {
     public static final int USER_GRADE__NORMAL = 30;
 
     private String userId;
-    private int userGrade;
+    private int userGrade = USER_GRADE__NORMAL;
 
     /**
      * User access token, used in websocket handler to verify client

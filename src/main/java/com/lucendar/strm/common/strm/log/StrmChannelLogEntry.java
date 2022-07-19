@@ -12,10 +12,11 @@ package com.lucendar.strm.common.strm.log;
  */
 public class StrmChannelLogEntry {
 
-    public static final String EVT__SUBSCRIBE_CHANNEL = "subscribe";
-    public static final String EVT__IDENTIFIED = "identified";
-    public static final String EVT__STRM_READY = "strm_ready";
-    public static final String EVT__REQUEST_CLOSED = "request_closed";
+    public static final String EVT__OPEN_CHANNEL = "open";
+    public static final String EVT__IDENTIFIED = "id";
+    public static final String EVT__STRM_READY = "ready";
+    public static final String EVT__REQUEST_CLOSED = "reqClosed";
+    public static final String EVT__SRC_CLOSED = "srcClosed";
 
     public static final String DATA_KEY__FIRST_REQ = "firstReq";
     public static final String DATA_KEY__LIVE_DATA_TYP = "liveDataTyp";

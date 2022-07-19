@@ -99,6 +99,26 @@ public class OpenChannelReq implements StrmMsg {
                     .add("password='" + password + "'")
                     .toString();
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            RtspSource that = (RtspSource) o;
+
+            if (url != null ? !url.equals(that.url) : that.url != null) return false;
+            if (username != null ? !username.equals(that.username) : that.username != null) return false;
+            return password != null ? password.equals(that.password) : that.password == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = url != null ? url.hashCode() : 0;
+            result = 31 * result + (username != null ? username.hashCode() : 0);
+            result = 31 * result + (password != null ? password.hashCode() : 0);
+            return result;
+        }
     }
 
     private String reqId;
@@ -118,6 +138,7 @@ public class OpenChannelReq implements StrmMsg {
     private Integer talkSendProtoVer;
     private AudioConfig audioCfg;
     private RtspSource rtspSrc;
+    private String timedToken;
 
 
     public OpenChannelReq() {
@@ -127,7 +148,8 @@ public class OpenChannelReq implements StrmMsg {
                           byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm,
                           boolean recordOnServer, Integer keepInterval, String uriScheme, Integer talkSendProtoVer,
                           AudioConfig audioCfg,
-                          RtspSource rtspSrc) {
+                          RtspSource rtspSrc,
+                          String timedToken) {
         this.reqId = reqId;
         this.callback = callback;
         this.user = user;
@@ -145,6 +167,7 @@ public class OpenChannelReq implements StrmMsg {
         this.talkSendProtoVer = talkSendProtoVer;
         this.audioCfg = audioCfg;
         this.rtspSrc = rtspSrc;
+        this.timedToken = timedToken;
     }
 
     public String getReqId() {
@@ -240,7 +263,7 @@ public class OpenChannelReq implements StrmMsg {
      * Return requested data type (for live) or media type (for replay) of the channel.
      * <ul>
      *     <li>For live channel, then value domain of the fields is one of `DATA_TYPE__XXXX`.</li>
-     *     <li>For replay channel, then value domain of the fields is one of `REPLAY_MEDIA_TYPE__XXX`.</li>
+     *     <li>For replay channel, then value domain of the fields is one of `REPLAY_MEDIA_TYPE__XXX`(exclude `REPLAY_MEDIA_TYPE__AUDIO_OR_VIDEO`).</li>
      * </ul>
      *
      * @return data type (for live) or media type (for replay) of the channel
@@ -314,6 +337,14 @@ public class OpenChannelReq implements StrmMsg {
 
     public void setRtspSrc(RtspSource rtspSrc) {
         this.rtspSrc = rtspSrc;
+    }
+
+    public String getTimedToken() {
+        return timedToken;
+    }
+
+    public void setTimedToken(String timedToken) {
+        this.timedToken = timedToken;
     }
 
     /**
@@ -433,6 +464,11 @@ public class OpenChannelReq implements StrmMsg {
                 return "rtspSrc.url";
         }
 
+        if (keepInterval != null) {
+            if (keepInterval < 15)
+                return "keepInterval";
+        }
+
         return null;
     }
 
@@ -472,6 +508,7 @@ public class OpenChannelReq implements StrmMsg {
                 .add("talkSendProtoVer=" + talkSendProtoVer)
                 .add("audioCfg=" + audioCfg)
                 .add("rtspSrc=" + rtspSrc)
+                .add("timedToken='" + timedToken + "'")
                 .toString();
     }
 }

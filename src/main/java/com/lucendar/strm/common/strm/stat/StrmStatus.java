@@ -1,40 +1,76 @@
-/*******************************************************************************
- *  Copyright (c) 2019, 2021 lucendar.com.
- *  All rights reserved.
- *
- *  Contributors:
- *     KwanKin Yau (alphax@vip.163.com) - initial API and implementation
- *******************************************************************************/
-package com.lucendar.strm.common.strm.closedlog;
+package com.lucendar.strm.common.strm.stat;
 
-import com.lucendar.strm.common.StrmMsg;
-import com.lucendar.strm.common.StrmMsgs;
-
-import java.util.List;
+import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class ClosedChannelLogEntry implements StrmMsg {
-
+public class StrmStatus {
     private String simNo;
     private short chanId;
     private boolean live;
     private Integer liveDataTyp;
-    private Integer codeStrm;
+    private byte codeStrm;
     private long createTm;
     private Long srcDetectTm;
     private boolean strmReady;
     private Long strmReadyTm;
-    private long closeTm;
     private long recvFromTerm;
-    private long sendToClient;
+    private long termByteRate;
+    private long sendToClnt;
     private String audioFmt;
-    private boolean audioFmtSupported;
+    private boolean aSupported;
     private String videoFmt;
-    private boolean videoFmtSupported;
+    private boolean vSupported;
     private String videoRes;
-    private Float frameRate;
+    private Float frameRate; // null if not available
     private String mediaTyp;
-    private List<ClosedReqLogEntry> requests;
+
+    private StrmReqStatus[] requests;
+
+    public StrmStatus() {
+    }
+
+    public StrmStatus(String simNo,
+                      short chanId,
+                      boolean live,
+                      Integer liveDataTyp,
+                      byte codeStrm,
+                      long createTm,
+                      Long srcDetectTm,
+                      boolean strmReady,
+                      Long strmReadyTm,
+                      long recvFromTerm,
+                      long termByteRate,
+                      long sendToClnt,
+                      String audioFmt,
+                      boolean aSupported,
+                      String videoFmt,
+                      boolean vSupported,
+                      String videoRes,
+                      Float frameRate,
+                      String mediaTyp,
+                      StrmReqStatus[] requests
+    ) {
+        this.simNo = simNo;
+        this.chanId = chanId;
+        this.live = live;
+        this.liveDataTyp = liveDataTyp;
+        this.codeStrm = codeStrm;
+        this.createTm = createTm;
+        this.srcDetectTm = srcDetectTm;
+        this.strmReady = strmReady;
+        this.strmReadyTm = strmReadyTm;
+        this.recvFromTerm = recvFromTerm;
+        this.termByteRate = termByteRate;
+        this.sendToClnt = sendToClnt;
+        this.audioFmt = audioFmt;
+        this.aSupported = aSupported;
+        this.videoFmt = videoFmt;
+        this.vSupported = vSupported;
+        this.videoRes = videoRes;
+        this.frameRate = frameRate;
+        this.mediaTyp = mediaTyp;
+        this.requests = requests;
+    }
 
     public String getSimNo() {
         return simNo;
@@ -68,11 +104,11 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.liveDataTyp = liveDataTyp;
     }
 
-    public Integer getCodeStrm() {
+    public byte getCodeStrm() {
         return codeStrm;
     }
 
-    public void setCodeStrm(Integer codeStrm) {
+    public void setCodeStrm(byte codeStrm) {
         this.codeStrm = codeStrm;
     }
 
@@ -108,14 +144,6 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.strmReadyTm = strmReadyTm;
     }
 
-    public long getCloseTm() {
-        return closeTm;
-    }
-
-    public void setCloseTm(long closeTm) {
-        this.closeTm = closeTm;
-    }
-
     public long getRecvFromTerm() {
         return recvFromTerm;
     }
@@ -124,12 +152,20 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.recvFromTerm = recvFromTerm;
     }
 
-    public long getSendToClient() {
-        return sendToClient;
+    public long getTermByteRate() {
+        return termByteRate;
     }
 
-    public void setSendToClient(long sendToClient) {
-        this.sendToClient = sendToClient;
+    public void setTermByteRate(long termByteRate) {
+        this.termByteRate = termByteRate;
+    }
+
+    public long getSendToClnt() {
+        return sendToClnt;
+    }
+
+    public void setSendToClnt(long sendToClnt) {
+        this.sendToClnt = sendToClnt;
     }
 
     public String getAudioFmt() {
@@ -140,12 +176,12 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.audioFmt = audioFmt;
     }
 
-    public boolean isAudioFmtSupported() {
-        return audioFmtSupported;
+    public boolean isaSupported() {
+        return aSupported;
     }
 
-    public void setAudioFmtSupported(boolean audioFmtSupported) {
-        this.audioFmtSupported = audioFmtSupported;
+    public void setaSupported(boolean aSupported) {
+        this.aSupported = aSupported;
     }
 
     public String getVideoFmt() {
@@ -156,12 +192,12 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.videoFmt = videoFmt;
     }
 
-    public boolean isVideoFmtSupported() {
-        return videoFmtSupported;
+    public boolean isvSupported() {
+        return vSupported;
     }
 
-    public void setVideoFmtSupported(boolean videoFmtSupported) {
-        this.videoFmtSupported = videoFmtSupported;
+    public void setvSupported(boolean vSupported) {
+        this.vSupported = vSupported;
     }
 
     public String getVideoRes() {
@@ -172,6 +208,11 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.videoRes = videoRes;
     }
 
+    /**
+     * Get frame rate of video.
+     *
+     * @return frame rate of video, null if not available
+     */
     public Float getFrameRate() {
         return frameRate;
     }
@@ -188,32 +229,17 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.mediaTyp = mediaTyp;
     }
 
-    public List<ClosedReqLogEntry> getRequests() {
+    public StrmReqStatus[] getRequests() {
         return requests;
     }
 
-    public void setRequests(List<ClosedReqLogEntry> requests) {
+    public void setRequests(StrmReqStatus[] requests) {
         this.requests = requests;
-    }
-
-    public ClosedReqLogEntry findReq(String reqId) {
-        if (this.requests != null) {
-            for (ClosedReqLogEntry r : this.requests) {
-                if (r.getReqId().equals(reqId))
-                    return r;
-            }
-        }
-
-        return null;
-    }
-
-    public boolean hasReq(String reqId) {
-        return findReq(reqId) != null;
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", ClosedChannelLogEntry.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", StrmStatus.class.getSimpleName() + "[", "]")
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
                 .add("live=" + live)
@@ -223,22 +249,17 @@ public class ClosedChannelLogEntry implements StrmMsg {
                 .add("srcDetectTm=" + srcDetectTm)
                 .add("strmReady=" + strmReady)
                 .add("strmReadyTm=" + strmReadyTm)
-                .add("closeTm=" + closeTm)
                 .add("recvFromTerm=" + recvFromTerm)
-                .add("sendToClient=" + sendToClient)
+                .add("termByteRate=" + termByteRate)
+                .add("sendToClnt=" + sendToClnt)
                 .add("audioFmt='" + audioFmt + "'")
-                .add("audioFmtSupported=" + audioFmtSupported)
+                .add("aSupported=" + aSupported)
                 .add("videoFmt='" + videoFmt + "'")
-                .add("videoFmtSupported=" + videoFmtSupported)
+                .add("vSupported=" + vSupported)
                 .add("videoRes='" + videoRes + "'")
                 .add("frameRate=" + frameRate)
                 .add("mediaTyp='" + mediaTyp + "'")
-                .add("requests=" + requests)
+                .add("requests=" + Arrays.toString(requests))
                 .toString();
-    }
-
-    @Override
-    public int msgId() {
-        return StrmMsgs.STRM_MSG__ClosedChannelLogEntry;
     }
 }

@@ -1,7 +1,5 @@
 package com.lucendar.strm.common.strm.stat;
 
-import com.lucendar.strm.common.strm.StrmStatSampling;
-
 import javax.management.Attribute;
 import javax.management.AttributeList;
 import javax.management.InstanceNotFoundException;
@@ -16,27 +14,23 @@ import java.lang.management.ThreadMXBean;
 import java.util.StringJoiner;
 
 public class StrmServerStat {
-        private String version;
-        private long startupTime;
-        private Double systemLoadAverage; // null for not available
+        private String ver;
+        private long startTm;
+        private Double sysLoadAvg; // null for not available
         private Double procCpuLoad; // null for not available
         private Double sysCpuLoad; // null for not available
-        private MemoryUsage heapMemoryUsage;
-        private MemoryUsage nonHeapMemoryUsage;
-        private int threadCount;
-        private int deadLockThreads;
-
-        private StrmStatSampling audioProcessDelay;
-        private StrmStatSampling videoProcessDelay;
-        private StrmStatSampling flvAvProcessDelay;
+        private MemoryUsage heapMemUse;
+        private MemoryUsage nonHeapMemUse;
+        private int thdCnt;
+        private int deadLockThds;
 
         private static Double[] cpuLoads(MBeanServer server) {
             try {
                 ObjectName n = ObjectName.getInstance("java.lang:type=OperatingSystem");
                 AttributeList list = server.getAttributes(n, new String[]{"ProcessCpuLoad", "SystemCpuLoad"});
                 Double[] r = new Double[2];
-                for (int i = 0; i < list.size(); i++) {
-                    Attribute att = (Attribute) list.get(i);
+                for (Object o : list) {
+                    Attribute att = (Attribute) o;
                     switch (att.getName()) {
                         case "ProcessCpuLoad":
                             double v = (Double) att.getValue();
@@ -68,35 +62,35 @@ public class StrmServerStat {
             }
             double d = ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage();
             if (d >= 0)
-                r.systemLoadAverage = d;
+                r.sysLoadAvg = d;
             MemoryMXBean mem = ManagementFactory.getMemoryMXBean();
-            r.heapMemoryUsage = mem.getHeapMemoryUsage();
-            r.nonHeapMemoryUsage = mem.getNonHeapMemoryUsage();
+            r.heapMemUse = mem.getHeapMemoryUsage();
+            r.nonHeapMemUse = mem.getNonHeapMemoryUsage();
             ThreadMXBean t = ManagementFactory.getThreadMXBean();
-            r.threadCount = t.getThreadCount();
+            r.thdCnt = t.getThreadCount();
             long[] arr = t.findDeadlockedThreads();
             if (arr != null)
-                r.deadLockThreads = arr.length;
+                r.deadLockThds = arr.length;
             else
-                r.deadLockThreads = 0;
+                r.deadLockThds = 0;
 
             return r;
         }
 
-        public String getVersion() {
-            return version;
+        public String getVer() {
+            return ver;
         }
 
-        public void setVersion(String version) {
-            this.version = version;
+        public void setVer(String ver) {
+            this.ver = ver;
         }
 
-        public long getStartupTime() {
-            return startupTime;
+        public long getStartTm() {
+            return startTm;
         }
 
-        public void setStartupTime(long startupTime) {
-            this.startupTime = startupTime;
+        public void setStartTm(long startTm) {
+            this.startTm = startTm;
         }
 
         public Double getProcCpuLoad() {
@@ -115,85 +109,59 @@ public class StrmServerStat {
             this.sysCpuLoad = sysCpuLoad;
         }
 
-        public Double getSystemLoadAverage() {
-            return systemLoadAverage;
+        public Double getSysLoadAvg() {
+            return sysLoadAvg;
         }
 
-        public void setSystemLoadAverage(Double systemLoadAverage) {
-            this.systemLoadAverage = systemLoadAverage;
+        public void setSysLoadAvg(Double sysLoadAvg) {
+            this.sysLoadAvg = sysLoadAvg;
         }
 
-        public MemoryUsage getHeapMemoryUsage() {
-            return heapMemoryUsage;
+        public MemoryUsage getHeapMemUse() {
+            return heapMemUse;
         }
 
-        public void setHeapMemoryUsage(MemoryUsage heapMemoryUsage) {
-            this.heapMemoryUsage = heapMemoryUsage;
+        public void setHeapMemUse(MemoryUsage heapMemUse) {
+            this.heapMemUse = heapMemUse;
         }
 
-        public MemoryUsage getNonHeapMemoryUsage() {
-            return nonHeapMemoryUsage;
+        public MemoryUsage getNonHeapMemUse() {
+            return nonHeapMemUse;
         }
 
-        public void setNonHeapMemoryUsage(MemoryUsage nonHeapMemoryUsage) {
-            this.nonHeapMemoryUsage = nonHeapMemoryUsage;
+        public void setNonHeapMemUse(MemoryUsage nonHeapMemUse) {
+            this.nonHeapMemUse = nonHeapMemUse;
         }
 
-        public int getThreadCount() {
-            return threadCount;
+        public int getThdCnt() {
+            return thdCnt;
         }
 
-        public void setThreadCount(int threadCount) {
-            this.threadCount = threadCount;
+        public void setThdCnt(int thdCnt) {
+            this.thdCnt = thdCnt;
         }
 
-        public int getDeadLockThreads() {
-            return deadLockThreads;
+        public int getDeadLockThds() {
+            return deadLockThds;
         }
 
-        public void setDeadLockThreads(int deadLockThreads) {
-            this.deadLockThreads = deadLockThreads;
+        public void setDeadLockThds(int deadLockThds) {
+            this.deadLockThds = deadLockThds;
         }
 
-        public StrmStatSampling getAudioProcessDelay() {
-            return audioProcessDelay;
-        }
-
-        public void setAudioProcessDelay(StrmStatSampling audioProcessDelay) {
-            this.audioProcessDelay = audioProcessDelay;
-        }
-
-        public StrmStatSampling getVideoProcessDelay() {
-            return videoProcessDelay;
-        }
-
-        public void setVideoProcessDelay(StrmStatSampling videoProcessDelay) {
-            this.videoProcessDelay = videoProcessDelay;
-        }
-
-        public StrmStatSampling getFlvAvProcessDelay() {
-            return flvAvProcessDelay;
-        }
-
-        public void setFlvAvProcessDelay(StrmStatSampling flvAvProcessDelay) {
-            this.flvAvProcessDelay = flvAvProcessDelay;
-        }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmServerStat.class.getSimpleName() + "[", "]")
-                .add("version='" + version + "'")
-                .add("startupTime=" + startupTime)
-                .add("systemLoadAverage=" + systemLoadAverage)
+                .add("ver='" + ver + "'")
+                .add("startTm=" + startTm)
+                .add("sysLoadAvg=" + sysLoadAvg)
                 .add("procCpuLoad=" + procCpuLoad)
                 .add("sysCpuLoad=" + sysCpuLoad)
-                .add("heapMemoryUsage=" + heapMemoryUsage)
-                .add("nonHeapMemoryUsage=" + nonHeapMemoryUsage)
-                .add("threadCount=" + threadCount)
-                .add("deadLockThreads=" + deadLockThreads)
-                .add("audioProcessDelay=" + audioProcessDelay)
-                .add("videoProcessDelay=" + videoProcessDelay)
-                .add("flvAvProcessDelay=" + flvAvProcessDelay)
+                .add("heapMemUse=" + heapMemUse)
+                .add("nonHeapMemUse=" + nonHeapMemUse)
+                .add("thdCnt=" + thdCnt)
+                .add("deadLockThds=" + deadLockThds)
                 .toString();
     }
 }

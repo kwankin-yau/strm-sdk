@@ -4,6 +4,19 @@
 - `SubscribeChannelReq` rename to `OpenChannelReq`
 - Introduce new `AudioConfig` class
 - `OpenChannelReq` add `audioCfg`, `rtspSrc` properties
+- `ChannelStat` add `audioFmtSupported`, `videoFmtSupported`, `frameRate`
+- `ClosedChannelLogEntry` add `audioFmtSupported`, `videoFmtSupported`, `frameRate`
+- Shorten `StrmChannelLogEntry.EVT__XXXX` constants value length, added `EVT__SRC_CLOSED`
+- `com.lucendar.strm.common.strm.OpenChannelReq` add `timedToken` property.
+- Introduce new `com.lucendar.strm.common.strm.stat.StrmPerfStat`
+- Shorten `StrmServerStat` property names, remove `recvFromTerm1Minute`, `XXXProcessDelay` properties,
+  add `perfStat` property, rename `channelCount` property to `strmCnt`, rename `channels` property to `strms`.
+- remove `com.lucendar.strm.common.strm.stat.StrmReportReq`.
+- `com.lucendar.strm.common.strm.stat.QryServerStatusReq` add `sysResStat` properties.
+- remove `com.lucendar.strm.common.strm.stat.QryServerStatResult`
+- `com.lucendar.strm.common.strm.stat.ChannelReportResult` rename to `QryServerStatusResult`
+- `com.lucendar.strm.common.strm.stat.ChannelStat` rename to `com.lucendar.strm.common.strm.stat.StrmStatus`
+- `com.lucendar.strm.common.strm.stat.ReqStat` rename to `com.lucendar.strm.common.strm.stat.StrmReqStatus`
 
 # 3.3.5 - [2022-05-05]
 Nothing changed, just change version.
