@@ -17,9 +17,9 @@ public class StrmMsgs {
     public static final int STRM_MSG__ReleaseChannelsReq = 6;
     public static final int STRM_MSG__QryServerStatusReq = 7;
     public static final int STRM_MSG__CheckChannelReq = 8;
-    public static final int STRM_MSG__ClosedChannelLogEntry = 9;
-    public static final int STRM_MSG__QryClosedLogReq = 10;
-    public static final int STRM_MSG__AvStoreLog = 11;
+    public static final int STRM_MSG__ClosedStrm = 9;
+    public static final int STRM_MSG__QryRecentClosedStrmReq = 10;
+    public static final int STRM_MSG__StoredAv = 11;
     public static final int STRM_MSG__QryStrmActivityReq = 12;
     public static final int STRM_MSG__QryStrmStatReq = 13;
     public static final int STRM_MSG__QryStrmActSegReq = 14;

@@ -10,7 +10,9 @@ package com.lucendar.strm.common.strm.stored;
 import com.lucendar.strm.common.StrmMsg;
 import com.lucendar.strm.common.StrmMsgs;
 
-public class AvStoreLog implements StrmMsg {
+import java.util.StringJoiner;
+
+public class StoredAv implements StrmMsg {
 
     private String reqId;
     private String reqTm;
@@ -21,11 +23,12 @@ public class AvStoreLog implements StrmMsg {
     private String ext;
     private long sz;
     private String url;
+    private String mediaTyp;
 
-    public AvStoreLog() {
+    public StoredAv() {
     }
 
-    public AvStoreLog(String reqId, String reqTm, String simNo, int chan, boolean live, String path, String ext, long sz) {
+    public StoredAv(String reqId, String reqTm, String simNo, int chan, boolean live, String path, String ext, long sz, String mediaTyp) {
         this.reqId = reqId;
         this.reqTm = reqTm;
         this.simNo = simNo;
@@ -34,6 +37,7 @@ public class AvStoreLog implements StrmMsg {
         this.path = path;
         this.ext = ext;
         this.sz = sz;
+        this.mediaTyp = mediaTyp;
     }
 
     public String getReqId() {
@@ -108,8 +112,16 @@ public class AvStoreLog implements StrmMsg {
         this.url = url;
     }
 
-    public AvStoreLog copyWithNewSz(long newSz) {
-        AvStoreLog r = new AvStoreLog();
+    public String getMediaTyp() {
+        return mediaTyp;
+    }
+
+    public void setMediaTyp(String mediaTyp) {
+        this.mediaTyp = mediaTyp;
+    }
+
+    public StoredAv copyWithNewSzAndMediaTyp(long newSz, String newMediaTyp) {
+        StoredAv r = new StoredAv();
         r.reqId = reqId;
         r.reqTm = reqTm;
         r.simNo = simNo;
@@ -119,27 +131,29 @@ public class AvStoreLog implements StrmMsg {
         r.ext = ext;
         r.sz = newSz;
         r.url = url;
+        r.mediaTyp = newMediaTyp;
 
         return r;
     }
 
     @Override
     public String toString() {
-        return "AVStoreLog{" +
-                "reqId='" + reqId + '\'' +
-                ", reqTm='" + reqTm + '\'' +
-                ", simNo='" + simNo + '\'' +
-                ", chan=" + chan +
-                ", live=" + live +
-                ", path='" + path + '\'' +
-                ", ext='" + ext + '\'' +
-                ", sz=" + sz +
-                ", url='" + url + '\'' +
-                '}';
+        return new StringJoiner(", ", StoredAv.class.getSimpleName() + "[", "]")
+                .add("reqId='" + reqId + "'")
+                .add("reqTm='" + reqTm + "'")
+                .add("simNo='" + simNo + "'")
+                .add("chan=" + chan)
+                .add("live=" + live)
+                .add("path='" + path + "'")
+                .add("ext='" + ext + "'")
+                .add("sz=" + sz)
+                .add("url='" + url + "'")
+                .add("mediaTyp='" + mediaTyp + "'")
+                .toString();
     }
 
     @Override
     public int msgId() {
-        return StrmMsgs.STRM_MSG__AvStoreLog;
+        return StrmMsgs.STRM_MSG__StoredAv;
     }
 }

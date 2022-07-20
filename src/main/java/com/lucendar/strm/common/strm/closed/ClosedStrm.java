@@ -5,7 +5,7 @@
  *  Contributors:
  *     KwanKin Yau (alphax@vip.163.com) - initial API and implementation
  *******************************************************************************/
-package com.lucendar.strm.common.strm.closedlog;
+package com.lucendar.strm.common.strm.closed;
 
 import com.lucendar.strm.common.StrmMsg;
 import com.lucendar.strm.common.StrmMsgs;
@@ -13,7 +13,7 @@ import com.lucendar.strm.common.StrmMsgs;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class ClosedChannelLogEntry implements StrmMsg {
+public class ClosedStrm implements StrmMsg {
 
     private String simNo;
     private short chanId;
@@ -34,7 +34,7 @@ public class ClosedChannelLogEntry implements StrmMsg {
     private String videoRes;
     private Float frameRate;
     private String mediaTyp;
-    private List<ClosedReqLogEntry> requests;
+    private List<ClosedStrmReq> requests;
 
     public String getSimNo() {
         return simNo;
@@ -188,17 +188,17 @@ public class ClosedChannelLogEntry implements StrmMsg {
         this.mediaTyp = mediaTyp;
     }
 
-    public List<ClosedReqLogEntry> getRequests() {
+    public List<ClosedStrmReq> getRequests() {
         return requests;
     }
 
-    public void setRequests(List<ClosedReqLogEntry> requests) {
+    public void setRequests(List<ClosedStrmReq> requests) {
         this.requests = requests;
     }
 
-    public ClosedReqLogEntry findReq(String reqId) {
+    public ClosedStrmReq findReq(String reqId) {
         if (this.requests != null) {
-            for (ClosedReqLogEntry r : this.requests) {
+            for (ClosedStrmReq r : this.requests) {
                 if (r.getReqId().equals(reqId))
                     return r;
             }
@@ -213,7 +213,7 @@ public class ClosedChannelLogEntry implements StrmMsg {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", ClosedChannelLogEntry.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", ClosedStrm.class.getSimpleName() + "[", "]")
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
                 .add("live=" + live)
@@ -239,6 +239,6 @@ public class ClosedChannelLogEntry implements StrmMsg {
 
     @Override
     public int msgId() {
-        return StrmMsgs.STRM_MSG__ClosedChannelLogEntry;
+        return StrmMsgs.STRM_MSG__ClosedStrm;
     }
 }

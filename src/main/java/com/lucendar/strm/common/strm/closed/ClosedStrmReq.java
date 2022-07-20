@@ -5,11 +5,11 @@
  *  Contributors:
  *     KwanKin Yau (alphax@vip.163.com) - initial API and implementation
  *******************************************************************************/
-package com.lucendar.strm.common.strm.closedlog;
+package com.lucendar.strm.common.strm.closed;
 
 import java.util.StringJoiner;
 
-public class ClosedReqLogEntry {
+public class ClosedStrmReq {
 
     private String reqId;
     private String userId;
@@ -86,7 +86,7 @@ public class ClosedReqLogEntry {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", ClosedReqLogEntry.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", ClosedStrmReq.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .add("userId='" + userId + "'")
                 .add("reqTm=" + reqTm)

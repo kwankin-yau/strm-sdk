@@ -1,22 +1,28 @@
 # 3.4.0 - [2022-05-12]
 ## Changed
-- Move inner class from StreamingApi to upper level
-- `SubscribeChannelReq` rename to `OpenChannelReq`
-- Introduce new `AudioConfig` class
-- `OpenChannelReq` add `audioCfg`, `rtspSrc` properties
-- `ChannelStat` add `audioFmtSupported`, `videoFmtSupported`, `frameRate`
-- `ClosedChannelLogEntry` add `audioFmtSupported`, `videoFmtSupported`, `frameRate`
-- Shorten `StrmChannelLogEntry.EVT__XXXX` constants value length, added `EVT__SRC_CLOSED`
+- Move inner class from StreamingApi to upper level.
+- `SubscribeChannelReq` rename to `OpenChannelReq`.
+- Introduce new `AudioConfig` class.
+- `OpenChannelReq` add `audioCfg`, `rtspSrc` properties.
+- `ChannelStat` add `audioFmtSupported`, `videoFmtSupported`, `frameRate`.
+- `ClosedChannelLogEntry` add `audioFmtSupported`, `videoFmtSupported`, `frameRate`.
+- Shorten `StrmChannelLogEntry.EVT__XXXX` constants value length, added `EVT__SRC_CLOSED`.
 - `com.lucendar.strm.common.strm.OpenChannelReq` add `timedToken` property.
-- Introduce new `com.lucendar.strm.common.strm.stat.StrmPerfStat`
+- Introduce new `com.lucendar.strm.common.strm.stat.StrmPerfStat`.
 - Shorten `StrmServerStat` property names, remove `recvFromTerm1Minute`, `XXXProcessDelay` properties,
   add `perfStat` property, rename `channelCount` property to `strmCnt`, rename `channels` property to `strms`.
 - remove `com.lucendar.strm.common.strm.stat.StrmReportReq`.
 - `com.lucendar.strm.common.strm.stat.QryServerStatusReq` add `sysResStat` properties.
-- remove `com.lucendar.strm.common.strm.stat.QryServerStatResult`
-- `com.lucendar.strm.common.strm.stat.ChannelReportResult` rename to `QryServerStatusResult`
-- `com.lucendar.strm.common.strm.stat.ChannelStat` rename to `com.lucendar.strm.common.strm.stat.StrmStatus`
-- `com.lucendar.strm.common.strm.stat.ReqStat` rename to `com.lucendar.strm.common.strm.stat.StrmReqStatus`
+- remove `com.lucendar.strm.common.strm.stat.QryServerStatResult`.
+- `com.lucendar.strm.common.strm.stat.ChannelReportResult` rename to `QryServerStatusResult`.
+- `com.lucendar.strm.common.strm.stat.ChannelStat` rename to `com.lucendar.strm.common.strm.stat.StrmStatus`.
+- `com.lucendar.strm.common.strm.stat.ReqStat` rename to `com.lucendar.strm.common.strm.stat.StrmReqStatus`.
+- `com.lucendar.strm.common.strm.stored.AvStoreLog` rename to `com.lucendar.strm.common.strm.stored.StoredAv`, 
+  and add `mediaTyp` property.
+- `com.lucendar.strm.common.strm.closedlog.ClosedReqLogEntry` rename to `com.lucendar.strm.common.strm.closedlog.ClosedStrmReq`
+- `com.lucendar.strm.common.strm.closedlog.ClosedChannelLogEntry` renamed to `com.lucendar.strm.common.strm.closedlog.ClosedStrm`
+- `com.lucendar.strm.common.strm.closedlog.QryClosedLogReq` rename to `com.lucendar.strm.common.strm.closedlog.QryRecentClosedStrmReq`,
+  and add `__page`, `__limit` properties.
 
 # 3.3.5 - [2022-05-05]
 Nothing changed, just change version.
