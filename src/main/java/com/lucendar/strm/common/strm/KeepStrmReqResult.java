@@ -1,13 +1,15 @@
 package com.lucendar.strm.common.strm;
 
-public class KeepChannelItemResult {
+import java.util.StringJoiner;
+
+public class KeepStrmReqResult {
     private String reqId;
     private boolean keep;
 
-    public KeepChannelItemResult() {
+    public KeepStrmReqResult() {
     }
 
-    public KeepChannelItemResult(String reqId, boolean keep) {
+    public KeepStrmReqResult(String reqId, boolean keep) {
         this.reqId = reqId;
         this.keep = keep;
     }
@@ -30,9 +32,9 @@ public class KeepChannelItemResult {
 
     @Override
     public String toString() {
-        return "KeepChannelItemResult{" +
-                "reqId='" + reqId + '\'' +
-                ", keep=" + keep +
-                '}';
+        return new StringJoiner(", ", KeepStrmReqResult.class.getSimpleName() + "[", "]")
+                .add("reqId='" + reqId + "'")
+                .add("keep=" + keep)
+                .toString();
     }
 }

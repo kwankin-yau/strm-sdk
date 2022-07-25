@@ -7,10 +7,12 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.log;
 
+import java.util.StringJoiner;
+
 /**
  * Streaming activity log entry
  */
-public class StrmChannelLogEntry {
+public class StrmLogEntry {
 
     public static final String EVT__OPEN_CHANNEL = "open";
     public static final String EVT__IDENTIFIED = "id";
@@ -94,14 +96,14 @@ public class StrmChannelLogEntry {
 
     @Override
     public String toString() {
-        return "StrmChannelLogEntry{" +
-                "time=" + time +
-                ", simNo='" + simNo + '\'' +
-                ", chanId=" + chanId +
-                ", live=" + live +
-                ", reqId='" + reqId + '\'' +
-                ", evtTyp='" + evtTyp + '\'' +
-                ", evtData='" + evtData + '\'' +
-                '}';
+        return new StringJoiner(", ", StrmLogEntry.class.getSimpleName() + "[", "]")
+                .add("time=" + time)
+                .add("simNo='" + simNo + "'")
+                .add("chanId=" + chanId)
+                .add("live=" + live)
+                .add("reqId='" + reqId + "'")
+                .add("evtTyp='" + evtTyp + "'")
+                .add("evtData='" + evtData + "'")
+                .toString();
     }
 }

@@ -14,7 +14,7 @@ import static com.lucendar.strm.common.StreamingApi.encodeStreamName;
 import static com.lucendar.strm.common.StreamingApi.isValidReqId;
 import static com.lucendar.strm.common.StreamingApi.isValidSimNo;
 
-public class OpenChannelReq implements StrmMsg {
+public class OpenStrmReq implements StrmMsg {
 
     public static final int DATA_TYPE__AV = 0;
     public static final int DATA_TYPE__VIDEO = 1;
@@ -38,11 +38,12 @@ public class OpenChannelReq implements StrmMsg {
     public static final byte REPLAY_STORAGE_TYPE__PRIMARY = 1;
     public static final byte REPLAY_STORAGE_TYPE__BACKUP = 2;
 
-    public static final int MIN_INTERVAL__FLV = 10;
+    public static final int MIN_KEEP_INTERVAL = 15;
+    public static final int MAX_KEEP_INTERVAL = 600;
+
     public static final int DEFAULT_INTERVAL__FLV = 20;
     public static final int MAX_INTERVAL__FLV = 30 * 60;
 
-    public static final int MIN_INTERVAL__HLS = 15;
     public static final int DEFAULT_INTERVAL__HLS = 20;
     public static final int MAX_INTERVAL__HLS = 30 * 60;
 
@@ -59,13 +60,13 @@ public class OpenChannelReq implements StrmMsg {
 
     @Override
     public int msgId() {
-        return StrmMsgs.STRM_MSG__OpenChannelReq;
+        return StrmMsgs.STRM_MSG__OpenStrmReq;
     }
 
     public static class RtspSource {
         private String url;
-        private String username;
-        private String password;
+        private String user;
+        private String pwd;
 
         public String getUrl() {
             return url;
@@ -75,28 +76,28 @@ public class OpenChannelReq implements StrmMsg {
             this.url = url;
         }
 
-        public String getUsername() {
-            return username;
+        public String getUser() {
+            return user;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
+        public void setUser(String user) {
+            this.user = user;
         }
 
-        public String getPassword() {
-            return password;
+        public String getPwd() {
+            return pwd;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
+        public void setPwd(String pwd) {
+            this.pwd = pwd;
         }
 
         @Override
         public String toString() {
             return new StringJoiner(", ", RtspSource.class.getSimpleName() + "[", "]")
                     .add("url='" + url + "'")
-                    .add("username='" + username + "'")
-                    .add("password='" + password + "'")
+                    .add("user='" + user + "'")
+                    .add("pwd='" + pwd + "'")
                     .toString();
         }
 
@@ -108,15 +109,15 @@ public class OpenChannelReq implements StrmMsg {
             RtspSource that = (RtspSource) o;
 
             if (url != null ? !url.equals(that.url) : that.url != null) return false;
-            if (username != null ? !username.equals(that.username) : that.username != null) return false;
-            return password != null ? password.equals(that.password) : that.password == null;
+            if (user != null ? !user.equals(that.user) : that.user != null) return false;
+            return pwd != null ? pwd.equals(that.pwd) : that.pwd == null;
         }
 
         @Override
         public int hashCode() {
             int result = url != null ? url.hashCode() : 0;
-            result = 31 * result + (username != null ? username.hashCode() : 0);
-            result = 31 * result + (password != null ? password.hashCode() : 0);
+            result = 31 * result + (user != null ? user.hashCode() : 0);
+            result = 31 * result + (pwd != null ? pwd.hashCode() : 0);
             return result;
         }
     }
@@ -126,14 +127,16 @@ public class OpenChannelReq implements StrmMsg {
     private StrmUserInfo user;
     private String typ;
     private String simNo;
-    private short channelId;
+    private short chanId;
     private byte proto;
     private byte connIdx;
     private String clientData;
     private int dataTyp;
     private byte codeStrm;
-    private boolean recordOnServer;
-    private Integer keepInterval;
+    private boolean exclusive;
+    private boolean record;
+    private Boolean detectMediaTyp;
+    private Integer keepIntv;
     private String uriScheme;
     private Integer talkSendProtoVer;
     private AudioConfig audioCfg;
@@ -141,28 +144,32 @@ public class OpenChannelReq implements StrmMsg {
     private String timedToken;
 
 
-    public OpenChannelReq() {
+    public OpenStrmReq() {
     }
 
-    public OpenChannelReq(String reqId, String callback, StrmUserInfo user, String typ, String simNo, short channelId,
-                          byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm,
-                          boolean recordOnServer, Integer keepInterval, String uriScheme, Integer talkSendProtoVer,
-                          AudioConfig audioCfg,
-                          RtspSource rtspSrc,
-                          String timedToken) {
+    public OpenStrmReq(String reqId, String callback, StrmUserInfo user, String typ, String simNo, short chanId,
+                       byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm,
+                       boolean exclusive, boolean record,
+                       Boolean detectMediaTyp,
+                       Integer keepIntv, String uriScheme, Integer talkSendProtoVer,
+                       AudioConfig audioCfg,
+                       RtspSource rtspSrc,
+                       String timedToken) {
         this.reqId = reqId;
         this.callback = callback;
         this.user = user;
         this.typ = typ;
         this.simNo = simNo;
-        this.channelId = channelId;
+        this.chanId = chanId;
         this.proto = proto;
         this.connIdx = connIdx;
         this.clientData = clientData;
         this.dataTyp = dataTyp;
         this.codeStrm = codeStrm;
-        this.recordOnServer = recordOnServer;
-        this.keepInterval = keepInterval;
+        this.exclusive = exclusive;
+        this.record = record;
+        this.detectMediaTyp = detectMediaTyp;
+        this.keepIntv = keepIntv;
         this.uriScheme = uriScheme;
         this.talkSendProtoVer = talkSendProtoVer;
         this.audioCfg = audioCfg;
@@ -215,12 +222,12 @@ public class OpenChannelReq implements StrmMsg {
         this.simNo = simNo;
     }
 
-    public short getChannelId() {
-        return channelId;
+    public short getChanId() {
+        return chanId;
     }
 
-    public void setChannelId(short channelId) {
-        this.channelId = channelId;
+    public void setChanId(short chanId) {
+        this.chanId = chanId;
     }
 
     public byte getProto() {
@@ -256,7 +263,7 @@ public class OpenChannelReq implements StrmMsg {
     }
 
     public String streamName() {
-        return encodeStreamName(simNo, channelId, isLive());
+        return encodeStreamName(simNo, chanId, isLive());
     }
 
     /**
@@ -284,20 +291,36 @@ public class OpenChannelReq implements StrmMsg {
         this.codeStrm = codeStrm;
     }
 
-    public boolean isRecordOnServer() {
-        return recordOnServer;
+    public boolean isExclusive() {
+        return exclusive;
     }
 
-    public void setRecordOnServer(boolean recordOnServer) {
-        this.recordOnServer = recordOnServer;
+    public void setExclusive(boolean exclusive) {
+        this.exclusive = exclusive;
     }
 
-    public Integer getKeepInterval() {
-        return keepInterval;
+    public boolean isRecord() {
+        return record;
     }
 
-    public void setKeepInterval(Integer keepInterval) {
-        this.keepInterval = keepInterval;
+    public void setRecord(boolean record) {
+        this.record = record;
+    }
+
+    public Boolean getDetectMediaTyp() {
+        return detectMediaTyp;
+    }
+
+    public void setDetectMediaTyp(Boolean detectMediaTyp) {
+        this.detectMediaTyp = detectMediaTyp;
+    }
+
+    public Integer getKeepIntv() {
+        return keepIntv;
+    }
+
+    public void setKeepIntv(Integer keepIntv) {
+        this.keepIntv = keepIntv;
     }
 
     public String getUriScheme() {
@@ -426,17 +449,17 @@ public class OpenChannelReq implements StrmMsg {
 
         switch (proto) {
             case PROTO__HLS:
-                if (keepInterval != null) {
-                    if (keepInterval < MIN_INTERVAL__HLS || keepInterval > MAX_INTERVAL__HLS)
-                        return "keepInterval";
-                }
+//                if (keepIntv != null) {
+//                    if (keepIntv < MIN_INTERVAL__HLS || keepIntv > MAX_INTERVAL__HLS)
+//                        return "keepIntv";
+//                }
                 break;
 
             case PROTO__HTTP_FLV:
-                if (keepInterval != null) {
-                    if (keepInterval < MIN_INTERVAL__FLV || keepInterval > MAX_INTERVAL__FLV)
-                        return "keepInterval";
-                }
+//                if (keepIntv != null) {
+//                    if (keepIntv < MIN_INTERVAL__FLV || keepIntv > MAX_INTERVAL__FLV)
+//                        return "keepIntv";
+//                }
                 break;
 
             case PROTO__RTMP:
@@ -464,9 +487,9 @@ public class OpenChannelReq implements StrmMsg {
                 return "rtspSrc.url";
         }
 
-        if (keepInterval != null) {
-            if (keepInterval < 15)
-                return "keepInterval";
+        if (keepIntv != null) {
+            if (keepIntv < MIN_KEEP_INTERVAL || keepIntv > MAX_KEEP_INTERVAL)
+                return "keepIntv";
         }
 
         return null;
@@ -490,20 +513,22 @@ public class OpenChannelReq implements StrmMsg {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", OpenChannelReq.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", OpenStrmReq.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .add("callback='" + callback + "'")
                 .add("user=" + user)
                 .add("typ='" + typ + "'")
                 .add("simNo='" + simNo + "'")
-                .add("channelId=" + channelId)
+                .add("chanId=" + chanId)
                 .add("proto=" + proto)
                 .add("connIdx=" + connIdx)
                 .add("clientData='" + clientData + "'")
                 .add("dataTyp=" + dataTyp)
                 .add("codeStrm=" + codeStrm)
-                .add("recordOnServer=" + recordOnServer)
-                .add("keepInterval=" + keepInterval)
+                .add("exclusive=" + exclusive)
+                .add("record=" + record)
+                .add("detectMediaTyp=" + detectMediaTyp)
+                .add("keepIntv=" + keepIntv)
                 .add("uriScheme='" + uriScheme + "'")
                 .add("talkSendProtoVer=" + talkSendProtoVer)
                 .add("audioCfg=" + audioCfg)

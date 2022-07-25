@@ -9,15 +9,15 @@ package com.lucendar.strm.common.strm;
 
 import java.util.StringJoiner;
 
-public class ReleaseChannelReqItem {
+public class ReleaseStrmReqItem {
 
     private String reqId;
     private int closeCause;
 
-    public ReleaseChannelReqItem() {
+    public ReleaseStrmReqItem() {
     }
 
-    public ReleaseChannelReqItem(String reqId, int closeCause) {
+    public ReleaseStrmReqItem(String reqId, int closeCause) {
         this.reqId = reqId;
         this.closeCause = closeCause;
     }
@@ -40,7 +40,7 @@ public class ReleaseChannelReqItem {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", ReleaseChannelReqItem.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", ReleaseStrmReqItem.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .add("closeCause=" + closeCause)
                 .toString();

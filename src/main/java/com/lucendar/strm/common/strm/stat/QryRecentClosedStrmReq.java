@@ -5,7 +5,7 @@
  *  Contributors:
  *     KwanKin Yau (alphax@vip.163.com) - initial API and implementation
  *******************************************************************************/
-package com.lucendar.strm.common.strm.closed;
+package com.lucendar.strm.common.strm.stat;
 
 import com.lucendar.strm.common.StrmMsg;
 import com.lucendar.strm.common.StrmMsgs;

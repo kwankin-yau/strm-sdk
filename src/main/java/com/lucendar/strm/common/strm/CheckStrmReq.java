@@ -5,14 +5,14 @@ import com.lucendar.strm.common.StrmMsgs;
 
 import java.util.StringJoiner;
 
-public class CheckChannelReq implements StrmMsg {
+public class CheckStrmReq implements StrmMsg {
 
     private String reqId;
 
-    public CheckChannelReq() {
+    public CheckStrmReq() {
     }
 
-    public CheckChannelReq(String reqId) {
+    public CheckStrmReq(String reqId) {
         this.reqId = reqId;
     }
 
@@ -26,13 +26,13 @@ public class CheckChannelReq implements StrmMsg {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", CheckChannelReq.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", CheckStrmReq.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .toString();
     }
 
     @Override
     public int msgId() {
-        return StrmMsgs.STRM_MSG__CheckChannelReq;
+        return StrmMsgs.STRM_MSG__CheckStrmReq;
     }
 }

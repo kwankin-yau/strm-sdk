@@ -10,12 +10,6 @@ public class StrmMediaNotif implements Cloneable {
     public static final String ACT__strmReady = "ready";
     public static final String ACT__strmClosed = "closed";
     public static final String ACT__qualityReport = "qr";
-    public static final String ACT__seeking = "seeking";
-    public static final String ACT__strmPause = "pause";
-    public static final String ACT__strmResume = "resume";
-    public static final String ACT__ctrlGot = "ctrlGot";
-    public static final String ACT__changeCodeStrm = "changeCodeStrm";
-
 
     public static final String TYP_none = "";
     public static final String TYP_live = "live";
@@ -30,42 +24,51 @@ public class StrmMediaNotif implements Cloneable {
     public static final int CLOSE_CAUSE__badStrmFormat = 7;
     public static final int CLOSE_CAUSE__noConnection = 8;
 
-
+    private String instId;
     private String act;
     private String reqId;
     private String typ;
-    private String servId;
     private String simNo;
     private short chan;
-    private Short codeStrm;
-    private Byte lostRate;
+
+    private String mediaTyp;
     private String playUrl;
     private String wsUrl;
     private String taUrl;
+
+    private Byte lostRate;
+
     private Integer closeCause;
     private String closeReason;
-    private String mediaTyp;
+
 
     public StrmMediaNotif() {
     }
 
     public StrmMediaNotif(
-            String act, String reqId, String typ, String servId, String simNo, short chan, Short codeStrm,
+            String instId, String act, String reqId, String typ, String simNo, short chan,
             Byte lostRate, String playUrl, String wsUrl, String taUrl, Integer closeCause,
             String mediaTyp) {
+        this.instId = instId;
         this.act = act;
         this.reqId = reqId;
         this.typ = typ;
-        this.servId = servId;
         this.simNo = simNo;
         this.chan = chan;
-        this.codeStrm = codeStrm;
         this.lostRate = lostRate;
         this.playUrl = playUrl;
         this.wsUrl = wsUrl;
         this.taUrl = taUrl;
         this.closeCause = closeCause;
         this.mediaTyp = mediaTyp;
+    }
+
+    public String getInstId() {
+        return instId;
+    }
+
+    public void setInstId(String instId) {
+        this.instId = instId;
     }
 
     public String getAct() {
@@ -103,14 +106,6 @@ public class StrmMediaNotif implements Cloneable {
         return TYP_live.equals(typ);
     }
 
-    public String getServId() {
-        return servId;
-    }
-
-    public void setServId(String servId) {
-        this.servId = servId;
-    }
-
     public String getSimNo() {
         return simNo;
     }
@@ -125,14 +120,6 @@ public class StrmMediaNotif implements Cloneable {
 
     public void setChan(short chan) {
         this.chan = chan;
-    }
-
-    public Short getCodeStrm() {
-        return codeStrm;
-    }
-
-    public void setCodeStrm(Short codeStrm) {
-        this.codeStrm = codeStrm;
     }
 
     public Byte getLostRate() {
@@ -203,6 +190,9 @@ public class StrmMediaNotif implements Cloneable {
             case CLOSE_CAUSE__termStrmClose:
                 return "Terminal connection closed.";
 
+            case CLOSE_CAUSE__badStrmFormat:
+                return "Bad stream format.";
+
             case CLOSE_CAUSE__noConnection:
                 return "No connection";
 
@@ -218,43 +208,7 @@ public class StrmMediaNotif implements Cloneable {
         if (closeCause != null) {
             int cc = closeCause;
             if (cc != 0) {
-                switch (cc) {
-                    case CLOSE_CAUSE__clientReq:
-                        closeReason = "Client request close.";
-                        break;
-
-                    case CLOSE_CAUSE__connectStrmServerFailed:
-                        closeReason = "Connect stream server failed.";
-                        break;
-
-                    case CLOSE_CAUSE__exceptionCaught:
-                        closeReason = "Exception caught.";
-                        break;
-
-                    case CLOSE_CAUSE__keepTimeout:
-                        closeReason = "Client keep timeout.";
-                        break;
-
-                    case CLOSE_CAUSE__termDataTimeout:
-                        closeReason = "Terminal media data timeout.";
-                        break;
-
-                    case CLOSE_CAUSE__termStrmClose:
-                        closeReason = "Terminal connection closed.";
-                        break;
-
-                    case CLOSE_CAUSE__badStrmFormat:
-                        closeReason = "Bad stream format.";
-                        break;
-
-                    case CLOSE_CAUSE__noConnection:
-                        closeReason = "No connection";
-                        break;
-
-                    default:
-                        closeReason = "Unknown";
-                        break;
-                }
+                closeReason = closeCauseToText(cc);
             }
         }
     }
@@ -279,20 +233,19 @@ public class StrmMediaNotif implements Cloneable {
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmMediaNotif.class.getSimpleName() + "[", "]")
+                .add("instId='" + instId + "'")
                 .add("act='" + act + "'")
                 .add("reqId='" + reqId + "'")
                 .add("typ='" + typ + "'")
-                .add("servId='" + servId + "'")
                 .add("simNo='" + simNo + "'")
                 .add("chan=" + chan)
-                .add("codeStream=" + codeStrm)
-                .add("lostRate=" + lostRate)
+                .add("mediaTyp='" + mediaTyp + "'")
                 .add("playUrl='" + playUrl + "'")
                 .add("wsUrl='" + wsUrl + "'")
                 .add("taUrl='" + taUrl + "'")
+                .add("lostRate=" + lostRate)
                 .add("closeCause=" + closeCause)
                 .add("closeReason='" + closeReason + "'")
-                .add("mediaTyp='" + mediaTyp + "'")
                 .toString();
     }
 }

@@ -11,27 +11,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class ReleaseChannelsReq2 {
+public class ReleaseStrmsReq2 {
 
-    private List<ReleaseChannelReqItem> reqItems;
+    private List<ReleaseStrmReqItem> reqItems;
 
-    public ReleaseChannelsReq2() {
+    public ReleaseStrmsReq2() {
     }
 
-    public ReleaseChannelsReq2(ReleaseChannelReqItem item) {
+    public ReleaseStrmsReq2(ReleaseStrmReqItem item) {
         add(item);
     }
 
 
-    public List<ReleaseChannelReqItem> getReqItems() {
+    public List<ReleaseStrmReqItem> getReqItems() {
         return reqItems;
     }
 
-    public void setReqItems(List<ReleaseChannelReqItem> reqItems) {
+    public void setReqItems(List<ReleaseStrmReqItem> reqItems) {
         this.reqItems = reqItems;
     }
 
-    public void add(ReleaseChannelReqItem item) {
+    public void add(ReleaseStrmReqItem item) {
         if (this.reqItems == null)
             this.reqItems = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class ReleaseChannelsReq2 {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", ReleaseChannelsReq2.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", ReleaseStrmsReq2.class.getSimpleName() + "[", "]")
                 .add("reqItems=" + reqItems)
                 .toString();
     }

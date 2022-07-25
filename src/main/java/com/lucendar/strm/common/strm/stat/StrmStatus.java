@@ -13,6 +13,7 @@ public class StrmStatus {
     private Long srcDetectTm;
     private boolean strmReady;
     private Long strmReadyTm;
+    private Long closeTm;
     private long recvFromTerm;
     private long termByteRate;
     private long sendToClnt;
@@ -38,6 +39,7 @@ public class StrmStatus {
                       Long srcDetectTm,
                       boolean strmReady,
                       Long strmReadyTm,
+                      Long closeTm,
                       long recvFromTerm,
                       long termByteRate,
                       long sendToClnt,
@@ -59,6 +61,7 @@ public class StrmStatus {
         this.srcDetectTm = srcDetectTm;
         this.strmReady = strmReady;
         this.strmReadyTm = strmReadyTm;
+        this.closeTm = closeTm;
         this.recvFromTerm = recvFromTerm;
         this.termByteRate = termByteRate;
         this.sendToClnt = sendToClnt;
@@ -144,6 +147,14 @@ public class StrmStatus {
         this.strmReadyTm = strmReadyTm;
     }
 
+    public Long getCloseTm() {
+        return closeTm;
+    }
+
+    public void setCloseTm(Long closeTm) {
+        this.closeTm = closeTm;
+    }
+
     public long getRecvFromTerm() {
         return recvFromTerm;
     }
@@ -176,11 +187,11 @@ public class StrmStatus {
         this.audioFmt = audioFmt;
     }
 
-    public boolean isaSupported() {
+    public boolean isASupported() {
         return aSupported;
     }
 
-    public void setaSupported(boolean aSupported) {
+    public void setASupported(boolean aSupported) {
         this.aSupported = aSupported;
     }
 
@@ -192,11 +203,11 @@ public class StrmStatus {
         this.videoFmt = videoFmt;
     }
 
-    public boolean isvSupported() {
+    public boolean isVSupported() {
         return vSupported;
     }
 
-    public void setvSupported(boolean vSupported) {
+    public void setVSupported(boolean vSupported) {
         this.vSupported = vSupported;
     }
 
@@ -237,6 +248,16 @@ public class StrmStatus {
         this.requests = requests;
     }
 
+    public boolean hasReq(String reqId) {
+        if (requests != null) {
+            for (StrmReqStatus r : requests)
+                if (r.getReqId().equals(reqId))
+                    return true;
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmStatus.class.getSimpleName() + "[", "]")
@@ -249,6 +270,7 @@ public class StrmStatus {
                 .add("srcDetectTm=" + srcDetectTm)
                 .add("strmReady=" + strmReady)
                 .add("strmReadyTm=" + strmReadyTm)
+                .add("closeTm=" + closeTm)
                 .add("recvFromTerm=" + recvFromTerm)
                 .add("termByteRate=" + termByteRate)
                 .add("sendToClnt=" + sendToClnt)
