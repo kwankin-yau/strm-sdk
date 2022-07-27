@@ -6,22 +6,22 @@ public class StrmReqStatus {
     private String reqId;
     private String userId;
     private long reqTm;
-    private int proto;
+    private int fmt;
     private long lastKeepTm;
-    private Long strmReadyTm;
+    private Long readyTm;
     private Long closeTm;
     private Integer closeCause;
 
     public StrmReqStatus() {
     }
 
-    public StrmReqStatus(String reqId, String userId, long reqTm, int proto, long lastKeepTm, Long strmReadyTm, Long closeTm, Integer closeCause) {
+    public StrmReqStatus(String reqId, String userId, long reqTm, int fmt, long lastKeepTm, Long readyTm, Long closeTm, Integer closeCause) {
         this.reqId = reqId;
         this.userId = userId;
         this.reqTm = reqTm;
-        this.proto = proto;
+        this.fmt = fmt;
         this.lastKeepTm = lastKeepTm;
-        this.strmReadyTm = strmReadyTm;
+        this.readyTm = readyTm;
         this.closeTm = closeTm;
         this.closeCause = closeCause;
     }
@@ -50,12 +50,12 @@ public class StrmReqStatus {
         this.reqTm = reqTm;
     }
 
-    public int getProto() {
-        return proto;
+    public int getFmt() {
+        return fmt;
     }
 
-    public void setProto(int proto) {
-        this.proto = proto;
+    public void setFmt(int fmt) {
+        this.fmt = fmt;
     }
 
     public Integer getCloseCause() {
@@ -74,12 +74,12 @@ public class StrmReqStatus {
         this.lastKeepTm = lastKeepTm;
     }
 
-    public Long getStrmReadyTm() {
-        return strmReadyTm;
+    public Long getReadyTm() {
+        return readyTm;
     }
 
-    public void setStrmReadyTm(Long strmReadyTm) {
-        this.strmReadyTm = strmReadyTm;
+    public void setReadyTm(Long readyTm) {
+        this.readyTm = readyTm;
     }
 
     public Long getCloseTm() {
@@ -96,9 +96,9 @@ public class StrmReqStatus {
                 .add("reqId='" + reqId + "'")
                 .add("userId='" + userId + "'")
                 .add("reqTm=" + reqTm)
-                .add("proto=" + proto)
+                .add("fmt=" + fmt)
                 .add("lastKeepTm=" + lastKeepTm)
-                .add("strmReadyTm=" + strmReadyTm)
+                .add("readyTm=" + readyTm)
                 .add("closeTm=" + closeTm)
                 .add("closeCause=" + closeCause)
                 .toString();

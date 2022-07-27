@@ -9,10 +9,10 @@ package com.lucendar.strm.common;
 
 public class StreamingApi {
 
-    public static final byte PROTO__HTTP_FLV = 0;
-    public static final byte PROTO__HLS = 1;
-    public static final byte PROTO__RTMP = 2;
-    public static final byte PROTO__RAW = 3;
+    public static final byte STRM_FORMAT__FLV = 0;
+    public static final byte STRM_FORMAT__HLS = 1;
+    public static final byte STRM_FORMAT__RTMP = 2;
+    public static final byte STRM_FORMAT__RAW = 3;
 
     public static final String CHANNEL_TYPE__LIVE = "live";
     public static final String CHANNEL_TYPE__REPLAY = "replay";

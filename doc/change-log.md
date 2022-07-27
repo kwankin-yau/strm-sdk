@@ -8,7 +8,11 @@
 - `ClosedChannelLogEntry` add `audioFmtSupported`, `videoFmtSupported`, `frameRate`.
 - Shorten `StrmChannelLogEntry.EVT__XXXX` constants value length, added `EVT__SRC_CLOSED`.
 - `com.lucendar.strm.common.strm.OpenChannelReq` rename to `com.lucendar.strm.common.strm.OpenStrmReq`, 
-  and add `timedToken`, `detectMediaTyp` properties, property `channelId` rename to `chanId`.
+  - add `timedToken`, `detectMediaTyp` properties, 
+  - property `channelId` rename to `chanId`,
+  - property `uriSchema` rename to `scheme`,
+  - property `callback` rename to `cb`
+  - property `proto` rename to `fmt`.
 - `com.lucendar.strm.common.strm.OpenChannelResult` rename to `com.lucendar.strm.common.strm.OpenStrmResult`
 - Introduce new `com.lucendar.strm.common.strm.stat.StrmPerfStat`.
 - Shorten `StrmServerStat` property names, remove `recvFromTerm1Minute`, `XXXProcessDelay` properties,
@@ -18,7 +22,16 @@
 - remove `com.lucendar.strm.common.strm.stat.QryServerStatResult`.
 - `com.lucendar.strm.common.strm.stat.ChannelReportResult` rename to `QryServerStatusResult`.
 - `com.lucendar.strm.common.strm.stat.ChannelStat` rename to `com.lucendar.strm.common.strm.stat.StrmStatus`.
-- `com.lucendar.strm.common.strm.stat.ReqStat` rename to `com.lucendar.strm.common.strm.stat.StrmReqStatus`.
+  - property `strmReady` rename to `ready`
+  - property `strmReadyTm` rename to `readyTm`
+  - property `audioFmt` rename to `aFmt`
+  - property `aSupported` rename to `aSupport`
+  - property `videoFmt` rename to `vFmt`
+  - property `vSupported` rename to `vSupport`
+  - property `videoRes` rename to `vRez`.
+- `com.lucendar.strm.common.strm.stat.ReqStat` rename to `com.lucendar.strm.common.strm.stat.StrmReqStatus`
+  - property `proto` rename to `fmt`
+  - proeprty `strmReadyTm` rename to `readyTm`.
 - `com.lucendar.strm.common.strm.stored.AvStoreLog` rename to `com.lucendar.strm.common.strm.stored.StoredAv`, 
   and add `mediaTyp` property.
 - `com.lucendar.strm.common.strm.closedlog.ClosedReqLogEntry` removed, use `StrmReqStatus` instead.
@@ -34,6 +47,7 @@
 - `com.lucendar.strm.common.strm.ReleaseChannelsReq2` rename to `com.lucendar.strm.common.strm.ReleaseStrmsReq2`
 - remove `com.lucendar.strm.common.StrmMediaNotif.ACT__ctrlGot, ACT__strmPause, ACT__strmResume, ACT__strmSeeking`.
 - `com.lucendar.strm.common.strm.OpenStrmResult.keepIntervalSeconds` rename to `com.lucendar.strm.common.strm.OpenStrmResult.keepIntv`.
+- `com.lucendar.strm.common.StreamingApi.PROTO__HTTP_FLV` rename to `com.lucendar.strm.common.StreamingApi.PROTO__FLV`.
 
 # 3.3.5 - [2022-05-05]
 Nothing changed, just change version.

@@ -8,10 +8,17 @@
 package com.lucendar.strm.common.strm;
 
 public enum UriScheme {
+
+
     HTTP("http"),
     HTTPS("https"),
     WS("ws"),
     WSS("wss");
+
+    public static final String HTTP_VALUE = "http";
+    public static final String HTTPS_VALUE = "https";
+    public static final String WS_VALUE = "ws";
+    public static final String WSS_VALUE = "wss";
 
     private String str;
 
@@ -34,16 +41,28 @@ public enum UriScheme {
         return this == WS || this == WSS;
     }
 
+    public static boolean isWebSocketFamilyValue(String scheme) {
+        return scheme == WS_VALUE || scheme == WSS_VALUE;
+    }
+
+    public boolean isHttpOrHttps() {
+        return this == HTTP || this == HTTPS;
+    }
+
+    public static boolean isHttpOrHttpsValue(String scheme) {
+        return scheme == HTTP_VALUE || scheme == HTTPS_VALUE;
+    }
+
     public String str() {
         return str;
     }
 
     public static boolean isValid(String uriScheme) {
         switch (uriScheme.toLowerCase()) {
-            case "http":
-            case "https":
-            case "ws":
-            case "wss":
+            case HTTP_VALUE:
+            case HTTPS_VALUE:
+            case WS_VALUE:
+            case WSS_VALUE:
                 return true;
 
             default:
@@ -53,13 +72,16 @@ public enum UriScheme {
 
     public static UriScheme of(String uriScheme) {
         switch (uriScheme.toLowerCase()) {
-            case "http":
+            case HTTP_VALUE:
                 return HTTP;
-            case "https":
+
+            case HTTPS_VALUE:
                 return HTTPS;
-            case "ws":
+
+            case WS_VALUE:
                 return WS;
-            case "wss":
+
+            case WSS_VALUE:
                 return WSS;
 
             default:

@@ -11,17 +11,30 @@ public class StrmStatus {
     private byte codeStrm;
     private long createTm;
     private Long srcDetectTm;
-    private boolean strmReady;
-    private Long strmReadyTm;
+    private boolean ready;
+    private Long readyTm;
     private Long closeTm;
-    private long recvFromTerm;
-    private long termByteRate;
+
+    /**
+     * Bytes received from terminal from connection created.
+     */
+    private long recv;
+
+    /**
+     * Terminal pushing byte rate (bytes/second) in recent one minute.
+     */
+    private long byteRate;
+
+    /**
+     * Bytes totally send to client.
+     */
     private long sendToClnt;
-    private String audioFmt;
-    private boolean aSupported;
-    private String videoFmt;
-    private boolean vSupported;
-    private String videoRes;
+
+    private String aFmt;
+    private Boolean aNotSupport;
+    private String vFmt;
+    private Boolean vNotSupport;
+    private String vRez;
     private Float frameRate; // null if not available
     private String mediaTyp;
 
@@ -37,17 +50,17 @@ public class StrmStatus {
                       byte codeStrm,
                       long createTm,
                       Long srcDetectTm,
-                      boolean strmReady,
-                      Long strmReadyTm,
+                      boolean ready,
+                      Long readyTm,
                       Long closeTm,
-                      long recvFromTerm,
-                      long termByteRate,
+                      long recv,
+                      long byteRate,
                       long sendToClnt,
-                      String audioFmt,
-                      boolean aSupported,
-                      String videoFmt,
-                      boolean vSupported,
-                      String videoRes,
+                      String aFmt,
+                      Boolean aNotSupport,
+                      String vFmt,
+                      Boolean vNotSupport,
+                      String vRez,
                       Float frameRate,
                       String mediaTyp,
                       StrmReqStatus[] requests
@@ -59,17 +72,17 @@ public class StrmStatus {
         this.codeStrm = codeStrm;
         this.createTm = createTm;
         this.srcDetectTm = srcDetectTm;
-        this.strmReady = strmReady;
-        this.strmReadyTm = strmReadyTm;
+        this.ready = ready;
+        this.readyTm = readyTm;
         this.closeTm = closeTm;
-        this.recvFromTerm = recvFromTerm;
-        this.termByteRate = termByteRate;
+        this.recv = recv;
+        this.byteRate = byteRate;
         this.sendToClnt = sendToClnt;
-        this.audioFmt = audioFmt;
-        this.aSupported = aSupported;
-        this.videoFmt = videoFmt;
-        this.vSupported = vSupported;
-        this.videoRes = videoRes;
+        this.aFmt = aFmt;
+        this.aNotSupport = aNotSupport;
+        this.vFmt = vFmt;
+        this.vNotSupport = vNotSupport;
+        this.vRez = vRez;
         this.frameRate = frameRate;
         this.mediaTyp = mediaTyp;
         this.requests = requests;
@@ -131,20 +144,20 @@ public class StrmStatus {
         this.srcDetectTm = srcDetectTm;
     }
 
-    public boolean isStrmReady() {
-        return strmReady;
+    public boolean isReady() {
+        return ready;
     }
 
-    public void setStrmReady(boolean strmReady) {
-        this.strmReady = strmReady;
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
 
-    public Long getStrmReadyTm() {
-        return strmReadyTm;
+    public Long getReadyTm() {
+        return readyTm;
     }
 
-    public void setStrmReadyTm(Long strmReadyTm) {
-        this.strmReadyTm = strmReadyTm;
+    public void setReadyTm(Long readyTm) {
+        this.readyTm = readyTm;
     }
 
     public Long getCloseTm() {
@@ -155,20 +168,20 @@ public class StrmStatus {
         this.closeTm = closeTm;
     }
 
-    public long getRecvFromTerm() {
-        return recvFromTerm;
+    public long getRecv() {
+        return recv;
     }
 
-    public void setRecvFromTerm(long recvFromTerm) {
-        this.recvFromTerm = recvFromTerm;
+    public void setRecv(long recv) {
+        this.recv = recv;
     }
 
-    public long getTermByteRate() {
-        return termByteRate;
+    public long getByteRate() {
+        return byteRate;
     }
 
-    public void setTermByteRate(long termByteRate) {
-        this.termByteRate = termByteRate;
+    public void setByteRate(long byteRate) {
+        this.byteRate = byteRate;
     }
 
     public long getSendToClnt() {
@@ -179,44 +192,44 @@ public class StrmStatus {
         this.sendToClnt = sendToClnt;
     }
 
-    public String getAudioFmt() {
-        return audioFmt;
+    public String getAFmt() {
+        return aFmt;
     }
 
-    public void setAudioFmt(String audioFmt) {
-        this.audioFmt = audioFmt;
+    public void setAFmt(String aFmt) {
+        this.aFmt = aFmt;
     }
 
-    public boolean isASupported() {
-        return aSupported;
+    public Boolean getANotSupport() {
+        return aNotSupport;
     }
 
-    public void setASupported(boolean aSupported) {
-        this.aSupported = aSupported;
+    public void setANotSupport(Boolean aNotSupport) {
+        this.aNotSupport = aNotSupport;
     }
 
-    public String getVideoFmt() {
-        return videoFmt;
+    public String getVFmt() {
+        return vFmt;
     }
 
-    public void setVideoFmt(String videoFmt) {
-        this.videoFmt = videoFmt;
+    public void setVFmt(String vFmt) {
+        this.vFmt = vFmt;
     }
 
-    public boolean isVSupported() {
-        return vSupported;
+    public Boolean getVNotSupport() {
+        return vNotSupport;
     }
 
-    public void setVSupported(boolean vSupported) {
-        this.vSupported = vSupported;
+    public void setVNotSupport(Boolean vNotSupport) {
+        this.vNotSupport = vNotSupport;
     }
 
-    public String getVideoRes() {
-        return videoRes;
+    public String getVRez() {
+        return vRez;
     }
 
-    public void setVideoRes(String videoRes) {
-        this.videoRes = videoRes;
+    public void setVRez(String vRez) {
+        this.vRez = vRez;
     }
 
     /**
@@ -268,17 +281,17 @@ public class StrmStatus {
                 .add("codeStrm=" + codeStrm)
                 .add("createTm=" + createTm)
                 .add("srcDetectTm=" + srcDetectTm)
-                .add("strmReady=" + strmReady)
-                .add("strmReadyTm=" + strmReadyTm)
+                .add("ready=" + ready)
+                .add("readyTm=" + readyTm)
                 .add("closeTm=" + closeTm)
-                .add("recvFromTerm=" + recvFromTerm)
-                .add("termByteRate=" + termByteRate)
+                .add("recv=" + recv)
+                .add("byteRate=" + byteRate)
                 .add("sendToClnt=" + sendToClnt)
-                .add("audioFmt='" + audioFmt + "'")
-                .add("aSupported=" + aSupported)
-                .add("videoFmt='" + videoFmt + "'")
-                .add("vSupported=" + vSupported)
-                .add("videoRes='" + videoRes + "'")
+                .add("aFmt='" + aFmt + "'")
+                .add("aNotSupport=" + aNotSupport)
+                .add("vFmt='" + vFmt + "'")
+                .add("vNotSupport=" + vNotSupport)
+                .add("vRez='" + vRez + "'")
                 .add("frameRate=" + frameRate)
                 .add("mediaTyp='" + mediaTyp + "'")
                 .add("requests=" + Arrays.toString(requests))

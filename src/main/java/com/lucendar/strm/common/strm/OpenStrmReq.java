@@ -7,9 +7,9 @@ import java.util.StringJoiner;
 
 import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__LIVE;
 import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__REPLAY;
-import static com.lucendar.strm.common.StreamingApi.PROTO__HLS;
-import static com.lucendar.strm.common.StreamingApi.PROTO__HTTP_FLV;
-import static com.lucendar.strm.common.StreamingApi.PROTO__RTMP;
+import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__HLS;
+import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__FLV;
+import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTMP;
 import static com.lucendar.strm.common.StreamingApi.encodeStreamName;
 import static com.lucendar.strm.common.StreamingApi.isValidReqId;
 import static com.lucendar.strm.common.StreamingApi.isValidSimNo;
@@ -123,12 +123,12 @@ public class OpenStrmReq implements StrmMsg {
     }
 
     private String reqId;
-    private String callback;
+    private String cb;
     private StrmUserInfo user;
     private String typ;
     private String simNo;
     private short chanId;
-    private byte proto;
+    private byte fmt;
     private byte connIdx;
     private String clientData;
     private int dataTyp;
@@ -137,7 +137,7 @@ public class OpenStrmReq implements StrmMsg {
     private boolean record;
     private Boolean detectMediaTyp;
     private Integer keepIntv;
-    private String uriScheme;
+    private String scheme;
     private Integer talkSendProtoVer;
     private AudioConfig audioCfg;
     private RtspSource rtspSrc;
@@ -147,21 +147,21 @@ public class OpenStrmReq implements StrmMsg {
     public OpenStrmReq() {
     }
 
-    public OpenStrmReq(String reqId, String callback, StrmUserInfo user, String typ, String simNo, short chanId,
-                       byte proto, byte connIdx, String clientData, int dataTyp, byte codeStrm,
+    public OpenStrmReq(String reqId, String cb, StrmUserInfo user, String typ, String simNo, short chanId,
+                       byte fmt, byte connIdx, String clientData, int dataTyp, byte codeStrm,
                        boolean exclusive, boolean record,
                        Boolean detectMediaTyp,
-                       Integer keepIntv, String uriScheme, Integer talkSendProtoVer,
+                       Integer keepIntv, String scheme, Integer talkSendProtoVer,
                        AudioConfig audioCfg,
                        RtspSource rtspSrc,
                        String timedToken) {
         this.reqId = reqId;
-        this.callback = callback;
+        this.cb = cb;
         this.user = user;
         this.typ = typ;
         this.simNo = simNo;
         this.chanId = chanId;
-        this.proto = proto;
+        this.fmt = fmt;
         this.connIdx = connIdx;
         this.clientData = clientData;
         this.dataTyp = dataTyp;
@@ -170,7 +170,7 @@ public class OpenStrmReq implements StrmMsg {
         this.record = record;
         this.detectMediaTyp = detectMediaTyp;
         this.keepIntv = keepIntv;
-        this.uriScheme = uriScheme;
+        this.scheme = scheme;
         this.talkSendProtoVer = talkSendProtoVer;
         this.audioCfg = audioCfg;
         this.rtspSrc = rtspSrc;
@@ -185,12 +185,12 @@ public class OpenStrmReq implements StrmMsg {
         this.reqId = reqId;
     }
 
-    public String getCallback() {
-        return callback;
+    public String getCb() {
+        return cb;
     }
 
-    public void setCallback(String callback) {
-        this.callback = callback;
+    public void setCb(String cb) {
+        this.cb = cb;
     }
 
     public StrmUserInfo getUser() {
@@ -230,12 +230,12 @@ public class OpenStrmReq implements StrmMsg {
         this.chanId = chanId;
     }
 
-    public byte getProto() {
-        return proto;
+    public byte getFmt() {
+        return fmt;
     }
 
-    public void setProto(byte proto) {
-        this.proto = proto;
+    public void setFmt(byte fmt) {
+        this.fmt = fmt;
     }
 
     public byte getConnIdx() {
@@ -323,19 +323,19 @@ public class OpenStrmReq implements StrmMsg {
         this.keepIntv = keepIntv;
     }
 
-    public String getUriScheme() {
-        return uriScheme;
+    public String getScheme() {
+        return scheme;
     }
 
-    public void setUriScheme(String uriScheme) {
-        this.uriScheme = uriScheme;
+    public void setScheme(String scheme) {
+        this.scheme = scheme;
     }
 
     public UriScheme uriScheme(UriScheme defaultValue) {
-        if (this.uriScheme == null)
+        if (this.scheme == null)
             return defaultValue;
         else
-            return UriScheme.of(this.uriScheme);
+            return UriScheme.of(this.scheme);
     }
 
     public Integer getTalkSendProtoVer() {
@@ -447,31 +447,31 @@ public class OpenStrmReq implements StrmMsg {
             }
         }
 
-        switch (proto) {
-            case PROTO__HLS:
+        switch (fmt) {
+            case STRM_FORMAT__HLS:
 //                if (keepIntv != null) {
 //                    if (keepIntv < MIN_INTERVAL__HLS || keepIntv > MAX_INTERVAL__HLS)
 //                        return "keepIntv";
 //                }
                 break;
 
-            case PROTO__HTTP_FLV:
+            case STRM_FORMAT__FLV:
 //                if (keepIntv != null) {
 //                    if (keepIntv < MIN_INTERVAL__FLV || keepIntv > MAX_INTERVAL__FLV)
 //                        return "keepIntv";
 //                }
                 break;
 
-            case PROTO__RTMP:
+            case STRM_FORMAT__RTMP:
                 break;
 
             default:
-                return "proto";
+                return "fmt";
         }
 
-        if (uriScheme != null) {
-            if (!UriScheme.isValid(uriScheme))
-                return "uriScheme";
+        if (scheme != null) {
+            if (!UriScheme.isValid(scheme))
+                return "scheme";
         }
 
         if (audioCfg != null) {
@@ -497,13 +497,13 @@ public class OpenStrmReq implements StrmMsg {
 
     public static int defaultKeepInterval(int proto) {
         switch (proto) {
-            case PROTO__HTTP_FLV:
+            case STRM_FORMAT__FLV:
                 return DEFAULT_INTERVAL__FLV;
 
-            case PROTO__HLS:
+            case STRM_FORMAT__HLS:
                 return DEFAULT_INTERVAL__HLS;
 
-            case PROTO__RTMP:
+            case STRM_FORMAT__RTMP:
                 return 0;
 
             default:
@@ -515,12 +515,12 @@ public class OpenStrmReq implements StrmMsg {
     public String toString() {
         return new StringJoiner(", ", OpenStrmReq.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
-                .add("callback='" + callback + "'")
+                .add("cb='" + cb + "'")
                 .add("user=" + user)
                 .add("typ='" + typ + "'")
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
-                .add("proto=" + proto)
+                .add("fmt=" + fmt)
                 .add("connIdx=" + connIdx)
                 .add("clientData='" + clientData + "'")
                 .add("dataTyp=" + dataTyp)
@@ -529,7 +529,7 @@ public class OpenStrmReq implements StrmMsg {
                 .add("record=" + record)
                 .add("detectMediaTyp=" + detectMediaTyp)
                 .add("keepIntv=" + keepIntv)
-                .add("uriScheme='" + uriScheme + "'")
+                .add("scheme='" + scheme + "'")
                 .add("talkSendProtoVer=" + talkSendProtoVer)
                 .add("audioCfg=" + audioCfg)
                 .add("rtspSrc=" + rtspSrc)
