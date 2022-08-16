@@ -9,7 +9,12 @@ package com.lucendar.strm.common.strm.stored;
 
 import java.util.StringJoiner;
 
-public class AvUpload implements Cloneable {
+/**
+ * This class represent a terminal remote A/V file upload request and it's state.
+ *
+ * @apiNote the format of time properties in this class are `yyyy-MM-dd HH:mm:ss`.
+ */
+public class AvUpload2 implements AbstractAvUpload, Cloneable {
 
     public static final byte STATE__REQUESTED = 1;
     public static final byte STATE__ACK = 2;
@@ -31,19 +36,21 @@ public class AvUpload implements Cloneable {
     private String reqTm;
     private int st;
     private String simNo;
-    private int channel;
-    private String startTime;
-    private String endTime;
-    private String almState;
-    private int mediaType;
-    private int codeStream;
-    private int storageType;
-    private Long fileSz;
+    private int chan;
+    private String startTm;
+    private String endTm;
+    private String almSt;
+    private int mediaTyp;
+    private int codeStrm;
+    private int stgTyp;
+    private Long sz;
     private String path;
-    private String fileName;
+    private String fn;
     private String uploadTm;
     private String url;
+    private String cb;
 
+    @Override
     public String getReqId() {
         return reqId;
     }
@@ -76,6 +83,7 @@ public class AvUpload implements Cloneable {
         return isAckOrEndingState(st);
     }
 
+    @Override
     public String getSimNo() {
         return simNo;
     }
@@ -84,43 +92,49 @@ public class AvUpload implements Cloneable {
         this.simNo = simNo;
     }
 
-    public int getChannel() {
-        return channel;
+    public int getChan() {
+        return chan;
     }
 
-    public void setChannel(int channel) {
-        this.channel = channel;
+    public void setChan(int chan) {
+        this.chan = chan;
     }
 
-    public String getStartTime() {
-        return startTime;
+    /**
+     * Get the start time of the terminal stored AV file. Date time format: `yyyy-MM-dd HH:mm:ss`.
+     *
+     * @return start time of the terminal stored AV file.
+     */
+    @Override
+    public String getStartTm() {
+        return startTm;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStartTm(String startTm) {
+        this.startTm = startTm;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getEndTm() {
+        return endTm;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEndTm(String endTm) {
+        this.endTm = endTm;
     }
 
-    public String getAlmState() {
-        return almState;
+    public String getAlmSt() {
+        return almSt;
     }
 
-    public void setAlmState(String almState) {
-        this.almState = almState;
+    public void setAlmSt(String almSt) {
+        this.almSt = almSt;
     }
 
-    public void setAlmState(long almState) {
-        this.almState = Long.toHexString(almState);
+    public void setAlmSt(long almSt) {
+        this.almSt = Long.toHexString(almSt);
     }
 
-    public static long almStateOf(String almState) {
+    public static long almStOf(String almState) {
         if (almState != null)
             return Long.parseLong(almState, 16);
         else
@@ -128,7 +142,7 @@ public class AvUpload implements Cloneable {
     }
 
     public long almStateToLong() {
-        return almStateOf(almState);
+        return almStOf(almSt);
     }
 
     public static int alm808Of(String almState) {
@@ -140,7 +154,7 @@ public class AvUpload implements Cloneable {
     }
 
     public int alm808() {
-        return alm808Of(almState);
+        return alm808Of(almSt);
     }
 
     public static int alm1078Of(String almState) {
@@ -154,39 +168,44 @@ public class AvUpload implements Cloneable {
     }
 
     public int alm1078() {
-        return alm1078Of(almState);
+        return alm1078Of(almSt);
     }
 
-    public int getMediaType() {
-        return mediaType;
+    public int getMediaTyp() {
+        return mediaTyp;
     }
 
-    public void setMediaType(int mediaType) {
-        this.mediaType = mediaType;
+    public void setMediaTyp(int mediaTyp) {
+        this.mediaTyp = mediaTyp;
     }
 
-    public int getCodeStream() {
-        return codeStream;
+    public int getCodeStrm() {
+        return codeStrm;
     }
 
-    public void setCodeStream(int codeStream) {
-        this.codeStream = codeStream;
+    public void setCodeStrm(int codeStrm) {
+        this.codeStrm = codeStrm;
     }
 
-    public int getStorageType() {
-        return storageType;
+    public int getStgTyp() {
+        return stgTyp;
     }
 
-    public void setStorageType(int storageType) {
-        this.storageType = storageType;
+    public void setStgTyp(int stgTyp) {
+        this.stgTyp = stgTyp;
     }
 
-    public Long getFileSz() {
-        return fileSz;
+    /**
+     * The claimed size of the A/V file.
+     *
+     * @return claimed size of the A/V file.
+     */
+    public Long getSz() {
+        return sz;
     }
 
-    public void setFileSz(Long fileSz) {
-        this.fileSz = fileSz;
+    public void setSz(Long sz) {
+        this.sz = sz;
     }
 
     public String getPath() {
@@ -197,12 +216,12 @@ public class AvUpload implements Cloneable {
         this.path = path;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFn() {
+        return fn;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFn(String fn) {
+        this.fn = fn;
     }
 
     public String fileNameWithPath() {
@@ -215,7 +234,7 @@ public class AvUpload implements Cloneable {
         if (!s.endsWith("/"))
             s = s + "/";
 
-        return s + fileName;
+        return s + fn;
     }
 
     public String getUploadTm() {
@@ -235,9 +254,18 @@ public class AvUpload implements Cloneable {
     }
 
     @Override
-    public AvUpload clone() {
+    public String getCb() {
+        return cb;
+    }
+
+    public void setCb(String cb) {
+        this.cb = cb;
+    }
+
+    @Override
+    public AvUpload2 clone() {
         try {
-            return (AvUpload) super.clone();
+            return (AvUpload2) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -245,23 +273,24 @@ public class AvUpload implements Cloneable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", AvUpload.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", AvUpload2.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .add("reqTm='" + reqTm + "'")
                 .add("st=" + st)
                 .add("simNo='" + simNo + "'")
-                .add("channel=" + channel)
-                .add("startTime='" + startTime + "'")
-                .add("endTime='" + endTime + "'")
-                .add("almState='" + almState + "'")
-                .add("mediaType=" + mediaType)
-                .add("codeStream=" + codeStream)
-                .add("storageType=" + storageType)
-                .add("fileSz=" + fileSz)
+                .add("chan=" + chan)
+                .add("startTm='" + startTm + "'")
+                .add("endTm='" + endTm + "'")
+                .add("almSt='" + almSt + "'")
+                .add("mediaTyp=" + mediaTyp)
+                .add("codeStrm=" + codeStrm)
+                .add("stgTyp=" + stgTyp)
+                .add("sz=" + sz)
                 .add("path='" + path + "'")
-                .add("fileName='" + fileName + "'")
+                .add("fn='" + fn + "'")
                 .add("uploadTm='" + uploadTm + "'")
                 .add("url='" + url + "'")
+                .add("cb='" + cb + "'")
                 .toString();
     }
 }

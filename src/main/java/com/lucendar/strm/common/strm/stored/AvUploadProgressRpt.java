@@ -7,13 +7,33 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+import java.util.StringJoiner;
+
 /**
  * A/V upload progress report
  */
 public class AvUploadProgressRpt {
 
+    private String startTm;
     private String reqId;
-    private long uploadedSize;
+    private long uploaded;
+
+    public AvUploadProgressRpt() {
+    }
+
+    public AvUploadProgressRpt(String startTm, String reqId, long uploaded) {
+        this.startTm = startTm;
+        this.reqId = reqId;
+        this.uploaded = uploaded;
+    }
+
+    public String getStartTm() {
+        return startTm;
+    }
+
+    public void setStartTm(String startTm) {
+        this.startTm = startTm;
+    }
 
     public String getReqId() {
         return reqId;
@@ -23,19 +43,20 @@ public class AvUploadProgressRpt {
         this.reqId = reqId;
     }
 
-    public long getUploadedSize() {
-        return uploadedSize;
+    public long getUploaded() {
+        return uploaded;
     }
 
-    public void setUploadedSize(long uploadedSize) {
-        this.uploadedSize = uploadedSize;
+    public void setUploaded(long uploaded) {
+        this.uploaded = uploaded;
     }
 
     @Override
     public String toString() {
-        return "AvUploadProgressRpt{" +
-                "reqId='" + reqId + '\'' +
-                ", uploadedSize=" + uploadedSize +
-                '}';
+        return new StringJoiner(", ", AvUploadProgressRpt.class.getSimpleName() + "[", "]")
+                .add("startTm='" + startTm + "'")
+                .add("reqId='" + reqId + "'")
+                .add("uploaded=" + uploaded)
+                .toString();
     }
 }

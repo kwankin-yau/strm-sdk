@@ -11,6 +11,11 @@ import java.util.StringJoiner;
 
 public class AvUploadCtrlReq {
 
+    public static final byte CTRL__PAUSE = 0;
+    public static final byte CTRL__RESUME = 1;
+    public static final byte CTRL__CANCEL = 2;
+
+
     private String reqId;
     private byte ctrl;
 

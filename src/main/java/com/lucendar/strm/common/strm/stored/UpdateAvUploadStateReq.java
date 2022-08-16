@@ -7,20 +7,35 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+import java.util.StringJoiner;
+
 public class UpdateAvUploadStateReq {
-    private String startTime;
+
+    public static final byte STATE__REQUESTED = AvUpload2.STATE__REQUESTED;
+    public static final byte STATE__ACK = AvUpload2.STATE__ACK;
+    public static final byte STATE__UPLOADING = AvUpload2.STATE__UPLOADING;
+    public static final byte STATE__UPLOADED = AvUpload2.STATE__UPLOADED;
+    public static final byte STATE__FAILED = AvUpload2.STATE__FAILED;
+    public static final byte STATE__CANCELED = AvUpload2.STATE__CANCELED;
+    public static final byte STATE__TIMEOUT = AvUpload2.STATE__TIMEOUT;
+
+    private String startTm;
     private String reqId;
+
+    /**
+     * The new state of request. Value domain: one of STATE__XXXX constant.
+     */
     private int st;
-    private String fileName;
-    private Long fileSz;
+    private String fn;
+    private Long sz;
     private String uploadTm;
 
-    public String getStartTime() {
-        return startTime;
+    public String getStartTm() {
+        return startTm;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStartTm(String startTm) {
+        this.startTm = startTm;
     }
 
     public String getReqId() {
@@ -39,20 +54,20 @@ public class UpdateAvUploadStateReq {
         this.st = st;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFn() {
+        return fn;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFn(String fn) {
+        this.fn = fn;
     }
 
-    public Long getFileSz() {
-        return fileSz;
+    public Long getSz() {
+        return sz;
     }
 
-    public void setFileSz(Long fileSz) {
-        this.fileSz = fileSz;
+    public void setSz(Long sz) {
+        this.sz = sz;
     }
 
     public String getUploadTm() {
@@ -65,13 +80,13 @@ public class UpdateAvUploadStateReq {
 
     @Override
     public String toString() {
-        return "UpdateAVUploadStateReq{" +
-                "startTime='" + startTime + '\'' +
-                ", reqId='" + reqId + '\'' +
-                ", st=" + st +
-                ", fileName='" + fileName + '\'' +
-                ", fileSz=" + fileSz +
-                ", uploadTm='" + uploadTm + '\'' +
-                '}';
+        return new StringJoiner(", ", UpdateAvUploadStateReq.class.getSimpleName() + "[", "]")
+                .add("startTm='" + startTm + "'")
+                .add("reqId='" + reqId + "'")
+                .add("st=" + st)
+                .add("fn='" + fn + "'")
+                .add("sz=" + sz)
+                .add("uploadTm='" + uploadTm + "'")
+                .toString();
     }
 }

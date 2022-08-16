@@ -48,6 +48,13 @@
 - remove `com.lucendar.strm.common.StrmMediaNotif.ACT__ctrlGot, ACT__strmPause, ACT__strmResume, ACT__strmSeeking`.
 - `com.lucendar.strm.common.strm.OpenStrmResult.keepIntervalSeconds` rename to `com.lucendar.strm.common.strm.OpenStrmResult.keepIntv`.
 - `com.lucendar.strm.common.StreamingApi.PROTO__HTTP_FLV` rename to `com.lucendar.strm.common.StreamingApi.PROTO__FLV`.
+- `com.lucendar.strm.common.strm.stored.AvUploadProgressRpt` properties rename:
+  - `uploadedSize` rename to `uploaded`
+- `com.lucendar.strm.common.strm.stored.UpdateAvUploadStateReq` properties rename:
+  - `startTime` rename to `startTm`
+  - `fileName` rename to `fn`
+  - `fileSz` rename to `sz`
+- introduce `com.lucendar.strm.common.strm.stored.AvUpload2`
 
 # 3.3.5 - [2022-05-05]
 Nothing changed, just change version.

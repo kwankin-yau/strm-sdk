@@ -42,7 +42,14 @@ public enum UriScheme {
     }
 
     public static boolean isWebSocketFamilyValue(String scheme) {
-        return scheme == WS_VALUE || scheme == WSS_VALUE;
+        switch (scheme) {
+            case WS_VALUE:
+            case WSS_VALUE:
+                return true;
+
+            default:
+                return false;
+        }
     }
 
     public boolean isHttpOrHttps() {
@@ -50,7 +57,14 @@ public enum UriScheme {
     }
 
     public static boolean isHttpOrHttpsValue(String scheme) {
-        return scheme == HTTP_VALUE || scheme == HTTPS_VALUE;
+        switch (scheme.toLowerCase()) {
+            case HTTP_VALUE:
+            case HTTPS_VALUE:
+                return true;
+
+            default:
+                return false;
+        }
     }
 
     public String str() {
@@ -58,7 +72,7 @@ public enum UriScheme {
     }
 
     public static boolean isValid(String uriScheme) {
-        switch (uriScheme.toLowerCase()) {
+        switch (uriScheme) {
             case HTTP_VALUE:
             case HTTPS_VALUE:
             case WS_VALUE:
@@ -71,7 +85,7 @@ public enum UriScheme {
     }
 
     public static UriScheme of(String uriScheme) {
-        switch (uriScheme.toLowerCase()) {
+        switch (uriScheme) {
             case HTTP_VALUE:
                 return HTTP;
 

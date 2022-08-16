@@ -7,6 +7,10 @@
  *******************************************************************************/
 package com.lucendar.strm.common;
 
+import java.nio.ByteBuffer;
+import java.util.Base64;
+import java.util.UUID;
+
 public class StreamingApi {
 
     public static final byte STRM_FORMAT__FLV = 0;
@@ -74,22 +78,61 @@ public class StreamingApi {
     }
 
     /**
-     * Check whether an given `reqId` is valid.
+     * Check whether given `reqId` is valid or not. The `reqId` with length range from 8 to 40 and contains
+     * only following characters are treat as valid:
+     * <ul>
+     *     <li>letters: `a`-`z`, `A`-`Z`</li>
+     *     <li>digests: `0`-`9`</li>
+     *     <li>others: `-`, `_`, `.`, '~'</li>
+     * </ul>
      *
-     * @param reqId
-     * @return
+     * @param reqId request ID (for stream or A/V upload).
+     * @return whether given `reqId` is valid or not.
      */
     public static boolean isValidReqId(String reqId) {
-        if (reqId == null || reqId.isEmpty())
+        if (reqId == null)
+            return false;
+
+        int len = reqId.length();
+
+        if (len < 8 || len > 40)
             return false;
 
         for (int i = 0; i < reqId.length(); i++) {
             char c = reqId.charAt(i);
-            if (!Character.isDigit(c) && !Character.isLetter(c) && c != '-' && c != '_' && c != '.')
-                return false;
+            if (!Character.isDigit(c) && !Character.isLetter(c)) {
+                switch (c) {
+                    case '-':
+                    case '_':
+                    case '.':
+                    case '~':
+                        break;
+
+                    default:
+                        return false;
+                }
+            }
         }
 
         return true;
+    }
+
+    public static String timeCodedId(long time) {
+        UUID uuid = UUID.randomUUID();
+        byte[] bytes = new byte[16 + 8];
+        ByteBuffer bb = ByteBuffer.wrap(bytes);
+
+        bb.putLong(time);
+        bb.putLong(uuid.getMostSignificantBits());
+        bb.putLong(uuid.getLeastSignificantBits());
+
+        return Base64.getUrlEncoder().encodeToString(bytes);
+    }
+
+    public static long extractTimeFromId(String id) {
+        byte[] bytes = Base64.getUrlDecoder().decode(id);
+        ByteBuffer bb = ByteBuffer.wrap(bytes);
+        return bb.getLong();
     }
 
 }
