@@ -1,3 +1,6 @@
+# 3.4.1 - [2022-08-18]
+- `com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTSP` added
+
 # 3.4.0 - [2022-05-12]
 ## Changed
 - Move inner class from StreamingApi to upper level.
