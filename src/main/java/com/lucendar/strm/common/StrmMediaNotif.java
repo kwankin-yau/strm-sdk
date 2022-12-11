@@ -24,6 +24,11 @@ public class StrmMediaNotif implements Cloneable {
     public static final int CLOSE_CAUSE__badStrmFormat = 7;
     public static final int CLOSE_CAUSE__noConnection = 8;
 
+    /**
+     * Terminal response a error for issued media command
+     */
+    public static final int CLOSE_CAUSE__termCmdError = 9;
+
     private String instId;
     private String act;
     private String reqId;
