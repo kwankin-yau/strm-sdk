@@ -34,7 +34,7 @@ public class AvUploadNotif {
     }
 
     /**
-     * 取录像上传状态代码，为 AVUpload.STATE__XXX 之一
+     * 取录像上传状态代码，为 AvUpload.STATE__XXX 之一
      *
      * @return 录像上传状态代码
      */
@@ -60,7 +60,7 @@ public class AvUploadNotif {
     }
 
     /**
-     * 取文件名。仅当`st`为 AVUpload.STATE__UPLOADED时有效
+     * 取文件名。仅当`st`为 AvUpload.STATE__UPLOADED时有效
      *
      * @return 文件名
      */
@@ -81,7 +81,7 @@ public class AvUploadNotif {
     }
 
     /**
-     * 取上传完成时间。仅当`st`为 AVUpload.STATE__UPLOADED时有效
+     * 取上传完成时间。仅当`st`为 AvUpload.STATE__UPLOADED时有效
      *
      * @return 上传完成时间
      */

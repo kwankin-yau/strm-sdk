@@ -5,7 +5,9 @@
  *  Contributors:
  *     KwanKin Yau (alphax@vip.163.com) - initial API and implementation
  *******************************************************************************/
-package com.lucendar.gnss.microftp.model;
+package com.lucendar.strm.common.strm.stored;
+
+import java.util.StringJoiner;
 
 public class AVUpload {
     public static final byte STATE__REQUESTED = 1;
@@ -162,23 +164,23 @@ public class AVUpload {
 
     @Override
     public String toString() {
-        return "AVUpload{" +
-                "reqId='" + reqId + '\'' +
-                ", reqTm='" + reqTm + '\'' +
-                ", st=" + st +
-                ", simNo='" + simNo + '\'' +
-                ", chan=" + chan +
-                ", startTm='" + startTm + '\'' +
-                ", endTm='" + endTm + '\'' +
-                ", alm808=" + alm808 +
-                ", alm1078=" + alm1078 +
-                ", mediaTyp=" + mediaTyp +
-                ", codeStrm=" + codeStrm +
-                ", stgTyp=" + stgTyp +
-                ", fileSz=" + fileSz +
-                ", path='" + path + '\'' +
-                ", fileName='" + fileName + '\'' +
-                ", uploadTm='" + uploadTm + '\'' +
-                '}';
+        return new StringJoiner(", ", AVUpload.class.getSimpleName() + "[", "]")
+                .add("reqId='" + reqId + "'")
+                .add("reqTm='" + reqTm + "'")
+                .add("st=" + st)
+                .add("simNo='" + simNo + "'")
+                .add("chan=" + chan)
+                .add("startTm='" + startTm + "'")
+                .add("endTm='" + endTm + "'")
+                .add("alm808=" + alm808)
+                .add("alm1078=" + alm1078)
+                .add("mediaTyp=" + mediaTyp)
+                .add("codeStrm=" + codeStrm)
+                .add("stgTyp=" + stgTyp)
+                .add("fileSz=" + fileSz)
+                .add("path='" + path + "'")
+                .add("fileName='" + fileName + "'")
+                .add("uploadTm='" + uploadTm + "'")
+                .toString();
     }
 }
