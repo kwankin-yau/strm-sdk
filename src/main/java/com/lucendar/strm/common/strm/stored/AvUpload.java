@@ -9,7 +9,7 @@ package com.lucendar.strm.common.strm.stored;
 
 import java.util.StringJoiner;
 
-public class AVUpload {
+public class AvUpload {
     public static final byte STATE__REQUESTED = 1;
     public static final byte STATE__UPLOADING = 2;
     public static final byte STATE__UPLOADED = 3;
@@ -164,7 +164,7 @@ public class AVUpload {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", AVUpload.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", AvUpload.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .add("reqTm='" + reqTm + "'")
                 .add("st=" + st)

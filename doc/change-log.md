@@ -1,6 +1,7 @@
 # 3.4.1 - [2022-08-18]
 - `com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTSP` added
-- `com.lucendar.strm.common.StrmMediaNotif.CLOSE_CAUSE__termCmdError` added
+- `com.lucendar.strm.common.StrmMediaNotif.CLOSE_CAUSE__termCmdFailed` added
+- `com.lucendar.strm.common.strm.stored.AVUpload` rename to `AvUpload`
 
 # 3.4.0 - [2022-05-12]
 ## Changed

@@ -27,7 +27,7 @@ public class StrmMediaNotif implements Cloneable {
     /**
      * Terminal response a error for issued media command
      */
-    public static final int CLOSE_CAUSE__termCmdError = 9;
+    public static final int CLOSE_CAUSE__termCmdFailed = 9;
 
     private String instId;
     private String act;
@@ -200,6 +200,9 @@ public class StrmMediaNotif implements Cloneable {
 
             case CLOSE_CAUSE__noConnection:
                 return "No connection";
+
+            case CLOSE_CAUSE__termCmdFailed:
+                return "Terminal command failed.";
 
             default:
                 return "Unknown";
