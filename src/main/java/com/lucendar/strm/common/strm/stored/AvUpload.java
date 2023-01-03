@@ -9,30 +9,40 @@ package com.lucendar.strm.common.strm.stored;
 
 import java.util.StringJoiner;
 
-public class AvUpload {
-    public static final byte STATE__REQUESTED = 1;
-    public static final byte STATE__UPLOADING = 2;
-    public static final byte STATE__UPLOADED = 3;
-    public static final byte STATE__FAILED = 4;
-    public static final byte STATE__CANCELED = 5;
+public class AvUpload implements Cloneable {
 
+    public static final byte STATE__REQUESTED = 1;
+    public static final byte STATE__ACK = 2;
+    public static final byte STATE__UPLOADING = 3;
+    public static final byte STATE__UPLOADED = 4;
+    public static final byte STATE__FAILED = 5;
+    public static final byte STATE__CANCELED = 6;
+    public static final byte STATE__TIMEOUT = 7;
+
+    public static boolean isEndingState(int st) {
+        return st > 3;
+    }
+
+    public static boolean isAckOrEndingState(int st) {
+        return st >= 2;
+    }
 
     private String reqId;
     private String reqTm;
     private int st;
     private String simNo;
-    private int chan;
-    private String startTm;
-    private String endTm;
-    private int alm808;
-    private int alm1078;
-    private int mediaTyp;
-    private int codeStrm;
-    private int stgTyp;
-    private long fileSz;
+    private int channel;
+    private String startTime;
+    private String endTime;
+    private String almState;
+    private int mediaType;
+    private int codeStream;
+    private int storageType;
+    private Long fileSz;
     private String path;
     private String fileName;
     private String uploadTm;
+    private String url;
 
     public String getReqId() {
         return reqId;
@@ -58,6 +68,14 @@ public class AvUpload {
         this.st = st;
     }
 
+    public boolean endingState() {
+        return isEndingState(st);
+    }
+
+    public boolean ackOrEndingState() {
+        return isAckOrEndingState(st);
+    }
+
     public String getSimNo() {
         return simNo;
     }
@@ -66,75 +84,108 @@ public class AvUpload {
         this.simNo = simNo;
     }
 
-    public int getChan() {
-        return chan;
+    public int getChannel() {
+        return channel;
     }
 
-    public void setChan(int chan) {
-        this.chan = chan;
+    public void setChannel(int channel) {
+        this.channel = channel;
     }
 
-    public String getStartTm() {
-        return startTm;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setStartTm(String startTm) {
-        this.startTm = startTm;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEndTm() {
-        return endTm;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEndTm(String endTm) {
-        this.endTm = endTm;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public int getAlm808() {
-        return alm808;
+    public String getAlmState() {
+        return almState;
     }
 
-    public void setAlm808(int alm808) {
-        this.alm808 = alm808;
+    public void setAlmState(String almState) {
+        this.almState = almState;
     }
 
-    public int getAlm1078() {
-        return alm1078;
+    public void setAlmState(long almState) {
+        this.almState = Long.toHexString(almState);
     }
 
-    public void setAlm1078(int alm1078) {
-        this.alm1078 = alm1078;
+    public static long almStateOf(String almState) {
+        if (almState != null)
+            return Long.parseLong(almState, 16);
+        else
+            return 0L;
     }
 
-    public int getMediaTyp() {
-        return mediaTyp;
+    public long almStateToLong() {
+        return almStateOf(almState);
     }
 
-    public void setMediaTyp(int mediaTyp) {
-        this.mediaTyp = mediaTyp;
+    public static int alm808Of(String almState) {
+        if (almState != null) {
+            long l = Long.parseLong(almState, 16);
+            return (int) l;
+        } else
+            return 0;
     }
 
-    public int getCodeStrm() {
-        return codeStrm;
+    public int alm808() {
+        return alm808Of(almState);
     }
 
-    public void setCodeStrm(int codeStrm) {
-        this.codeStrm = codeStrm;
+    public static int alm1078Of(String almState) {
+        if (almState != null) {
+            long l = Long.parseLong(almState, 16);
+            l >>= 32;
+            return (int) l;
+        } else {
+            return 0;
+        }
     }
 
-    public int getStgTyp() {
-        return stgTyp;
+    public int alm1078() {
+        return alm1078Of(almState);
     }
 
-    public void setStgTyp(int stgTyp) {
-        this.stgTyp = stgTyp;
+    public int getMediaType() {
+        return mediaType;
     }
 
-    public long getFileSz() {
+    public void setMediaType(int mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public int getCodeStream() {
+        return codeStream;
+    }
+
+    public void setCodeStream(int codeStream) {
+        this.codeStream = codeStream;
+    }
+
+    public int getStorageType() {
+        return storageType;
+    }
+
+    public void setStorageType(int storageType) {
+        this.storageType = storageType;
+    }
+
+    public Long getFileSz() {
         return fileSz;
     }
 
-    public void setFileSz(long fileSz) {
+    public void setFileSz(Long fileSz) {
         this.fileSz = fileSz;
     }
 
@@ -154,12 +205,42 @@ public class AvUpload {
         this.fileName = fileName;
     }
 
+    public String fileNameWithPath() {
+        String s = path;
+        if (s == null || s.isEmpty())
+            s = "/";
+        else if (!s.startsWith("/"))
+            s = "/" + s;
+
+        if (!s.endsWith("/"))
+            s = s + "/";
+
+        return s + fileName;
+    }
+
     public String getUploadTm() {
         return uploadTm;
     }
 
     public void setUploadTm(String uploadTm) {
         this.uploadTm = uploadTm;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public AvUpload clone() {
+        try {
+            return (AvUpload) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -169,18 +250,18 @@ public class AvUpload {
                 .add("reqTm='" + reqTm + "'")
                 .add("st=" + st)
                 .add("simNo='" + simNo + "'")
-                .add("chan=" + chan)
-                .add("startTm='" + startTm + "'")
-                .add("endTm='" + endTm + "'")
-                .add("alm808=" + alm808)
-                .add("alm1078=" + alm1078)
-                .add("mediaTyp=" + mediaTyp)
-                .add("codeStrm=" + codeStrm)
-                .add("stgTyp=" + stgTyp)
+                .add("channel=" + channel)
+                .add("startTime='" + startTime + "'")
+                .add("endTime='" + endTime + "'")
+                .add("almState='" + almState + "'")
+                .add("mediaType=" + mediaType)
+                .add("codeStream=" + codeStream)
+                .add("storageType=" + storageType)
                 .add("fileSz=" + fileSz)
                 .add("path='" + path + "'")
                 .add("fileName='" + fileName + "'")
                 .add("uploadTm='" + uploadTm + "'")
+                .add("url='" + url + "'")
                 .toString();
     }
 }
