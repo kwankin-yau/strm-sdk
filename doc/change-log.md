@@ -1,4 +1,11 @@
+# 3.4.2 - [2023-07-10]
+## Improvement
+- `UriScheme` add RTSP and RTMP enum, `defaultSchemeOf()` method
+
+
+
 # 3.4.1 - [2022-08-18]
+## Improvement
 - `com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTSP` added
 - `com.lucendar.strm.common.StrmMediaNotif.CLOSE_CAUSE__termCmdFailed` added
 - `com.lucendar.strm.common.strm.stored.AVUpload` rename to `AvUpload`

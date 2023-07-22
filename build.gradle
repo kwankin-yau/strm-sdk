@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.lucendar.strm'
-version '3.4.1'
+version '3.4.2-SNAPSHOT'
 
 compileJava.options.encoding = 'UTF-8'
 
@@ -19,16 +19,32 @@ dependencies {
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
+    archiveClassifier = 'sources'
 }
 
 publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
+    repositories {
+        maven {
+            if (project.version.toString().endsWith("-SNAPSHOT")) {
+                name = "snapshots"
+                url = "${snapshotUrl}"
+            } else {
+                name = "releases"
+                url = "${releaseUrl}"
+            }
 
-            artifact sourceJar {
-                classifier "sources"
+            credentials {
+                username = "${ossUser}"
+                password = "${ossPwd}"
             }
         }
     }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact sourceJar
+        }
+    }
 }
+

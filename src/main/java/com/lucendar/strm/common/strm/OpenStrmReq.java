@@ -10,6 +10,7 @@ import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__REPLAY;
 import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__HLS;
 import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__FLV;
 import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTMP;
+import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTSP;
 import static com.lucendar.strm.common.StreamingApi.encodeStreamName;
 import static com.lucendar.strm.common.StreamingApi.isValidReqId;
 import static com.lucendar.strm.common.StreamingApi.isValidSimNo;
@@ -462,6 +463,9 @@ public class OpenStrmReq implements StrmMsg {
 //                }
                 break;
 
+            case STRM_FORMAT__RTSP:
+                break;
+
             case STRM_FORMAT__RTMP:
                 break;
 
@@ -504,6 +508,9 @@ public class OpenStrmReq implements StrmMsg {
                 return DEFAULT_INTERVAL__HLS;
 
             case STRM_FORMAT__RTMP:
+                return 0;
+
+            case STRM_FORMAT__RTSP:
                 return 0;
 
             default:
