@@ -1,7 +1,7 @@
 # 3.4.2 - [2023-07-10]
 ## Improvement
 - `UriScheme` add RTSP and RTMP enum, `defaultSchemeOf()` method
-
+- `OpenStrmReq` add `subFmt` property
 
 
 # 3.4.1 - [2022-08-18]

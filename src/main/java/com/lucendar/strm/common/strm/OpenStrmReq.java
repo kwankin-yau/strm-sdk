@@ -7,10 +7,12 @@ import java.util.StringJoiner;
 
 import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__LIVE;
 import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__REPLAY;
-import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__HLS;
 import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__FLV;
+import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__HLS;
 import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTMP;
 import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTSP;
+import static com.lucendar.strm.common.StreamingApi.STRM_SUB_FORMAT__FMP4;
+import static com.lucendar.strm.common.StreamingApi.STRM_SUB_FORMAT__MPEGTS;
 import static com.lucendar.strm.common.StreamingApi.encodeStreamName;
 import static com.lucendar.strm.common.StreamingApi.isValidReqId;
 import static com.lucendar.strm.common.StreamingApi.isValidSimNo;
@@ -130,6 +132,7 @@ public class OpenStrmReq implements StrmMsg {
     private String simNo;
     private short chanId;
     private byte fmt;
+    private String subFmt;
     private byte connIdx;
     private String clientData;
     private int dataTyp;
@@ -148,14 +151,28 @@ public class OpenStrmReq implements StrmMsg {
     public OpenStrmReq() {
     }
 
-    public OpenStrmReq(String reqId, String cb, StrmUserInfo user, String typ, String simNo, short chanId,
-                       byte fmt, byte connIdx, String clientData, int dataTyp, byte codeStrm,
-                       boolean exclusive, boolean record,
-                       Boolean detectMediaTyp,
-                       Integer keepIntv, String scheme, Integer talkSendProtoVer,
-                       AudioConfig audioCfg,
-                       RtspSource rtspSrc,
-                       String timedToken) {
+    public OpenStrmReq(
+            String reqId,
+            String cb,
+            StrmUserInfo user,
+            String typ,
+            String simNo,
+            short chanId,
+            byte fmt,
+            String subFmt,
+            byte connIdx,
+            String clientData,
+            int dataTyp,
+            byte codeStrm,
+            boolean exclusive,
+            boolean record,
+            Boolean detectMediaTyp,
+            Integer keepIntv,
+            String scheme,
+            Integer talkSendProtoVer,
+            AudioConfig audioCfg,
+            RtspSource rtspSrc,
+            String timedToken) {
         this.reqId = reqId;
         this.cb = cb;
         this.user = user;
@@ -163,6 +180,7 @@ public class OpenStrmReq implements StrmMsg {
         this.simNo = simNo;
         this.chanId = chanId;
         this.fmt = fmt;
+        this.subFmt = subFmt;
         this.connIdx = connIdx;
         this.clientData = clientData;
         this.dataTyp = dataTyp;
@@ -237,6 +255,21 @@ public class OpenStrmReq implements StrmMsg {
 
     public void setFmt(byte fmt) {
         this.fmt = fmt;
+    }
+
+    public String getSubFmt() {
+        return subFmt;
+    }
+
+    public void setSubFmt(String subFmt) {
+        this.subFmt = subFmt;
+    }
+
+    public String subFmtDef() {
+        if (subFmt == null)
+            return STRM_SUB_FORMAT__FMP4;
+        else
+            return subFmt;
     }
 
     public byte getConnIdx() {
@@ -473,6 +506,16 @@ public class OpenStrmReq implements StrmMsg {
                 return "fmt";
         }
 
+        if (subFmt != null) {
+            switch (subFmt) {
+                case STRM_SUB_FORMAT__FMP4:
+                case STRM_SUB_FORMAT__MPEGTS:
+                    if (fmt != STRM_FORMAT__HLS)
+                        return "subFmt";
+                    break;
+            }
+        }
+
         if (scheme != null) {
             if (!UriScheme.isValid(scheme))
                 return "scheme";
@@ -528,6 +571,7 @@ public class OpenStrmReq implements StrmMsg {
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
                 .add("fmt=" + fmt)
+                .add("subFmt=" + subFmt)
                 .add("connIdx=" + connIdx)
                 .add("clientData='" + clientData + "'")
                 .add("dataTyp=" + dataTyp)

@@ -19,6 +19,9 @@ public class StreamingApi {
     public static final byte STRM_FORMAT__RAW = 3;
     public static final byte STRM_FORMAT__RTSP = 4;
 
+    public static final String STRM_SUB_FORMAT__FMP4 = "fmp4";
+    public static final String STRM_SUB_FORMAT__MPEGTS = "mpegts";
+
     public static final String CHANNEL_TYPE__LIVE = "live";
     public static final String CHANNEL_TYPE__REPLAY = "replay";
 
@@ -76,6 +79,20 @@ public class StreamingApi {
 
     public static String encodeStreamName(String simNo, short channelId, boolean live) {
         return normalizeSimNo(simNo) + "_" + channelId + "_" + (live ? "1" : "0");
+    }
+
+    public static String newReqId() {
+        UUID uuid = UUID.randomUUID();
+        byte[] bytes = new byte[16];
+        ByteBuffer bb = ByteBuffer.wrap(bytes);
+        bb.putLong(uuid.getMostSignificantBits());
+        bb.putLong(uuid.getLeastSignificantBits());
+        String r = Base64.getUrlEncoder().encodeToString(bytes);
+        int idx = r.indexOf('='); // remove the ending `=` character
+        if (idx > 0)
+            r = r.substring(0, idx);
+
+        return r;
     }
 
     /**
