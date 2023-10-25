@@ -1,8 +1,13 @@
 # 3.4.2 - [2023-07-10]
 ## Improvement
 - `UriScheme` add RTSP and RTMP enum, `defaultSchemeOf()` method
-- `OpenStrmReq` add `subFmt` property
+- `OpenStrmReq` add `subFmt`, `inAudioCfg` property
+- `StrmMediaNotif` add `ac`, `vc` properties.
+- Introduce `MemUsage` to replace the `java.lang.management.MemoryUsage` which cause the InaccessibleObjectException 
+  when do GSON conversion.
 
+## Fixed
+- `com.lucendar.strm.common.StreamingApi.normalizeSimNo` should only add 0 when all character is digit
 
 # 3.4.1 - [2022-08-18]
 ## Improvement

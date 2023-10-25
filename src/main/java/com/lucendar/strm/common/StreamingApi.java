@@ -63,15 +63,19 @@ public class StreamingApi {
 
     public static String normalizeSimNo(String simNo) {
         int start = -1;
+        boolean allDigit = true;
         for (int i = 0; i < simNo.length(); i++) {
             char c = simNo.charAt(i);
-            if (c != '0') {
-                start = i;
-                break;
-            }
+            if (c >= '0' && c <= '9') {
+                // find out first non-zero digit position
+                if (start < 0 && c != '0') {
+                    start = i;
+                }
+            } else
+                allDigit = false;
         }
 
-        if (start >= 0)
+        if (allDigit && start >= 0)
             return simNo.substring(start);
         else
             return simNo;

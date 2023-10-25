@@ -19,8 +19,8 @@ public class StrmServerStat {
         private Double sysLoadAvg; // null for not available
         private Double procCpuLoad; // null for not available
         private Double sysCpuLoad; // null for not available
-        private MemoryUsage heapMemUse;
-        private MemoryUsage nonHeapMemUse;
+        private MemUsage heapMemUse;
+        private MemUsage nonHeapMemUse;
         private int thdCnt;
         private int deadLockThds;
 
@@ -64,8 +64,8 @@ public class StrmServerStat {
             if (d >= 0)
                 r.sysLoadAvg = d;
             MemoryMXBean mem = ManagementFactory.getMemoryMXBean();
-            r.heapMemUse = mem.getHeapMemoryUsage();
-            r.nonHeapMemUse = mem.getNonHeapMemoryUsage();
+            r.heapMemUse = new MemUsage(mem.getHeapMemoryUsage());
+            r.nonHeapMemUse = new MemUsage(mem.getNonHeapMemoryUsage());
             ThreadMXBean t = ManagementFactory.getThreadMXBean();
             r.thdCnt = t.getThreadCount();
             long[] arr = t.findDeadlockedThreads();
@@ -117,19 +117,19 @@ public class StrmServerStat {
             this.sysLoadAvg = sysLoadAvg;
         }
 
-        public MemoryUsage getHeapMemUse() {
+        public MemUsage getHeapMemUse() {
             return heapMemUse;
         }
 
-        public void setHeapMemUse(MemoryUsage heapMemUse) {
+        public void setHeapMemUse(MemUsage heapMemUse) {
             this.heapMemUse = heapMemUse;
         }
 
-        public MemoryUsage getNonHeapMemUse() {
+        public MemUsage getNonHeapMemUse() {
             return nonHeapMemUse;
         }
 
-        public void setNonHeapMemUse(MemoryUsage nonHeapMemUse) {
+        public void setNonHeapMemUse(MemUsage nonHeapMemUse) {
             this.nonHeapMemUse = nonHeapMemUse;
         }
 

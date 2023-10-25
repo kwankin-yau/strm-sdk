@@ -50,6 +50,33 @@ public class OpenStrmReq implements StrmMsg {
     public static final int DEFAULT_INTERVAL__HLS = 20;
     public static final int MAX_INTERVAL__HLS = 30 * 60;
 
+    /*
+     * TRACE_MODE__XXXX: The trace mode which user requested on this stream play request.
+     */
+
+    /**
+     * 0: DISABLED mode. DO NOT trace
+     */
+    public static final int TRACE_MODE__DISABLED = 0;
+
+    /**
+     * 1: SIMPLE mode. Only trace stream state changes and stream related terminal command, including terminal
+     * online/offline.
+     */
+    public static final int TRACE_MODE__SIMPLE = 1;
+
+    /**
+     * 2: ADVANCED mode. Trace stream state changes, code stream and related terminal command, including terminal
+     * online/offline.
+     */
+    public static final int TRACE_MODE__ADVANCED = 2;
+
+    /**
+     * 3: FULL mode. Full trace, include stream state changes, code stream and all terminal inbound/outbound message, including
+     * terminal online/offline.
+     */
+    public static final int TRACE_MODE__FULL = 3;
+
     public static boolean dataTypeContainsServerAudio(int dataType) {
         switch (dataType) {
             case DATA_TYPE__TALK:
@@ -143,10 +170,11 @@ public class OpenStrmReq implements StrmMsg {
     private Integer keepIntv;
     private String scheme;
     private Integer talkSendProtoVer;
+    private AudioConfig inputAudioCfg;
     private AudioConfig audioCfg;
     private RtspSource rtspSrc;
     private String timedToken;
-
+    private Integer trace;
 
     public OpenStrmReq() {
     }
@@ -170,9 +198,11 @@ public class OpenStrmReq implements StrmMsg {
             Integer keepIntv,
             String scheme,
             Integer talkSendProtoVer,
+            AudioConfig inputAudioCfg,
             AudioConfig audioCfg,
             RtspSource rtspSrc,
-            String timedToken) {
+            String timedToken,
+            Integer trace) {
         this.reqId = reqId;
         this.cb = cb;
         this.user = user;
@@ -191,9 +221,11 @@ public class OpenStrmReq implements StrmMsg {
         this.keepIntv = keepIntv;
         this.scheme = scheme;
         this.talkSendProtoVer = talkSendProtoVer;
+        this.inputAudioCfg = inputAudioCfg;
         this.audioCfg = audioCfg;
         this.rtspSrc = rtspSrc;
         this.timedToken = timedToken;
+        this.trace = trace;
     }
 
     public String getReqId() {
@@ -380,6 +412,14 @@ public class OpenStrmReq implements StrmMsg {
         this.talkSendProtoVer = talkSendProtoVer;
     }
 
+    public AudioConfig getInputAudioCfg() {
+        return inputAudioCfg;
+    }
+
+    public void setInputAudioCfg(AudioConfig inputAudioCfg) {
+        this.inputAudioCfg = inputAudioCfg;
+    }
+
     public AudioConfig getAudioCfg() {
         return audioCfg;
     }
@@ -402,6 +442,14 @@ public class OpenStrmReq implements StrmMsg {
 
     public void setTimedToken(String timedToken) {
         this.timedToken = timedToken;
+    }
+
+    public Integer getTrace() {
+        return trace;
+    }
+
+    public void setTrace(Integer trace) {
+        this.trace = trace;
     }
 
     /**
@@ -539,6 +587,19 @@ public class OpenStrmReq implements StrmMsg {
                 return "keepIntv";
         }
 
+        if (trace != null) {
+            switch (trace.intValue()) {
+                case TRACE_MODE__DISABLED:
+                case TRACE_MODE__SIMPLE:
+                case TRACE_MODE__ADVANCED:
+                case TRACE_MODE__FULL:
+                    break;
+
+                default:
+                    return "trace";
+            }
+        }
+
         return null;
     }
 
@@ -571,7 +632,7 @@ public class OpenStrmReq implements StrmMsg {
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
                 .add("fmt=" + fmt)
-                .add("subFmt=" + subFmt)
+                .add("subFmt='" + subFmt + "'")
                 .add("connIdx=" + connIdx)
                 .add("clientData='" + clientData + "'")
                 .add("dataTyp=" + dataTyp)
@@ -582,9 +643,11 @@ public class OpenStrmReq implements StrmMsg {
                 .add("keepIntv=" + keepIntv)
                 .add("scheme='" + scheme + "'")
                 .add("talkSendProtoVer=" + talkSendProtoVer)
+                .add("inputAudioCfg=" + inputAudioCfg)
                 .add("audioCfg=" + audioCfg)
                 .add("rtspSrc=" + rtspSrc)
                 .add("timedToken='" + timedToken + "'")
+                .add("trace=" + trace)
                 .toString();
     }
 }

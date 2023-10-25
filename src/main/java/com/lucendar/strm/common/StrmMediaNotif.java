@@ -45,27 +45,11 @@ public class StrmMediaNotif implements Cloneable {
 
     private Integer closeCause;
     private String closeReason;
+    private Integer ac;
+    private Integer vc;
 
 
     public StrmMediaNotif() {
-    }
-
-    public StrmMediaNotif(
-            String instId, String act, String reqId, String typ, String simNo, short chan,
-            Byte lostRate, String playUrl, String wsUrl, String taUrl, Integer closeCause,
-            String mediaTyp) {
-        this.instId = instId;
-        this.act = act;
-        this.reqId = reqId;
-        this.typ = typ;
-        this.simNo = simNo;
-        this.chan = chan;
-        this.lostRate = lostRate;
-        this.playUrl = playUrl;
-        this.wsUrl = wsUrl;
-        this.taUrl = taUrl;
-        this.closeCause = closeCause;
-        this.mediaTyp = mediaTyp;
     }
 
     public String getInstId() {
@@ -229,6 +213,32 @@ public class StrmMediaNotif implements Cloneable {
         this.mediaTyp = mediaTyp;
     }
 
+    /**
+     * Get audio codec. 0 for NO audio or unrecognized.
+     *
+     * @return
+     */
+    public Integer getAc() {
+        return ac;
+    }
+
+    public void setAc(Integer ac) {
+        this.ac = ac;
+    }
+
+    /**
+     * Get video codec. 0 for NO audio or unrecognized.
+     *
+     * @return
+     */
+    public Integer getVc() {
+        return vc;
+    }
+
+    public void setVc(Integer vc) {
+        this.vc = vc;
+    }
+
     @Override
     public StrmMediaNotif clone() {
         try {
@@ -254,6 +264,8 @@ public class StrmMediaNotif implements Cloneable {
                 .add("lostRate=" + lostRate)
                 .add("closeCause=" + closeCause)
                 .add("closeReason='" + closeReason + "'")
+                .add("ac=" + ac)
+                .add("vc=" + vc)
                 .toString();
     }
 }
