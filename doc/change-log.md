@@ -1,3 +1,7 @@
+# 3.4.3 - [2023-10-25]
+## Improvement
+- `OpenStrmReq` add `trace` property.
+
 # 3.4.2 - [2023-07-10]
 ## Improvement
 - `UriScheme` add RTSP and RTMP enum, `defaultSchemeOf()` method
