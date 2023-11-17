@@ -1,6 +1,10 @@
 # 3.4.3 - [2023-10-25]
 ## Improvement
 - `OpenStrmReq` add `trace` property.
+- `StrmMediaNotif` add the following constant:
+  - `CLOSE_CAUSE__openStrmFailed`, used in micro-gnss
+  - `CLOSE_CAUSE__requestTimeout`, used in micro-gnss
+- `StrmStatus` add `trace` property.
 
 # 3.4.2 - [2023-07-10]
 ## Improvement

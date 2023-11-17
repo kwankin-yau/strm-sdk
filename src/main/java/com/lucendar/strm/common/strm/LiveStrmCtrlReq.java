@@ -5,7 +5,7 @@ import com.lucendar.strm.common.StrmMsgs;
 
 import java.util.StringJoiner;
 
-public class LiveStrmCtrlReq implements StrmMsg {
+public class LiveStrmCtrlReq implements StrmMsg, StrmCtrlReq{
 
     public static final byte CTRL__CLOSE = 0;
     public static final byte CTRL__SWITCH_CODE_STREAM = 1;
@@ -45,6 +45,11 @@ public class LiveStrmCtrlReq implements StrmMsg {
         this.closeAction = closeAction;
         this.codeStream = codeStream;
         this.closeReason = closeReason;
+    }
+
+    @Override
+    public boolean isLive() {
+        return true;
     }
 
     public String getReqId() {

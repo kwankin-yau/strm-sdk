@@ -18,7 +18,10 @@ public class StrmMediaNotif implements Cloneable {
     public static final int CLOSE_CAUSE__clientReq = 1;
     public static final int CLOSE_CAUSE__termStrmClose = 2;
     public static final int CLOSE_CAUSE__connectStrmServerFailed = 3;
+
+    @Deprecated
     public static final int CLOSE_CAUSE__exceptionCaught = 4; // internal error
+    public static final int CLOSE_CAUSE__internalError = 4; // internal error
     public static final int CLOSE_CAUSE__keepTimeout = 5;
     public static final int CLOSE_CAUSE__termDataTimeout = 6;
     public static final int CLOSE_CAUSE__badStrmFormat = 7;
@@ -28,6 +31,13 @@ public class StrmMediaNotif implements Cloneable {
      * Terminal response a error for issued media command
      */
     public static final int CLOSE_CAUSE__termCmdFailed = 9;
+
+    public static final int CLOSE_CAUSE__openStrmFailed = 10; // /strm/open API call return error
+
+    /**
+     * The whole open stream request handling timeout, primary used in `micro-gnss` API.
+     */
+    public static final int CLOSE_CAUSE__requestTimeout = 11;
 
     private String instId;
     private String act;

@@ -60,20 +60,18 @@ public class OpenStrmReq implements StrmMsg {
     public static final int TRACE_MODE__DISABLED = 0;
 
     /**
-     * 1: SIMPLE mode. Only trace stream state changes and stream related terminal command, including terminal
-     * online/offline.
+     * 1: SIMPLE mode. This mode only effect `strm-proxy` or `micro-gnss` service.
      */
     public static final int TRACE_MODE__SIMPLE = 1;
 
     /**
-     * 2: ADVANCED mode. Trace stream state changes, code stream and related terminal command, including terminal
-     * online/offline.
+     * 2: ADVANCED mode. This mode only effect `strm-proxy` or `micro-gnss` service.
      */
     public static final int TRACE_MODE__ADVANCED = 2;
 
     /**
-     * 3: FULL mode. Full trace, include stream state changes, code stream and all terminal inbound/outbound message, including
-     * terminal online/offline.
+     * 3: FULL mode. In this mode, the stream media service will record the media channel traffic to database, include
+     * data receive from terminal and send to terminal.
      */
     public static final int TRACE_MODE__FULL = 3;
 
@@ -450,6 +448,13 @@ public class OpenStrmReq implements StrmMsg {
 
     public void setTrace(Integer trace) {
         this.trace = trace;
+    }
+
+    public int traceDef() {
+        if (trace != null)
+            return trace;
+        else
+            return TRACE_MODE__DISABLED;
     }
 
     /**

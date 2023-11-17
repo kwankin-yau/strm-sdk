@@ -1,5 +1,7 @@
 package com.lucendar.strm.common.strm.stat;
 
+import com.lucendar.strm.common.strm.OpenStrmReq;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -37,6 +39,7 @@ public class StrmStatus {
     private String vRez;
     private Float frameRate; // null if not available
     private String mediaTyp;
+    private Integer trace;
 
     private StrmReqStatus[] requests;
 
@@ -63,6 +66,7 @@ public class StrmStatus {
                       String vRez,
                       Float frameRate,
                       String mediaTyp,
+                      Integer trace,
                       StrmReqStatus[] requests
     ) {
         this.simNo = simNo;
@@ -85,6 +89,7 @@ public class StrmStatus {
         this.vRez = vRez;
         this.frameRate = frameRate;
         this.mediaTyp = mediaTyp;
+        this.trace = trace;
         this.requests = requests;
     }
 
@@ -253,6 +258,61 @@ public class StrmStatus {
         this.mediaTyp = mediaTyp;
     }
 
+    public String getaFmt() {
+        return aFmt;
+    }
+
+    public void setaFmt(String aFmt) {
+        this.aFmt = aFmt;
+    }
+
+    public Boolean getaNotSupport() {
+        return aNotSupport;
+    }
+
+    public void setaNotSupport(Boolean aNotSupport) {
+        this.aNotSupport = aNotSupport;
+    }
+
+    public String getvFmt() {
+        return vFmt;
+    }
+
+    public void setvFmt(String vFmt) {
+        this.vFmt = vFmt;
+    }
+
+    public Boolean getvNotSupport() {
+        return vNotSupport;
+    }
+
+    public void setvNotSupport(Boolean vNotSupport) {
+        this.vNotSupport = vNotSupport;
+    }
+
+    public String getvRez() {
+        return vRez;
+    }
+
+    public void setvRez(String vRez) {
+        this.vRez = vRez;
+    }
+
+    public Integer getTrace() {
+        return trace;
+    }
+
+    public void setTrace(Integer trace) {
+        this.trace = trace;
+    }
+
+    public int traceDef() {
+        if (trace != null)
+            return trace;
+        else
+            return OpenStrmReq.TRACE_MODE__DISABLED;
+    }
+
     public StrmReqStatus[] getRequests() {
         return requests;
     }
@@ -294,6 +354,7 @@ public class StrmStatus {
                 .add("vRez='" + vRez + "'")
                 .add("frameRate=" + frameRate)
                 .add("mediaTyp='" + mediaTyp + "'")
+                .add("trace=" + trace)
                 .add("requests=" + Arrays.toString(requests))
                 .toString();
     }

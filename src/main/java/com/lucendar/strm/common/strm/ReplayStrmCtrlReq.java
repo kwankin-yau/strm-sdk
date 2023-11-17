@@ -5,7 +5,7 @@ import com.lucendar.strm.common.StrmMsgs;
 
 import java.util.StringJoiner;
 
-public class ReplayStrmCtrlReq implements StrmMsg {
+public class ReplayStrmCtrlReq implements StrmMsg, StrmCtrlReq {
 
     public static final byte CTRL__PLAY = 0;
     public static final byte CTRL__PAUSE = 1;
@@ -45,6 +45,11 @@ public class ReplayStrmCtrlReq implements StrmMsg {
         this.ctrl = ctrl;
         this.factor = factor;
         this.time = time;
+    }
+
+    @Override
+    public boolean isLive() {
+        return false;
     }
 
     public String getReqId() {
