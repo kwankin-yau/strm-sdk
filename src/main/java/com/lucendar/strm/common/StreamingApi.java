@@ -13,6 +13,11 @@ import java.util.UUID;
 
 public class StreamingApi {
 
+    /**
+     * Default application ID.
+     */
+    public static final String DEFAULT_APP_ID = "";
+
     public static final byte STRM_FORMAT__FLV = 0;
     public static final byte STRM_FORMAT__HLS = 1;
     public static final byte STRM_FORMAT__RTMP = 2;

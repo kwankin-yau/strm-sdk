@@ -14,8 +14,9 @@ public class CommLog {
     public static final String EVT_TYP__RECV = "RECV";
     public static final String EVT_TYP__DECO = "DECO";
     public static final String EVT_TYP__SEND = "SEND";
+    public static final String EVT_TYP__ERRO = "ERRO";
 
-    private long id;
+    private String id;
 
     /**
      * The time of the event.
@@ -46,7 +47,7 @@ public class CommLog {
 
     /**
      * The event description.
-     *
+     * <p>
      * - for `CONN`, `DISC`, this field is a k/v list.
      * - for `DECO`, `SEND`, this field is the result of the JT808Msg.toString() method.
      * - for `SEND`, this field may be null.
@@ -62,11 +63,11 @@ public class CommLog {
     transient private byte[] binaryData;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -143,7 +144,10 @@ public class CommLog {
     }
 
     public void encodeFromBinaryData() {
-        data = StrmUtils.bytesToHex(binaryData);
+        if (binaryData != null)
+            data = StrmUtils.bytesToHex(binaryData);
+        else
+            data = null;
     }
 
     public String dataFromBinary() {

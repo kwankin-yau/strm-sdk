@@ -1,5 +1,6 @@
 package com.lucendar.strm.common.strm;
 
+import com.lucendar.strm.common.StreamingApi;
 import com.lucendar.strm.common.StrmMsg;
 import com.lucendar.strm.common.StrmMsgs;
 
@@ -149,7 +150,7 @@ public class OpenStrmReq implements StrmMsg {
             return result;
         }
     }
-
+    private String appId;
     private String reqId;
     private String cb;
     private StrmUserInfo user;
@@ -178,6 +179,7 @@ public class OpenStrmReq implements StrmMsg {
     }
 
     public OpenStrmReq(
+            String appId,
             String reqId,
             String cb,
             StrmUserInfo user,
@@ -224,6 +226,14 @@ public class OpenStrmReq implements StrmMsg {
         this.rtspSrc = rtspSrc;
         this.timedToken = timedToken;
         this.trace = trace;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     public String getReqId() {
@@ -450,6 +460,13 @@ public class OpenStrmReq implements StrmMsg {
         this.trace = trace;
     }
 
+    public String appIdDef() {
+        if (appId != null)
+            return appId;
+        else
+            return StreamingApi.DEFAULT_APP_ID;
+    }
+
     public int traceDef() {
         if (trace != null)
             return trace;
@@ -467,6 +484,8 @@ public class OpenStrmReq implements StrmMsg {
             if (!isValidReqId(reqId))
                 return "reqId";
         }
+
+        normalizeAppId();
 
 //            if (callback == null)
 //                return "callback";
@@ -627,9 +646,15 @@ public class OpenStrmReq implements StrmMsg {
         }
     }
 
+    public void normalizeAppId() {
+        if (this.appId == null)
+            this.appId = StreamingApi.DEFAULT_APP_ID;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", OpenStrmReq.class.getSimpleName() + "[", "]")
+                .add("appId='" + appId + "'")
                 .add("reqId='" + reqId + "'")
                 .add("cb='" + cb + "'")
                 .add("user=" + user)

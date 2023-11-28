@@ -7,11 +7,14 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stat;
 
+import com.lucendar.strm.common.StreamingApi;
+
 import java.util.StringJoiner;
 
 public class StrmActivity {
 
     private String reqId;
+    private String appId;
     private String simNo;
     private int chanId;
     private boolean live;
@@ -25,6 +28,14 @@ public class StrmActivity {
 
     public void setReqId(String reqId) {
         this.reqId = reqId;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     public String getSimNo() {
@@ -75,10 +86,18 @@ public class StrmActivity {
         this.endTm = endTm;
     }
 
+    public String appIdDef() {
+        if (appId != null)
+            return appId;
+        else
+            return StreamingApi.DEFAULT_APP_ID;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmActivity.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
+                .add("appId='" + appId + "'")
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
                 .add("live=" + live)

@@ -7,15 +7,20 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+import com.lucendar.strm.common.StreamingApi;
 import com.lucendar.strm.common.StrmMsg;
 import com.lucendar.strm.common.StrmMsgs;
 
 import java.util.StringJoiner;
 
+/**
+ * 终端音视频播放或回放时，服务端同时存储在服务器本地的转录文件
+ */
 public class StoredAv implements StrmMsg {
 
     private String reqId;
     private String reqTm;
+    private String appId;
     private String simNo;
     private int chan;
     private boolean live;
@@ -28,9 +33,20 @@ public class StoredAv implements StrmMsg {
     public StoredAv() {
     }
 
-    public StoredAv(String reqId, String reqTm, String simNo, int chan, boolean live, String path, String ext, long sz, String mediaTyp) {
+    public StoredAv(
+            String reqId,
+            String reqTm,
+            String appId,
+            String simNo,
+            int chan,
+            boolean live,
+            String path,
+            String ext,
+            long sz,
+            String mediaTyp) {
         this.reqId = reqId;
         this.reqTm = reqTm;
+        this.appId = appId;
         this.simNo = simNo;
         this.chan = chan;
         this.live = live;
@@ -54,6 +70,14 @@ public class StoredAv implements StrmMsg {
 
     public void setReqTm(String reqTm) {
         this.reqTm = reqTm;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     public String getSimNo() {
@@ -120,10 +144,18 @@ public class StoredAv implements StrmMsg {
         this.mediaTyp = mediaTyp;
     }
 
+    public String appIdDef() {
+        if (appId != null)
+            return appId;
+        else
+            return StreamingApi.DEFAULT_APP_ID;
+    }
+
     public StoredAv copyWithNewSzAndMediaTyp(long newSz, String newMediaTyp) {
         StoredAv r = new StoredAv();
         r.reqId = reqId;
         r.reqTm = reqTm;
+        r.appId = appId;
         r.simNo = simNo;
         r.chan = chan;
         r.live = live;
@@ -141,6 +173,7 @@ public class StoredAv implements StrmMsg {
         return new StringJoiner(", ", StoredAv.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .add("reqTm='" + reqTm + "'")
+                .add("appId='" + appId + "'")
                 .add("simNo='" + simNo + "'")
                 .add("chan=" + chan)
                 .add("live=" + live)

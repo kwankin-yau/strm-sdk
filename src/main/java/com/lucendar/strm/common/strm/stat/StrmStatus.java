@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class StrmStatus {
+    private String appId;
+    private String initReqId;
     private String simNo;
     private short chanId;
     private boolean live;
@@ -46,29 +48,34 @@ public class StrmStatus {
     public StrmStatus() {
     }
 
-    public StrmStatus(String simNo,
-                      short chanId,
-                      boolean live,
-                      Integer liveDataTyp,
-                      byte codeStrm,
-                      long createTm,
-                      Long srcDetectTm,
-                      boolean ready,
-                      Long readyTm,
-                      Long closeTm,
-                      long recv,
-                      long byteRate,
-                      long sendToClnt,
-                      String aFmt,
-                      Boolean aNotSupport,
-                      String vFmt,
-                      Boolean vNotSupport,
-                      String vRez,
-                      Float frameRate,
-                      String mediaTyp,
-                      Integer trace,
-                      StrmReqStatus[] requests
+    public StrmStatus(
+            String appId,
+            String initReqId,
+            String simNo,
+            short chanId,
+            boolean live,
+            Integer liveDataTyp,
+            byte codeStrm,
+            long createTm,
+            Long srcDetectTm,
+            boolean ready,
+            Long readyTm,
+            Long closeTm,
+            long recv,
+            long byteRate,
+            long sendToClnt,
+            String aFmt,
+            Boolean aNotSupport,
+            String vFmt,
+            Boolean vNotSupport,
+            String vRez,
+            Float frameRate,
+            String mediaTyp,
+            Integer trace,
+            StrmReqStatus[] requests
     ) {
+        this.appId = appId;
+        this.initReqId = initReqId;
         this.simNo = simNo;
         this.chanId = chanId;
         this.live = live;
@@ -91,6 +98,22 @@ public class StrmStatus {
         this.mediaTyp = mediaTyp;
         this.trace = trace;
         this.requests = requests;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getInitReqId() {
+        return initReqId;
+    }
+
+    public void setInitReqId(String initReqId) {
+        this.initReqId = initReqId;
     }
 
     public String getSimNo() {
@@ -334,6 +357,8 @@ public class StrmStatus {
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmStatus.class.getSimpleName() + "[", "]")
+                .add("appId='" + appId + "'")
+                .add("initReqId='" + initReqId + "'")
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
                 .add("live=" + live)

@@ -4,6 +4,9 @@ public class StrmUtils {
 
     private static final char[] HEX_CHARS = "0123456789abcdef".toCharArray();
     public static String bytesToHex(byte[] bytes) {
+        if (bytes == null)
+            throw new NullPointerException("bytes");
+
         char[] r = new char[bytes.length * 2];
 
         for (int j = 0; j < bytes.length; j++) {

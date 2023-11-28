@@ -7,6 +7,8 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.log;
 
+import com.lucendar.strm.common.StreamingApi;
+
 import java.util.StringJoiner;
 
 /**
@@ -31,6 +33,7 @@ public class StrmLogEntry {
     public static final String DATA_KEY__CTRL = "ctrl";
 
     private long time;
+    private String appId;
     private String simNo;
     private short chanId;
     private boolean live;
@@ -44,6 +47,14 @@ public class StrmLogEntry {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     public String getSimNo() {
@@ -94,10 +105,18 @@ public class StrmLogEntry {
         this.evtData = evtData;
     }
 
+    public String appIdDef() {
+        if (appId != null)
+            return appId;
+        else
+            return StreamingApi.DEFAULT_APP_ID;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmLogEntry.class.getSimpleName() + "[", "]")
                 .add("time=" + time)
+                .add("appId='" + appId + "'")
                 .add("simNo='" + simNo + "'")
                 .add("chanId=" + chanId)
                 .add("live=" + live)

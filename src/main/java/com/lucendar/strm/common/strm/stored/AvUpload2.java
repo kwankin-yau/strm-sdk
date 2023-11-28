@@ -7,10 +7,13 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+import com.lucendar.strm.common.StreamingApi;
+
 import java.util.StringJoiner;
 
 /**
- * This class represent a terminal remote A/V file upload request and it's state.
+ * This class represent a terminal remote A/V file upload request and the state of the request.
+ * The `AvUpload2` used for internal storage while `AvUpload` used for supply to client.
  *
  * @apiNote the format of time properties in this class are `yyyy-MM-dd HH:mm:ss`.
  */
@@ -35,6 +38,7 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
     private String reqId;
     private String reqTm;
     private int st;
+    private String appId;
     private String simNo;
     private int chan;
     private String startTm;
@@ -81,6 +85,14 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
 
     public boolean ackOrEndingState() {
         return isAckOrEndingState(st);
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     @Override
@@ -262,6 +274,13 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
         this.cb = cb;
     }
 
+    public String appIdDef() {
+        if (appId != null)
+            return appId;
+        else
+            return StreamingApi.DEFAULT_APP_ID;
+    }
+
     @Override
     public AvUpload2 clone() {
         try {
@@ -277,6 +296,7 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
                 .add("reqId='" + reqId + "'")
                 .add("reqTm='" + reqTm + "'")
                 .add("st=" + st)
+                .add("appId='" + appId + "'")
                 .add("simNo='" + simNo + "'")
                 .add("chan=" + chan)
                 .add("startTm='" + startTm + "'")
