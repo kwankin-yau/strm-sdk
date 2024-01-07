@@ -312,6 +312,16 @@ public class OpenStrmReq implements StrmMsg {
             return subFmt;
     }
 
+    public String subFmtDef(boolean defaultMpeg2Ts) {
+        if (subFmt == null) {
+            if (defaultMpeg2Ts)
+                return STRM_SUB_FORMAT__MPEGTS;
+            else
+                return STRM_SUB_FORMAT__FMP4;
+        } else
+            return subFmt;
+    }
+
     public byte getConnIdx() {
         return connIdx;
     }

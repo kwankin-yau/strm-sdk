@@ -23,7 +23,14 @@ public class RegisterAvUploadResult {
     public RegisterAvUploadResult() {
     }
 
-    public RegisterAvUploadResult(String reqId, String ip, int port, String path, String user, String pwd, String urlPrefix) {
+    public RegisterAvUploadResult(
+            String reqId,
+            String ip,
+            int port,
+            String path,
+            String user,
+            String pwd,
+            String urlPrefix) {
         this.reqId = reqId;
         this.ip = ip;
         this.port = port;

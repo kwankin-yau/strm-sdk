@@ -12,6 +12,10 @@ public class ReleaseStrmsReq implements StrmMsg {
     public ReleaseStrmsReq() {
     }
 
+    public ReleaseStrmsReq(String reqId) {
+        this.reqIds = new String[]{reqId};
+    }
+
     public ReleaseStrmsReq(String[] reqIds) {
         this.reqIds = reqIds;
     }

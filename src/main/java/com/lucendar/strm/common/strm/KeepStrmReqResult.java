@@ -3,6 +3,7 @@ package com.lucendar.strm.common.strm;
 import java.util.StringJoiner;
 
 public class KeepStrmReqResult {
+
     private String reqId;
     private boolean keep;
 

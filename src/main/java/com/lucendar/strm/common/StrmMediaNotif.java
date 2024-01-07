@@ -2,6 +2,9 @@ package com.lucendar.strm.common;
 
 import java.util.StringJoiner;
 
+/**
+ * 媒体状态变更通知
+ */
 public class StrmMediaNotif implements Cloneable {
 
     public static final String ACT__cmdSent = "sent";
@@ -32,12 +35,21 @@ public class StrmMediaNotif implements Cloneable {
      */
     public static final int CLOSE_CAUSE__termCmdFailed = 9;
 
+    /**
+     * 代理服务调用媒体服务的打开媒体接口(`/strm/open`)失败
+     */
     public static final int CLOSE_CAUSE__openStrmFailed = 10; // /strm/open API call return error
 
     /**
      * The whole open stream request handling timeout, primary used in `micro-gnss` API.
+     * 整个媒体请求处理超时（在成功打开前超时）
      */
     public static final int CLOSE_CAUSE__requestTimeout = 11;
+
+    /**
+     * 当客户端成功请求打开一个流后，如果在配置的时间内（默认1分钟）未消费。
+     */
+    public static final int CLOSE_CAUSE__consumptionTimeout = 12;
 
     private String instId;
     private String act;
@@ -197,6 +209,15 @@ public class StrmMediaNotif implements Cloneable {
 
             case CLOSE_CAUSE__termCmdFailed:
                 return "Terminal command failed.";
+
+            case CLOSE_CAUSE__openStrmFailed:
+                return "Call `/strm/open` API failed.";
+
+            case CLOSE_CAUSE__requestTimeout:
+                return "Whole request handling timeout.";
+
+            case CLOSE_CAUSE__consumptionTimeout:
+                return "Media consumption timeout.";
 
             default:
                 return "Unknown";

@@ -7,8 +7,13 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+
+
 import java.util.StringJoiner;
 
+/**
+ * 更新远程录像上传状态请求
+ */
 public class UpdateAvUploadStateReq {
 
     public static final byte STATE__REQUESTED = AvUpload2.STATE__REQUESTED;
@@ -23,13 +28,21 @@ public class UpdateAvUploadStateReq {
     private String reqId;
 
     /**
-     * The new state of request. Value domain: one of STATE__XXXX constant.
+     * The new state of request. Value domain: one of AvUpload2.STATE__XXXX constant.
      */
     private int st;
+
     private String fn;
+
     private Long sz;
+
     private String uploadTm;
 
+    /**
+     * 远程录像的开始时间, 北京时间。格式：`yyyy-MM-dd HH:mm:ss`
+     *
+     * @return
+     */
     public String getStartTm() {
         return startTm;
     }
@@ -46,6 +59,11 @@ public class UpdateAvUploadStateReq {
         this.reqId = reqId;
     }
 
+    /**
+     * The new state of request. Value domain: one of AvUpload2.STATE__XXXX constant.
+     *
+     * @return
+     */
     public int getSt() {
         return st;
     }
@@ -54,6 +72,11 @@ public class UpdateAvUploadStateReq {
         this.st = st;
     }
 
+    /**
+     * The file name of uploaded file. Only valid when st == AvUpload2#STATE__UPLOADED
+     *
+     * @return
+     */
     public String getFn() {
         return fn;
     }
@@ -70,6 +93,12 @@ public class UpdateAvUploadStateReq {
         this.sz = sz;
     }
 
+    /**
+     * 上传完成时间, 北京时间。格式：`yyyy-MM-dd HH:mm:ss`
+     * 可能为 null 。
+     *
+     * @return
+     */
     public String getUploadTm() {
         return uploadTm;
     }

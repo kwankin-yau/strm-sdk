@@ -1,3 +1,16 @@
+# 3.4.4 - [203-11-28]
+## Improvement
+- AvUpload2:
+  - add `avResPath` static method
+  - add `strmInst` property
+- StreamingApi add `BEIJING_ZONE_OFFSET` constant
+- Introduce `ScopedSimNo`
+- Introduce `com.lucendar.strm.common.strm.stored.RegisterAvUploadReq.assign`
+
+## Changed
+- Maven group changed `com.lucendar`
+- `timeCodedId`, `extractTimeFromId` method moved to `StrmUtils`
+
 # 3.4.3 - [2023-10-25]
 ## Improvement
 - `OpenStrmReq` add `trace` property.

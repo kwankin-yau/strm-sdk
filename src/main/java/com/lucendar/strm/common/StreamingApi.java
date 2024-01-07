@@ -8,15 +8,49 @@
 package com.lucendar.strm.common;
 
 import java.nio.ByteBuffer;
+import java.time.ZoneOffset;
 import java.util.Base64;
 import java.util.UUID;
 
 public class StreamingApi {
 
+    public static boolean isValidId(String id) {
+        if (id == null)
+            return false;
+
+        if (id.isEmpty())
+            return true;
+
+        for (int i = 0; i < id.length(); i++) {
+            char c = id.charAt(i);
+            if (!Character.isLetterOrDigit(c)) {
+                switch (c) {
+                    case '_':
+                    case '-':
+                    case '$':
+                    case '.':
+                    case '~':
+                        break;
+
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
     /**
      * Default application ID.
      */
     public static final String DEFAULT_APP_ID = "";
+
+
+    public static boolean isValidAppId(String appId) {
+        return isValidId(appId);
+    }
 
     public static final byte STRM_FORMAT__FLV = 0;
     public static final byte STRM_FORMAT__HLS = 1;
@@ -29,6 +63,17 @@ public class StreamingApi {
 
     public static final String CHANNEL_TYPE__LIVE = "live";
     public static final String CHANNEL_TYPE__REPLAY = "replay";
+
+
+    /**
+     * 每个流媒体请求最大的生命期，流媒体请求超过这个时长请求ID将会无效。单位：分钟
+     */
+    public static final int STRM_REQ_MAX_LIFETIME_MINUTES = 2 * 60;
+
+    /**
+     * 远程录像上传请求的最大的生命期，上传请求超过这个时长请求ID将会无效。单位：分钟
+     */
+    public static final int AV_UPLOAD_REQ_MAX_LIFETIME_MINUTES = 30;
 
     public static boolean isValidSimNoChar(char c) {
         if (c >= '0' && c <= '9')
@@ -90,13 +135,16 @@ public class StreamingApi {
         return normalizeSimNo(simNo) + "_" + channelId + "_" + (live ? "1" : "0");
     }
 
+    private static final Base64.Encoder UrlSafeBase64EncoderNoPadding =
+            Base64.getUrlEncoder().withoutPadding();
+
     public static String newReqId() {
         UUID uuid = UUID.randomUUID();
         byte[] bytes = new byte[16];
         ByteBuffer bb = ByteBuffer.wrap(bytes);
         bb.putLong(uuid.getMostSignificantBits());
         bb.putLong(uuid.getLeastSignificantBits());
-        String r = Base64.getUrlEncoder().encodeToString(bytes);
+        String r = UrlSafeBase64EncoderNoPadding.encodeToString(bytes);
         int idx = r.indexOf('='); // remove the ending `=` character
         if (idx > 0)
             r = r.substring(0, idx);
@@ -125,41 +173,8 @@ public class StreamingApi {
         if (len < 8 || len > 40)
             return false;
 
-        for (int i = 0; i < reqId.length(); i++) {
-            char c = reqId.charAt(i);
-            if (!Character.isDigit(c) && !Character.isLetter(c)) {
-                switch (c) {
-                    case '-':
-                    case '_':
-                    case '.':
-                    case '~':
-                        break;
-
-                    default:
-                        return false;
-                }
-            }
-        }
-
-        return true;
+        return isValidId(reqId);
     }
 
-    public static String timeCodedId(long time) {
-        UUID uuid = UUID.randomUUID();
-        byte[] bytes = new byte[16 + 8];
-        ByteBuffer bb = ByteBuffer.wrap(bytes);
-
-        bb.putLong(time);
-        bb.putLong(uuid.getMostSignificantBits());
-        bb.putLong(uuid.getLeastSignificantBits());
-
-        return Base64.getUrlEncoder().encodeToString(bytes);
-    }
-
-    public static long extractTimeFromId(String id) {
-        byte[] bytes = Base64.getUrlDecoder().decode(id);
-        ByteBuffer bb = ByteBuffer.wrap(bytes);
-        return bb.getLong();
-    }
-
+    public static final ZoneOffset BEIJING_ZONE_OFFSET = ZoneOffset.ofHours(8);
 }

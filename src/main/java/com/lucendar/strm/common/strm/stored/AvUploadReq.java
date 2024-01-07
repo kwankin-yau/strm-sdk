@@ -11,7 +11,11 @@ import com.lucendar.strm.common.StreamingApi;
 
 import java.util.StringJoiner;
 
+/**
+ * 上传终端远程录像请求
+ */
 public class AvUploadReq {
+
     private String appId;
     private String simNo;
     private int channel;

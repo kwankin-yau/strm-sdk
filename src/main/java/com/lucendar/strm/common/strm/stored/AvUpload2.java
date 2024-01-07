@@ -9,6 +9,9 @@ package com.lucendar.strm.common.strm.stored;
 
 import com.lucendar.strm.common.StreamingApi;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.StringJoiner;
 
 /**
@@ -18,6 +21,14 @@ import java.util.StringJoiner;
  * @apiNote the format of time properties in this class are `yyyy-MM-dd HH:mm:ss`.
  */
 public class AvUpload2 implements AbstractAvUpload, Cloneable {
+
+    public static String avResPath(String simNo, long startTm, String reqId) {
+        OffsetDateTime odt = OffsetDateTime.ofInstant(Instant.ofEpochMilli(startTm), StreamingApi.BEIJING_ZONE_OFFSET);
+        LocalDate ld = odt.toLocalDate();
+        int month = ld.getMonthValue();
+        String monthS = month < 10 ? "0" + month : String.valueOf(month);
+        return "/" + ld.getYear() + "/" + monthS + "/" + simNo + "/" + reqId;
+    }
 
     public static final byte STATE__REQUESTED = 1;
     public static final byte STATE__ACK = 2;
@@ -53,6 +64,8 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
     private String uploadTm;
     private String url;
     private String cb;
+
+    private String strmInst;
 
     @Override
     public String getReqId() {
@@ -237,16 +250,7 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
     }
 
     public String fileNameWithPath() {
-        String s = path;
-        if (s == null || s.isEmpty())
-            s = "/";
-        else if (!s.startsWith("/"))
-            s = "/" + s;
-
-        if (!s.endsWith("/"))
-            s = s + "/";
-
-        return s + fn;
+        return AvUpload.calcFileNameWithPath(path, fn);
     }
 
     public String getUploadTm() {
@@ -274,11 +278,39 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
         this.cb = cb;
     }
 
+    /**
+     * 创建AvUpload任务时使用的媒体服务的实例ID
+     *
+     * @return
+     */
+    public String getStrmInst() {
+        return strmInst;
+    }
+
+    public void setStrmInst(String strmInst) {
+        this.strmInst = strmInst;
+    }
+
     public String appIdDef() {
         if (appId != null)
             return appId;
         else
             return StreamingApi.DEFAULT_APP_ID;
+    }
+
+    public String url() {
+        return url;
+    }
+
+    public AvUpload2 url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public AvUpload toAvUpload() {
+        AvUpload r = new AvUpload();
+        r.assignFrom(this);
+        return r;
     }
 
     @Override
@@ -311,6 +343,7 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
                 .add("uploadTm='" + uploadTm + "'")
                 .add("url='" + url + "'")
                 .add("cb='" + cb + "'")
+                .add("strmInst='" + strmInst + "'")
                 .toString();
     }
 }

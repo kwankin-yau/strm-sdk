@@ -222,7 +222,7 @@ public class AvUpload implements Cloneable {
         this.fileName = fileName;
     }
 
-    public String fileNameWithPath() {
+    public static String calcFileNameWithPath(String path, String fileName) {
         String s = path;
         if (s == null || s.isEmpty())
             s = "/";
@@ -235,6 +235,10 @@ public class AvUpload implements Cloneable {
         return s + fileName;
     }
 
+    public String fileNameWithPath() {
+        return calcFileNameWithPath(path, fileName);
+    }
+
     public String getUploadTm() {
         return uploadTm;
     }
@@ -243,6 +247,14 @@ public class AvUpload implements Cloneable {
         this.uploadTm = uploadTm;
     }
 
+    /**
+     * 文件的下载 URL。仅当 st == AvUpload2#STATE__UPLOADED 时有效。
+     * 注意，这个 下载 URL 是有时效的：
+     * 1. 查询获得的 url 在两小时后失效
+     * 2. 两次查询同一个 AvUpload，返回的 url 可能不一样
+     *
+     * @return
+     */
     public String getUrl() {
         return url;
     }
@@ -251,11 +263,39 @@ public class AvUpload implements Cloneable {
         this.url = url;
     }
 
+    public String url() {
+        return url;
+    }
+
+    public AvUpload url(String value) {
+        this.url = value;
+        return this;
+    }
+
     public String appIdDef() {
         if (appId != null)
             return appId;
         else
             return StreamingApi.DEFAULT_APP_ID;
+    }
+
+    public void assignFrom(AvUpload2 avUpload2) {
+        reqId = avUpload2.getReqId();
+        reqTm = avUpload2.getReqTm();
+        st = avUpload2.getSt();
+        appId = avUpload2.getAppId();
+        simNo = avUpload2.getSimNo();
+        channel = avUpload2.getChan();
+        startTime = avUpload2.getStartTm();
+        endTime = avUpload2.getEndTm();
+        almState = avUpload2.getAlmSt();
+        mediaType = avUpload2.getMediaTyp();
+        codeStream = avUpload2.getCodeStrm();
+        storageType = avUpload2.getStgTyp();
+        fileSz = avUpload2.getSz();
+        path = avUpload2.getPath();
+        fileName = avUpload2.getFn();
+        uploadTm = avUpload2.getUploadTm();
     }
 
     @Override

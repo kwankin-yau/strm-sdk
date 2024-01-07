@@ -13,6 +13,10 @@ public class KeepStrmReq implements StrmMsg {
     public KeepStrmReq() {
     }
 
+    public KeepStrmReq(String reqId) {
+        this.reqIds = new String[]{reqId};
+    }
+
     public KeepStrmReq(String[] reqIds, ServerHint strmServerHint) {
         this.reqIds = reqIds;
         this.strmServerHint = strmServerHint;

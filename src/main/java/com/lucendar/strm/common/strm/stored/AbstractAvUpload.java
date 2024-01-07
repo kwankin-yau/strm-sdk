@@ -7,7 +7,20 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+import com.lucendar.strm.common.utils.StrmUtils;
+
 public interface AbstractAvUpload {
+
+    /**
+     * Generate a new AV upload request ID.
+     *
+     * @param startTm The start time of the AV upload request. epoch millis.
+     * @return the new request ID.
+     */
+    static String newAvUploadReqId(long startTm) {
+        return StrmUtils.timeCodedId(startTm);
+    }
+
 
     /**
      * Get the A/V upload request ID.

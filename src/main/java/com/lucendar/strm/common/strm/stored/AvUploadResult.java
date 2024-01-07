@@ -7,9 +7,17 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+/**
+ * 上传终端远程录像应答
+ */
 public class AvUploadResult {
     private String reqId;
 
+    /**
+     * 请求ID。由服务端产生或调用者在`AvUploadReq`中指定。
+     *
+     * @return 请求ID。
+     */
     public String getReqId() {
         return reqId;
     }
