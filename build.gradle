@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.lucendar'
-version '3.4.4-SNAPSHOT'
+version '3.4.4'
 
 compileJava.options.encoding = 'UTF-8'
 targetCompatibility = '8'
