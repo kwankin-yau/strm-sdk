@@ -7,11 +7,14 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm;
 
+import com.lucendar.strm.common.StrmMsg;
+import com.lucendar.strm.common.StrmMsgs;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class ReleaseStrmsReq2 {
+public class ReleaseStrmsReq2 implements StrmMsg {
 
     private List<ReleaseStrmReqItem> reqItems;
 
@@ -43,5 +46,10 @@ public class ReleaseStrmsReq2 {
         return new StringJoiner(", ", ReleaseStrmsReq2.class.getSimpleName() + "[", "]")
                 .add("reqItems=" + reqItems)
                 .toString();
+    }
+
+    @Override
+    public int msgId() {
+        return StrmMsgs.STRM_MSG__ReleaseStrmsReq2;
     }
 }

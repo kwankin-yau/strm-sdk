@@ -23,4 +23,5 @@ public class StrmMsgs {
     public static final int STRM_MSG__QryStrmActivityReq = 12;
     public static final int STRM_MSG__QryStrmStatReq = 13;
     public static final int STRM_MSG__QryStrmActSegReq = 14;
+    public static final int STRM_MSG__ReleaseStrmsReq2 = 15;
 }

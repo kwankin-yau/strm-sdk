@@ -3,6 +3,7 @@
 - AvUpload2:
   - add `avResPath` static method
   - add `strmInst` property
+  - add `fileNameWithPathUrl` method
 - StreamingApi add `BEIJING_ZONE_OFFSET` constant
 - Introduce `ScopedSimNo`
 - Introduce `com.lucendar.strm.common.strm.stored.RegisterAvUploadReq.assign`

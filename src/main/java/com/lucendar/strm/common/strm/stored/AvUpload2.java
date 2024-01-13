@@ -9,6 +9,9 @@ package com.lucendar.strm.common.strm.stored;
 
 import com.lucendar.strm.common.StreamingApi;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -251,6 +254,14 @@ public class AvUpload2 implements AbstractAvUpload, Cloneable {
 
     public String fileNameWithPath() {
         return AvUpload.calcFileNameWithPath(path, fn);
+    }
+
+    public String fileNameWithPathUrl() {
+        try {
+            return AvUpload.calcFileNameWithPath(path, URLEncoder.encode(fn, StandardCharsets.UTF_8.name()));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getUploadTm() {
