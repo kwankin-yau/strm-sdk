@@ -21,7 +21,7 @@ import java.util.StringJoiner;
  * This class represent a terminal remote A/V file upload request and the state of the request.
  * The `AvUpload2` used for internal storage while `AvUpload` used for supply to client.
  *
- * @apiNote the format of time properties in this class are `yyyy-MM-dd HH:mm:ss`.
+ * Note: the format of time properties in this class are `yyyy-MM-dd HH:mm:ss`.
  */
 public class AvUpload2 implements AbstractAvUpload, Cloneable {
 

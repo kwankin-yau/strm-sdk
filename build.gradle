@@ -1,50 +1,75 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
 }
 
 group 'com.lucendar'
 version '3.4.4'
 
 compileJava.options.encoding = 'UTF-8'
-targetCompatibility = '8'
+
+sourceCompatibility = 8
+targetCompatibility = 8
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
 }
 
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    archiveClassifier = 'sources'
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 publishing {
-    repositories {
-        maven {
-            if (project.version.toString().endsWith("-SNAPSHOT")) {
-                name = "snapshots"
-                url = "${snapshotUrl}"
-            } else {
-                name = "releases"
-                url = "${releaseUrl}"
-            }
-
-            credentials {
-                username = "${ossUser}"
-                password = "${ossPwd}"
-            }
-        }
-    }
-
     publications {
         maven(MavenPublication) {
             from components.java
-            artifact sourceJar
+
+            pom {
+                name = 'GT-Streaming SDK library'
+                packaging = 'jar'
+                // optionally artifactId can be defined here
+                description = 'A common library used in GT-Streaming application.'
+                url = 'https://github.com/kwankin-yau/strm-sdk'
+
+                scm {
+                    connection = 'https://github.com/kwankin-yau/strm-sdk.git'
+                    developerConnection = 'https://github.com/kwankin-yau/strm-sdk.git'
+                    url = 'https://github.com/kwankin-yau/strm-sdk'
+                }
+
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'http://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'kky'
+                        name = 'kwankin-yau'
+                        email = 'alphax@vip.163.com'
+                    }
+                }
+            }
         }
     }
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+signing {
+    sign publishing.publications.maven
 }
 
