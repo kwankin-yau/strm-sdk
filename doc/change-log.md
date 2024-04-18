@@ -1,3 +1,43 @@
+# 4.0.0 [2024-01-16]
+## 完善
+- 引用 GNSS 驱动
+- `JT808Msg` 增加 `headers` 属性
+- `JT808Frame` 改为只读对象，并增加 `backOffReader` 属性
+- `TermCmdStateChanged` 增加 `uuid`, `pub` 属性, `setRandomUuid` 方法
+- 新增 `info.gratour.jt808common.adas.AdasAlmTypes` 平台ADAS报警类型定义类
+- `MQEventAddt_0800_MultiMediaEvent` 新增 MEDIA_TYPE__xxxx, MEDIA_FMT__xxxx, EVT_TYPE__xxxx 等常量定义.
+- 新增 `MBEncoder808_Track.encodeTrackBasicInfo` 方法
+- 新增 `MBEncoder808_0800_MultiMediaEvent`, `MBEncoder808_0801_MultiMediaData` 两个消息体编码器
+- 新增 `AppInfo` 接口
+- 新增 `StrmServerInfo2`
+- `ServerInfo` 增加 `api` 属性
+- 使 `GnssLoginResult` 继承 `ServerInfo`
+- 新增 `AdasAddt` 接口，令所有 `Adas...Addt` 继承此接口
+- `Trk` 新增 `vehId` 属性
+- `Trk` 的 `plateColor`, `ioSt`, `adasAlm` 属性改为 `Integer`
+- `info.gratour.jt808common.spi.model.Event` 增加 `appId` 属性
+- `TermConnState` 实现 `Clonable` 接口
+- 补充 `TermCmdMaterializer` 和 `TermCmdStateChangedMaterializer` 中遗漏的属性编解码
+- 新增 `com.lucendar.strm.common.strm.stored.TermStoredAvItem` 类
+- 新增 `com.lucendar.strm.common.strm.stored.QryTermSideStoredAvReq` 类
+- `AvUploadNotif` 增加 `simNo` 属性
+- 新增 `QryAdasAlmAttReq`、`AlmAtt` 类
+- `User` 和 `TokenValidateResult` 增加 `authorities` 属性。
+- 新增 `Alm`, `AlmParam`, `CloseAlmReq` 类 
+
+## 不兼容变更
+- `AvUploadReq` 增加 `fileSz` 必填属性 
+
+## 变更
+- `com.lucendar.gnss.sdk.gateway.OnlineOfflineNotif.protoVer` 数据类型由 Integer 改为 String
+- `com.lucendar.gnss.sdk.gateway.TermConnState.protoVer` 数据类型由 Integer 改为 String
+- 删去 `SseEventSource`
+- `StoredAv` 重命名为 `PlayedAvDump`
+- 依赖
+  - 合并 `micro-gnss-sdk` 3.4.4
+  - 合并 `jt808-common` 3.0.1
+  - `lucendar-common` 升级到 2.2.0
+ 
 # 3.4.4 - [2023-11-28]
 ## Improvement
 - AvUpload2:
@@ -78,7 +118,7 @@
 - `com.lucendar.strm.common.strm.stat.ReqStat` rename to `com.lucendar.strm.common.strm.stat.StrmReqStatus`
   - property `proto` rename to `fmt`
   - proeprty `strmReadyTm` rename to `readyTm`.
-- `com.lucendar.strm.common.strm.stored.AvStoreLog` rename to `com.lucendar.strm.common.strm.stored.StoredAv`, 
+- `com.lucendar.strm.common.strm.stored.AvStoreLog` rename to `com.lucendar.strm.common.strm.dump.PlayedAvDump`, 
   and add `mediaTyp` property.
 - `com.lucendar.strm.common.strm.closedlog.ClosedReqLogEntry` removed, use `StrmReqStatus` instead.
 - `com.lucendar.strm.common.strm.closedlog.ClosedChannelLogEntry` removed, use `StrmStatus` instead.
@@ -86,7 +126,7 @@
   and add `__page`, `__limit` properties, move to `stat` package.
 - `com.lucendar.strm.common.strm.log.StrmChannelLogEntry` rename to `com.lucendar.strm.common.strm.log.StrmLogEntry`
 - `com.lucendar.strm.common.strm.KeepChannelReq` rename to `com.lucendar.strm.common.strm.KeepStrmReq`
-- `com.lucendar.strm.common.strm.KeepChannelItemResult` rename to `com.lucendar.strm.common.strm.KeepStrmReqResult`
+- `com.lucendar.strm.common.strm.KeepChannelItemResult` rename to `com.lucendar.strm.common.strm.KeepStrmResult`
 - `com.lucendar.strm.common.strm.CheckChannelReq` rename to `com.lucendar.strm.common.strm.CheckStrmReq`
 - `com.lucendar.strm.common.strm.ReleaseChannelReqItem` rename to `com.lucendar.strm.common.strm.ReleaseStrmReqItem`
 - `com.lucendar.strm.common.strm.ReleaseChannelsReq` rename to `com.lucendar.strm.common.strm.ReleaseStrmsReq`
