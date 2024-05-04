@@ -421,6 +421,9 @@ object MBDecoder808_Track extends JTCodecHelper {
             t.setAdasOverSpdAlarm(alarm)
           }
 
+          // 72, 川标载重报警?
+        // 73, 川标限高报警?
+
         case _ =>
       }
 

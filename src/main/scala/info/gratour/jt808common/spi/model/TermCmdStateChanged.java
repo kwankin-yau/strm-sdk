@@ -288,6 +288,45 @@ public class TermCmdStateChanged {
     }
 
     /**
+     * 将变更应用到 TermCmd 对象中。
+     *
+     * @param cmd 目标 TermCmd 对象
+     */
+    public void applyTo(TermCmd cmd) {
+        switch (status) {
+            case TermCmd.CMD_STATUS__SENT:
+                cmd.setStatus(TermCmd.CMD_STATUS__SENT);
+                cmd.setSentTm(tmAsEpochMillis());
+                cmd.setMsgSn(msgSn);
+                break;
+
+            case TermCmd.CMD_STATUS__ACK:
+                cmd.setStatus(TermCmd.CMD_STATUS__ACK);
+                cmd.setAckMsgId(ackMsgId);
+                cmd.setAckSeqNo(ackSeqNo);
+                cmd.setAckCode(ackCode);
+                cmd.setAckParams(ackParams);
+                cmd.setAckTm(tmAsEpochMillis());
+                break;
+
+            default:
+                cmd.setStatus(status);
+                cmd.setEndTm(tmAsEpochMillis());
+        }
+    }
+
+    /**
+     * 将指令发生变更的时间字符串转船成 epoch millis。
+     * @return 指令发生变更的时间 的 epoch millis 表示。
+     */
+    public Long tmAsEpochMillis() {
+        if (tm != null)
+            return DateTimeUtils.BeijingConv.stringToMillis(tm);
+        else
+            return null;
+    }
+
+    /**
      * 取 initMsgId 属性的整数值。本方法只用于部分协议，如：JT/T 808, JT/T 1078 系列协议
      *
      * @return initMsgId 属性的整数值

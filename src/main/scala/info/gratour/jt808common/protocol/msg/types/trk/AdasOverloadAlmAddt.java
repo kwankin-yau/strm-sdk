@@ -9,8 +9,17 @@ import java.util.StringJoiner;
  */
 public class AdasOverloadAlmAddt extends AdasAddt implements Cloneable {
 
+    /**
+     * 标志：报警开始
+     */
     public static final byte FLAG__START = 1;
+    /**
+     * 标志：报警结束
+     */
     public static final byte FLAG__END = 2;
+    /**
+     * 标志：报警持续
+     */
     public static final byte FLAG__CONTINUOUSLY = 3;
 
     /**
@@ -23,118 +32,86 @@ public class AdasOverloadAlmAddt extends AdasAddt implements Cloneable {
      */
     public static final byte TYP__OVER_ROAD_LOADING = 2;
 
-    private int almId;
     private byte flag;
     private byte typ;
     private int actualLoading;
     private int threshold;
-    private short spd;
-    private int alt;
-    private double lat;
-    private double lng;
 
-    private long tm;
-    private short vehSt;
-    private String almNo;
-
+    /**
+     * 构造函数
+     * @param adasDialect ADAS 方言
+     */
     public AdasOverloadAlmAddt(AdasDialect adasDialect) {
         super(adasDialect);
     }
 
-    public int getAlmId() {
-        return almId;
-    }
-
-    public void setAlmId(int almId) {
-        this.almId = almId;
-    }
-
+    /**
+     * 取标志状态。为 FLAG__ 系列常量之一
+     *
+     * @return 标志状态
+     */
     public byte getFlag() {
         return flag;
     }
 
+    /**
+     * 设置标志状态
+     *
+     * @param flag 标志状态，为 FLAG__ 系列常量之一
+     */
     public void setFlag(byte flag) {
         this.flag = flag;
     }
 
+    /**
+     * 取报警/事件类型。见本类的 TYP__ 系列常量
+     *
+     * @return 报警/事件类型
+     */
     public byte getTyp() {
         return typ;
     }
 
+    /**
+     * 设置报警/事件类型
+     *
+     * @param typ 报警/事件类型
+     */
     public void setTyp(byte typ) {
         this.typ = typ;
     }
 
+    /**
+     * 取车辆实际载重，单位：10kg
+     *
+     * @return 车辆实际载重，单位：10kg
+     */
     public int getActualLoading() {
         return actualLoading;
     }
 
+    /**
+     * 设置车辆实际载重，单位：10kg
+     * @param actualLoading 车辆实际载重，单位：10kg
+     */
     public void setActualLoading(int actualLoading) {
         this.actualLoading = actualLoading;
     }
 
+    /**
+     * 取额定/限定载重，单位：10kg
+     * @return 额定/限定载重，单位：10kg
+     */
     public int getThreshold() {
         return threshold;
     }
 
+    /**
+     * 设置额定/限定载重，单位：10kg
+     * @param threshold 额定/限定载重，单位：10kg
+     */
     public void setThreshold(int threshold) {
         this.threshold = threshold;
-    }
-
-    public short getSpd() {
-        return spd;
-    }
-
-    public void setSpd(short spd) {
-        this.spd = spd;
-    }
-
-    public int getAlt() {
-        return alt;
-    }
-
-    public void setAlt(int alt) {
-        this.alt = alt;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-
-    public long getTm() {
-        return tm;
-    }
-
-    public void setTm(long tm) {
-        this.tm = tm;
-    }
-
-    public short getVehSt() {
-        return vehSt;
-    }
-
-    public void setVehSt(short vehSt) {
-        this.vehSt = vehSt;
-    }
-
-    public String getAlmNo() {
-        return almNo;
-    }
-
-    public void setAlmNo(String almNo) {
-        this.almNo = almNo;
     }
 
     @Override

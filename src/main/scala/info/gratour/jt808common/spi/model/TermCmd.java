@@ -8,7 +8,9 @@
 package info.gratour.jt808common.spi.model;
 
 import com.lucendar.common.utils.CommonUtils;
+import info.gratour.jt808common.protocol.msg.types.ackparams.AckParamsParser;
 import info.gratour.jt808common.protocol.msg.types.ackparams.JT808AckParams;
+import info.gratour.jt808common.protocol.msg.types.cmdparams.CmdParamsParser;
 import info.gratour.jt808common.protocol.msg.types.cmdparams.JT808CmdParams;
 import info.gratour.jtcommon.JTConsts;
 import info.gratour.jtcommon.JTUtils;
@@ -763,6 +765,28 @@ public class TermCmd implements Cloneable {
             return appId;
         else
             return "";
+    }
+
+    /**
+     * 通过 JSON 字符串设置指令参数
+     * @param paramsJson JSON 字符串参数
+     */
+    public void setParamsJson(String paramsJson) {
+        if (paramsJson != null) {
+            this.params = CmdParamsParser.fromJson(msgId, paramsJson);
+        } else
+            this.params = null;
+    }
+
+    /**
+     * 通过 JSON 字符串设置应答数据
+     * @param ackParamsJson JSON 字符串应答数据
+     */
+    public void setAckParamsJson(String ackParamsJson) {
+        if (ackParamsJson != null) {
+            this.ackParams = AckParamsParser.fromJsonBySrcMsgId(msgId, ackParamsJson);
+        } else
+            this.ackParams = null;
     }
 
     /**

@@ -69,7 +69,7 @@ public class AdasDrivingAssistAlmAddt extends AdasAddt implements Cloneable {
     /**
      * 道路标志识别事件
      */
-    public static final byte TYP__ROAD_RECOG_EVENT = 0x10;
+    public static final byte TYP__ROAD_SIGN_RECOG_EVENT = 0x10;
 
     /**
      * 主动抓拍识别事件
@@ -87,9 +87,9 @@ public class AdasDrivingAssistAlmAddt extends AdasAddt implements Cloneable {
     public static final byte TYP__PASSENGER_AT_CARRIAGE_HALLWAY_DETECTED = 0x13;
 
     /**
-     * 设备失效提醒
+     * 设备失效提醒（湘标）
      */
-    public static final byte TYP__DEVICE_FAILURE = 0x14;
+    public static final byte TYP__DEVICE_FAILURE_hu_nan = 0x14;
 
     /**
      * 不能识别或厂商自定义报警/事件类型
@@ -97,7 +97,7 @@ public class AdasDrivingAssistAlmAddt extends AdasAddt implements Cloneable {
     public static final byte TYP__CUSTOM = (byte) 0xFF;
 
 
-    private int almId;
+
     private byte flag;
     private short typ;
     private short typ2;
@@ -107,13 +107,6 @@ public class AdasDrivingAssistAlmAddt extends AdasAddt implements Cloneable {
     private Byte deviateTyp;
     private Byte rdRecogMark;
     private Byte rdRecogDat;
-    private short spd;
-    private short alt;
-    private double lat;
-    private double lng;
-    private long tm;
-    private short vehSt;
-    private String almNo;
 
     /**
      * 构造函数
@@ -122,24 +115,6 @@ public class AdasDrivingAssistAlmAddt extends AdasAddt implements Cloneable {
      */
     public AdasDrivingAssistAlmAddt(AdasDialect adasDialect) {
         super(adasDialect);
-    }
-
-    /**
-     * 取报警ID
-     *
-     * @return 报警ID
-     */
-    public int getAlmId() {
-        return almId;
-    }
-
-    /**
-     * 设置报警ID
-     *
-     * @param almId 报警ID
-     */
-    public void setAlmId(int almId) {
-        this.almId = almId;
     }
 
     /**
@@ -305,130 +280,6 @@ public class AdasDrivingAssistAlmAddt extends AdasAddt implements Cloneable {
      */
     public void setRdRecogDat(Byte rdRecogDat) {
         this.rdRecogDat = rdRecogDat;
-    }
-
-    /**
-     * 取车速
-     * @return 车速, km/h
-     */
-    public short getSpd() {
-        return spd;
-    }
-
-    /**
-     * 设置车速
-     * @param spd 车速, km/h
-     */
-    public void setSpd(short spd) {
-        this.spd = spd;
-    }
-
-    /**
-     * 取高程
-     *
-     * @return 高程, m
-     */
-    public short getAlt() {
-        return alt;
-    }
-
-    /**
-     * 设置高程
-     *
-     * @param alt 高程, m
-     */
-    public void setAlt(short alt) {
-        this.alt = alt;
-    }
-
-    /**
-     * 取纬度
-     *
-     * @return 纬度
-     */
-    public double getLat() {
-        return lat;
-    }
-
-    /**
-     * 设置纬度
-     *
-     * @param lat 纬度
-     */
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    /**
-     * 取经度
-     *
-     * @return 经度
-     */
-    public double getLng() {
-        return lng;
-    }
-
-    /**
-     * 设置经度
-     *
-     * @param lng 经度
-     */
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-
-    /**
-     * 取报警时间, epoch millis
-     *
-     * @return 报警时间, epoch millis
-     */
-    public long getTm() {
-        return tm;
-    }
-
-    /**
-     * 设置报警时间
-     *
-     * @param tm 报警时间, epoch millis
-     */
-    public void setTm(long tm) {
-        this.tm = tm;
-    }
-
-    /**
-     * 取车辆状态字
-     *
-     * @return 车辆状态字
-     */
-    public short getVehSt() {
-        return vehSt;
-    }
-
-    /**
-     * 设置车辆状态字
-     *
-     * @param vehSt 车辆状态字
-     */
-    public void setVehSt(short vehSt) {
-        this.vehSt = vehSt;
-    }
-
-    /**
-     * 取报警识别号/编号
-     *
-     * @return 报警识别号/编号, HEX格式
-     */
-    public String getAlmNo() {
-        return almNo;
-    }
-
-    /**
-     * 设置报警识别号/编号
-     *
-     * @param almNo 报警识别号/编号, HEX格式
-     */
-    public void setAlmNo(String almNo) {
-        this.almNo = almNo;
     }
 
     @Override

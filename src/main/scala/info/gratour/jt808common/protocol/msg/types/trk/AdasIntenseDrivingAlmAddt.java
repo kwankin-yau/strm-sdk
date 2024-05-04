@@ -71,19 +71,11 @@ public class AdasIntenseDrivingAlmAddt extends AdasAddt implements Cloneable {
      */
     public static final byte TYP__CUSTOM = (byte) 0xFF;
 
-    private int almId;
     private byte flag;
     private short typ;
     private short dur;
     private short thold1;
     private short thold2;
-    private short spd;
-    private short alt;
-    private double lat;
-    private double lng;
-    private long tm;
-    private short vehSt;
-    private String almNo;
 
     /**
      * 构造函数
@@ -94,24 +86,6 @@ public class AdasIntenseDrivingAlmAddt extends AdasAddt implements Cloneable {
         super(adasDialect);
     }
 
-
-    /**
-     * 取报警ID
-     *
-     * @return 报警ID
-     */
-    public int getAlmId() {
-        return almId;
-    }
-
-    /**
-     * 设置报警ID
-     *
-     * @param almId 报警ID
-     */
-    public void setAlmId(int almId) {
-        this.almId = almId;
-    }
 
     /**
      * 取标志状态
@@ -208,129 +182,6 @@ public class AdasIntenseDrivingAlmAddt extends AdasAddt implements Cloneable {
         this.thold2 = thold2;
     }
 
-    /**
-     * 取车速
-     * @return 车速, km/h
-     */
-    public short getSpd() {
-        return spd;
-    }
-
-    /**
-     * 设置车速
-     * @param spd 车速, km/h
-     */
-    public void setSpd(short spd) {
-        this.spd = spd;
-    }
-
-    /**
-     * 取高程
-     *
-     * @return 高程, m
-     */
-    public short getAlt() {
-        return alt;
-    }
-
-    /**
-     * 设置高程
-     *
-     * @param alt 高程, m
-     */
-    public void setAlt(short alt) {
-        this.alt = alt;
-    }
-
-    /**
-     * 取纬度
-     *
-     * @return 纬度
-     */
-    public double getLat() {
-        return lat;
-    }
-
-    /**
-     * 设置纬度
-     *
-     * @param lat 纬度
-     */
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    /**
-     * 取经度
-     *
-     * @return 经度
-     */
-    public double getLng() {
-        return lng;
-    }
-
-    /**
-     * 设置经度
-     *
-     * @param lng 经度
-     */
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-
-    /**
-     * 取报警时间, epoch millis
-     *
-     * @return 报警时间, epoch millis
-     */
-    public long getTm() {
-        return tm;
-    }
-
-    /**
-     * 设置报警时间
-     *
-     * @param tm 报警时间, epoch millis
-     */
-    public void setTm(long tm) {
-        this.tm = tm;
-    }
-
-    /**
-     * 取车辆状态字
-     *
-     * @return 车辆状态字
-     */
-    public short getVehSt() {
-        return vehSt;
-    }
-
-    /**
-     * 设置车辆状态字
-     *
-     * @param vehSt 车辆状态字
-     */
-    public void setVehSt(short vehSt) {
-        this.vehSt = vehSt;
-    }
-
-    /**
-     * 取报警识别号/编号
-     *
-     * @return 报警识别号/编号, HEX格式
-     */
-    public String getAlmNo() {
-        return almNo;
-    }
-
-    /**
-     * 设置报警识别号/编号
-     *
-     * @param almNo 报警识别号/编号, HEX格式
-     */
-    public void setAlmNo(String almNo) {
-        this.almNo = almNo;
-    }
 
     @Override
     public AdasIntenseDrivingAlmAddt clone() {

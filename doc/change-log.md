@@ -3,7 +3,7 @@
 - 引用 GNSS 驱动
 - `JT808Msg` 增加 `headers` 属性
 - `JT808Frame` 改为只读对象，并增加 `backOffReader` 属性
-- `TermCmdStateChanged` 增加 `uuid`, `pub` 属性, `setRandomUuid` 方法
+- `TermCmdStateChanged` 增加 `uuid`, `pub` 属性, `setRandomUuid`, `tmAsEpochMillis`, `applyTo` 方法
 - 新增 `info.gratour.jt808common.adas.AdasAlmTypes` 平台ADAS报警类型定义类
 - `MQEventAddt_0800_MultiMediaEvent` 新增 MEDIA_TYPE__xxxx, MEDIA_FMT__xxxx, EVT_TYPE__xxxx 等常量定义.
 - 新增 `MBEncoder808_Track.encodeTrackBasicInfo` 方法
@@ -24,9 +24,16 @@
 - 新增 `QryAdasAlmAttReq`、`AlmAtt` 类
 - `User` 和 `TokenValidateResult` 增加 `authorities` 属性。
 - 新增 `Alm`, `AlmParam`, `CloseAlmReq` 类 
+- `AlmTypes`, `AdasAlmTypes` 补充部分 ADAS 报警类型定义
+- 新增DTO `QryStrmMediaNotifRecReq`, `QryStrmCommLogReq`, `QryGatewayCommLogReq` 类
+- 新增 `SetTraceMsg` 类
+- `TermCmd` 增加 `setParamsJson`, `setAckParamsJson` 方法
+- 新增 `QryTermCmdReq` 类
 
 ## 不兼容变更
-- `AvUploadReq` 增加 `fileSz` 必填属性 
+- `AvUploadReq` 增加 `fileSz` 必填属性
+- `AdasAlmTypes` 的报警类型编码改为 Micro-GNSS 1.x 的 ADAS 报警类型 编码
+- `AdasDialect.GDRTA_2020` 改名为 `AdasDialect.GUANG_DONG`
 
 ## 变更
 - `com.lucendar.gnss.sdk.gateway.OnlineOfflineNotif.protoVer` 数据类型由 Integer 改为 String

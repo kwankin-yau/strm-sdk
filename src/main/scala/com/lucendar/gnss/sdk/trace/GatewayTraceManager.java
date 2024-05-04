@@ -31,4 +31,12 @@ public interface GatewayTraceManager {
      */
     @NonNull
     TraceTicket trace(@NonNull String appId, @NonNull String simNo);
+
+    /**
+     * 取消跟踪
+     *
+     * @param appId 应用ID
+     * @param simNo 终端识别号
+     */
+    void untrace(@NonNull String appId, @NonNull String simNo);
 }

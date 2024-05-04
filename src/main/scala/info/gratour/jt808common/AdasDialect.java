@@ -20,7 +20,7 @@ public enum AdasDialect {
     /**
      * 粤标
      */
-    GDRTA_2020(JT808Consts.ProtocolVersions.PROTO_VER__REV2019),
+    GUANG_DONG(JT808Consts.ProtocolVersions.PROTO_VER__REV2019),
 
     /**
      * 湘标
@@ -55,7 +55,7 @@ public enum AdasDialect {
     /**
      * 默认的 ADAS 言
      */
-    public static final AdasDialect DEFAULT = AdasDialect.GDRTA_2020;
+    public static final AdasDialect DEFAULT = AdasDialect.GUANG_DONG;
 
     /**
      * 将字符串转换成 AdasDialect 枚举，如果给定 `name` 参数为 null，返回给定的 `defaultValue`

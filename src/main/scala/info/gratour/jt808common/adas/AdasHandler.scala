@@ -53,7 +53,7 @@ object AdasHandler_SiChuan extends AdasHandler {
 }
 
 object AdasHandler_Gdrta_2020 extends AdasHandler {
-  override def dialect: AdasDialect = AdasDialect.GDRTA_2020
+  override def dialect: AdasDialect = AdasDialect.GUANG_DONG
 
   override def mapDrivingAssistAlmTyp(typ: Short): Short = {
     if (typ >= 0x08 && typ <= 0x0F || typ >= 0x14)
@@ -103,7 +103,7 @@ object AdasHandler_HuNan extends AdasHandler {
       AdasDrivingAssistAlmAddt.TYP__CUSTOM
     else
       typ match {
-        case 0x12 => AdasDrivingAssistAlmAddt.TYP__DEVICE_FAILURE
+        case 0x12 => AdasDrivingAssistAlmAddt.TYP__DEVICE_FAILURE_hu_nan
         case _ => typ
       }
 
@@ -139,7 +139,7 @@ object AdasHandlers {
 
     adasDialect match {
       case AdasDialect.SI_CHUAN => AdasHandler_SiChuan
-      case AdasDialect.GDRTA_2020 => AdasHandler_Gdrta_2020
+      case AdasDialect.GUANG_DONG => AdasHandler_Gdrta_2020
       case AdasDialect.HU_NAN => AdasHandler_HuNan
       case AdasDialect.JIANG_SU => AdasHandler_JiangSu
       case AdasDialect.CHONG_QING => AdasHandler_ChongQing

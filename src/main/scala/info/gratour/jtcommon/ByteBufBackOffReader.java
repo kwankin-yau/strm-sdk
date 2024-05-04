@@ -8,9 +8,9 @@ import org.apache.commons.codec.binary.Hex;
  */
 public class ByteBufBackOffReader implements LazyBytesProvider {
 
-    private final ByteBuf buf;
-    private final int originalReaderIndex;
-    private final int sz;
+    private ByteBuf buf;
+    private int originalReaderIndex;
+    private int sz;
 
     private byte[] _binary;
     private String _hex;
@@ -19,6 +19,19 @@ public class ByteBufBackOffReader implements LazyBytesProvider {
         this.buf = buf;
         originalReaderIndex = buf.readerIndex();
         sz = buf.readableBytes();
+    }
+
+    /**
+     * Keep track for the other ByteBuf
+     * @param buf the other ByteBuf
+     */
+    public void reset(ByteBuf buf) {
+        this.buf = buf;
+        originalReaderIndex = buf.readerIndex();
+        sz = buf.readableBytes();
+
+        _binary = null;
+        _hex = null;
     }
 
     @Override
@@ -39,6 +52,11 @@ public class ByteBufBackOffReader implements LazyBytesProvider {
         return _hex;
     }
 
+    /**
+     * Build a slice of original buffer region.
+     *
+     * @return the slice of original buffer region.
+     */
     public ByteBuf slice() {
         return buf.slice(originalReaderIndex, sz);
     }

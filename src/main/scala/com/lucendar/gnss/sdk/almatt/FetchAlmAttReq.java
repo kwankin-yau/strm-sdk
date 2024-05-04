@@ -12,7 +12,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.StringJoiner;
 
 /**
- * 提取 ADAS 报警附件请求。本请求由媒体服务管理。
+ * 提取 ADAS 报警附件请求。本请求用于向媒体服务请求向终端提取指定的 ADAS 报警附件。
  */
 public class FetchAlmAttReq {
 
@@ -20,6 +20,37 @@ public class FetchAlmAttReq {
     private String almNo;
     private String almTyp;
     private Integer almLvl;
+
+    /**
+     * 空构造函数
+     */
+    public FetchAlmAttReq() {
+    }
+
+    /**
+     * 主构造函数
+     * @param simNo 终端识别号
+     * @param almNo 终端报警识别号
+     */
+    public FetchAlmAttReq(String simNo, String almNo) {
+        this.simNo = simNo;
+        this.almNo = almNo;
+    }
+
+    /**
+     * 全构造函数
+     *
+     * @param simNo 终端识别号
+     * @param almNo 终端报警识别号
+     * @param almTyp 报警类型
+     * @param almLvl 报警级别
+     */
+    public FetchAlmAttReq(String simNo, String almNo, String almTyp, Integer almLvl) {
+        this.simNo = simNo;
+        this.almNo = almNo;
+        this.almTyp = almTyp;
+        this.almLvl = almLvl;
+    }
 
     private transient Long tm1Millis;
 
@@ -98,7 +129,7 @@ public class FetchAlmAttReq {
     }
 
     /**
-     * 取报警时间，epoch millis
+     * 取报警时间，epoch millis。此属性由媒体服务使用
      *
      * @return 报警时间，epoch millis
      */
@@ -107,7 +138,7 @@ public class FetchAlmAttReq {
     }
 
     /**
-     * 设置报警时间，epoch millis
+     * 设置报警时间，epoch millis。此属性由媒体服务使用。客户端代码不需要设置
      *
      * @param tm1Millis 报警时间，epoch millis
      */

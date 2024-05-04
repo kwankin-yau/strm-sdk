@@ -41,17 +41,10 @@ public class AdasAiRecogAlmAddt extends AdasAddt implements Cloneable {
      */
     public static final short TYP__SEAT_BELT_NOT_CHECKED = 0x80;
 
-    private int almId;
+
     private byte flag;
     private short typ;
     private byte lvl;
-    private short spd;
-    private short alt;
-    private double lat;
-    private double lng;
-    private long tm;
-    private short vehSt;
-    private String almNo;
 
     /**
      * 构造函数
@@ -60,24 +53,6 @@ public class AdasAiRecogAlmAddt extends AdasAddt implements Cloneable {
      */
     public AdasAiRecogAlmAddt(AdasDialect adasDialect) {
         super(adasDialect);
-    }
-
-    /**
-     * 取报警ID
-     *
-     * @return 报警ID
-     */
-    public int getAlmId() {
-        return almId;
-    }
-
-    /**
-     * 设置报警ID
-     *
-     * @param almId 报警ID
-     */
-    public void setAlmId(int almId) {
-        this.almId = almId;
     }
 
     /**
@@ -132,132 +107,6 @@ public class AdasAiRecogAlmAddt extends AdasAddt implements Cloneable {
      */
     public void setLvl(byte lvl) {
         this.lvl = lvl;
-    }
-
-    /**
-     * 取车速，km/h
-     *
-     * @return 车速
-     */
-    public short getSpd() {
-        return spd;
-    }
-
-    /**
-     * 设置车速
-     *
-     * @param spd 车速，km/h
-     */
-    public void setSpd(short spd) {
-        this.spd = spd;
-    }
-
-    /**
-     * 取高程。单位：m
-     *
-     * @return 高程
-     */
-    public short getAlt() {
-        return alt;
-    }
-
-    /**
-     * 设置高程
-     *
-     * @param alt 高程，单位：m
-     */
-    public void setAlt(short alt) {
-        this.alt = alt;
-    }
-
-    /**
-     * 取纬度。
-     *
-     * @return 纬度
-     */
-    public double getLat() {
-        return lat;
-    }
-
-    /**
-     * 设置纬度
-     *
-     * @param lat 纬度
-     */
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    /**
-     * 取经度
-     *
-     * @return 经度
-     */
-    public double getLng() {
-        return lng;
-    }
-
-    /**
-     * 设置经度
-     *
-     * @param lng 经度
-     */
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-
-    /**
-     * 取报警、事件发生时间. epoch millis
-     *
-     * @return 报警、事件发生时间
-     */
-    public long getTm() {
-        return tm;
-    }
-
-    /**
-     * 设置报警、事件发生时间
-     *
-     * @param tm 报警、事件发生时间，epoch millis
-     */
-    public void setTm(long tm) {
-        this.tm = tm;
-    }
-
-    /**
-     * 取车辆状态。详见湘标规范
-     *
-     * @return 车辆状态
-     */
-    public short getVehSt() {
-        return vehSt;
-    }
-
-    /**
-     * 设置车辆状态
-     *
-     * @param vehSt 车辆状态
-     */
-    public void setVehSt(short vehSt) {
-        this.vehSt = vehSt;
-    }
-
-    /**
-     * 取报警识别号
-     *
-     * @return 报警识别号
-     */
-    public String getAlmNo() {
-        return almNo;
-    }
-
-    /**
-     * 设置报警识别号
-     *
-     * @param almNo 报警识别号
-     */
-    public void setAlmNo(String almNo) {
-        this.almNo = almNo;
     }
 
     @Override

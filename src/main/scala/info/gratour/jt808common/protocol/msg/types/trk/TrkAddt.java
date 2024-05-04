@@ -8,7 +8,9 @@
 package info.gratour.jt808common.protocol.msg.types.trk;
 
 import com.google.gson.reflect.TypeToken;
+import info.gratour.jt808common.adas.AdasAlmTypes;
 import info.gratour.jtcommon.JTConsts;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.lang.reflect.Type;
 
@@ -239,6 +241,39 @@ public class TrkAddt implements Cloneable {
         this.overHeightAlmAddt = overHeightAlmAddt;
     }
 
+    /**
+     * 按报警类型取 ADAS 报警附件信息
+     *
+     * @param almTyp ADAS 报警类型
+     * @return ADAS 报警附件信息。如果 `almTyp` 不是 ADAS 报警类型，或不能识别，则返回 null
+     */
+    @Nullable
+    public AdasAddt getAdasAddtByAlmTyp(String almTyp) {
+        if (AdasAlmTypes.DrivingAssistAlm.isDrivingAssistAlmTyp(almTyp)) {
+            return drivingAssistAlm;
+        } else if (AdasAlmTypes.DriverBehavAlm.isDriverBehavAlmTyp(almTyp)) {
+            return driverBehavAlm;
+        } else if (AdasAlmTypes.TyreStateAlm.isTyreStateAlmTyp(almTyp)) {
+            return tyreState;
+        } else if (AdasAlmTypes.BlindAreaAlm.isBlindAreaAlmTyp(almTyp)) {
+            return blindArea;
+        } else if (AdasAlmTypes.IntenseDrivingAlm.isIntenseDrivingAlmTyp(almTyp)) {
+            return intenseDrivingAlm;
+        } else if (AdasAlmTypes.OverSpdAlm.isOverSpdAlmTyp(almTyp)) {
+            return adasOverSpd;
+        } else if (AdasAlmTypes.OverHeightAlm.isOverHeightAlmTyp(almTyp)) {
+            return overHeightAlmAddt;
+        } else if (AdasAlmTypes.AiRecogAlm.isAiRecogAlmTyp(almTyp)) {
+            return aiRecogAlm;
+        } else
+            return null;
+    }
+
+    /**
+     * 从 另一个 TrkAddt 复制属性到本 TrkAddt 对象中
+     *
+     * @param source 源TrkAddt
+     */
     public void assignFrom(TrkAddt source) {
         this.id = source.id;
         this.sat = source.sat;
