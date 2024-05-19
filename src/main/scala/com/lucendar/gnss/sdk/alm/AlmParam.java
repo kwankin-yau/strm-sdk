@@ -14,6 +14,7 @@ import java.util.StringJoiner;
  */
 public class AlmParam {
 
+    private String appId;
     private String typ;
     private boolean disabled;
     private boolean stat;
@@ -25,6 +26,14 @@ public class AlmParam {
     private short captureChanMask;
     private boolean liveVidMon;
     private short liveVidMonChanMask;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public String getTyp() {
         return typ;
@@ -109,6 +118,7 @@ public class AlmParam {
     @Override
     public String toString() {
         return new StringJoiner(", ", AlmParam.class.getSimpleName() + "[", "]")
+                .add("appId='" + appId + "'")
                 .add("typ='" + typ + "'")
                 .add("disabled=" + disabled)
                 .add("stat=" + stat)

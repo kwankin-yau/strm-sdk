@@ -7,6 +7,7 @@
  *******************************************************************************/
 package com.lucendar.gnss.sdk.alm;
 
+import com.lucendar.gnss.sdk.GnssConsts;
 import info.gratour.jt808common.adas.AdasAlmTypes;
 import info.gratour.jt808common.protocol.msg.types.trk.TrkAddt;
 import info.gratour.jtcommon.JTMessages;
@@ -283,9 +284,13 @@ public class Alm {
 
 
     private String id;
+    private String appId;
     private String simNo;
+    private String vehId;
     private String plateNo;
     private Integer plateColor;
+    private String grpId;
+    private String grpName;
     private String trkId;
     private String typ;
     private String subTyp;
@@ -349,6 +354,22 @@ public class Alm {
     }
 
     /**
+     * 取 AppId
+     * @return AppId
+     */
+    public String getAppId() {
+        return appId;
+    }
+
+    /**
+     * 设置 AppId
+     * @param appId AppId
+     */
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    /**
      * 取终端识别号
      * @return 终端识别号
      */
@@ -362,6 +383,22 @@ public class Alm {
      */
     public void setSimNo(String simNo) {
         this.simNo = simNo;
+    }
+
+    /**
+     * 取终端关联的车辆ID
+     * @return 终端关联的车辆ID
+     */
+    public String getVehId() {
+        return vehId;
+    }
+
+    /**
+     * 设置终端关联的车辆ID
+     * @param vehId 终端关联的车辆ID
+     */
+    public void setVehId(String vehId) {
+        this.vehId = vehId;
     }
 
     /**
@@ -394,6 +431,38 @@ public class Alm {
      */
     public void setPlateColor(Integer plateColor) {
         this.plateColor = plateColor;
+    }
+
+    /**
+     * 取车辆所属分组ID
+     * @return 车辆所属分组ID
+     */
+    public String getGrpId() {
+        return grpId;
+    }
+
+    /**
+     * 设置车辆所属分组ID
+     * @param grpId 车辆所属分组ID
+     */
+    public void setGrpId(String grpId) {
+        this.grpId = grpId;
+    }
+
+    /**
+     * 取车辆所属分组名称
+     * @return 车辆所属分组名称
+     */
+    public String getGrpName() {
+        return grpName;
+    }
+
+    /**
+     * 设置车辆所属分组名称
+     * @param grpName 车辆所属分组名称
+     */
+    public void setGrpName(String grpName) {
+        this.grpName = grpName;
     }
 
     /**
@@ -1029,13 +1098,32 @@ public class Alm {
         return AdasAlmTypes.isAdasAlmType(typ);
     }
 
+    public String addt1ToJson() {
+        if (addt1 != null)
+            return GnssConsts.GSON.toJson(addt1);
+        else
+            return null;
+    }
+
+
+    public String addt0ToJson() {
+        if (addt0 != null)
+            return GnssConsts.GSON.toJson(addt0);
+        else
+            return null;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Alm.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
+                .add("appId='" + appId + "'")
                 .add("simNo='" + simNo + "'")
+                .add("vehId='" + vehId + "'")
                 .add("plateNo='" + plateNo + "'")
                 .add("plateColor=" + plateColor)
+                .add("grpId='" + grpId + "'")
+                .add("grpName='" + grpName + "'")
                 .add("trkId='" + trkId + "'")
                 .add("typ='" + typ + "'")
                 .add("subTyp='" + subTyp + "'")

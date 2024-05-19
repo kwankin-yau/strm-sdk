@@ -52,7 +52,7 @@ object AdasHandler_SiChuan extends AdasHandler {
   }
 }
 
-object AdasHandler_Gdrta_2020 extends AdasHandler {
+object AdasHandler_GuangDong_2020 extends AdasHandler {
   override def dialect: AdasDialect = AdasDialect.GUANG_DONG
 
   override def mapDrivingAssistAlmTyp(typ: Short): Short = {
@@ -139,7 +139,7 @@ object AdasHandlers {
 
     adasDialect match {
       case AdasDialect.SI_CHUAN => AdasHandler_SiChuan
-      case AdasDialect.GUANG_DONG => AdasHandler_Gdrta_2020
+      case AdasDialect.GUANG_DONG => AdasHandler_GuangDong_2020
       case AdasDialect.HU_NAN => AdasHandler_HuNan
       case AdasDialect.JIANG_SU => AdasHandler_JiangSu
       case AdasDialect.CHONG_QING => AdasHandler_ChongQing

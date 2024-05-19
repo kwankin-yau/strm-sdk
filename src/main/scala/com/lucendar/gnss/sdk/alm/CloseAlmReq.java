@@ -1,5 +1,6 @@
 package com.lucendar.gnss.sdk.alm;
 
+import com.lucendar.gnss.sdk.GnssConsts;
 import info.gratour.jt808common.protocol.msg.types.trk.TrkAddt;
 
 import java.util.StringJoiner;
@@ -108,6 +109,17 @@ public class CloseAlmReq {
 
     public void setAddt0(TrkAddt addt0) {
         this.addt0 = addt0;
+    }
+
+    /**
+     * 将 addt0 转换成 JSON 字符串
+     * @return 代表 addt0 的 JSON 字符串，如果 addt0 为 null ，则返回 null
+     */
+    public String addt0ToJson() {
+        if (addt0 != null)
+            return GnssConsts.GSON.toJson(addt0);
+        else
+            return null;
     }
 
     @Override

@@ -8,8 +8,9 @@ import java.util.StringJoiner;
 public class QryGatewayCommLogReq {
 
     private String startTime;
-    private String simNo;
     private String appId;
+    private String simNo;
+    private boolean retData;
     private int __limit;
     private int __page;
 
@@ -21,6 +22,14 @@ public class QryGatewayCommLogReq {
         this.startTime = startTime;
     }
 
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
     public String getSimNo() {
         return simNo;
     }
@@ -29,12 +38,20 @@ public class QryGatewayCommLogReq {
         this.simNo = simNo;
     }
 
-    public String getAppId() {
-        return appId;
+    /**
+     * 取是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     * @return 是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     */
+    public boolean isRetData() {
+        return retData;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    /**
+     * 设置是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     * @param retData 是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     */
+    public void setRetData(boolean retData) {
+        this.retData = retData;
     }
 
     public int get__limit() {
@@ -57,8 +74,9 @@ public class QryGatewayCommLogReq {
     public String toString() {
         return new StringJoiner(", ", QryGatewayCommLogReq.class.getSimpleName() + "[", "]")
                 .add("startTime='" + startTime + "'")
-                .add("simNo='" + simNo + "'")
                 .add("appId='" + appId + "'")
+                .add("simNo='" + simNo + "'")
+                .add("retData=" + retData)
                 .add("__limit=" + __limit)
                 .add("__page=" + __page)
                 .toString();

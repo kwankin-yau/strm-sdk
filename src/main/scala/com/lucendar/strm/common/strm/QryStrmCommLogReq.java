@@ -8,6 +8,7 @@ import java.util.StringJoiner;
 public class QryStrmCommLogReq {
 
     private String reqId;
+    private boolean retData;
     private int __limit;
     private int __page;
 
@@ -17,6 +18,22 @@ public class QryStrmCommLogReq {
 
     public void setReqId(String reqId) {
         this.reqId = reqId;
+    }
+
+    /**
+     * 取是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     * @return 是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     */
+    public boolean isRetData() {
+        return retData;
+    }
+
+    /**
+     * 设置是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     * @param retData 是否返回 `data` 属性。为 false 时，不返回 `data` 而返回 `dataSz`
+     */
+    public void setRetData(boolean retData) {
+        this.retData = retData;
     }
 
     public int get__limit() {
@@ -39,6 +56,7 @@ public class QryStrmCommLogReq {
     public String toString() {
         return new StringJoiner(", ", QryStrmCommLogReq.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
+                .add("retData=" + retData)
                 .add("__limit=" + __limit)
                 .add("__page=" + __page)
                 .toString();

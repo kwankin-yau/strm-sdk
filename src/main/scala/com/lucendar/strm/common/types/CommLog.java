@@ -60,6 +60,11 @@ public class CommLog {
      */
     private String data;
 
+    /**
+     * The size of the packet content. The server will only return `dataSz` instead of `data` if retData
+     */
+    private Integer dataSz;
+
     transient private byte[] binaryData;
 
 
@@ -135,6 +140,14 @@ public class CommLog {
         this.data = data;
     }
 
+    public Integer getDataSz() {
+        return dataSz;
+    }
+
+    public void setDataSz(Integer dataSz) {
+        this.dataSz = dataSz;
+    }
+
     public byte[] getBinaryData() {
         return binaryData;
     }
@@ -171,6 +184,7 @@ public class CommLog {
                 .add("evtTyp='" + evtTyp + "'")
                 .add("desc='" + desc + "'")
                 .add("data='" + d + "'")
+                .add("dataSz=" + dataSz)
                 .toString();
     }
 }

@@ -213,7 +213,7 @@ public class AdasAlmTypes {
         /**
          * 探头遮挡报警（粤标）
          */
-        public static final String CameraCovered = AlmTypes.TYP_021H_ADAS_DRIVER_ASSIST_CAMERA_COVERED();
+        public static final String CameraCovered = AlmTypes.TYP_021H_ADAS_DRIVER_BEHAV_CAMERA_COVERED();
 
 
 
