@@ -7,12 +7,14 @@
  *******************************************************************************/
 package com.lucendar.gnss.sdk.almatt;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.StringJoiner;
 
 /**
  * 提取 ADAS 报警附件请求。本请求用于向媒体服务请求向终端提取指定的 ADAS 报警附件。
+ *
  */
 public class FetchAlmAttReq {
 
@@ -28,24 +30,14 @@ public class FetchAlmAttReq {
     }
 
     /**
-     * 主构造函数
-     * @param simNo 终端识别号
-     * @param almNo 终端报警识别号
-     */
-    public FetchAlmAttReq(String simNo, String almNo) {
-        this.simNo = simNo;
-        this.almNo = almNo;
-    }
-
-    /**
      * 全构造函数
      *
-     * @param simNo 终端识别号
-     * @param almNo 终端报警识别号
-     * @param almTyp 报警类型
-     * @param almLvl 报警级别
+     * @param simNo 终端识别号，不可为 null
+     * @param almNo 终端报警识别号，不可为 null
+     * @param almTyp 报警类型，不可为 null
+     * @param almLvl 报警级别。有些报警没有报警级别
      */
-    public FetchAlmAttReq(String simNo, String almNo, String almTyp, Integer almLvl) {
+    public FetchAlmAttReq(@NonNull String simNo, @NonNull String almNo, @NonNull String almTyp, @Nullable Integer almLvl) {
         this.simNo = simNo;
         this.almNo = almNo;
         this.almTyp = almTyp;
@@ -59,6 +51,7 @@ public class FetchAlmAttReq {
      *
      * @return 终端识别号
      */
+    @NonNull
     public String getSimNo() {
         return simNo;
     }
@@ -68,7 +61,7 @@ public class FetchAlmAttReq {
      *
      * @param simNo 终端识别号
      */
-    public void setSimNo(String simNo) {
+    public void setSimNo(@NonNull String simNo) {
         this.simNo = simNo;
     }
 
@@ -77,6 +70,7 @@ public class FetchAlmAttReq {
      *
      * @return 终端 ADAS 报警编号的 HEX 形式
      */
+    @NonNull
     public String getAlmNo() {
         return almNo;
     }
@@ -86,7 +80,7 @@ public class FetchAlmAttReq {
      *
      * @param almNo 终端 ADAS 报警编号的 HEX 形式
      */
-    public void setAlmNo(String almNo) {
+    public void setAlmNo(@NonNull String almNo) {
         this.almNo = almNo;
     }
 
@@ -96,6 +90,7 @@ public class FetchAlmAttReq {
      *
      * @return 报警类型代码
      */
+    @NonNull
     public String getAlmTyp() {
         return almTyp;
     }
@@ -105,7 +100,7 @@ public class FetchAlmAttReq {
      *
      * @param almTyp 报警类型代码
      */
-    public void setAlmTyp(String almTyp) {
+    public void setAlmTyp(@NonNull String almTyp) {
         this.almTyp = almTyp;
     }
 

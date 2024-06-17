@@ -79,7 +79,7 @@ class Jt808Driver(
     }
 
     if (msgEncodeTempBuf != null) {
-      msgEncodeTempBuf.clear()
+      msgEncodeTempBuf.release()
       msgEncodeTempBuf = null
     }
   }

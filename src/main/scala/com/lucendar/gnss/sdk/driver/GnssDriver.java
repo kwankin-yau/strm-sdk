@@ -26,7 +26,7 @@ public interface GnssDriver extends Closeable {
      * </ol>
      * 如果decode()方法产生未检查异常(unchecked exception)，网关将关闭终端连接和驱动。
      *
-     * @param buf 报文。
+     * @param buf 报文。如果报文不足以解释出一个消息，驱动实现应自行缓存，等待下一此 decode() 调用传入剩余的报文数据。
      */
     void decode(ByteBuf buf);
 
