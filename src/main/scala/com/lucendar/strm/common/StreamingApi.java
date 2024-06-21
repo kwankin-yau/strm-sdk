@@ -139,8 +139,8 @@ public class StreamingApi {
             return simNo;
     }
 
-    public static String encodeStreamName(String simNo, short channelId, boolean live) {
-        return normalizeSimNo(simNo) + "_" + channelId + "_" + (live ? "1" : "0");
+    public static String encodeStreamName(String simNo, short channelId, boolean live, boolean talk) {
+        return normalizeSimNo(simNo) + "_" + channelId + "_" + (talk ? "2" : (live ? "1" : "0"));
     }
 
     private static final Base64.Encoder UrlSafeBase64EncoderNoPadding =

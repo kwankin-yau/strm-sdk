@@ -1,5 +1,7 @@
 package com.lucendar.strm.common;
 
+import com.lucendar.strm.common.strm.OpenStrmReq;
+
 import java.util.StringJoiner;
 
 /**
@@ -55,6 +57,7 @@ public class StrmMediaNotif implements Cloneable {
     private String act;
     private String reqId;
     private String typ;
+    private boolean talk;
     private String simNo;
     private short chan;
 
@@ -111,6 +114,14 @@ public class StrmMediaNotif implements Cloneable {
             typ = TYP_live;
         else
             typ = TYP_replay;
+    }
+
+    public boolean isTalk() {
+        return talk;
+    }
+
+    public void setTalk(boolean talk) {
+        this.talk = talk;
     }
 
     public boolean isLive() {
@@ -286,6 +297,7 @@ public class StrmMediaNotif implements Cloneable {
                 .add("act='" + act + "'")
                 .add("reqId='" + reqId + "'")
                 .add("typ='" + typ + "'")
+                .add("talk=" + talk)
                 .add("simNo='" + simNo + "'")
                 .add("chan=" + chan)
                 .add("mediaTyp='" + mediaTyp + "'")

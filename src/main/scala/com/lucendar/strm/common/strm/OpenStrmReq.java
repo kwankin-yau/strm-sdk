@@ -342,12 +342,16 @@ public class OpenStrmReq implements StrmMsg {
         return CHANNEL_TYPE__LIVE.equals(typ);
     }
 
+    public boolean isTalk() {
+        return isLive() && dataTyp == DATA_TYPE__TALK;
+    }
+
     public boolean isReplay() {
         return CHANNEL_TYPE__REPLAY.equals(typ);
     }
 
     public String streamName() {
-        return encodeStreamName(simNo, chanId, isLive());
+        return encodeStreamName(simNo, chanId, isLive(), isTalk());
     }
 
     /**
