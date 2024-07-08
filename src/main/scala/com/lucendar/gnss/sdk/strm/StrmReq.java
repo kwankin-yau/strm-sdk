@@ -29,6 +29,7 @@ public class StrmReq implements CompoundStrmReqId {
     public static final int STATE__STRM_ABORTED = 24;
     public static final int STATE__MEDIA_DATA_TIMEOUT = 25;
     public static final int STATE__CLIENT_KEEP_TIMEOUT = 26;
+    public static final int STATE__CONSUMPTION_TIMEOUT = 27;
 
     /**
      * The whole request timed out.

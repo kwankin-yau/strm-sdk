@@ -34,68 +34,282 @@ object AlmTypes {
   val TYP_0106_UNUSUAL_DRIVE_BEHAV = "0106"
   val TYP_0107_SPEICAL_REC_STG_RUN_OUT = "0107"
 
+  /**
+   * 前向碰撞报警
+   */
   val TYP_0201_ADAS_FRONT_CRASH = "0201"
+
+  /**
+   * 车道偏离报警
+   */
   val TYP_0202_ADAS_STRAY_PATH = "0202"
+
+  /**
+   * 车距过近报警
+   */
   val TYP_0203_ADAS_VEH_TOO_CLOSE = "0203"
+
+  /**
+   * 行人碰撞报警
+   */
   val TYP_0204_ADAS_PEDESTRIAN_HIT = "0204"
+
+  /**
+   * 频繁变道报警
+   */
   val TYP_0205_ADAS_CHANGE_LANE_FREQUENTLY = "0205"
+
+  /**
+   * 道路标识超限报警
+   */
   val TYP_0206_ADAS_ROAD_RECOG_OVERRUN = "0206"
+
+  /**
+   * 障碍物报警
+   */
   val TYP_0207_ADAS_OBSTACLE = "0207"
+
+  /**
+   * 驾驶辅助功能失效报警
+   */
   val TYP_0208_ADAS_DRIVING_ASSIST_FUNC_FAILURE = "0208"
+
+  /**
+   * 道路标志识别事件
+   */
   val TYP_0209_ADAS_ROAD_SIGN_RECOG_EVENT = "0209"
+
+  /**
+   * 实线变道报警
+   */
   val TYP_020A_ADAS_VIOLATED_CHANGE_PATH = "020A"
+
+  /**
+   * 车厢过道行人检测报警
+   */
   val TYP_020B_ADAS_PASSENGER_AT_CARRIAGE_HALLWAY_DETECTED = "020B"
 
+  /**
+   * 主动抓拍事件(驾驶辅助功能)
+   */
+  val TYP_020C_ADAS_DRIVING_ASSIST_ACTIVE_CAPTURE = "020C"
+
+
+
+  /**
+   * 疲劳驾驶报警
+   */
   val TYP_0211_ADAS_FATIGUED = "0211"
+
+  /**
+   * 不目视前方报警
+   */
   val TYP_0212_ADAS_NO_LOOK_AHEAD = "0212"
+
+  /**
+   * 抽烟报警
+   */
   val TYP_0213_ADAS_SMOKE = "0213"
+
+  /**
+   * 接打手持电话报警
+   */
   val TYP_0214_ADAS_PHONE_CALL = "0214"
+
+  /**
+   * 驾驶员异常报警
+   */
   val TYP_0215_ADAS_DRIVER_NOT_DETECTED = "0215"
+
+  /**
+   * 双脱把报警
+   */
   val TYP_0216_ADAS_STEERING_WHEEL_NOT_HOLDING = "0216"
+
+  /**
+   * 驾驶员行为监测功能失效报警
+   */
   val TYP_0217_ADAS_DRIVER_BEHAV_ALM_FUNC_FAILURE = "0217"
+
+  /**
+   * 驾驶员身份异常
+   */
   val TYP_0218_ADAS_INVALID_DRIVER_ID = "0218"
+
+  /**
+   * 驾驶员变更事件
+   */
   val TYP_0219_ADAS_DRIVER_BEHAV_DRIVER_CHANGED_EVENT = "0219"
+
+  /**
+   * 夜间禁行报警
+   */
   val TYP_021A_ADAS_NIGHT_DRIVE_PROHIBITED = "021A"
+
+  /**
+   * 超时驾驶报警
+   */
   val TYP_021B_ADAS_DRIVE_OVERTIME = "021B"
+
+  /**
+   * 主动抓拍事件(驾驶员监测功能)
+   */
   val TYP_021C_ADAS_DRIVER_BEHAV_AUTO_CAPTURE = "021C"
+
+  /**
+   * 未系安全带报警
+   */
   val TYP_021D_ADAS_DRIVER_BEHAV_NOT_BELTING = "021D"
+
+  /**
+   * 红外墨镜失效报警
+   */
   val TYP_021E_ADAS_ANTI_FACE_RECOG_DETECT_FUNC_FAILURE = "021E"
-  val TYP_021F_ADAS_DRIVER_BEHAV_ACTIVE_CAPTURE = "021F"
+
+  /**
+   * 点火抓拍事件
+   */
+  val TYP_021F_ADAS_DRIVER_BEHAV_IGNITED_CAPTURE = "021F"
+
+  /**
+   * 探头遮挡报警（粤标）
+   */
   val TYP_021H_ADAS_DRIVER_BEHAV_CAMERA_COVERED = "021H" // do not use G, due to indistinguishable
+
+  /**
+   * 玩手机报警
+   */
   val TYP_021J_ADAS_PLAY_SMART_PHONE = "021J" // do not use I, due to indistinguishable
 
 
+  /**
+   * 胎压过高报警
+   */
   val TYP_0221_ADAS_TYRE_PRESS_TOO_HIGH = "0221"
+
+  /**
+   * 胎压过低报警
+   */
   val TYP_0222_ADAS_TYRE_PRESS_TOO_LOW = "0222"
+
+  /**
+   * 轮胎温度过高报警
+   */
   val TYP_0223_ADAS_TYRE_TEMP_TOO_HIGH = "0223"
+
+  /**
+   * 轮胎传感器异常报警
+   */
   val TYP_0224_ADAS_TYRE_SENSOR_FAILURE = "0224"
+
+  /**
+   * 胎压不平衡报警
+   */
   val TYP_0225_ADAS_TYRE_PRESS_DISBALANCE = "0225"
+
+  /**
+   * 轮胎慢漏气报警
+   */
   val TYP_0226_ADAS_TYRE_AIR_LEAK_SLOWLY = "0226"
+
+  /**
+   * 电池电压低报警
+   */
   val TYP_0227_ADAS_BATTERY_LOW = "0227"
 
+
+
+
+  /**
+   * 后方接近报警
+   */
   val TYP_0231_ADAS_REAR_TOO_CLOSE = "0231"
+
+  /**
+   * 左侧后方接近报警
+   */
   val TYP_0232_ADAS_LEFT_REAR_TOO_CLOSE = "0232"
+
+  /**
+   * 右侧后方接近报警
+   */
   val TYP_0233_ADAS_RIGHT_REAR_TOO_CLOSE = "0233"
 
+
+  /**
+   * 急加速报警
+   */
   val TYP_0241_ADAS_RAPID_ACCELERATE = "0241"
+
+  /**
+   * 急减速报警
+   */
   val TYP_0242_ADAS_RAPID_DECELERATE = "0242"
+
+  /**
+   * 急转弯报警
+   */
   val TYP_0243_ADAS_RAPID_TURN = "0243"
+
+  /**
+   * 怠速报警
+   */
   val TYP_0244_ADAS_IDLING = "0244"
+
+  /**
+   * 异常熄火报警
+   */
   val TYP_0245_ADAS_UNEXPECTED_FLAME_OUT = "0245"
+
+  /**
+   * 空挡滑行报警
+   */
   val TYP_0246_ADAS_SLIDING_ON_N = "0246"
+
+  /**
+   * 发动机超转报警
+   */
   val TYP_0247_ADAS_ENGINE_RPM_TOO_HIGH = "0247"
 
+
+  /**
+   * 超过阈值速度报警
+   */
   val TYP_0251_ADAS_OVER_EQUIP_SPD_LIMIT = "0251"
+
+  /**
+   * 超过道路限速报警
+   */
   val TYP_0252_ADAS_OVER_ROAD_SPD_LIMIT = "0252"
 
+
+
+
+  /**
+   * 超重报警
+   */
   val TYP_0261_ADAS_OVERLOAD = "0261"
 
+
+
+  /**
+   * 限高报警
+   */
   val TYP_0271_ADAS_OVER_HEIGHT = "0271"
 
+
+  /***
+   * 超员报警
+   */
   val TYP_0281_ADAS_OVERCROWDED = "0281"
+
+  /**
+   * 未巡检乘客安全带事件
+   */
   val TYP_0282_ADAS_BELTING_NOT_CHECKED = "0282"
 
-  val TYP_E002_ENTER_RGN_EVENT = "E002"
+
+//  val TYP_E002_ENTER_RGN_EVENT = "E002"
 
   //  val TYP_E101_VIOLATED_CHANGE_PATH = "E101"
   //  val TYP_E102_PASSENGER_AT_CARRIAGE_HALLWAY_DETECTED = "E102"
@@ -188,7 +402,7 @@ object AlmTypes {
     TYP_021C_ADAS_DRIVER_BEHAV_AUTO_CAPTURE,
     TYP_021D_ADAS_DRIVER_BEHAV_NOT_BELTING,
     TYP_021E_ADAS_ANTI_FACE_RECOG_DETECT_FUNC_FAILURE,
-    TYP_021F_ADAS_DRIVER_BEHAV_ACTIVE_CAPTURE,
+    TYP_021F_ADAS_DRIVER_BEHAV_IGNITED_CAPTURE,
     TYP_021H_ADAS_DRIVER_BEHAV_CAMERA_COVERED,
 
 

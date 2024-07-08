@@ -130,6 +130,20 @@ object JT1078MediaPacketPayloadTypes {
       t.typeName
   }
 
+  /**
+   * Get type enum name of given type ID.
+   *
+   * @param typ type ID
+   * @return type enum name of given type, or `typ` to string if the type not found.
+   */
+  def typeEnumNameOf(typ: Int): String = {
+    val t = Types.get(typ).orNull
+    if (t == null)
+      typ.toString
+    else
+      t.enumName
+  }
+
 
   /**
    * Get type ID of given enum name.

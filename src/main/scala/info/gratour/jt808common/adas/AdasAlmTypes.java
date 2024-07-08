@@ -93,7 +93,7 @@ public class AdasAlmTypes {
         /**
          * 主动抓拍识别事件
          */
-        public static final String ActiveCaptureEvent = AlmTypes.TYP_021F_ADAS_DRIVER_BEHAV_ACTIVE_CAPTURE();
+        public static final String ActiveCaptureEvent = AlmTypes.TYP_020C_ADAS_DRIVING_ASSIST_ACTIVE_CAPTURE();
 
         /**
          * 实线变道报警
@@ -208,7 +208,7 @@ public class AdasAlmTypes {
         /**
          * 点火抓拍事件
          */
-        public static final String IgnitedCapture = AlmTypes.TYP_021F_ADAS_DRIVER_BEHAV_ACTIVE_CAPTURE();
+        public static final String IgnitedCapture = AlmTypes.TYP_021F_ADAS_DRIVER_BEHAV_IGNITED_CAPTURE();
 
         /**
          * 探头遮挡报警（粤标）
