@@ -30,6 +30,16 @@ public class StrmStatus {
     private long byteRate;
 
     /**
+     * Bytes send to terminal from connection created.
+     */
+    private long sent;
+
+    /**
+     * Send to terminal bytes rate (bytes/second) in recent one minute.
+     */
+    private long sendRate;
+
+    /**
      * Bytes totally send to client.
      */
     private long sendToClnt;
@@ -63,6 +73,8 @@ public class StrmStatus {
             Long closeTm,
             long recv,
             long byteRate,
+            long sent,
+            long sendRate,
             long sendToClnt,
             String aFmt,
             Boolean aNotSupport,
@@ -88,6 +100,8 @@ public class StrmStatus {
         this.closeTm = closeTm;
         this.recv = recv;
         this.byteRate = byteRate;
+        this.sent = sent;
+        this.sendRate = sendRate;
         this.sendToClnt = sendToClnt;
         this.aFmt = aFmt;
         this.aNotSupport = aNotSupport;
@@ -210,6 +224,22 @@ public class StrmStatus {
 
     public void setByteRate(long byteRate) {
         this.byteRate = byteRate;
+    }
+
+    public long getSent() {
+        return sent;
+    }
+
+    public void setSent(long sent) {
+        this.sent = sent;
+    }
+
+    public long getSendRate() {
+        return sendRate;
+    }
+
+    public void setSendRate(long sendRate) {
+        this.sendRate = sendRate;
     }
 
     public long getSendToClnt() {
@@ -356,31 +386,33 @@ public class StrmStatus {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", StrmStatus.class.getSimpleName() + "[", "]")
-                .add("appId='" + appId + "'")
-                .add("initReqId='" + initReqId + "'")
-                .add("simNo='" + simNo + "'")
-                .add("chanId=" + chanId)
-                .add("live=" + live)
-                .add("liveDataTyp=" + liveDataTyp)
-                .add("codeStrm=" + codeStrm)
-                .add("createTm=" + createTm)
-                .add("srcDetectTm=" + srcDetectTm)
-                .add("ready=" + ready)
-                .add("readyTm=" + readyTm)
-                .add("closeTm=" + closeTm)
-                .add("recv=" + recv)
-                .add("byteRate=" + byteRate)
-                .add("sendToClnt=" + sendToClnt)
-                .add("aFmt='" + aFmt + "'")
-                .add("aNotSupport=" + aNotSupport)
-                .add("vFmt='" + vFmt + "'")
-                .add("vNotSupport=" + vNotSupport)
-                .add("vRez='" + vRez + "'")
-                .add("frameRate=" + frameRate)
-                .add("mediaTyp='" + mediaTyp + "'")
-                .add("trace=" + trace)
-                .add("requests=" + Arrays.toString(requests))
-                .toString();
+        return "StrmStatus{" +
+                "appId='" + appId + '\'' +
+                ", initReqId='" + initReqId + '\'' +
+                ", simNo='" + simNo + '\'' +
+                ", chanId=" + chanId +
+                ", live=" + live +
+                ", liveDataTyp=" + liveDataTyp +
+                ", codeStrm=" + codeStrm +
+                ", createTm=" + createTm +
+                ", srcDetectTm=" + srcDetectTm +
+                ", ready=" + ready +
+                ", readyTm=" + readyTm +
+                ", closeTm=" + closeTm +
+                ", recv=" + recv +
+                ", byteRate=" + byteRate +
+                ", sent=" + sent +
+                ", sendRate=" + sendRate +
+                ", sendToClnt=" + sendToClnt +
+                ", aFmt='" + aFmt + '\'' +
+                ", aNotSupport=" + aNotSupport +
+                ", vFmt='" + vFmt + '\'' +
+                ", vNotSupport=" + vNotSupport +
+                ", vRez='" + vRez + '\'' +
+                ", frameRate=" + frameRate +
+                ", mediaTyp='" + mediaTyp + '\'' +
+                ", trace=" + trace +
+                ", requests=" + Arrays.toString(requests) +
+                '}';
     }
 }
