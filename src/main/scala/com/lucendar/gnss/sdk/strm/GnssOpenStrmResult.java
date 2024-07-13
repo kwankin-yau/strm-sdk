@@ -13,12 +13,16 @@ import info.gratour.common.types.rest.Reply;
 import java.lang.reflect.Type;
 import java.util.StringJoiner;
 
+/**
+ * 打开媒体流结果
+ */
 public class GnssOpenStrmResult {
 
     public static final Type REPLY_TYPE = new TypeToken<Reply<GnssOpenStrmResult>>(){}.getType();
 
     private String reqId;
     private String instanceId;
+    private int channel;
     private Boolean ctrl;
     private boolean ready;
     private String playUrl;
@@ -34,13 +38,23 @@ public class GnssOpenStrmResult {
     private String taUrl;
     private String mediaTyp;
 
+    /**
+     * 取请求ID
+     *
+     * @return 请求ID
+     */
     public String getReqId() {
         return reqId;
     }
 
+    /**
+     * 设置请求ID
+     * @param reqId 请求ID
+     */
     public void setReqId(String reqId) {
         this.reqId = reqId;
     }
+
 
     public String getInstanceId() {
         return instanceId;
@@ -48,6 +62,23 @@ public class GnssOpenStrmResult {
 
     public void setInstanceId(String instanceId) {
         this.instanceId = instanceId;
+    }
+
+    /**
+     * 取通道号
+     *
+     * @return 通道号
+     */
+    public int getChannel() {
+        return channel;
+    }
+
+    /**
+     * 设置通道号
+     * @param channel 通道号
+     */
+    public void setChannel(int channel) {
+        this.channel = channel;
     }
 
     public Boolean getCtrl() {
