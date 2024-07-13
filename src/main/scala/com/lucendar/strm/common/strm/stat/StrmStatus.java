@@ -34,11 +34,11 @@ public class StrmStatus {
      */
     private long sent;
 
-    /**
-     * Send to terminal bytes rate (bytes/second) in recent one minute.
-     */
-    private long sendRate;
-
+//    /**
+//     * Send to terminal bytes rate (bytes/second) in recent one minute.
+//     */
+//    private long sendRate;
+//
     /**
      * Bytes totally send to client.
      */
@@ -74,7 +74,7 @@ public class StrmStatus {
             long recv,
             long byteRate,
             long sent,
-            long sendRate,
+//            long sendRate,
             long sendToClnt,
             String aFmt,
             Boolean aNotSupport,
@@ -101,7 +101,7 @@ public class StrmStatus {
         this.recv = recv;
         this.byteRate = byteRate;
         this.sent = sent;
-        this.sendRate = sendRate;
+//        this.sendRate = sendRate;
         this.sendToClnt = sendToClnt;
         this.aFmt = aFmt;
         this.aNotSupport = aNotSupport;
@@ -234,13 +234,13 @@ public class StrmStatus {
         this.sent = sent;
     }
 
-    public long getSendRate() {
-        return sendRate;
-    }
-
-    public void setSendRate(long sendRate) {
-        this.sendRate = sendRate;
-    }
+//    public long getSendRate() {
+//        return sendRate;
+//    }
+//
+//    public void setSendRate(long sendRate) {
+//        this.sendRate = sendRate;
+//    }
 
     public long getSendToClnt() {
         return sendToClnt;
@@ -402,7 +402,7 @@ public class StrmStatus {
                 ", recv=" + recv +
                 ", byteRate=" + byteRate +
                 ", sent=" + sent +
-                ", sendRate=" + sendRate +
+//                ", sendRate=" + sendRate +
                 ", sendToClnt=" + sendToClnt +
                 ", aFmt='" + aFmt + '\'' +
                 ", aNotSupport=" + aNotSupport +
