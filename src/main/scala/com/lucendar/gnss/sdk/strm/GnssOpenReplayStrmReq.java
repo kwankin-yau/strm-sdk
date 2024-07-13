@@ -261,11 +261,6 @@ public class GnssOpenReplayStrmReq implements GnssOpenStrmReq {
     }
 
     @Override
-    public Integer getTalkSendProtoVer() {
-        return null;
-    }
-
-    @Override
     public AudioConfig getInputAudioCfg() {
         return inputAudioCfg;
     }

@@ -35,8 +35,9 @@ public class TermConnState implements Cloneable {
 
     /**
      * 最后连接时间, epoch millis
+     * 定义为String 类型是为了前端 js 解释时不丢失精度
      */
-    private long connAt;
+    private String connAt;
 
     /**
      * 终端的协议版本。对于JT/T 808协议：
@@ -48,8 +49,9 @@ public class TermConnState implements Cloneable {
 
     /**
      * 最后上传或应答时间，epoch millis
+     * 定义为String 类型是为了前端 js 解释时不丢失精度
      */
-    private long lastActive;
+    private String lastActive;
 
     /**
      * 连接期间上报的轨迹数
@@ -106,12 +108,16 @@ public class TermConnState implements Cloneable {
         this.connTimes = connTimes;
     }
 
-    public long getConnAt() {
+    public String getConnAt() {
         return connAt;
     }
 
-    public void setConnAt(long connAt) {
-        this.connAt = connAt;
+    public void setConnAt(long connAtEpochMillis) {
+        this.connAt = String.valueOf(connAtEpochMillis);
+    }
+
+    public void setConnAt(String connAtEpochMillis) {
+        this.connAt = connAtEpochMillis;
     }
 
     public Integer getVidAlm() {
@@ -130,12 +136,16 @@ public class TermConnState implements Cloneable {
         this.protoVer = protoVer;
     }
 
-    public long getLastActive() {
+    public String getLastActive() {
         return lastActive;
     }
 
-    public void setLastActive(long lastActive) {
-        this.lastActive = lastActive;
+    public void setLastActive(long lastActiveEpochMillis) {
+        this.lastActive = String.valueOf(lastActiveEpochMillis);
+    }
+
+    public void setLastActive(String lastActiveEpochMillis) {
+        this.lastActive = lastActiveEpochMillis;
     }
 
     public long getTrkCnt() {

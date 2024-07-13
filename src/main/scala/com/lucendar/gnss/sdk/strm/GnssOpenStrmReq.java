@@ -102,18 +102,6 @@ public interface GnssOpenStrmReq {
      */
     Integer getKeepInterval();
 
-    /**
-     * 取对讲时服务端向客户端的语音向终端发送码流时所采用的协议版本
-     * <ul>
-     *     <li>null(不指定)：按服务端配置的协议版本</li>
-     *     <li>0: 使用短终端号（2013）码流格式</li>
-     *     <li>1: 使用长终端号（2019）码流格式</li>
-     * </ul>
-     *
-     * @return 对讲时服务端向客户端的语音向终端发送码流时所采用的协议版本
-     */
-    Integer getTalkSendProtoVer();
-
     AudioConfig getInputAudioCfg();
     AudioConfig getAudioCfg();
     OpenStrmReq.RtspSource getRtspSrc();

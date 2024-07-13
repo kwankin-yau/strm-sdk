@@ -39,7 +39,6 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
     @Nullable
     private Boolean detectMediaTyp;
     private Integer keepInterval;
-    private Integer talkSendProtoVer;
     private AudioConfig inputAudioCfg;
     private AudioConfig audioCfg;
     private OpenStrmReq.RtspSource rtspSrc;
@@ -223,15 +222,6 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
 
 
     @Override
-    public Integer getTalkSendProtoVer() {
-        return talkSendProtoVer;
-    }
-
-    public void setTalkSendProtoVer(Integer talkSendProtoVer) {
-        this.talkSendProtoVer = talkSendProtoVer;
-    }
-
-    @Override
     public OpenStrmReq.RtspSource getRtspSrc() {
         return rtspSrc;
     }
@@ -313,7 +303,6 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
                 .add("saveOnServer=" + saveOnServer)
                 .add("detectMediaTyp=" + detectMediaTyp)
                 .add("keepInterval=" + keepInterval)
-                .add("talkSendProtoVer=" + talkSendProtoVer)
                 .add("inputAudioCfg=" + inputAudioCfg)
                 .add("audioCfg=" + audioCfg)
                 .add("rtspSrc=" + rtspSrc)
