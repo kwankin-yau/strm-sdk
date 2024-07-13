@@ -12,7 +12,7 @@ public class JT808Consts {
             return ver == PROTO_VER__REV2013 || ver == PROTO_VER__REV2019;
         }
 
-        public static int detectProtoVerBySimNoLen(int simNoLen) {
+        public static byte detectProtoVerBySimNoLen(int simNoLen) {
             switch (simNoLen) {
                 case 12:
                     return PROTO_VER__REV2013;
