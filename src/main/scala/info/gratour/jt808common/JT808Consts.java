@@ -12,14 +12,14 @@ public class JT808Consts {
             return ver == PROTO_VER__REV2013 || ver == PROTO_VER__REV2019;
         }
 
-        public static byte detectProtoVerBySimNoLen(int simNoLen) {
-            switch (simNoLen) {
-                case 12:
+        public static byte detectProtoVerBySimNoLen(int simNoLenInBytes) {
+            switch (simNoLenInBytes) {
+                case 6:
                     return PROTO_VER__REV2013;
-                case 20:
+                case 10:
                     return PROTO_VER__REV2019;
                 default:
-                    throw ErrorWithCode.internalError("Unrecognized simNoLen: " + simNoLen);
+                    throw ErrorWithCode.internalError("Unrecognized simNoLenInBytes: " + simNoLenInBytes);
             }
         }
     }

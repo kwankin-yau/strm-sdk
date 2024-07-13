@@ -30,6 +30,7 @@
 - `TermCmd` 增加 `setParamsJson`, `setAckParamsJson` 方法
 - 新增 `QryTermCmdReq` 类
 - 新增 `info.gratour.jt808common.JT808Consts.ProtocolVersions.detectProtoVerBySimNoLen` 方法
+- `OpenStrmReq` 去除 `talkSendProtoVer` 属性
 
 ## 不兼容变更
 - `AvUploadReq` 增加 `fileSz` 必填属性

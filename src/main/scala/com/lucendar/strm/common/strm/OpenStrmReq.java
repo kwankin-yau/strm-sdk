@@ -168,7 +168,7 @@ public class OpenStrmReq implements StrmMsg {
     private Boolean detectMediaTyp;
     private Integer keepIntv;
     private String scheme;
-    private Integer talkSendProtoVer;
+//    private Integer talkSendProtoVer;
     private AudioConfig inputAudioCfg;
     private AudioConfig audioCfg;
     private RtspSource rtspSrc;
@@ -220,7 +220,7 @@ public class OpenStrmReq implements StrmMsg {
         this.detectMediaTyp = detectMediaTyp;
         this.keepIntv = keepIntv;
         this.scheme = scheme;
-        this.talkSendProtoVer = talkSendProtoVer;
+//        this.talkSendProtoVer = talkSendProtoVer;
         this.inputAudioCfg = inputAudioCfg;
         this.audioCfg = audioCfg;
         this.rtspSrc = rtspSrc;
@@ -426,13 +426,13 @@ public class OpenStrmReq implements StrmMsg {
             return UriScheme.of(this.scheme);
     }
 
-    public Integer getTalkSendProtoVer() {
-        return talkSendProtoVer;
-    }
+//    public Integer getTalkSendProtoVer() {
+//        return talkSendProtoVer;
+//    }
 
-    public void setTalkSendProtoVer(Integer talkSendProtoVer) {
-        this.talkSendProtoVer = talkSendProtoVer;
-    }
+//    public void setTalkSendProtoVer(Integer talkSendProtoVer) {
+//        this.talkSendProtoVer = talkSendProtoVer;
+//    }
 
     public AudioConfig getInputAudioCfg() {
         return inputAudioCfg;
@@ -686,7 +686,7 @@ public class OpenStrmReq implements StrmMsg {
                 .add("detectMediaTyp=" + detectMediaTyp)
                 .add("keepIntv=" + keepIntv)
                 .add("scheme='" + scheme + "'")
-                .add("talkSendProtoVer=" + talkSendProtoVer)
+//                .add("talkSendProtoVer=" + talkSendProtoVer)
                 .add("inputAudioCfg=" + inputAudioCfg)
                 .add("audioCfg=" + audioCfg)
                 .add("rtspSrc=" + rtspSrc)
