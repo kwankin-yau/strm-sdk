@@ -197,7 +197,6 @@ public class OpenStrmReq implements StrmMsg {
             Boolean detectMediaTyp,
             Integer keepIntv,
             String scheme,
-            Integer talkSendProtoVer,
             AudioConfig inputAudioCfg,
             AudioConfig audioCfg,
             RtspSource rtspSrc,
