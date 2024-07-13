@@ -33,7 +33,7 @@
 - `OpenStrmReq` 和 `GnssOpenStrmReq` 去掉 `talkSendProtoVer` 属性 
 - `StrmStatus` 增加 `sent` 属性
 - 为了避免前端 js 解释时不丢失精度，`TermConnState` 的 `connAt`、`lastActive` 改为 String 类型
-- `GnssOpenStrmResult` 增加 `channel` 属性
+- `GnssOpenStrmResult`, `OpenStrmResult` 增加 `channel` 属性
 
 ## 不兼容变更
 - `AvUploadReq` 增加 `fileSz` 必填属性
