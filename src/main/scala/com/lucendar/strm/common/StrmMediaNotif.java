@@ -1,7 +1,5 @@
 package com.lucendar.strm.common;
 
-import com.lucendar.strm.common.strm.OpenStrmReq;
-
 import java.util.StringJoiner;
 
 /**
@@ -9,15 +7,52 @@ import java.util.StringJoiner;
  */
 public class StrmMediaNotif implements Cloneable {
 
+    /**
+     * 通知类型：下发指令（当终端未及时推流时，服务端可能多次下发指令，因此此通知也可能多次推送）
+     */
     public static final String ACT__cmdSent = "sent";
+
+    /**
+     * 通知类型：终端指令失败（终端不在线或终端应答提出指令已经失败）。
+     */
     public static final String ACT__cmdFailed = "failed";
+
+    /**
+     * 通知类型：终端开始推流。
+     */
     public static final String ACT__id = "id";
+
+    /**
+     * 通知类型：流已经准备好，此时客户端可以打开流URL（URL由playUrl属性指出）。注意：用异步模式打开实时音视频播放时，如果目标通道已经有其他请求
+     * 打开，则POST /strm/live/open请求返回的对象的ready将为true。返回后，服务端不会发送act为ready的流媒体状态通知。
+     */
     public static final String ACT__strmReady = "ready";
+
+    /**
+     * 通知类型：流已经关闭，如果客户端此时仍在播放，则应停止播放。具体关闭原因请检查closeCause和closeReason属性。注意：流关闭并不意味着终端已
+     * 经关闭码流，如果有其他请求仍在使用码流，则终端码流将仍然保持推流，只是当前的请求ID(reqId)已经关闭、失效。
+     */
     public static final String ACT__strmClosed = "closed";
+
+    /**
+     * 通知类型： 终端媒体流网络传输质量报告。在接收终端媒体流过程中，媒体服务将定时产生此报告。企业应用可据此向终端发出实时音视频传输状态通知
+     * （0x9105）。此通知不需推送到客户端。
+     */
     public static final String ACT__qualityReport = "qr";
 
+    /**
+     * 流的类型：无
+     */
     public static final String TYP_none = "";
+
+    /**
+     * 流的类型：直播流
+     */
     public static final String TYP_live = "live";
+
+    /**
+     * 流的类型：回放流
+     */
     public static final String TYP_replay = "replay";
 
     public static final int CLOSE_CAUSE__clientReq = 1;
@@ -71,7 +106,9 @@ public class StrmMediaNotif implements Cloneable {
     private Integer closeCause;
     private String closeReason;
     private Integer ac;
+    private Integer aBitrate;
     private Integer vc;
+    private String frameRate;
 
 
     public StrmMediaNotif() {
@@ -281,6 +318,30 @@ public class StrmMediaNotif implements Cloneable {
         this.vc = vc;
     }
 
+    /**
+     * 取音频的位率，单位：位/秒
+     * @return 音频的位率
+     */
+    public Integer getaBitrate() {
+        return aBitrate;
+    }
+
+    public void setaBitrate(Integer aBitrate) {
+        this.aBitrate = aBitrate;
+    }
+
+    /**
+     * 取视频的帧率。单位：帧/秒
+     * @return 视频的帧率
+     */
+    public String getFrameRate() {
+        return frameRate;
+    }
+
+    public void setFrameRate(String frameRate) {
+        this.frameRate = frameRate;
+    }
+
     @Override
     public StrmMediaNotif clone() {
         try {
@@ -308,7 +369,9 @@ public class StrmMediaNotif implements Cloneable {
                 .add("closeCause=" + closeCause)
                 .add("closeReason='" + closeReason + "'")
                 .add("ac=" + ac)
+                .add("aBitrate=" + aBitrate)
                 .add("vc=" + vc)
+                .add("frameRate='" + frameRate + "'")
                 .toString();
     }
 }
