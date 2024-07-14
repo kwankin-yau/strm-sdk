@@ -1,5 +1,6 @@
 package com.lucendar.gnss.sdk.strm;
 
+import com.lucendar.common.utils.DateTimeUtils;
 import com.lucendar.gnss.sdk.types.PagedQuery;
 
 import java.util.StringJoiner;
@@ -23,12 +24,28 @@ public class QryStrmLogReq extends PagedQuery {
         this.startTime = startTime;
     }
 
+    public Long startTime() {
+        return DateTimeUtils.BeijingConv.strToMillis(startTime);
+    }
+
+    public void startTime(Long startTime) {
+        this.startTime = DateTimeUtils.BeijingConv.millisToStrBoxed(startTime);
+    }
+
     public String getEndTime() {
         return endTime;
     }
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public Long endTime() {
+        return DateTimeUtils.BeijingConv.strToMillis(endTime);
+    }
+
+    void endTime(Long endTime) {
+        this.endTime = DateTimeUtils.BeijingConv.millisToStrBoxed(endTime);
     }
 
     public String getSimNo() {
