@@ -36,6 +36,7 @@
 - `GnssOpenStrmResult`, `OpenStrmResult` 增加 `channel` 属性
 - `StrmMediaNotif` 增加 `aBitrate`, `frameRate` 属性
 - 新增 `PagedQuery`, `QryStrmLogReq` 类
+- `JT1078MediaPacketPayloadType` 增加常用媒体类型判断方法
 
 ## 不兼容变更
 - `AvUploadReq` 增加 `fileSz` 必填属性

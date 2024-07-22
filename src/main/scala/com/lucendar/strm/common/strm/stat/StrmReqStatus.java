@@ -2,6 +2,9 @@ package com.lucendar.strm.common.strm.stat;
 
 import java.util.StringJoiner;
 
+/**
+ * 媒体流请求状态
+ */
 public class StrmReqStatus {
     private String reqId;
     private String userId;
@@ -15,7 +18,14 @@ public class StrmReqStatus {
     public StrmReqStatus() {
     }
 
-    public StrmReqStatus(String reqId, String userId, long reqTm, int fmt, long lastKeepTm, Long readyTm, Long closeTm, Integer closeCause) {
+    public StrmReqStatus(String reqId,
+                         String userId,
+                         long reqTm,
+                         int fmt,
+                         long lastKeepTm,
+                         Long readyTm,
+                         Long closeTm,
+                         Integer closeCause) {
         this.reqId = reqId;
         this.userId = userId;
         this.reqTm = reqTm;
@@ -50,6 +60,10 @@ public class StrmReqStatus {
         this.reqTm = reqTm;
     }
 
+    /**
+     * 取媒体流格式，为 `com.lucendar.strm.common.StreamingApi.FORMAT__XXX` 系列常量之一
+     * @return 媒体流格式
+     */
     public int getFmt() {
         return fmt;
     }

@@ -2,7 +2,18 @@ package info.gratour.jt808common
 
 object JT1078MediaPacketPayloadTypes {
 
-  case class JT1078MediaPacketPayloadType(typ: Int, typeName: String, enumName: String)
+  case class JT1078MediaPacketPayloadType(typ: Int, typeName: String, enumName: String) {
+    def adpcm: Boolean = typ == ADPCMA_VALUE
+    def g726: Boolean = typ == G726_VALUE
+
+    def g711: Boolean = typ == G711A_VALUE || typ == G711U_VALUE
+    def g711a: Boolean = typ == G711A_VALUE
+    def g711u: Boolean = typ == G711U_VALUE
+
+    def aac: Boolean = typ == AACLC_VALUE || typ == AAC_VALUE
+    def aacLc: Boolean = typ == AACLC_VALUE
+    def lpcm: Boolean = typ == LPCM_VALUE
+  }
 
   final val G721_VALUE = 1
   final val G722_VALUE = 2
