@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 /**
  * ADAS附件提取操作结束（成功或失败）通知
  */
-public class AlmAttReadyNotif {
+public class FetchAlmAttCompleted {
 
     private String simNo;
     private String almNo;
@@ -128,7 +128,7 @@ public class AlmAttReadyNotif {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", AlmAttReadyNotif.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", FetchAlmAttCompleted.class.getSimpleName() + "[", "]")
                 .add("almNo='" + almNo + "'")
                 .add("almTyp='" + almTyp + "'")
                 .add("almLvl=" + almLvl)
