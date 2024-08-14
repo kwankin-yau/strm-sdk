@@ -386,10 +386,18 @@ public class OpenStrmReq implements StrmMsg {
         this.exclusive = exclusive;
     }
 
+    /**
+     * 取是否在播放的同时存储到服务器上
+     * @return 是否在播放的同时存储到服务器上
+     */
     public boolean isRecord() {
         return record;
     }
 
+    /**
+     * 设置是否在播放的同时存储到服务器上
+     * @param record 是否在播放的同时存储到服务器上
+     */
     public void setRecord(boolean record) {
         this.record = record;
     }

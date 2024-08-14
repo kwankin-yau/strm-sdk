@@ -38,6 +38,8 @@ public class GnssOpenStrmResult {
     private String taUrl;
     private String mediaTyp;
 
+    private Integer sampleRate;
+
     /**
      * 取请求ID
      *
@@ -136,17 +138,27 @@ public class GnssOpenStrmResult {
         this.mediaTyp = mediaTyp;
     }
 
+    public Integer getSampleRate() {
+        return sampleRate;
+    }
+
+    public void setSampleRate(Integer sampleRate) {
+        this.sampleRate = sampleRate;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", GnssOpenStrmResult.class.getSimpleName() + "[", "]")
                 .add("reqId='" + reqId + "'")
                 .add("instanceId='" + instanceId + "'")
+                .add("channel=" + channel)
                 .add("ctrl=" + ctrl)
                 .add("ready=" + ready)
                 .add("playUrl='" + playUrl + "'")
                 .add("wsUrl='" + wsUrl + "'")
                 .add("taUrl='" + taUrl + "'")
                 .add("mediaTyp='" + mediaTyp + "'")
+                .add("sampleRate=" + sampleRate)
                 .toString();
     }
 }

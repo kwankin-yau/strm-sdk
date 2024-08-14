@@ -14,6 +14,9 @@ import java.time.ZoneOffset;
 import java.util.Base64;
 import java.util.UUID;
 
+/**
+ * GT-Streaming API 常量及公用函数
+ */
 public class StreamingApi {
 
     public static boolean isValidId(String id) {

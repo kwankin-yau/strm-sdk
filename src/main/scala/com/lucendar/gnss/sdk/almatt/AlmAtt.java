@@ -29,7 +29,7 @@ public class AlmAtt implements Cloneable, RelativeFileNameProvider {
     public static final Type REPLY_TYPE = new TypeToken<Reply<AlmAtt>>(){}.getType();
 
     /**
-     * 平台报警ID 或 终端 ADAS 报警编号的 HEX 形式
+     * 终端 ADAS 报警编号的 HEX 形式
      */
     private String id;
 
