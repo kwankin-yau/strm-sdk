@@ -33,7 +33,7 @@
 - `OpenStrmReq` 和 `GnssOpenStrmReq` 去掉 `talkSendProtoVer` 属性 
 - `StrmStatus` 增加 `sent` 属性
 - 为了避免前端 js 解释时不丢失精度，`TermConnState` 的 `connAt`、`lastActive` 改为 String 类型
-- `GnssOpenStrmResult`, `OpenStrmResult` 增加 `channel` 属性
+- `GnssOpenStrmResult`, `OpenStrmResult` 增加 `channel`, `proto` 属性。
 - `StrmMediaNotif` 增加 `aBitrate`, `frameRate` 属性
 - 新增 `PagedQuery`, `QryStrmLogReq` 类
 - `JT1078MediaPacketPayloadType` 增加常用媒体类型判断方法

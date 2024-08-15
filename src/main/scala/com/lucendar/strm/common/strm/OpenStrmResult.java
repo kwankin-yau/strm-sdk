@@ -6,6 +6,7 @@ public class OpenStrmResult {
 
     private String reqId;
     private int channel;
+    private int proto;
     private boolean ctrl;
     private boolean ready;
     private String mediaTyp;
@@ -25,13 +26,14 @@ public class OpenStrmResult {
     public OpenStrmResult() {
     }
 
-    public OpenStrmResult(String reqId, int channel, boolean ctrl, boolean ready, String mediaTyp, String playUrl, String wsUrl,
+    public OpenStrmResult(String reqId, int channel, int proto, boolean ctrl, boolean ready, String mediaTyp, String playUrl, String wsUrl,
                           String taUrl,
                           int keepIntv, String host, int port, boolean tcp,
                           int port2019, boolean tcp2019, Boolean recording, AudioConfig audioConfig,
                           Boolean detectMediaTyp) {
         this.reqId = reqId;
         this.channel = channel;
+        this.proto = proto;
         this.ctrl = ctrl;
         this.ready = ready;
         this.mediaTyp = mediaTyp;
@@ -63,6 +65,14 @@ public class OpenStrmResult {
 
     public void setChannel(int channel) {
         this.channel = channel;
+    }
+
+    public int getProto() {
+        return proto;
+    }
+
+    public void setProto(int proto) {
+        this.proto = proto;
     }
 
     public boolean isCtrl() {
@@ -187,24 +197,25 @@ public class OpenStrmResult {
 
     @Override
     public String toString() {
-        return "OpenStrmResult{" +
-                "reqId='" + reqId + '\'' +
-                ", channel=" + channel +
-                ", ctrl=" + ctrl +
-                ", ready=" + ready +
-                ", mediaTyp='" + mediaTyp + '\'' +
-                ", playUrl='" + playUrl + '\'' +
-                ", wsUrl='" + wsUrl + '\'' +
-                ", taUrl='" + taUrl + '\'' +
-                ", keepIntv=" + keepIntv +
-                ", host='" + host + '\'' +
-                ", port=" + port +
-                ", tcp=" + tcp +
-                ", port2019=" + port2019 +
-                ", tcp2019=" + tcp2019 +
-                ", recording=" + recording +
-                ", audioConfig=" + audioConfig +
-                ", detectMediaTyp=" + detectMediaTyp +
-                '}';
+        return new StringJoiner(", ", OpenStrmResult.class.getSimpleName() + "[", "]")
+                .add("reqId='" + reqId + "'")
+                .add("channel=" + channel)
+                .add("proto=" + proto)
+                .add("ctrl=" + ctrl)
+                .add("ready=" + ready)
+                .add("mediaTyp='" + mediaTyp + "'")
+                .add("playUrl='" + playUrl + "'")
+                .add("wsUrl='" + wsUrl + "'")
+                .add("taUrl='" + taUrl + "'")
+                .add("keepIntv=" + keepIntv)
+                .add("host='" + host + "'")
+                .add("port=" + port)
+                .add("tcp=" + tcp)
+                .add("port2019=" + port2019)
+                .add("tcp2019=" + tcp2019)
+                .add("recording=" + recording)
+                .add("audioConfig=" + audioConfig)
+                .add("detectMediaTyp=" + detectMediaTyp)
+                .toString();
     }
 }
