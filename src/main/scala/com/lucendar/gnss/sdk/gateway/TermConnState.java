@@ -44,6 +44,8 @@ public class TermConnState implements Cloneable {
      * - 0: 2013
      * - 1: 2019
      * - null: 未知
+     * <p>
+     * 能是非 jt808 终端，所以 protoVer 为字符串
      */
     private String protoVer;
 
