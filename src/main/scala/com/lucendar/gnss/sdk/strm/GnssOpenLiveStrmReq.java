@@ -8,20 +8,54 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.StringJoiner;
 
+/**
+ * 打开实时音视频请求
+ */
 public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
 
+    /**
+     * 数据类型：音视频
+     */
     public static final byte DATA_TYPE__AV = 0;
+
+    /**
+     * 数据类型：视频
+     */
     public static final byte DATA_TYPE__VIDEO = 1;
+
+    /**
+     * 数据类型：对讲
+     */
     public static final byte DATA_TYPE__TALK = 2;
+
+    /**
+     * 数据类型：监听
+     */
     public static final byte DATA_TYPE__LISTEN = 3;
 
+    /**
+     * 码流：主码流
+     */
     public static final byte CODE_STREAM__PRIMARY = 0;
+
+    /**
+     * 码流：子码流
+     */
     public static final byte CODE_STREAM__SUB = 1;
 
+    /**
+     * 推流时使用的通讯协议: TCP
+     */
     public static final int TERM_PROTO__TCP = 0;
+
+    /**
+     * 推流时使用的通讯协议: UDP
+     */
     public static final int TERM_PROTO__UDP = 1;
 
+    @Nullable
     private String reqId;
+
     private boolean async = true;
     private String appId = GnssConsts.DEFAULT_APP_ID;
     private String simNo;
@@ -51,61 +85,127 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
     @Nullable
     private Boolean dontSendCloseIfInterrupt;
 
+    /**
+     * 取流请求ID。此方法由服务内部使用，客户端不使用此属性。
+     *
+     * @return 流请求ID。
+     */
+    @Nullable
     @Override
     public String getReqId() {
         return reqId;
     }
 
-    public void setReqId(String reqId) {
+    /**
+     * 设置流请求ID。此方法由服务内部使用。
+     *
+     * @param reqId 流请求ID
+     */
+    public void setReqId(@Nullable String reqId) {
         this.reqId = reqId;
     }
 
+    /**
+     * 取是否异步请求。异步请求时，服务端将在进行必要的处理后返回请求ID，而不是等到终端开始推流才返回。
+     *
+     * @return 是否异步请求
+     */
     @Override
     public boolean isAsync() {
         return async;
     }
 
+    /**
+     * 设置是否异步请求。异步请求时，服务端将在进行必要的处理后返回请求ID，而不是等到终端开始推流才返回。
+     *
+     * @param async 是否异步请求
+     */
     public void setAsync(boolean async) {
         this.async = async;
     }
 
+    /**
+     * 取是否实时音视频请求。
+     *
+     * @return 是否实时音视频请求。为 `false` 时表示远程回放。
+     */
     @Override
     public boolean isLiveReq() {
         return true;
     }
 
+    /**
+     * 取App ID
+     *
+     * @return App ID
+     */
     @Override
     public String getAppId() {
         return appId;
     }
 
+    /**
+     * 设置 App ID
+     *
+     * @param appId App ID
+     */
     public void setAppId(String appId) {
         this.appId = appId;
     }
 
+    /**
+     * 取终端识别号
+     *
+     * @return 终端识别号
+     */
     @Override
     public String getSimNo() {
         return simNo;
     }
 
+    /**
+     * 设置终端识别号
+     *
+     * @param simNo 终端识别号
+     */
     public void setSimNo(String simNo) {
         this.simNo = simNo;
     }
 
+    /**
+     * 取通道号。参见JT/T 1078标准定义的车载视频逻辑通道号定义表。对讲时，可以不指定通道号。其他情况，通道号为必填。
+     *
+     * @return 通道号
+     */
     @Override
     public byte getChannel() {
         return channel;
     }
 
+    /**
+     * 设置通道号。
+     *
+     * @param channel 通道号。参见JT/T 1078标准定义的车载视频逻辑通道号定义表。对讲时，可以不指定通道号。其他情况，通道号为必填。
+     */
     @Override
     public void setChannel(byte channel) {
         this.channel = channel;
     }
 
+    /**
+     * 取数据类型。
+     *
+     * @return 数据类型。为 DATA_TYPE__xxx 系列常量之一
+     */
     public Byte getDataType() {
         return dataType;
     }
 
+    /**
+     * 设置数据类型。
+     *
+     * @param dataType 数据类型。为 DATA_TYPE__xxx 系列常量之一
+     */
     public void setDataType(Byte dataType) {
         this.dataType = dataType;
     }
@@ -117,10 +217,20 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
             return dataType;
     }
 
+    /**
+     * 取码流类型
+     *
+     * @return 码流类型。为 CODE_STREAM__xxx 系列常量之一。
+     */
     public byte getCodeStream() {
         return codeStream;
     }
 
+    /**
+     * 设置码流类型。
+     *
+     * @param codeStream 码流类型。为 CODE_STREAM__xxx 系列常量之一。
+     */
     public void setCodeStream(byte codeStream) {
         this.codeStream = codeStream;
     }
@@ -130,20 +240,40 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return codeStream;
     }
 
+    /**
+     * 取请求的客户端协议类型
+     *
+     * @return 请求的客户端协议类型，为 StreamingApi.STRM_FORMAT__xxx 系列常量之一
+     */
     @Override
     public int getProto() {
         return proto;
     }
 
+    /**
+     * 设置请求的客户端协议类型
+     *
+     * @param proto 请求的客户端协议类型，为 StreamingApi.STRM_FORMAT__xxx 系列常量之一
+     */
     public void setProto(int proto) {
         this.proto = proto;
     }
 
+    /**
+     * 取子协议类型
+     *
+     * @return 子协议类型，为 StreamingApi.STRM_SUB_FORMAT__xxx 系列常量之一
+     */
     @Override
     public String getSubProto() {
         return subProto;
     }
 
+    /**
+     * 设置子协议类型
+     *
+     * @param subProto 子协议类型，为 StreamingApi.STRM_SUB_FORMAT__xxx 系列常量之一
+     */
     public void setSubProto(String subProto) {
         this.subProto = subProto;
     }
@@ -193,20 +323,31 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         this.exclusive = exclusive;
     }
 
+    /**
+     * 取播放时是否同时存储在服务端的本地媒体存储目录
+     *
+     * @return 播放时是否同时存储在服务端的本地媒体存储目录
+     */
     @Override
     public boolean isSaveOnServer() {
         return saveOnServer;
     }
 
+    /**
+     * 设置播放时是否同时存储在服务端的本地媒体存储目录
+     * @param saveOnServer 播放时是否同时存储在服务端的本地媒体存储目录
+     */
     public void setSaveOnServer(boolean saveOnServer) {
         this.saveOnServer = saveOnServer;
     }
 
     @Override
+    @Deprecated
     public Boolean getDetectMediaTyp() {
         return detectMediaTyp;
     }
 
+    @Deprecated
     public void setDetectMediaTyp(Boolean detectMediaTyp) {
         this.detectMediaTyp = detectMediaTyp;
     }
@@ -221,11 +362,19 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
     }
 
 
+    /**
+     * 取RTSP源。
+     * @return RTSP源
+     */
     @Override
     public OpenStrmReq.RtspSource getRtspSrc() {
         return rtspSrc;
     }
 
+    /**
+     * 设置RTSP源。采用RTSP源进行播放。打开JT/T 1078协议终端时，不需要指定本属性。
+     * @param rtspSrc RTSP源
+     */
     public void setRtspSrc(OpenStrmReq.RtspSource rtspSrc) {
         this.rtspSrc = rtspSrc;
     }
@@ -257,11 +406,19 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         this.timedToken = timedToken;
     }
 
+    /**
+     * 取跟踪模式
+     * @return 跟踪模式。为 GnssOpenStrmReq.TRACE_MODE__xxx 系列常量之一
+     */
     @Override
     public Integer getTrace() {
         return trace;
     }
 
+    /**
+     * 设置跟踪模式。
+     * @param trace 跟踪模式。为 GnssOpenStrmReq.TRACE_MODE__xxx 系列常量之一
+     */
     public void setTrace(Integer trace) {
         this.trace = trace;
     }
