@@ -12,6 +12,9 @@ import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
+/**
+ * 远程录像回放控制参数
+ */
 @JTMsgId(JT1078MsgConsts.REPLAY_AV_CTRL_9202)
 public class CP_9202_ReplayAvCtrl implements JT808CmdParams {
 
@@ -30,34 +33,67 @@ public class CP_9202_ReplayAvCtrl implements JT808CmdParams {
     private String serverId;
 
 
+    /**
+     * 取通道号
+     *
+     * @return 通道号
+     */
     public byte getChan() {
         return chan;
     }
 
+    /**
+     * 设置通道号
+     * @param chan 通道号
+     */
     public void setChan(byte chan) {
         this.chan = chan;
     }
 
+    /**
+     * 取回放控制
+     * @return 回放控制
+     */
     public int getCtrl() {
         return ctrl;
     }
 
+    /**
+     * 设置回放控制
+     * @param ctrl 回放控制
+     */
     public void setCtrl(int ctrl) {
         this.ctrl = ctrl;
     }
 
+    /**
+     * 取快进或快退倍数
+     * @return 快进或快退倍数。仅当回放方式为1或2时不为 null
+     */
     public Byte getFactor() {
         return factor;
     }
 
+    /**
+     * 设置快进或快退倍数
+     * @param factor 快进或快退倍数。仅当回放方式为1或2时不为 null
+     */
     public void setFactor(Byte factor) {
         this.factor = factor;
     }
 
+    /**
+     * 取拖动回放位置
+     * @return 拖动回放位置, epoch millis。仅当回放方式为5时不为 null
+     */
     public Long getTm() {
         return tm;
     }
 
+    /**
+     * 设置拖动回放位置
+     * @param tm 拖动回放位置， epoch millis。仅当回放方式为5时不为 null
+     */
     public void setTm(Long tm) {
         this.tm = tm;
     }

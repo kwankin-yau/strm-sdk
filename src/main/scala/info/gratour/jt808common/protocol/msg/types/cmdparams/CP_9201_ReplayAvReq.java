@@ -12,6 +12,9 @@ import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
+/**
+ * 远程录像回放指令参数
+ */
 @JTMsgId(JT1078MsgConsts.REPLAY_AV_REQ_9201)
 public class CP_9201_ReplayAvReq implements JT808CmdParams {
 
@@ -52,26 +55,51 @@ public class CP_9201_ReplayAvReq implements JT808CmdParams {
     private int debug;
     private String serverId;
 
+    /**
+     * 取服务器IP地址
+     * @return 服务器IP地址
+     */
     public String getServerIp() {
         return serverIp;
     }
 
+    /**
+     * 设置服务器IP地址
+     * @param serverIp 服务器IP地址
+     */
     public void setServerIp(String serverIp) {
         this.serverIp = serverIp;
     }
 
+    /**
+     * 取TCP端口号
+     *
+     * @return TCP端口号
+     */
     public int getTcpPort() {
         return tcpPort;
     }
 
+    /**
+     * 设置TCP端口号
+     * @param tcpPort TCP端口号
+     */
     public void setTcpPort(int tcpPort) {
         this.tcpPort = tcpPort;
     }
 
+    /**
+     * 取UDP端口号
+     * @return UDP端口号
+     */
     public int getUdpPort() {
         return udpPort;
     }
 
+    /**
+     * 设置UDP端口号
+     * @param udpPort UDP端口号
+     */
     public void setUdpPort(int udpPort) {
         this.udpPort = udpPort;
     }
@@ -92,66 +120,133 @@ public class CP_9201_ReplayAvReq implements JT808CmdParams {
         this.udpPort2019 = udpPort2019;
     }
 
+
+    /**
+     * 取通道号
+     *
+     * @return 通道号
+     */
     public byte getChan() {
         return chan;
     }
 
+    /**
+     * 设置通道号
+     *
+     * @param chan 通道号
+     */
     public void setChan(byte chan) {
         this.chan = chan;
     }
 
+    /**
+     * 取音视频类型
+     * @return 音视频类型
+     */
     public byte getMediaTyp() {
         return mediaTyp;
     }
 
+    /**
+     * 设置音视频类型
+     * @param mediaTyp 音视频类型
+     */
     public void setMediaTyp(byte mediaTyp) {
         this.mediaTyp = mediaTyp;
     }
 
+    /**
+     * 取码流
+     * @return 码流
+     */
     public byte getCodeStrm() {
         return codeStrm;
     }
 
+    /**
+     * 设置码流
+     * @param codeStrm 码流
+     */
     public void setCodeStrm(byte codeStrm) {
         this.codeStrm = codeStrm;
     }
 
+    /**
+     * 取存储器类型
+     * @return 存储器类型
+     */
     public byte getStgTyp() {
         return stgTyp;
     }
 
+    /**
+     * 设置存储器类型
+     * @param stgTyp 存储器类型
+     */
     public void setStgTyp(byte stgTyp) {
         this.stgTyp = stgTyp;
     }
 
+    /**
+     * 取回放方式
+     * @return 回放方式
+     */
     public byte getMode() {
         return mode;
     }
 
+    /**
+     * 设置回放方式
+     * @param mode 回放方式
+     */
     public void setMode(byte mode) {
         this.mode = mode;
     }
 
+    /**
+     * 取快进或快退倍数
+     * @return 快进或快退倍数。仅当回放方式为3或4时不为 null
+     */
     public Byte getFactor() {
         return factor;
     }
 
+    /**
+     * 设置快进或快退倍数
+     * @param factor 快进或快退倍数。仅当回放方式为3或4时不为 null
+     */
     public void setFactor(Byte factor) {
         this.factor = factor;
     }
 
+    /**
+     * 取开始时间
+     * @return 开始时间, epoch millis
+     */
     public long getStartTm() {
         return startTm;
     }
 
+    /**
+     * 设置开始时间
+     * @param startTm 开始时间, epoch millis
+     */
     public void setStartTm(long startTm) {
         this.startTm = startTm;
     }
 
+    /**
+     * 取结束时间
+     * @return 结束时间
+     */
     public Long getEndTm() {
         return endTm;
     }
 
+    /**
+     * 设置结束时间
+     * @param endTm 结束时间
+     */
     public void setEndTm(Long endTm) {
         this.endTm = endTm;
     }

@@ -12,6 +12,9 @@ import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
+/**
+ * 报警附件上传指令参数
+ */
 @JTMsgId(JTAdasMsgConsts.ALM_ATT_UPLOAD_REQ_9208)
 public class CP_9208_AlmAddtUploadReq implements JT808CmdParams {
 
@@ -22,42 +25,82 @@ public class CP_9208_AlmAddtUploadReq implements JT808CmdParams {
     private String almId;
     private long almTm1;
 
+    /**
+     * 取服务器地址
+     * @return 服务器地址
+     */
     public String getServerIp() {
         return serverIp;
     }
 
+    /**
+     * 设置服务器地址
+     * @param serverIp 服务器地址
+     */
     public void setServerIp(String serverIp) {
         this.serverIp = serverIp;
     }
 
+    /**
+     * 取TCP端口号
+     * @return TCP端口号
+     */
     public int getTcpPort() {
         return tcpPort;
     }
 
+    /**
+     * 设置TCP端口号
+     * @param tcpPort TCP端口号
+     */
     public void setTcpPort(int tcpPort) {
         this.tcpPort = tcpPort;
     }
 
+    /**
+     * 取UDP端口号
+     * @return UDP端口号
+     */
     public int getUdpPort() {
         return udpPort;
     }
 
+    /**
+     * 设置UDP端口号
+     * @param udpPort UDP端口号
+     */
     public void setUdpPort(int udpPort) {
         this.udpPort = udpPort;
     }
 
+    /**
+     * 取报警标识号
+     * @return 报警标识号
+     */
     public String getAlmNo() {
         return almNo;
     }
 
+    /**
+     * 设置报警标识号
+     * @param almNo 报警标识号
+     */
     public void setAlmNo(String almNo) {
         this.almNo = almNo;
     }
 
+    /**
+     * 取报警编号
+     * @return 报警编号
+     */
     public String getAlmId() {
         return almId;
     }
 
+    /**
+     * 设置报警编号
+     * @param almId 报警编号
+     */
     public void setAlmId(String almId) {
         this.almId = almId;
     }

@@ -12,6 +12,9 @@ import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
+/**
+ * 音视频传输请求指令参数。参数的具体意义，请参阅 JT/T 1078 文本的指令部分
+ */
 @JTMsgId(JT1078MsgConsts.LIVE_AV_REQ_9101)
 public class CP_9101_LiveAvReq implements JT808CmdParams {
 
@@ -36,66 +39,136 @@ public class CP_9101_LiveAvReq implements JT808CmdParams {
     private int debug;
     private String serverId;
 
+    /**
+     * 取服务器IP地址
+     *
+     * @return 服务器IP地址
+     */
     public String getServerIp() {
         return serverIp;
     }
 
+    /**
+     * 设置服务器IP地址
+     *
+     * @param serverIp 服务器IP地址
+     */
     public void setServerIp(String serverIp) {
         this.serverIp = serverIp;
     }
 
+    /**
+     * 取2013协议的TCP端口号
+     *
+     * @return 2013协议的TCP端口号
+     */
     public int getTcpPort() {
         return tcpPort;
     }
 
+    /**
+     * 设置2013协议的TCP端口号
+     * @param tcpPort 2013协议的TCP端口号
+     */
     public void setTcpPort(int tcpPort) {
         this.tcpPort = tcpPort;
     }
 
+    /**
+     * 取2013协议的UDP端口号
+     * @return 2013协议的UDP端口号
+     */
     public int getUdpPort() {
         return udpPort;
     }
 
+    /**
+     * 设置2013协议的UDP端口号
+     * @param udpPort 2013协议的UDP端口号
+     */
     public void setUdpPort(int udpPort) {
         this.udpPort = udpPort;
     }
 
+    /**
+     * 取2019协议的TCP端口号
+     * @return  2019协议的TCP端口号
+     */
     public int getTcpPort2019() {
         return tcpPort2019;
     }
 
+    /**
+     * 设置2019协议的TCP端口号
+     * @param tcpPort2019 2019协议的TCP端口号
+     */
     public void setTcpPort2019(int tcpPort2019) {
         this.tcpPort2019 = tcpPort2019;
     }
 
+    /**
+     * 取2019协议的UDP端口号
+     * @return 2019协议的UDP端口号
+     */
     public int getUdpPort2019() {
         return udpPort2019;
     }
 
+    /**
+     * 设置2019协议的UDP端口号
+     * @param udpPort2019 2019协议的UDP端口号
+     */
     public void setUdpPort2019(int udpPort2019) {
         this.udpPort2019 = udpPort2019;
     }
 
+    /**
+     * 取通道号
+     *
+     * @return 通道号
+     */
     public byte getChan() {
         return chan;
     }
 
+    /**
+     * 设置通道号
+     * @param chan 通道号
+     */
     public void setChan(byte chan) {
         this.chan = chan;
     }
 
+    /**
+     * 取数据类型
+     *
+     * @return 数据类型
+     */
     public Byte getDataTyp() {
         return dataTyp;
     }
 
+    /**
+     * 设置数据类型
+     * @param dataTyp 数据类型
+     */
     public void setDataTyp(Byte dataTyp) {
         this.dataTyp = dataTyp;
     }
 
+    /**
+     * 取码流
+     *
+     * @return 码流
+     */
     public Byte getCodeStrm() {
         return codeStrm;
     }
 
+    /**
+     * 设置码流
+     * @param codeStrm 码流
+     */
     public void setCodeStrm(Byte codeStrm) {
         this.codeStrm = codeStrm;
     }

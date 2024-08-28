@@ -121,10 +121,18 @@ public class TermCmdStateChanged {
         this.reqTm = reqTm;
     }
 
+    /**
+     * 取指令状态
+     * @return 指令状态。为 TermCmd.CMD_STATUS__xxx 系列常量之一
+     */
     public int getStatus() {
         return status;
     }
 
+    /**
+     * 设置指令状态
+     * @param status 指令状态。为 TermCmd.CMD_STATUS__xxx 系列常量之一
+     */
     public void setStatus(int status) {
         this.status = status;
     }
@@ -138,10 +146,20 @@ public class TermCmdStateChanged {
         return tm;
     }
 
+    /**
+     * 设置指令发生变更的时间
+     *
+     * @param tm 指令发生变更的时间，epoch millis
+     */
     public void setTm(long tm) {
         this.tm = DateTimeUtils.BeijingConv.millisToString(tm);
     }
 
+    /**
+     * 设置指令发生变更的时间
+     *
+     * @param tm 指令发生变更的时间，格式: yyyy-MM-dd HH:mm:ss，北京时间
+     */
     public void setTm(String tm) {
         this.tm = tm;
     }

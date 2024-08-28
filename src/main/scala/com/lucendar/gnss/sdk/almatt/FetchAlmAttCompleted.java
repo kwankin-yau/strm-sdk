@@ -15,6 +15,7 @@ public class FetchAlmAttCompleted {
     private String almTyp;
     private Integer almLvl;
     private boolean success;
+    private String completeTm;
     private int retryTimes;
 
     /**
@@ -111,6 +112,22 @@ public class FetchAlmAttCompleted {
     }
 
     /**
+     * 取结束时间
+     * @return 结束时间
+     */
+    public String getCompleteTm() {
+        return completeTm;
+    }
+
+    /**
+     * 设置结束时间
+     * @param completeTm 结束时间
+     */
+    public void setCompleteTm(String completeTm) {
+        this.completeTm = completeTm;
+    }
+
+    /**
      * 取重试次数
      * @return 重试次数
      */
@@ -129,10 +146,12 @@ public class FetchAlmAttCompleted {
     @Override
     public String toString() {
         return new StringJoiner(", ", FetchAlmAttCompleted.class.getSimpleName() + "[", "]")
+                .add("simNo='" + simNo + "'")
                 .add("almNo='" + almNo + "'")
                 .add("almTyp='" + almTyp + "'")
                 .add("almLvl=" + almLvl)
                 .add("success=" + success)
+                .add("completeTm='" + completeTm + "'")
                 .add("retryTimes=" + retryTimes)
                 .toString();
     }

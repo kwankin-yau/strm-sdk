@@ -12,6 +12,9 @@ import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
+/**
+ * 录像文件上传控制指令参数
+ */
 @JTMsgId(JT1078MsgConsts.AV_UPLOAD_CTRL_9207)
 public class CP_9207_AvUploadCtrl implements JT808CmdParams {
 
@@ -29,6 +32,7 @@ public class CP_9207_AvUploadCtrl implements JT808CmdParams {
      * The JT808 message seqNo of the originate av upload cmd(9206).
      */
     private int origSeqNo;
+
     private byte ctrl;
 
     /**
@@ -45,22 +49,34 @@ public class CP_9207_AvUploadCtrl implements JT808CmdParams {
     }
 
     /**
-     * Get the JT808 message seqNo of the originate av upload cmd(9206).
-     * @return The JT808 message seqNo of the originate av upload cmd(9206).
+     * 取应答流水号。Get the JT808 message seqNo of the originate av upload cmd(9206).
+     * @return 应答流水号. The JT808 message seqNo of the originate av upload cmd(9206).
      */
     public int getOrigSeqNo() {
         return origSeqNo;
     }
 
 
+    /**
+     * 设置应答流水号
+     * @param origSeqNo 应答流水号
+     */
     public void setOrigSeqNo(int origSeqNo) {
         this.origSeqNo = origSeqNo;
     }
 
+    /**
+     * 取上传控制
+     * @return 上传控制
+     */
     public byte getCtrl() {
         return ctrl;
     }
 
+    /**
+     * 设置上传控制
+     * @param ctrl 上传控制
+     */
     public void setCtrl(byte ctrl) {
         this.ctrl = ctrl;
     }

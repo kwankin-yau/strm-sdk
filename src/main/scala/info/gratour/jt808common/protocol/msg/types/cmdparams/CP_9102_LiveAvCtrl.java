@@ -12,6 +12,9 @@ import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
+/**
+ * 音视频实时传输控制指令参数
+ */
 @JTMsgId(JT1078MsgConsts.LIVE_AV_CTRL_9102)
 public class CP_9102_LiveAvCtrl implements JT808CmdParams {
 
@@ -40,34 +43,68 @@ public class CP_9102_LiveAvCtrl implements JT808CmdParams {
     private String closeReason;
 
 
+    /**
+     * 取通道号
+     * @return 通道号
+     */
     public byte getChan() {
         return chan;
     }
 
+    /**
+     * 设置通道号
+     * @param chan 通道号
+     */
     public void setChan(byte chan) {
         this.chan = chan;
     }
 
+    /**
+     * 取控制指令
+     *
+     * @return 控制指令
+     */
     public byte getCtrl() {
         return ctrl;
     }
 
+    /**
+     * 设置控制指令
+     * @param ctrl 控制指令
+     */
     public void setCtrl(int ctrl) {
         this.ctrl = (byte) ctrl;
     }
 
+    /**
+     * 取关闭音视频类型
+     * @return 关闭音视频类型
+     */
     public Byte getCloseAction() {
         return closeAction;
     }
 
+    /**
+     * 设置关闭音视频类型
+     * @param closeAction 关闭音视频类型
+     */
     public void setCloseAction(Byte closeAction) {
         this.closeAction = closeAction;
     }
 
+    /**
+     * 取切换码流类型
+     *
+     * @return 切换码流类型
+     */
     public Byte getCodeStrm() {
         return codeStrm;
     }
 
+    /**
+     * 设置切换码流类型
+     * @param codeStrm 切换码流类型
+     */
     public void setCodeStrm(Byte codeStrm) {
         this.codeStrm = codeStrm;
     }

@@ -21,6 +21,8 @@ public class AvUploadNotif {
     private String url;
     private String uploadTm;
 
+    private transient boolean progressNotif;
+
     /**
      * 取请求ID
      *
@@ -139,6 +141,14 @@ public class AvUploadNotif {
         this.uploadTm = uploadTm;
     }
 
+    public boolean isProgressNotif() {
+        return progressNotif;
+    }
+
+    public void setProgressNotif(boolean progressNotif) {
+        this.progressNotif = progressNotif;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", AvUploadNotif.class.getSimpleName() + "[", "]")
@@ -149,6 +159,7 @@ public class AvUploadNotif {
                 .add("fileName='" + fileName + "'")
                 .add("url='" + url + "'")
                 .add("uploadTm='" + uploadTm + "'")
+                .add("progressNotif=" + progressNotif)
                 .toString();
     }
 }

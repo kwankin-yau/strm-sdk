@@ -10,21 +10,34 @@ package info.gratour.jt808common.protocol.msg.types.ackparams;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.JT1078AvRes;
 import info.gratour.jtcommon.JTMsgId;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
+/**
+ * 查询音视频资源列表指令应答参数
+ */
 @JTMsgId(JT1078MsgConsts.QRY_AV_RES_ACK_1205)
 public class JT1078AckParams_1205_QryAvResAck implements JT808AckParams, Cloneable {
 
     private JT1078AvRes[] resList;
 
+    /**
+     * 取音视频资源列表
+     * @return 音视频资源列表
+     */
+    @NonNull
     public JT1078AvRes[] getResList() {
         return resList;
     }
 
-    public void setResList(JT1078AvRes[] resList) {
+    /**
+     * 设置音视频资源列表
+     * @param resList 音视频资源列表
+     */
+    public void setResList(@NonNull JT1078AvRes[] resList) {
         this.resList = resList;
     }
 
