@@ -13,6 +13,7 @@ import com.lucendar.gnss.sdk.alm.Alm;
 import com.lucendar.strm.common.types.RelativeFileNameProvider;
 import com.lucendar.strm.common.utils.StrmUtils;
 import info.gratour.common.types.rest.Reply;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.w3c.dom.TypeInfo;
 
 import java.lang.reflect.Type;
@@ -32,6 +33,12 @@ public class AlmAtt implements Cloneable, RelativeFileNameProvider {
      * 终端 ADAS 报警编号的 HEX 形式
      */
     private String id;
+
+    /**
+     * 提取任务的ID
+     */
+    @Nullable
+    private String taskId;
 
     /**
      * 报警时间（平台接收或从终端 ADAS 报警编号中解释得出），格式：yyyy-MM-dd HH:mm:ss
@@ -67,7 +74,7 @@ public class AlmAtt implements Cloneable, RelativeFileNameProvider {
      * 4: 面部特征图片
      *
      */
-    private short typ;
+    private int typ;
 
     /**
      * 文件接收完成时间, yyyy-MM-dd HH:mm:ss
@@ -103,6 +110,22 @@ public class AlmAtt implements Cloneable, RelativeFileNameProvider {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    /**
+     * 取提取任务的ID
+     * @return 提取任务的ID
+     */
+    public String getTaskId() {
+        return taskId;
+    }
+
+    /**
+     * 设置提取任务的ID
+     * @param taskId 提取任务的ID
+     */
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     /**
@@ -200,7 +223,7 @@ public class AlmAtt implements Cloneable, RelativeFileNameProvider {
      * </ul>
      * @return 文件类型
      */
-    public short getTyp() {
+    public int getTyp() {
         return typ;
     }
 
@@ -208,7 +231,7 @@ public class AlmAtt implements Cloneable, RelativeFileNameProvider {
      * 设置文件类型
      * @param typ  文件类型
      */
-    public void setTyp(short typ) {
+    public void setTyp(int typ) {
         this.typ = typ;
     }
 
@@ -299,6 +322,7 @@ public class AlmAtt implements Cloneable, RelativeFileNameProvider {
     public String toString() {
         return new StringJoiner(", ", AlmAtt.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
+                .add("taskId='" + taskId + "'")
                 .add("tm1='" + tm1 + "'")
                 .add("adasTyp='" + adasTyp + "'")
                 .add("almLvl=" + almLvl)

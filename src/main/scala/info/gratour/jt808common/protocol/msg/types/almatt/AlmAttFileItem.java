@@ -7,24 +7,45 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.almatt;
 
+import java.util.StringJoiner;
+
+/**
+ * 主动安全报警附件文件项
+ */
 public class AlmAttFileItem implements Cloneable {
 
     private String fileName;
     private int fileSize;
     private transient boolean uploadCompleted;
 
+    /**
+     * 取文件名
+     * @return 文件名
+     */
     public String getFileName() {
         return fileName;
     }
 
+    /**
+     * 设置文件名
+     * @param fileName 文件名
+     */
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * 取文件大小
+     * @return 文件大小
+     */
     public int getFileSize() {
         return fileSize;
     }
 
+    /**
+     * 设置文件大小
+     * @param fileSize 文件大小
+     */
     public void setFileSize(int fileSize) {
         this.fileSize = fileSize;
     }
@@ -48,10 +69,10 @@ public class AlmAttFileItem implements Cloneable {
 
     @Override
     public String toString() {
-        return "AlmAttFileItem{" +
-                "fileName='" + fileName + '\'' +
-                ", fileSize=" + fileSize +
-                ", uploadCompleted=" + uploadCompleted +
-                '}';
+        return new StringJoiner(", ", AlmAttFileItem.class.getSimpleName() + "[", "]")
+                .add("fileName='" + fileName + "'")
+                .add("fileSize=" + fileSize)
+                .add("uploadCompleted=" + uploadCompleted)
+                .toString();
     }
 }

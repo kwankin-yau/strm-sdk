@@ -38,6 +38,8 @@
 - 新增 `PagedQuery`, `QryStrmLogReq` 类
 - `JT1078MediaPacketPayloadType` 增加常用媒体类型判断方法
 - 新增 `FetchAlmAttCompletedAlmAttReadyNotif`、`QryPlayedAvDumpReq` 类
+- 新增 `AlmAttFileList`, `FetchAlmAttTask`, `FetchAlmAttLog`, `QryFetchAlmAttTaskReq`, `QryFetchAlmAttLogReq` 类
+
 
 ## 不兼容变更
 - `AvUploadReq` 增加 `fileSz` 必填属性

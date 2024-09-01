@@ -7,15 +7,20 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.almatt;
 
+import java.util.StringJoiner;
+
+/**
+ * 带类型的主动安全报警附件信息
+ */
 public class AlmAttFileItemWithType extends AlmAttFileItem {
 
-    private byte fileType;
+    private int fileType;
 
-    public byte getFileType() {
+    public int getFileType() {
         return fileType;
     }
 
-    public void setFileType(byte fileType) {
+    public void setFileType(int fileType) {
         this.fileType = fileType;
     }
 
@@ -26,8 +31,8 @@ public class AlmAttFileItemWithType extends AlmAttFileItem {
 
     @Override
     public String toString() {
-        return "AlmAttFileItemWithType{" +
-                "fileType=" + fileType +
-                "} " + super.toString();
+        return new StringJoiner(", ", AlmAttFileItemWithType.class.getSimpleName() + "[", "]")
+                .add("fileType=" + fileType)
+                .toString();
     }
 }
