@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @JTMsgId(JT808MsgConsts.QRY_PARAMS_ACK_0104)
+@Expose
 public class JT808AckParams_0104_QryParamsAck implements JT808AckParams, Cloneable {
 
 

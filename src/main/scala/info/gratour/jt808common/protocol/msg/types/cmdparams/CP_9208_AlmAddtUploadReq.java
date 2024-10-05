@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JTAdasMsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -16,6 +17,7 @@ import java.util.StringJoiner;
  * 报警附件上传指令参数
  */
 @JTMsgId(JTAdasMsgConsts.ALM_ATT_UPLOAD_REQ_9208)
+@Expose
 public class CP_9208_AlmAddtUploadReq implements JT808CmdParams {
 
     private String serverIp;

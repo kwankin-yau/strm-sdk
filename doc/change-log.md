@@ -39,6 +39,7 @@
 - `JT1078MediaPacketPayloadType` 增加常用媒体类型判断方法
 - 新增 `FetchAlmAttCompletedAlmAttReadyNotif`、`QryPlayedAvDumpReq` 类
 - 新增 `AlmAttFileList`, `FetchAlmAttTask`, `FetchAlmAttLog`, `QryFetchAlmAttTaskReq`, `QryFetchAlmAttLogReq` 类
+- 新增 `Expose` 标注，并标注 `TermCmd`, `JT808CmdParams`, `JT808AckParam`, `Trk`等相关的类
 
 
 ## 不兼容变更

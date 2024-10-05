@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.TERMINAL_CTRL_8105)
+@Expose
 public class CP_8105_TerminalCtrl implements JT808CmdParams {
 
     public static final int CMD__WIRELESS_UPGRADE = 1;
@@ -34,6 +36,7 @@ public class CP_8105_TerminalCtrl implements JT808CmdParams {
     }
 
 
+    @Expose
     public static interface CP_8105_Params extends Cloneable {
         CP_8105_Params clone();
     }
@@ -58,6 +61,7 @@ public class CP_8105_TerminalCtrl implements JT808CmdParams {
         this.params = params;
     }
 
+    @Expose
     public static class Cmd1_WirelessUpgrade implements CP_8105_Params {
 
         private String url;
@@ -193,6 +197,7 @@ public class CP_8105_TerminalCtrl implements JT808CmdParams {
         }
     }
 
+    @Expose
     public static class Cmd2_ConnSpecialServer implements CP_8105_Params {
 
         private int connectCtrl;

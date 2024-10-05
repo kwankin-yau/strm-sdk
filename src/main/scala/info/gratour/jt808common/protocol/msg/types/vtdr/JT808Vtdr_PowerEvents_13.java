@@ -7,10 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
+import com.lucendar.strm.common.types.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+@Expose
 public class JT808Vtdr_PowerEvents_13 implements JT808VtdrDataBlock {
     private List<Vtdr_PowerEvent> powerEvents;
 

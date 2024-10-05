@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.MANUAL_CONFIRM_ALARM_8203)
+@Expose
 public class CP_8203_ManualConfirmAlarm implements JT808CmdParams {
 
     private int ackSeqNo;

@@ -7,8 +7,10 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jtcommon.JTConsts;
 
+@Expose
 public interface JT808CmdParams extends Cloneable {
 
     default String toJson() {

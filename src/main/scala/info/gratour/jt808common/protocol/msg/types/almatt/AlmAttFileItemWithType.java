@@ -7,11 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.almatt;
 
+import com.lucendar.strm.common.types.Expose;
+
 import java.util.StringJoiner;
 
 /**
  * 带类型的主动安全报警附件信息
  */
+@Expose
 public class AlmAttFileItemWithType extends AlmAttFileItem {
 
     private int fileType;

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -16,6 +17,7 @@ import java.util.StringJoiner;
  * 查询音视频资源列表指令参数
  */
 @JTMsgId(JT1078MsgConsts.QRY_AV_RES_9205)
+@Expose
 public class CP_9205_QryAvRes implements JT808CmdParams {
 
     private byte chan;

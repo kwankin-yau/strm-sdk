@@ -7,11 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.addt.MQEventAddt_0800_MultiMediaEvent;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.STORED_MEDIA_SEARCH_8802)
+@Expose
 public class CP_8802_StoredMediaSearch implements JT808CmdParams {
 
     public static final int MEDIA_TYPE__IMAGE = MQEventAddt_0800_MultiMediaEvent.MEDIA_TYPE__IMAGE;

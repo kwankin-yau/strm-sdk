@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.LOCATION_TRACE_CTRL_8202)
+@Expose
 public class CP_8202_LocationTraceCtrl implements JT808CmdParams {
 
     private int interval;

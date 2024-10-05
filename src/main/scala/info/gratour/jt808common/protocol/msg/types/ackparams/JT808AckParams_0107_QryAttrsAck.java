@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.QRY_TERMINAL_ATTRS_ACK_0107)
+@Expose
 public class JT808AckParams_0107_QryAttrsAck implements JT808AckParams, Cloneable {
 
     private short terminalType;

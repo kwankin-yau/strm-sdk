@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.JT808InfoMenuItem;
 import info.gratour.jtcommon.JTMsgId;
@@ -14,6 +15,7 @@ import info.gratour.jtcommon.JTMsgId;
 import java.util.Arrays;
 
 @JTMsgId(JT808MsgConsts.SET_UP_INFO_MENU_8303)
+@Expose
 public class CP_8303_SetUpInfoMenu implements JT808CmdParams {
 
     private byte action;

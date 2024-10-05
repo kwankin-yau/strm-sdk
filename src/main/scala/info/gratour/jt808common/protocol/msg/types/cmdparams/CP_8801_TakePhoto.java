@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.TAKE_PHOTO_8801)
+@Expose
 public class CP_8801_TakePhoto implements JT808CmdParams {
 
     private byte channel;

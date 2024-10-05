@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -16,6 +17,7 @@ import java.util.StringJoiner;
  * 录像文件上传指令参数
  */
 @JTMsgId(JT1078MsgConsts.AV_UPLOAD_REQ_9206)
+@Expose
 public class CP_9206_AvUploadReq implements JT808CmdParams {
 
     public static final int MEDIA_TYPE__AV = 0;

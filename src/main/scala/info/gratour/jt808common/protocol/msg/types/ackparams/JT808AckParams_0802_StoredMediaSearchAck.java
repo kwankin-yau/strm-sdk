@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.JT808MediaInfo;
 import info.gratour.jtcommon.JTMsgId;
@@ -14,6 +15,7 @@ import info.gratour.jtcommon.JTMsgId;
 import java.util.Arrays;
 
 @JTMsgId(JT808MsgConsts.STORED_MEDIA_SEARCH_ACK_0802)
+@Expose
 public class JT808AckParams_0802_StoredMediaSearchAck implements JT808AckParams, Cloneable {
 
     private JT808MediaInfo[] mediaInfos;

@@ -8,8 +8,10 @@
 package info.gratour.jt808common.protocol.msg.types;
 
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.msg.types.trk.Trk;
 
+@Expose
 public class JT808MediaInfo implements Cloneable {
 
     private long mediaId;

@@ -1,7 +1,10 @@
 package info.gratour.jt808common.protocol.msg.types;
 
+import com.lucendar.strm.common.types.Expose;
+
 import java.util.StringJoiner;
 
+@Expose
 public class JT1078TermAvAttrs {
 
     private byte audioCodec;

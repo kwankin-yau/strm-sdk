@@ -7,10 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
+import com.lucendar.strm.common.types.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+@Expose
 public class Vtdr_LocationInfoPerHour implements Cloneable {
 
     private String startTime;

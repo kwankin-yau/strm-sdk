@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.JT1078AvRes;
 import info.gratour.jtcommon.JTMsgId;
@@ -20,6 +21,7 @@ import java.util.StringJoiner;
  * 查询音视频资源列表指令应答参数
  */
 @JTMsgId(JT1078MsgConsts.QRY_AV_RES_ACK_1205)
+@Expose
 public class JT1078AckParams_1205_QryAvResAck implements JT808AckParams, Cloneable {
 
     private JT1078AvRes[] resList;

@@ -7,11 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.trk.Trk;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.VEH_CTRL_ACK_0500)
+@Expose
 public class JT808AckParams_0500_VehCtrlAck implements JT808AckParams, Cloneable {
 
     private Trk trk;

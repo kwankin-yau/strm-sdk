@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.AUDIO_RECORD_CTRL_8804)
+@Expose
 public class CP_8804_AudioRecordCtrl implements JT808CmdParams {
 
     private byte action;

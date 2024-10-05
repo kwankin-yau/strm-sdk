@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -16,6 +17,7 @@ import java.util.StringJoiner;
  * 远程录像回放指令参数
  */
 @JTMsgId(JT1078MsgConsts.REPLAY_AV_REQ_9201)
+@Expose
 public class CP_9201_ReplayAvReq implements JT808CmdParams {
 
     public static final int MEDIA_TYPE__AV = 0;

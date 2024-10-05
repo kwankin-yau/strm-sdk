@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.AdasDialect;
 import info.gratour.jt808common.codec.CodecError;
 import org.apache.commons.codec.DecoderException;
@@ -17,6 +18,7 @@ import java.util.StringJoiner;
 /**
  * 驾驶员状态监测系统报警附加信息
  */
+@Expose
 public class AdasDriverBehavAlmAddt extends AdasAddt implements Cloneable {
 
     /**

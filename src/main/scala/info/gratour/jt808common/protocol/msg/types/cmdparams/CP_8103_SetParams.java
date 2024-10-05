@@ -7,12 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 import java.util.Map;
 
 @JTMsgId(JT808MsgConsts.SET_PARAMS_8103)
+@Expose
 public class CP_8103_SetParams implements JT808CmdParams {
 
     private Map<String, Object> params;

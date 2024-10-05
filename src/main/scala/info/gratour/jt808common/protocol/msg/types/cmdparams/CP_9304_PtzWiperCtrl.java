@@ -7,12 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
 @JTMsgId(JT1078MsgConsts.PTZ_WIPER_CTRL_9304)
+@Expose
 public class CP_9304_PtzWiperCtrl implements JT808CmdParams {
 
     private byte chan;

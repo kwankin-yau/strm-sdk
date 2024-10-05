@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.vtdr.JT808VtdrDataBlock;
 import info.gratour.jtcommon.JTMsgId;
@@ -14,6 +15,7 @@ import info.gratour.jtcommon.JTMsgId;
 import java.util.StringJoiner;
 
 @JTMsgId(JT808MsgConsts.VTDR_DATA_COLLECT_REQ_8700)
+@Expose
 public class CP_8700_VtdrDataCollectReq implements JT808CmdParams {
 
     private byte cmd;

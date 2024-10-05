@@ -7,12 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.trk.Trk;
 import info.gratour.jtcommon.JTMsgId;
 
 
 @JTMsgId(JT808MsgConsts.QRY_LOCATION_ACK_0201)
+@Expose
 public class JT808AckParams_0201_QryLocationAck implements JT808AckParams, Cloneable {
 
     private Trk trk;

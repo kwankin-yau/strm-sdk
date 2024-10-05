@@ -7,8 +7,10 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jtcommon.JTConsts;
 
+@Expose
 public interface JT808AckParams {
 
     default String toJson() {

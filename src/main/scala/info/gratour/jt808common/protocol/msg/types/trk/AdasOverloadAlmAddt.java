@@ -1,5 +1,6 @@
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.AdasDialect;
 
 import java.util.StringJoiner;
@@ -7,6 +8,7 @@ import java.util.StringJoiner;
 /**
  * 载重报警附加信息
  */
+@Expose
 public class AdasOverloadAlmAddt extends AdasAddt implements Cloneable {
 
     /**

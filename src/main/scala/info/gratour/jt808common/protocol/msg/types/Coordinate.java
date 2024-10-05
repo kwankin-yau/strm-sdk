@@ -1,9 +1,11 @@
 package info.gratour.jt808common.protocol.msg.types;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jtcommon.JTUtils;
 
 import java.util.Objects;
 
+@Expose
 public class Coordinate implements Cloneable {
 
     private double lng;

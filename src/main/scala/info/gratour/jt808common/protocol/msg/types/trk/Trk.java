@@ -1,6 +1,7 @@
 package info.gratour.jt808common.protocol.msg.types.trk;
 
 import com.google.gson.reflect.TypeToken;
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.JT1078VidAlarmBit;
 import info.gratour.jt808common.JT808AlarmBit;
 import info.gratour.jt808common.JT808StateBit;
@@ -17,6 +18,7 @@ import java.text.DecimalFormat;
 /**
  * 轨迹
  */
+@Expose
 public class Trk implements MQEventAddt, Cloneable {
 
     public static final Type TYPE = new TypeToken<Trk>() {

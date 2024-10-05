@@ -7,11 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types;
 
+import com.lucendar.strm.common.types.Expose;
+
 import java.util.StringJoiner;
 
 /**
  * 音视频资源
  */
+@Expose
 public class JT1078AvRes {
 
     public static final int MEDIA_TYPE__AV = 0;

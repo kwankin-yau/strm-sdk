@@ -7,12 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 import java.util.Arrays;
 
 @JTMsgId(JT808MsgConsts.DEL_CIRCLE_REGION_8601)
+@Expose
 public class CP_8601_DelCircleRegion implements JT808CmdParams {
 
     private int[] regionIds;

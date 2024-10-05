@@ -7,11 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 import info.gratour.jtcommon.JTUtils;
 
 @JTMsgId(JT808MsgConsts.SEND_TEXT_8300)
+@Expose
 public class CP_8300_SendText implements JT808CmdParams {
 
 

@@ -7,8 +7,11 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
+import com.lucendar.strm.common.types.Expose;
+
 import java.util.StringJoiner;
 
+@Expose
 public class JT808Vtdr_VerInfo_00 implements JT808VtdrDataBlock {
 
     private String year;

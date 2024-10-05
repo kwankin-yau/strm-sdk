@@ -7,11 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.addt;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.ackparams.JT808AckParams;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.DRIVER_IDENTITY_0702)
+@Expose
 public class MQEventAddt_0702_DriverIdentity implements MQEventAddt, JT808AckParams {
 
     public static final short ACT__LOGIN = 1;

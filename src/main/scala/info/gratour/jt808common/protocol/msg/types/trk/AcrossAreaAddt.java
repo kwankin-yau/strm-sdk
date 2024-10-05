@@ -1,10 +1,13 @@
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
+
 import java.util.StringJoiner;
 
 /**
  * 进出区域/路线报警附加信息
  */
+@Expose
 public class AcrossAreaAddt implements Cloneable {
 
     /**

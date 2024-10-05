@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.JT808CircleRegion;
 import info.gratour.jtcommon.JTMsgId;
@@ -14,6 +15,7 @@ import info.gratour.jtcommon.JTMsgId;
 import java.util.Arrays;
 
 @JTMsgId(JT808MsgConsts.SET_CIRCLE_REGION_8600)
+@Expose
 public class CP_8600_SetCircleRegion implements JT808CmdParams {
 
     private byte action;

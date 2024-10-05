@@ -7,6 +7,9 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types;
 
+import com.lucendar.strm.common.types.Expose;
+
+@Expose
 public class JT808RectRegion implements Cloneable {
 
     private int regionId;

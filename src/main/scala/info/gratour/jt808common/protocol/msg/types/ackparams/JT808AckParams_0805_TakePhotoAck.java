@@ -7,12 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 import java.util.Arrays;
 
 @JTMsgId(JT808MsgConsts.TAKE_PHOTO_ACK_0805)
+@Expose
 public class JT808AckParams_0805_TakePhotoAck implements JT808AckParams, Cloneable {
 
     private byte result;

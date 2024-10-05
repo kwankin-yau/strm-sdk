@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -16,6 +17,7 @@ import java.util.StringJoiner;
  * 录像文件上传控制指令参数
  */
 @JTMsgId(JT1078MsgConsts.AV_UPLOAD_CTRL_9207)
+@Expose
 public class CP_9207_AvUploadCtrl implements JT808CmdParams {
 
     public static final byte CTRL__PAUSE = 0;

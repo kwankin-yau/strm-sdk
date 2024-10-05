@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.AdasDialect;
 
 import java.util.StringJoiner;
@@ -14,6 +15,7 @@ import java.util.StringJoiner;
 /**
  * 盲区监测系统报警附加信息
  */
+@Expose
 public class AdasBlindAreaAlmAddt extends AdasAddt implements Cloneable {
 
     /**

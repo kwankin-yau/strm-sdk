@@ -1,5 +1,8 @@
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
+
+@Expose
 public class UnusualDriveBehav implements Cloneable {
     private short typ;
     private byte tiredLvl;

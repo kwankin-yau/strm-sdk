@@ -8,6 +8,7 @@
 package info.gratour.jt808common.protocol.msg.types.trk;
 
 import com.google.gson.reflect.TypeToken;
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.adas.AdasAlmTypes;
 import info.gratour.jtcommon.JTConsts;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -17,6 +18,7 @@ import java.lang.reflect.Type;
 /**
  * 轨迹附加信息
  */
+@Expose
 public class TrkAddt implements Cloneable {
 
     public static final Type TYPE = new TypeToken<TrkAddt>() {

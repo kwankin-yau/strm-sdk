@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -16,6 +17,7 @@ import java.util.StringJoiner;
  * 音视频实时传输控制指令参数
  */
 @JTMsgId(JT1078MsgConsts.LIVE_AV_CTRL_9102)
+@Expose
 public class CP_9102_LiveAvCtrl implements JT808CmdParams {
 
     public static final int CTRL__CLOSE_CHANNEL = 0;

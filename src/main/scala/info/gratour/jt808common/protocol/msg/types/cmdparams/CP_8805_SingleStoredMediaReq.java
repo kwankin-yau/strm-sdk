@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.SINGLE_STORED_MEDIA_REQ_8805)
+@Expose
 public class CP_8805_SingleStoredMediaReq implements JT808CmdParams {
 
     private int mediaId;

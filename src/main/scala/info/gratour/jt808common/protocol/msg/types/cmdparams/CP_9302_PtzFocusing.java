@@ -7,12 +7,14 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 import java.util.StringJoiner;
 
 @JTMsgId(JT1078MsgConsts.PTZ_FOCUSING_9302)
+@Expose
 public class CP_9302_PtzFocusing implements JT808CmdParams {
 
     private byte chan;

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.AdasDialect;
 
 import java.util.StringJoiner;
@@ -14,6 +15,7 @@ import java.util.StringJoiner;
 /**
  * 卫星定位超速报警
  */
+@Expose
 public class AdasOverSpdAlmAddt extends AdasAddt implements Cloneable {
 
 

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
@@ -16,6 +17,7 @@ import java.util.StringJoiner;
  * 音视频传输请求指令参数。参数的具体意义，请参阅 JT/T 1078 文本的指令部分
  */
 @JTMsgId(JT1078MsgConsts.LIVE_AV_REQ_9101)
+@Expose
 public class CP_9101_LiveAvReq implements JT808CmdParams {
 
     public static final byte DATA_TYPE__AV = 0;

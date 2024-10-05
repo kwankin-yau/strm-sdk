@@ -7,11 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.AdasDialect;
 
 import java.util.List;
 import java.util.StringJoiner;
 
+@Expose
 public class AdasTyreState extends AdasAddt implements Cloneable {
 
     public static final byte FLAG__NOT_AVAILABLE = 0;

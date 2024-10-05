@@ -7,6 +7,7 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JTAdasMsgConsts;
 import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttFileItemWithType;
 import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttReTransFileBlock;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JTMsgId(JTAdasMsgConsts.ALM_ATT_FILE_ITEM_COMPLETED_9212)
+@Expose
 public class CP_9212_AlmAttFileItemCompleted implements JT808CmdParams {
 
     public static final byte RESULT__COMPLETED = 0;

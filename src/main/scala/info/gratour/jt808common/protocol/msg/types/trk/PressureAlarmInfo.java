@@ -1,7 +1,9 @@
 package info.gratour.jt808common.protocol.msg.types.trk;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jtcommon.JTUtils;
 
+@Expose
 public class PressureAlarmInfo {
 
     public static final byte BIT__PRESS_VALUE = 0;

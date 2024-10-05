@@ -7,10 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import com.lucendar.strm.common.types.Expose;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
 @JTMsgId(JT808MsgConsts.PHONE_CALLBACK_8400)
+@Expose
 public class CP_8400_PhoneCallback implements JT808CmdParams {
 
     public static final int ACTION__TALK = 0;
