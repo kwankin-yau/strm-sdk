@@ -65,13 +65,17 @@ public class JT808Msg implements JTMsg {
         this.headers = headers;
     }
 
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", JT808Msg.class.getSimpleName() + "[", "]")
-                .add("msgId=" + JTUtils.msgIdToHex(msgId))
+    public StringJoiner toString(StringJoiner joiner) {
+        joiner.add("msgId=" + JTUtils.msgIdToHex(msgId))
                 .add("simNo='" + simNo + "'")
                 .add("seqNo=" + seqNo)
-                .add("headers=" + headers)
-                .toString();
+                .add("headers=" + headers);
+
+        return joiner;
+    }
+
+    @Override
+    public String toString() {
+        return toString(new StringJoiner(", ", JT808Msg.class.getSimpleName() + "[", "]")).toString();
     }
 }

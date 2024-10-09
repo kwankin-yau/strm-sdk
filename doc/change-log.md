@@ -40,7 +40,7 @@
 - 新增 `FetchAlmAttCompletedAlmAttReadyNotif`、`QryPlayedAvDumpReq` 类
 - 新增 `AlmAttFileList`, `FetchAlmAttTask`, `FetchAlmAttLog`, `QryFetchAlmAttTaskReq`, `QryFetchAlmAttLogReq` 类
 - 新增 `Expose` 标注，并标注 `TermCmd`, `JT808CmdParams`, `JT808AckParam`, `Trk`等相关的类
-
+- 新增 `com.lucendar.strm.common.strm.log.StrmMqAdaptorLogEntry`, `com.lucendar.strm.common.strm.log.StrmMqLogEntry` 类
 
 ## 不兼容变更
 - `AvUploadReq` 增加 `fileSz` 必填属性

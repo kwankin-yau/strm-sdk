@@ -38,9 +38,9 @@ public class JT1078Msg_9102_LiveAvCtrl extends JT1078Msg {
     }
 
     @Override
-    public String toString() {
-        return new StringJoiner(", ", JT1078Msg_9102_LiveAvCtrl.class.getSimpleName() + "[", "]")
-                .add("params=" + params)
-                .toString();
+    public StringJoiner toString(StringJoiner joiner) {
+        StringJoiner r = super.toString(joiner);
+        r.add("params=" + params);
+        return r;
     }
 }
