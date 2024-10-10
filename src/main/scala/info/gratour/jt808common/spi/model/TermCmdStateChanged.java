@@ -123,6 +123,7 @@ public class TermCmdStateChanged {
 
     /**
      * 取指令状态
+     *
      * @return 指令状态。为 TermCmd.CMD_STATUS__xxx 系列常量之一
      */
     public int getStatus() {
@@ -131,6 +132,7 @@ public class TermCmdStateChanged {
 
     /**
      * 设置指令状态
+     *
      * @param status 指令状态。为 TermCmd.CMD_STATUS__xxx 系列常量之一
      */
     public void setStatus(int status) {
@@ -282,15 +284,16 @@ public class TermCmdStateChanged {
      * 从 TermCmd 对象中复制属性。
      *
      * @param cmd      源 TermCmd 对象
+     * @param status    新的指令状态
      * @param changeTm 状态变更的时间
      */
-    public void assign(TermCmd cmd, long changeTm) {
+    public void assign(TermCmd cmd, int status, long changeTm) {
         this.appId = cmd.appIdDef();
         this.id = cmd.getId();
         this.externalId = cmd.getExternalId();
         this.reqId = cmd.getReqId();
         this.reqTm = DateTimeUtils.BeijingConv.millisToString(cmd.getReqTm());
-        this.status = cmd.getStatus();
+        this.status = status;
         this.tm = DateTimeUtils.BeijingConv.millisToString(changeTm);
         this.initMsgId = cmd.getMsgId();
         this.subCmdTyp = cmd.getSubCmdTyp();
@@ -335,6 +338,7 @@ public class TermCmdStateChanged {
 
     /**
      * 将指令发生变更的时间字符串转船成 epoch millis。
+     *
      * @return 指令发生变更的时间 的 epoch millis 表示。
      */
     public Long tmAsEpochMillis() {
