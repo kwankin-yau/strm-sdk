@@ -309,6 +309,16 @@ public class TermCmdStateChanged {
     }
 
     /**
+     * 从 TermCmd 对象中复制属性。`status` 采用 `termCmd.status`。
+     *
+     * @param cmd      源 TermCmd 对象
+     * @param changeTm 状态变更的时间
+     */
+    public void assign(TermCmd cmd, long changeTm) {
+        assign(cmd, cmd.getStatus(), changeTm);
+    }
+
+    /**
      * 将变更应用到 TermCmd 对象中。
      *
      * @param cmd 目标 TermCmd 对象

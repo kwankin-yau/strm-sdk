@@ -14,7 +14,7 @@ import java.util.StringJoiner;
  * ADAS 报警附件查询请求。分为按 id 查询和按时间段查询。
  * <ul>
  *     <li>按 id 查询时，只使用 `id`, `simNo` 两个参数，且两者均为必要参数</li>
- *     <li>按时间段查询时，使用 `simNo`, `startTime`, `endTime`, `__page`, `__limit` 参数，其中 `simNo`, `startTime`
+ *     <li>按时间段查询时，使用 `simNo`, `startTime`, `endTime`, `taskId`, `__page`, `__limit` 参数，其中 `simNo`, `startTime`
  *     为必要参数，`endTime` 不指定时，表示报警时间到当前时间为止</li>
  * </ul>
  * 本类的字符串时间值采用北京时间，格式为：yyyy-MM-dd HH:mm:ss
@@ -24,6 +24,7 @@ public class QryAdasAlmAttReq {
     private String simNo;
     private String startTime;
     private String endTime;
+    private String taskId;
     private Integer __page;
     private Integer __limit;
 
@@ -94,6 +95,23 @@ public class QryAdasAlmAttReq {
     }
 
     /**
+     * 取提取任务ID
+     *
+     * @return 提取任务ID
+     */
+    public String getTaskId() {
+        return taskId;
+    }
+
+    /**
+     * 设置提取任务ID
+     * @param taskId 提取任务ID
+     */
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+    /**
      * 取分页的页码，从1开始
      * @return 分页的页码
      */
@@ -160,6 +178,7 @@ public class QryAdasAlmAttReq {
                 .add("simNo='" + simNo + "'")
                 .add("startTime='" + startTime + "'")
                 .add("endTime='" + endTime + "'")
+                .add("taskId='" + taskId + "'")
                 .add("__page=" + __page)
                 .add("__limit=" + __limit)
                 .toString();

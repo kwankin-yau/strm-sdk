@@ -46,6 +46,7 @@
 - `AvUploadReq` 增加 `fileSz` 必填属性
 - `AdasAlmTypes` 的报警类型编码改为 Micro-GNSS 1.x 的 ADAS 报警类型 编码
 - `AdasDialect.GDRTA_2020` 改名为 `AdasDialect.GUANG_DONG`
+- `QryAdasAlmAttReq` 增加 `taskId` 参数
 
 ## 变更
 - `com.lucendar.gnss.sdk.gateway.OnlineOfflineNotif.protoVer` 数据类型由 Integer 改为 String
