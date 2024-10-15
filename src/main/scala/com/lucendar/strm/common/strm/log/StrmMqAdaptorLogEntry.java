@@ -10,6 +10,7 @@ public class StrmMqAdaptorLogEntry {
     private String id;
     private long tm;
     private String appId;
+    private String simNo;
     private String method;
     private String input;
     private String err;
@@ -65,6 +66,22 @@ public class StrmMqAdaptorLogEntry {
     }
 
     /**
+     * 取终端识别号
+     * @return 终端识别号
+     */
+    public String getSimNo() {
+        return simNo;
+    }
+
+    /**
+     * 设置终端识别号
+     * @param simNo 终端识别号
+     */
+    public void setSimNo(String simNo) {
+        this.simNo = simNo;
+    }
+
+    /**
      * 取所调用的方法的名称，如 "getAckInfo", "convertTermCmd"
      * @return 所调用的方法的名称
      */
@@ -114,7 +131,7 @@ public class StrmMqAdaptorLogEntry {
     }
 
     /**
-     * 取调用方法返回的数据
+     * 取调用方法返回的数据。发生错误时，返回 null
      *
      * @return 调用方法返回的数据
      */
@@ -136,6 +153,7 @@ public class StrmMqAdaptorLogEntry {
                 .add("id='" + id + "'")
                 .add("tm=" + tm)
                 .add("appId='" + appId + "'")
+                .add("simNo='" + simNo + "'")
                 .add("method='" + method + "'")
                 .add("input='" + input + "'")
                 .add("err='" + err + "'")

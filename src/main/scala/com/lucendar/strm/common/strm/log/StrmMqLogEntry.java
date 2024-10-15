@@ -24,12 +24,43 @@ public class StrmMqLogEntry {
      */
     public static final int TYP__RECV = 2;
 
+    /**
+     * 消息类型：指令下发
+     * 发送者：媒体服务
+     */
+    public static final String KIND__termCmd = "termCmd";
+
+    /**
+     * 消息类型：指令状态变更通知
+     * 发送者：集成系统
+     */
+    public static final String KIND__cmdStateChanged = "cmdStateChanged";
+
+    /**
+     * 消息类型：远程录像上传通知
+     * 发送者：媒体服务
+     */
+    public static final String KIND__avUploadNotif = "avUploadNotif";
+
+    /**
+     * 消息类型：提取ADAS报警附件请求消息
+     * 发送者：集成系统
+     */
+    public static final String KIND__fetchAlmAtt = "fetchAlmAtt";
+
+    /**
+     * 消息类型：提取ADAS报警附件任务结束通知
+     * 发送者：媒体服务
+     */
+    public static final String KIND__fetchAlmAttCompleted = "fetchAlmAttCompleted";
+
     private String id;
     private long tm;
     private String appId;
     private String channel;
     private String destination;
     private int typ;
+    private String kind;
     private String msg;
 
     /**
@@ -116,6 +147,22 @@ public class StrmMqLogEntry {
     }
 
     /**
+     * 取消息类型，为 KIND__xxx 常量之一。应用应跳过识别不了消息类型的消息
+     * @return 消息类型
+     */
+    public String getKind() {
+        return kind;
+    }
+
+    /**
+     * 设置消息类型
+     * @param kind 消息类型
+     */
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    /**
      * 取事件类型，为 TYP__xxx 系列常量之一
      *
      * @return 事件类型，为 TYP__xxx 系列常量之一
@@ -152,12 +199,13 @@ public class StrmMqLogEntry {
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmMqLogEntry.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
+                .add("id='" + id + "'")
                 .add("tm=" + tm)
                 .add("appId='" + appId + "'")
                 .add("channel='" + channel + "'")
                 .add("destination='" + destination + "'")
                 .add("typ=" + typ)
+                .add("kind='" + kind + "'")
                 .add("msg='" + msg + "'")
                 .toString();
     }

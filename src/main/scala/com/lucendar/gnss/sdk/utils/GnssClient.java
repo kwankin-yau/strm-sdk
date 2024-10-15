@@ -74,8 +74,8 @@ public class GnssClient {
     protected final String authHeaderValue;
 
     /**
-     * @param connParams
-     * @param logging      whether logging the http call
+     * @param connParams connection parameters
+     * @param logging    whether logging the http call
      */
     public GnssClient(
             GnssApiConnParams connParams,
