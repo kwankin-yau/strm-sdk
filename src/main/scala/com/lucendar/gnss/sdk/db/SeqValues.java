@@ -16,7 +16,14 @@ public class SeqValues {
      */
     public record SeqValueConfig(String seqName, int incr){}
 
+    /**
+     * 轨迹ID sequence
+     */
     public static final String SEQ_TRK_ID = "s_trk_id";
+
+    /**
+     * 报警ID sequence
+     */
     public static final String SEQ_ALM_ID = "s_alm_id";
 
     public static final SeqValueConfig TrkIdConfig = new SeqValueConfig(SEQ_TRK_ID, 100000);

@@ -12,5 +12,5 @@
 
 ## Gradle
 ```groovy
-implementation 'com.lucendar:strm-sdk:3.4.4'
+implementation 'com.lucendar:strm-sdk:4.0.0'
 ```

@@ -1,85 +1,354 @@
-/*
- * Copyright (c) 2024 lucendar.com.
- * All rights reserved.
- */
 package com.lucendar.gnss.sdk.clnt;
 
 import com.google.gson.Gson;
-import com.lucendar.common.types.KV;
-import com.lucendar.common.types.rest.Pagination;
-import com.lucendar.gnss.sdk.almatt.AlmAtt;
-import com.lucendar.gnss.sdk.almatt.FetchAlmAttReq;
+import com.google.gson.GsonBuilder;
+import com.lucendar.gnss.sdk.session.GnssLoginReq;
+import com.lucendar.gnss.sdk.session.GnssLoginResult;
+import com.lucendar.gnss.sdk.strm.GnssOpenLiveStrmReq;
+import com.lucendar.gnss.sdk.strm.GnssOpenReplayStrmReq;
+import com.lucendar.gnss.sdk.strm.GnssOpenStrmResult;
+import com.lucendar.gnss.sdk.types.GnssApiConnParams;
+import com.lucendar.gnss.sdk.types.ReplyTypes;
+import com.lucendar.strm.common.strm.*;
+import info.gratour.common.error.ErrorWithCode;
 import info.gratour.common.types.rest.Reply;
-import okhttp3.OkHttpClient;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import okhttp3.*;
+import okhttp3.logging.HttpLoggingInterceptor;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.time.Duration;
+
+import static com.lucendar.gnss.sdk.HttpConsts.HEADER_X_APP_ID;
+import static com.lucendar.gnss.sdk.HttpConsts.HEADER_X_AUTH_TOKEN;
+import static info.gratour.common.types.rest.Reply.RAW_REPLY_TYPE;
 
 /**
- * 媒体服务API客户端
+ * HTTP API 客户端
  */
-public class StrmApiClient extends SimpleApiClient {
+public class StrmApiClient {
 
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(StrmApiClient.class);
+
+    public static final GsonBuilder GSON_BUILDER = new GsonBuilder();
+    public static final Gson GSON = GSON_BUILDER.create();
+
+    public static final GsonBuilder GSON_BUILDER_PRETTY = GSON_BUILDER.setPrettyPrinting();
+    public static final Gson GSON_PRETTY = GSON_BUILDER_PRETTY.create();
+
+    private final MediaType JSON = MediaType.get("application/json");
+
+    protected OkHttpClient createHttpClient(boolean logging) {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(Duration.ofSeconds(15));
+
+        if (logging) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                @Override
+                public void log(@NotNull String s) {
+                    LOGGER.info(s);
+                }
+            });
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(interceptor);
+        }
+
+        return builder.build();
+    }
+
+    protected final OkHttpClient httpClient;
+    protected String token;
+    protected final GnssApiConnParams connParams;
+
+    protected final String authHeaderValue;
+
+    /**
+     * @param connParams connection parameters
+     * @param logging    whether logging the http call
+     */
     public StrmApiClient(
-            @NonNull Gson gson,
-            @NonNull String endPointUrl,
-            @NonNull ApiAuthentication authentication,
-            @NonNull OkHttpClient httpClient) {
-        super(gson, endPointUrl, authentication, httpClient);
+            GnssApiConnParams connParams,
+            boolean logging) {
+
+        this.connParams = connParams;
+
+        httpClient = createHttpClient(logging);
+        authHeaderValue = connParams.authorizationHeaderValue();
     }
 
-    /**
-     * ADAS 报警附件API
-     */
-    public class AdasAlmAttApi {
+    public GnssApiConnParams getConnParams() {
+        return connParams;
+    }
 
-        /**
-         * 指示媒体服务提取终端的 ADAS 报警附件
-         *
-         * @param req 提取 ADAS 报警附件请求
-         * @return 常规响应
-         */
-        public Reply<Void> fetch(@NonNull FetchAlmAttReq req) {
-            return post("/alm/att/fetch", Reply.RAW_REPLY_TYPE, null, req);
-        }
+    public String getToken() {
+        return token;
+    }
 
-        /**
-         * 按 ID 查询 ADAS 报警附件
-         * @param id 终端ADAS报警ID（16字节或40字节(2019版)），HEX编码
-         * @param simNo 终端识别号
-         * @return 附件信息列表
-         */
-        public Reply<AlmAtt> qryAlmAttById(@NonNull String id, @NonNull String simNo) {
-            return get("/alm/att", AlmAtt.REPLY_TYPE, KV.of("id", id), KV.of("simNo", simNo));
-        }
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-        /**
-         * 按时间范围查询 ADAS 报警附件
-         * @param simNo 终端识别号
-         * @param startTime 报警时间的开始时间，格式：`yyyy-MM-dd HH:mm:ss`
-         * @param endTime 报警时间的结束时间，格式：`yyyy-MM-dd HH:mm:ss`。查询结果不包含结束时刻，即小于结束时刻。
-         *                不指定时，表示到服务执行查询的时间。时间跨度不能超过7天。
-         * @return 附件信息列表
-         */
-        public Reply<AlmAtt> qryAlmAttByTimeRange(
-                @Nullable String simNo,
-                @NonNull String startTime,
-                @Nullable String endTime,
-                @Nullable Pagination pagination) {
-            KV.KVList list = new KV.KVList();
-            list.addNonNull("simNo", simNo);
-            list.add("startTime", startTime);
-            list.addNonNull("endTime", endTime);
-            if (pagination != null) {
-                list.add("__limit", pagination.limit);
-                list.add("__page", pagination.page);
+    public OkHttpClient getHttpClient() {
+        return httpClient;
+    }
+
+    protected <T extends Reply<?>> T makeCall(String endPoint, Request request, Type responseType, boolean checkResp) {
+        try (Response resp = httpClient.newCall(request).execute()) {
+            ResponseBody body = resp.body();
+            if (body != null) {
+                int httpCategory = resp.code() / 100;
+
+                // TODO: what about status code category is 3xx?
+                if (httpCategory != 2) {
+                    String message = "API `%s` call return status: %d.";
+                    message = String.format(message, endPoint, resp.code());
+                    throw new RuntimeException(message);
+                }
+
+                String s = body.string();
+                T r = GSON.fromJson(s, responseType);
+                if (checkResp && !r.ok())
+                    throw new ErrorWithCode(r.getErrCode(), r.getMessage());
+
+                return r;
+            } else {
+                String message = "API `%s` call return empty body: " + resp;
+                message = String.format(message, endPoint);
+                throw new RuntimeException(message);
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-            return get("/alm/att", AlmAtt.REPLY_TYPE, list.toArray());
+    protected Request buildRequest(String endPoint, String method, RequestBody body) {
+        Request.Builder builder = new Request.Builder()
+                .url(connParams.getApiBasePath() + endPoint)
+                .header(
+                        HttpHeaders.AUTHORIZATION,
+                        authHeaderValue
+                );
+
+        if (token != null)
+            builder.header(HEADER_X_AUTH_TOKEN, token);
+
+        if (connParams.getAppId() != null)
+            builder.header(HEADER_X_APP_ID, connParams.getAppId());
+
+        if (body == null &&
+                (method.equalsIgnoreCase("POST") || (method.equalsIgnoreCase("PUT")))
+        )
+            body = RequestBody.create("{}", JSON);
+
+        Request r = builder.method(method, body).build();
+        System.out.println(r.toString());
+        return r;
+    }
+
+    protected <T extends Reply<?>> T callWithoutBody(
+            String endPoint,
+            Type responseType,
+            String method,
+            boolean checkResp) {
+        Request request = buildRequest(endPoint, method, null);
+        return makeCall(endPoint, request, responseType, checkResp);
+    }
+
+    protected <T extends Reply<?>> T callWithBody(
+            String endPoint,
+            Object reqBody,
+            Type responseType,
+            String method,
+            boolean checkResp) {
+        String json = GSON.toJson(reqBody);
+
+        Request request = buildRequest(endPoint, method, RequestBody.create(json, JSON));
+        return makeCall(endPoint, request, responseType, checkResp);
+    }
+
+    protected <T extends Reply<?>> T postWithBody(String endPoint, Object reqBody, Type responseType, boolean checkResp) {
+        return callWithBody(endPoint, reqBody, responseType, "POST", checkResp);
+    }
+
+    protected <T extends Reply<?>> T postWithBody(String endPoint, Object reqBody, Type responseType) {
+        return postWithBody(endPoint, reqBody, responseType, true);
+    }
+
+    protected <T extends Reply<?>> T putWithBody(String endPoint, Object reqBody, Type responseType, boolean checkResp) {
+        return callWithBody(endPoint, reqBody, responseType, "PUT", checkResp);
+    }
+
+    protected <T extends Reply<?>> T putWithBody(String endPoint, Object reqBody, Type responseType) {
+        return putWithBody(endPoint, reqBody, responseType, true);
+    }
+
+    protected Reply<Void> postReturnRawReply(String endPoint, Object reqBody, boolean checkResp) {
+        return postWithBody(endPoint, reqBody, RAW_REPLY_TYPE, checkResp);
+    }
+
+    protected Reply<Void> postReturnRawReply(String endPoint, Object reqBody) {
+        return postReturnRawReply(endPoint, reqBody, true);
+    }
+
+    protected Reply<Void> postWithoutBodyReturnRawReply(String endPoint, boolean checkResp) {
+        return callWithoutBody(endPoint, RAW_REPLY_TYPE, "POST", checkResp);
+    }
+
+    protected Reply<Void> postWithoutBodyReturnRawReply(String endPoint) {
+        return postWithoutBodyReturnRawReply(endPoint, true);
+    }
+
+    protected Reply<Void> putReturnRawReply(String endPoint, Object reqBody) {
+        return putWithBody(endPoint, reqBody, RAW_REPLY_TYPE, true);
+    }
+
+    protected <T extends Reply<?>> T postWithoutBody(
+            String endPoint,
+            Type responseType,
+            boolean checkResp) {
+        return callWithoutBody(endPoint, responseType, "POST", checkResp);
+    }
+
+    protected <T extends Reply<?>> T postWithoutBody(
+            String endPoint,
+            Type responseType) {
+        return postWithoutBody(endPoint, responseType, true);
+    }
+
+    protected <T extends Reply<?>> T putWithoutBody(
+            String endPoint,
+            Type responseType,
+            boolean checkResp) {
+        return callWithoutBody(endPoint, responseType, "PUT", checkResp);
+    }
+
+    protected <T extends Reply<?>> T putWithoutBody(
+            String endPoint,
+            Type responseType) {
+        return putWithoutBody(endPoint, responseType, true);
+    }
+
+    /**
+     * 登录。
+     *
+     * @return 登录结果。
+     */
+    public GnssLoginResult login() {
+        GnssLoginReq req = new GnssLoginReq();
+        req.setAppId(connParams.getAppId());
+        req.setUserName(connParams.getUsername());
+        req.setPassword(connParams.getPassword());
+
+        Reply<GnssLoginResult> reply = postWithBody("/login", req, GnssLoginResult.REPLY_TYPE);
+        GnssLoginResult r = reply.first();
+
+        if (token == null)
+            token = r.getAuthToken();
+
+        return r;
+    }
+
+    /**
+     * 注销。使当前使用的token失效。已经打开的、未关闭的媒体流请求将全部被关闭。
+     */
+    public void logout() {
+        if (token == null)
+            return;
+
+        try {
+            postWithoutBodyReturnRawReply("/logout", false);
+        } catch (Throwable t) {
+            // suppress exception
+        }
+
+        token = null;
+    }
+
+    /**
+     * 打开实时音视频。
+     *
+     * @param req 实时音视频流请求。
+     * @return 打开流请求返回对象。
+     */
+    public GnssOpenStrmResult openLive(GnssOpenLiveStrmReq req) {
+        Reply<GnssOpenStrmResult> r = postWithBody("/strm/live/open", req, GnssOpenStrmResult.REPLY_TYPE);
+        return r.first();
+    }
+
+    /**
+     * 实时音视频控制。
+     *
+     * @param req 实时音视频控制请求。
+     * @return 请求响应。
+     */
+    public Reply<Void> liveCtrl(LiveStrmCtrlReq req) {
+        return postReturnRawReply("/strm/live/ctrl", req);
+    }
+
+    /**
+     * 打开远程录像回放。
+     *
+     * @param req 远程录像回放请求。
+     * @return 打开流请求返回对象。
+     */
+    public GnssOpenStrmResult openReplay(GnssOpenReplayStrmReq req) {
+        Reply<GnssOpenStrmResult> r = postWithBody("/strm/replay/open", req, GnssOpenStrmResult.REPLY_TYPE);
+        return r.first();
+    }
+
+    /**
+     * 远程录像回放控制。
+     *
+     * @param req 远程录像回放控制请求。
+     * @return 请求响应。
+     */
+    public Reply<Void> replayCtrl(ReplayStrmCtrlReq req) {
+        return postReturnRawReply("/strm/replay/ctrl", req);
+    }
+
+    /**
+     * 保持流。
+     *
+     * @param req 保持流请求体。
+     * @return 请求响应。
+     */
+    public Reply<KeepStrmResult> keep(KeepStrmReq req) {
+        return postWithBody("/strm/keep", req, ReplyTypes.REPLY_TYPE__KEEP_STRM_RESULT);
+    }
+
+    public Reply<KeepStrmResult> keep(String reqId) {
+        KeepStrmReq req = new KeepStrmReq(reqId);
+        return keep(req);
+    }
+
+    /**
+     * 关闭媒体请求。
+     *
+     * @param req 关闭媒体请求对象。
+     */
+    public void closeStrms(ReleaseStrmsReq req) {
+        try {
+            postReturnRawReply("/strm/close", req, false);
+        } catch (Throwable t) {
+            // suppress exception, mainly for network exception
         }
     }
 
     /**
-     * ADAS 报警附件API
+     * 关闭单个媒体请求。
+     *
+     * @param reqId 所要关闭的媒体请求ID
      */
-    public final AdasAlmAttApi adasAlmAttApi = new AdasAlmAttApi();
+    public void closeStrm(String reqId) {
+        ReleaseStrmsReq r = new ReleaseStrmsReq();
+        r.setReqIds(new String[]{reqId});
+
+        closeStrms(r);
+    }
+
 }

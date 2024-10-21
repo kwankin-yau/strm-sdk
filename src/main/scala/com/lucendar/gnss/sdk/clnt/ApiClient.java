@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 
 /**
- * The HTTP Api Client, must be thread-safe.
+ * HTTP API 客户端基类，本类必须是线程安全的
  */
 public abstract class ApiClient {
 

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
+@Deprecated
 public class StrmClusterInfo implements Cloneable {
 
     private List<StrmServerInfo> serverList = new ArrayList<>();

@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * GNSS驱动运行时配置
+ */
 public class GnssDriverRtConfig {
 
     private final String id;

@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * 登录返回项
+ */
 public class GnssLoginResult extends ServerInfo {
     public static final Type REPLY_TYPE = new TypeToken<Reply<GnssLoginResult>>(){}.getType();
     private String authToken;
@@ -17,6 +20,17 @@ public class GnssLoginResult extends ServerInfo {
     public GnssLoginResult() {
     }
 
+    /**
+     * 构造函数
+     *
+     * @param authToken 令牌
+     * @param ver 服务端版本号
+     * @param startTm 启动时间, epoch millis
+     * @param instance 实例ID
+     * @param features 特征列表
+     * @param config 配置
+     * @param api API URL
+     */
     public GnssLoginResult(String authToken, String ver, long startTm, String instance, String[] features, Map<String, String> config,
                            String api) {
         this.authToken = authToken;
@@ -28,10 +42,19 @@ public class GnssLoginResult extends ServerInfo {
         setApi(api);
     }
 
+    /**
+     * 取鉴权令牌
+     *
+     * @return 鉴权令牌
+     */
     public String getAuthToken() {
         return authToken;
     }
 
+    /**
+     * 设置鉴权令牌
+     * @param authToken 鉴权令牌
+     */
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }

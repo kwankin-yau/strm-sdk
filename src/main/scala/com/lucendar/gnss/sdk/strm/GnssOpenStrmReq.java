@@ -5,6 +5,9 @@ import com.lucendar.strm.common.strm.AudioConfig;
 import com.lucendar.strm.common.strm.OpenStrmReq;
 import com.lucendar.strm.common.strm.ServerHint;
 
+/**
+ * （实时或回放）播放请求抽象
+ */
 public interface GnssOpenStrmReq {
 
     int FORMAT__HTTP_FLV = StreamingApi.STRM_FORMAT__FLV;

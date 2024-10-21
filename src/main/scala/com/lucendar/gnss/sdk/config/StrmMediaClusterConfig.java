@@ -15,6 +15,7 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+@Deprecated
 public class StrmMediaClusterConfig {
 
     private static class ClusterConfig {

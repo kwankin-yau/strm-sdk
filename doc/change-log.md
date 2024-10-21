@@ -1,6 +1,6 @@
 # 4.0.0 [2024-01-16]
 ## 完善
-- 引用 GNSS 驱动
+- 引入 GNSS 驱动
 - `JT808Msg` 增加 `headers` 属性
 - `JT808Frame` 改为只读对象，并增加 `backOffReader` 属性
 - `TermCmdStateChanged` 增加 `uuid`, `pub` 属性, `setRandomUuid`, `tmAsEpochMillis`, `applyTo` 方法
