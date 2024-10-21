@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.lucendar'
-version '4.0.0'
+version '4.0.1'
 
 compileJava.options.encoding = 'UTF-8'
 compileScala.options.encoding = 'UTF-8'
@@ -43,7 +43,7 @@ dependencies {
     implementation('dnsjava:dnsjava:3.4.2')
 
 
-    implementation("com.lucendar:lucendar-common:2.2.0-SNAPSHOT")
+    implementation("com.lucendar:lucendar-common:2.2.0")
 }
 
 java {
