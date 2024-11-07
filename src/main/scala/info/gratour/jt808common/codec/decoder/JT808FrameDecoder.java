@@ -1,10 +1,12 @@
 package info.gratour.jt808common.codec.decoder;
 
+import info.gratour.jt808common.AdasDialect;
 import info.gratour.jt808common.codec.CodecError;
 import info.gratour.jt808common.codec.CrcError;
 import info.gratour.jt808common.protocol.FrameSplitInfo;
 import info.gratour.jt808common.protocol.JT808Frame;
 import info.gratour.jt808common.protocol.JT808FrameHeader;
+import info.gratour.jt808common.protocol.JT808Msg;
 import info.gratour.jtcommon.BcdUtils;
 import info.gratour.jtcommon.ByteBufBackOffReader;
 import info.gratour.jtcommon.JTUtils;
@@ -19,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HexFormat;
 import java.util.List;
 
 public class JT808FrameDecoder implements AutoCloseable {
@@ -225,5 +228,41 @@ public class JT808FrameDecoder implements AutoCloseable {
      */
     public static JT808Frame decodeFrame(ByteBuf buf, byte[] tempBuf) {
         return decodeFrame(buf, tempBuf, true);
+    }
+
+    public static void main(String[] args) {
+//        String hex = "7e0704012d01332012052100100003010051000000000000000101696a9406d8a445000000000000240405000115010400000001020200000302000030010031010025040000000014040000000515040000000f1604000000001702000518030000000082000000000000000101696a9406d8a445000000000000240405000138010400000001020200000302000030010031010025040000000014040000000515040000000f160400000000170200051803000000652f00000001000702000000000050000001696a9406d8a4452404050001370001303137303736332404050001370005000051000000000000000101696a9406d8a445000000000000240405000145010400000001020200000302000030011f31010025040000000014040000000515040000000f160400000000170200051803000000d07e";
+//        String hex = "7e0200008201332012052101a600000000000c000301696b3e06d8a40800b900000000241105220401010400000001020200000302000030011f31011625040000000014040000000515040000000f160400000000170200051803000000652f0000001500070200000000005000b901696b3e06d8a4082411052203590401303137303736332411052203590005001b7e";
+//        String hex = "7e0200008a01827067539220d80800000000400003015a083006cc6ba1000000c800002411051703480104003ac138030200c830011431010a25040000000014040000000515040000003e160400000000170200051803000000f00ae10400000000ee0101d5652f000002ab0005010500000000140000015a083006cc6ba12411051703460401303637353339322411051703465b05006d7e";
+        String hex = "7e020040bd010000000001330649809771890000000000480003016198b206c058f80018023a00c524110610462301040002e6a7020200000302024e140480000000150400000000160400000000170200002504000000002b040000000030011d31010d64470000000e00030200000000003a000001619a3306c0597c241106104620046100000000000000000000000000000000000000000000543634393830393724110610462000050000eb11000700d401003658fe000600f880000000ef0d000000480000492492000011038e7e";
+        ByteBuf buf = Unpooled.buffer();
+        try {
+            buf.writeBytes(HexFormat.of().parseHex(hex));
+            JT808FrameDecoder frameDecoder = new JT808FrameDecoder(UnpooledByteBufAllocator.DEFAULT);
+            JT808MsgDecoder msgDecoder = new JT808MsgDecoder(AdasDialect.JIANG_SU, false);
+            try {
+                DecodeState st = frameDecoder.splitAndUnescape(buf);
+                if (!st.ok())
+                    System.err.println("Decode failed");
+
+                List<ByteBuf> frames = new ArrayList<>();
+                try {
+                    frameDecoder.getSplit(frames);
+                    byte[] temp = allocTempBuf();
+
+                    frames.forEach(f -> {
+                        JT808Frame frame = decodeFrame(f, temp, false);
+                        JT808Msg msg = msgDecoder.decode(frame, temp);
+                        System.out.println(msg.toString());
+                    });
+                } finally {
+                    frames.forEach(ReferenceCounted::release);
+                }
+            } finally {
+                frameDecoder.close();
+            }
+        } finally {
+            buf.release();
+        }
     }
 }

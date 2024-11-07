@@ -22,6 +22,7 @@ import java.util
 
 class Jt808Driver(
                    config           : util.Map[String, String],
+                   adasDialect: AdasDialect,
                    verifyCrc        : Boolean,
                    simplifiedDecoder: Boolean,
                    ctx              : GnssDriverContext
@@ -29,8 +30,8 @@ class Jt808Driver(
   extends AbstractGnssDriver(config, verifyCrc, simplifiedDecoder, ctx) {
 
   private final val alloc = ctx.alloc()
-  private final val adasDialect =
-    AdasDialect.valueOfDefault(findStringAttr(GnssDriverFactory.CONFIG__ADAS_DIALECT))
+//  private final val adasDialect =
+//    AdasDialect.valueOfDefault(findStringAttr(GnssDriverFactory.CONFIG__ADAS_DIALECT))
   private var frameDecoder: JT808FrameDecoder = new JT808FrameDecoder(alloc)
   private val msgDecoder: JT808MsgDecoder = new JT808MsgDecoder(adasDialect, simplifiedDecoder)
   private val tempBuf: Array[Byte] = JT808MsgDecoder.allocDecodeTempBuf
