@@ -19,11 +19,28 @@ import java.util.StringJoiner;
 public class AdasOverSpdAlmAddt extends AdasAddt implements Cloneable {
 
 
+    /**
+     * 标志：报警开始
+     */
     public static final byte FLAG__START = 1;
+
+    /**
+     * 标志：报警结束
+     */
     public static final byte FLAG__END = 2;
+
+    /**
+     * 标志：报警持续
+     */
     public static final byte FLAG__CONTINUOUS = 3;
 
+    /**
+     * 超过阈值速度报警标志位
+     */
     public static final byte BIT__OVER_EQUIP_SPEED_LIMIT = 0;
+    /**
+     * 超过道路速度报警标志位
+     */
     public static final byte BIT__OVER_ROAD_SPEED_LIMIT = 1;
 
     private byte flag;
@@ -36,47 +53,92 @@ public class AdasOverSpdAlmAddt extends AdasAddt implements Cloneable {
         super(adasDialect);
     }
 
+    /**
+     * 取报警状态
+     * @return 报警状态
+     */
     public byte getFlag() {
         return flag;
     }
 
+    /**
+     * 设置报警状态
+     * @param flag 报警状态
+     */
     public void setFlag(byte flag) {
         this.flag = flag;
     }
 
+    /**
+     * 取是否报警开始
+     * @return 是否报警开始
+     */
     public boolean flagIsStart() {
         return flag == FLAG__START;
     }
 
 
+    /**
+     * 取事件类型
+     *
+     * @return 事件类型
+     */
     public short getTyp() {
         return typ;
     }
 
+    /**
+     * 设置事件类型
+     * @param typ 事件类型
+     */
     public void setTyp(short typ) {
         this.typ = typ;
     }
 
+    /**
+     * 取超速报警类型，以各 `BIT__xxx` 位是否置位表示
+     * @return 超速报警类型，以各 `BIT__xxx` 位是否置位表示
+     */
     public byte getOverSpdAlmTyp() {
         return overSpdAlmTyp;
     }
 
+    /**
+     * 设置超速报警类型，以各 `BIT__xxx` 位是否置位表示
+     * @param overSpdAlmTyp 超速报警类型，以各 `BIT__xxx` 位是否置位表示
+     */
     public void setOverSpdAlmTyp(byte overSpdAlmTyp) {
         this.overSpdAlmTyp = overSpdAlmTyp;
     }
 
+    /**
+     * 取终端设定的超速报警阈值，单位：km/h
+     * @return 终端设定的超速报警阈值，单位：km/h
+     */
     public short getTermSpdThold() {
         return termSpdThold;
     }
 
+    /**
+     * 设置终端设定的超速报警阈值，单位：km/h
+     * @param termSpdThold 终端设定的超速报警阈值，单位：km/h
+     */
     public void setTermSpdThold(short termSpdThold) {
         this.termSpdThold = termSpdThold;
     }
 
+    /**
+     * 取车辆当前速度超出报警阈值的插值，单位：km/h
+     * @return 车辆当前速度超出报警阈值的插值，单位：km/h
+     */
     public short getRdSpdThold() {
         return rdSpdThold;
     }
 
+    /**
+     * 设置车辆当前速度超出报警阈值的插值，单位：km/h
+     * @param rdSpdThold 车辆当前速度超出报警阈值的插值，单位：km/h
+     */
     public void setRdSpdThold(short rdSpdThold) {
         this.rdSpdThold = rdSpdThold;
     }

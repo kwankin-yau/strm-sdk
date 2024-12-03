@@ -10,31 +10,53 @@ import com.lucendar.strm.common.strm.ServerHint;
  */
 public interface GnssOpenStrmReq {
 
-    int FORMAT__HTTP_FLV = StreamingApi.STRM_FORMAT__FLV;
+    /**
+     * FLV 格式
+     */
+    int FORMAT__FLV = StreamingApi.STRM_FORMAT__FLV;
+
+    /**
+     * RTMP 格式
+     */
     int FORMAT__RTMP = StreamingApi.STRM_FORMAT__RTMP;
+
+    /**
+     * HLS 格式
+     */
     int FORMAT__HLS = StreamingApi.STRM_FORMAT__HLS;
+
+    /**
+     * RTSP 格式
+     */
     int FORMAT__RTSP = StreamingApi.STRM_FORMAT__RTSP;
 
+    /**
+     * HLS fMP4 子格式
+     */
     String SUB_FORMAT__FMP4 = StreamingApi.STRM_SUB_FORMAT__FMP4;
+
+    /**
+     * HLS mpeg-ts 子格式
+     */
     String SUB_FORMAT__MPEGTS = StreamingApi.STRM_SUB_FORMAT__MPEGTS;
 
     /**
-     * DISABLED mode. DO NOT trace
+     * 跟踪模式：不跟踪
      */
     int TRACE_MODE__DISABLED = 0;
 
     /**
-     * SIMPLE mode. Trace:
-     * - stream state changes (StrmReq.state)
-     * - all terminal inbound/outbound message, including
+     * 跟踪模式：简单模式，跟踪以下事件：
+     * - 流状态改变 (StrmReq.state)
+     * - 所有终端的出入站数据
      */
     int TRACE_MODE__SIMPLE = 1;
 
     /**
      * ADVANCED mode. Trace:
-     * - stream state changes (StrmReq.state)
-     * - stream media notification (StrmMediaNotif)
-     * - all terminal inbound/outbound message, including
+     * - 流状态改变 (StrmReq.state)
+     * - 媒体状态变更通知 (StrmMediaNotif)
+     * - 所有终端的出入站数据
      */
     int TRACE_MODE__ADVANCED = 2;
 
@@ -84,6 +106,11 @@ public interface GnssOpenStrmReq {
      * @return data type of channel
      */
     int liveDataType();
+
+    default boolean isTalk() {
+        return isLiveReq() && liveDataType() == GnssOpenLiveStrmReq.DATA_TYPE__TALK;
+    }
+
     int replayMediaType();
 
     default int liveDataTypeOrReplayMediaType() {

@@ -1,4 +1,9 @@
-# 4.0.1 [2024-]
+# 4.1.0 [2024-11-12]
+## 完善
+- 新增 `SetTokenReq` 类
+## 变更
+- `GnssOpenStrmReq.FORMAT__HTTP_FLV` 重命名为 `GnssOpenStrmReq.FORMAT__FLV`
+
 # 4.0.0 [2024-01-16]
 ## 完善
 - 引入 GNSS 驱动
