@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 /**
  * 设置令牌（代替登录方法）请求
  */
-public class SetTokenReq {
+public class UseTokenReq {
     private String authToken;
 
     public String getAuthToken() {
@@ -18,7 +18,7 @@ public class SetTokenReq {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", SetTokenReq.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", UseTokenReq.class.getSimpleName() + "[", "]")
                 .add("authToken='" + authToken + "'")
                 .toString();
     }

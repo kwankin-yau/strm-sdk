@@ -1,6 +1,7 @@
 # 4.1.0 [2024-11-12]
 ## 完善
-- 新增 `SetTokenReq` 类
+- 新增 `UseTokenReq` 类
+
 ## 变更
 - `GnssOpenStrmReq.FORMAT__HTTP_FLV` 重命名为 `GnssOpenStrmReq.FORMAT__FLV`
 
