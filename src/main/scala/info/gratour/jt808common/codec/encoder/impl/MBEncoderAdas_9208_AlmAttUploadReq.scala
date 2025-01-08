@@ -28,8 +28,11 @@ object MBEncoderAdas_9208_AlmAttUploadReq extends AbstractJT808MsgBodyEncoder[JT
       if (bytes.length != 16)
         throw new CodecError("Invalid `almNo`: %s.".format(p.getAlmNo))
     } else {
-      if (bytes.length != 40 && bytes.length != 16) // compatible with old
-        throw new CodecError("Invalid `almNo`: %s.".format(p.getAlmNo))
+      // compatible with old
+      if (bytes.length != 40 && bytes.length != 16) {
+        if (adasDialect == AdasDialect.SI_CHUAN && bytes.length != 39) // 川标(2021-9)39字节
+          throw new CodecError("Invalid `almNo`: %s.".format(p.getAlmNo))
+      }
     }
     out.writeBytes(bytes)
     //    out.writeFixedLenStr(StringUtils.leftPad(p.getAlmId.toString, 32, '0'), 32)

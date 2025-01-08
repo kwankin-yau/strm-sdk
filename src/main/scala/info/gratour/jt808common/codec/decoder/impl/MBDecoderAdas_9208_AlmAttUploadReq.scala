@@ -24,7 +24,13 @@ object MBDecoderAdas_9208_AlmAttUploadReq extends JT808MsgBodyDecoder[JTAdasMsg_
     cp.setUdpPort(body.readUnsignedShort())
 
 
-    val almNoLen = if (protoVer > 0) 40 else 16
+    val almNoLen =
+      if (protoVer > 0) {
+        if (adasDialect == AdasDialect.SI_CHUAN)
+          39
+        else
+          40
+      }else 16
     cp.setAlmNo(body.readBytesHex(almNoLen))
     cp.setAlmId(body.readCStr(32))
 
