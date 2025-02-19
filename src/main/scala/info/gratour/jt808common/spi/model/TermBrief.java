@@ -78,18 +78,38 @@ public interface TermBrief {
      */
     int getStdProtocols();
 
+    /**
+     * 判断终端是否支持808协议
+     *
+     * @return 是否支持808协议
+     */
     default boolean support808() {
         return (getStdProtocols() & TERM_PROTO__808) != 0;
     }
 
+    /**
+     * 判断终端是否支持ADAS协议
+     *
+     * @return 是否支持ADAS协议
+     */
     default boolean supportAdas() {
         return (getStdProtocols() & TERM_PROTO__ADAS) != 0;
     }
 
+    /**
+     * 判断终端是否支持1078协议
+     *
+     * @return 是否支持1078协议
+     */
     default boolean support1078() {
         return (getStdProtocols() & TERM_PROTO__1078) != 0;
     }
 
+    /**
+     * 取关联的车辆的车牌号和颜色
+     *
+     * @return 关联的车辆的车牌号和颜色
+     */
     default IPlateNoAndColor getPlateNoAndColor() {
         String pn = getPlateNo();
         Integer clr = getPlateColor();

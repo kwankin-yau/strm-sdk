@@ -7,10 +7,10 @@
  *******************************************************************************/
 package info.gratour.jt808common;
 
-import info.gratour.jtcommon.JTUtils;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import info.gratour.jtcommon.JTUtils;
 
 class JT808IoStateNames {
     public static final String MESSAGE_KEY_DEEP_SLEEP = "iost.deep_sleep.0";
@@ -42,9 +42,19 @@ class JT808IoStateNames {
 
 }
 
+/**
+ * 车辆IO状态
+ */
 public enum  JT808IoState {
 
+    /**
+     * 深度休眠
+     */
     DEEP_SLEEP(0),
+
+    /**
+     * 休眠
+     */
     SLEEP(1);
 
 
@@ -54,14 +64,29 @@ public enum  JT808IoState {
         this.index = bitIndex;
     }
 
+    /**
+     * 获取位索引
+     * @return 位索引
+     */
     public int bitIndex() {
         return index;
     }
 
+    /**
+     * 获取状态名称
+     * @param locale 区域
+     * @return 状态名称
+     */
     public String stateName(Locale locale) {
         return JT808IoStateNames.getStateName(index, locale);
     }
 
+    /**
+     * 格式化车辆IO状态文本
+     * @param vehIoStateBits 车辆IO状态位
+     * @param locale 区域
+     * @return 车辆IO状态文本
+     */
     public static String vehIoStateText(int vehIoStateBits, Locale locale) {
         StringBuilder str = new StringBuilder();
         boolean first = true;

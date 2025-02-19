@@ -7,25 +7,40 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 事故疑点记录
+ */
 @Expose
 public class JT808Vtdr_AccidentPoints_10 implements JT808VtdrDataBlock {
 
     private List<Vtdr_AccidentPoint> accidentPoints;
 
+    /**
+     * 取事故疑点记录
+     * @return 事故疑点记录
+     */
     public List<Vtdr_AccidentPoint> getAccidentPoints() {
         return accidentPoints;
     }
 
+    /**
+     * 设置事故疑点记录
+     * @param accidentPoints 事故疑点记录
+     */
     public void setAccidentPoints(List<Vtdr_AccidentPoint> accidentPoints) {
         this.accidentPoints = accidentPoints;
     }
 
+    /**
+     * 添加事故疑点记录
+     * @param accidentPoint 事故疑点记录
+     */
     public void addAccidentPoint(Vtdr_AccidentPoint accidentPoint) {
         if (this.accidentPoints == null)
             this.accidentPoints = new ArrayList<>();
@@ -33,6 +48,10 @@ public class JT808Vtdr_AccidentPoints_10 implements JT808VtdrDataBlock {
         this.accidentPoints.add(accidentPoint);
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT808Vtdr_AccidentPoints_10 source) {
         if (source.accidentPoints != null) {
             this.accidentPoints = new ArrayList<>();

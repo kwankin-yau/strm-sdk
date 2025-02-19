@@ -10,16 +10,29 @@ import org.apache.commons.codec.binary.Hex
 
 import scala.util.Random
 
+/**
+ * JT/T 808 协议工具类
+ */
 object JT808Utils {
 
   private val random = new Random()
 
+  /**
+   * 生成（终端）鉴权码
+   * @return 鉴权码。HEX 格式。
+   */
   def newAuthCode(): String = {
     val bytes = new Array[Byte](5)
     random.nextBytes(bytes)
     Hex.encodeHexString(bytes)
   }
 
+  /**
+   * 将 6 字节 BCD 格式的时间表示转换为时间戳（epoch millis）
+   * @param bcd 6 字节 BCD 格式的时间表示
+   * @param offset 偏移量
+   * @return 时间戳（epoch millis）
+   */
   def bcd6ToTimestamp(bcd: Array[Byte], offset: Int): Long = {
     val y = BcdUtils.decodeByte(bcd(offset + 0)) + 2000
     val m = BcdUtils.decodeByte(bcd(offset + 1))
@@ -32,9 +45,27 @@ object JT808Utils {
     odt.toEpochSecond * 1000
   }
 
+  /**
+   * 将 6 字节 BCD 格式的时间表示转换为时间戳（epoch millis）
+   * @param bcd 6 字节 BCD 格式的时间表示
+   * @return 时间戳（epoch millis）
+   */
   def bcd6ToTimestamp(bcd: Array[Byte]): Long = bcd6ToTimestamp(bcd, 0)
 
+  /**
+   * 6 字节数字时间表示类
+   * @param year 年份
+   * @param month 月份
+   * @param day 日期
+   * @param hour 小时
+   * @param minute 分钟
+   * @param second 秒
+   */
   case class SixDigitsDateTime(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
+    /**
+     * 将 6 字节数字时间表示转换为 BCD 格式
+     * @return BCD 格式的时间表示
+     */
     def toBcd6: Array[Byte] = {
       val r = new Array[Byte](6)
       val y =
@@ -53,6 +84,11 @@ object JT808Utils {
     }
   }
 
+  /**
+   * 将 `yyMMddHHmmss` 格式的时间字符串解析为 6 字节数字时间表示类
+   * @param s 时间字符串
+   * @return 6 字节数字时间表示类
+   */
   def parseSixDigitsDateTime(s: String): SixDigitsDateTime = {
     if (s == null)
       return SixDigitsDateTime(0, 0, 0, 0, 0, 0)
@@ -72,6 +108,11 @@ object JT808Utils {
     SixDigitsDateTime(year, month, day, hour, minute, second)
   }
 
+  /**
+   * 将时间戳（epoch millis）转换为 6 字节 BCD 格式
+   * @param time 时间戳（epoch millis）
+   * @param out 输出缓冲区
+   */
   def timestampToBcd6(time: Long, out: ByteBuf): Unit = {
     val odt = OffsetDateTime.ofInstant(Instant.ofEpochMilli(time), JTConsts.ZONE_OFFSET_BEIJING)
     val y = odt.getYear - 2000
@@ -90,6 +131,11 @@ object JT808Utils {
     out.writeByte(BcdUtils.encodeByte(s))
   }
 
+  /**
+   * 将时间戳（epoch millis）转换为 6 字节 BCD 格式
+   * @param time 时间戳（epoch millis）
+   * @return 6 字节 BCD 格式的时间表示
+   */
   def timestampToBcd6(time: Long): Array[Byte] = {
     val odt = OffsetDateTime.ofInstant(Instant.ofEpochMilli(time), JTConsts.ZONE_OFFSET_BEIJING)
     val y = odt.getYear - 2000
@@ -103,6 +149,11 @@ object JT808Utils {
     Array(BcdUtils.encodeByte(y), BcdUtils.encodeByte(m), BcdUtils.encodeByte(d), BcdUtils.encodeByte(h), BcdUtils.encodeByte(min), BcdUtils.encodeByte(s))
   }
 
+  /**
+   * 将 `LocalDateTime` 转换为 6 字节 BCD 格式
+   * @param ldt `LocalDateTime`
+   * @return 6 字节 BCD 格式的时间表示
+   */
   def localDateTimeToBcd6(ldt: LocalDateTime): Array[Byte] = {
     val y = ldt.getYear - 2000
     val m = ldt.getMonthValue
@@ -115,13 +166,32 @@ object JT808Utils {
     Array(BcdUtils.encodeByte(y), BcdUtils.encodeByte(m), BcdUtils.encodeByte(d), BcdUtils.encodeByte(h), BcdUtils.encodeByte(min), BcdUtils.encodeByte(s))
   }
 
+  /**
+   * 从 `ByteBuf` 中读取 6 字节 BCD 格式的时间戳
+   * @param byteBuf `ByteBuf`
+   * @param tempBuf 临时缓冲区
+   * @param offset 偏移量
+   * @return 时间戳（epoch millis）
+   */
   def readBcd6Timestamp(byteBuf: ByteBuf, tempBuf: Array[Byte], offset: Int): Long = {
     byteBuf.readBytes(tempBuf, offset, 6)
     bcd6ToTimestamp(tempBuf, 0)
   }
 
+  /**
+   * 从 `ByteBuf` 中读取 6 字节 BCD 格式的时间戳
+   * @param byteBuf `ByteBuf`
+   * @param tempBuf 临时缓冲区
+   * @return 时间戳（epoch millis）
+   */
   def readBcd6Timestamp(byteBuf: ByteBuf, tempBuf: Array[Byte]): Long = readBcd6Timestamp(byteBuf, tempBuf, 0)
 
+  /**
+   * 将 4 字节 BCD 格式的日期表示转换为 `LocalDate`
+   * @param bcd 4 字节 BCD 格式的日期表示
+   * @param offset 偏移量
+   * @return `LocalDate`
+   */
   def bcd4ToLocalDate(bcd: Array[Byte], offset: Int): LocalDate = {
 
     def b(delta: Int): Byte = {
@@ -135,10 +205,22 @@ object JT808Utils {
     LocalDate.of(y, m, d)
   }
 
+  /**
+   * 将 4 字节 BCD 格式的日期表示转换为 `LocalDate`
+   * @param bcd 4 字节 BCD 格式的日期表示
+   * @return `LocalDate`
+   */
   def bcd4ToLocalDate(bcd: Array[Byte]): LocalDate = bcd4ToLocalDate(bcd, 0)
 
+  /**
+   * VTDR 日期时间格式化器
+   */
   val VTDR_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
 
+  /**
+   * 将 VTDR 日期时间字符串转换为 `LocalDateTime`
+   * @param s VTDR 日期时间字符串
+   * @return `LocalDateTime`
   def vtdrStrToLocalDateTime(s: String): LocalDateTime = {
     if (s == null)
       throw new RuntimeException("Invalid parameter: `vtdr string`.");
@@ -162,6 +244,11 @@ object JT808Utils {
     LocalDateTime.of(year, month, day, hour, minute, second)
   }
 
+  /**
+   * 将 `LocalDateTime` 转换为 VTDR 日期时间字符串
+   * @param dateTime `LocalDateTime`
+   * @return VTDR 日期时间字符串
+   */
   def vtdrLocalDateTimeToStr(dateTime: LocalDateTime): String = dateTime.format(VTDR_DATE_TIME_FORMATTER)
 
 //  def encodeTrkIdWithEpochDay(seqValue: Long, epochDay: Long): Long = {

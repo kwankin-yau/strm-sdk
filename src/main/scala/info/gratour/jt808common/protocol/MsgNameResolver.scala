@@ -11,13 +11,31 @@ import java.util.{Locale, MissingResourceException, ResourceBundle}
 
 import info.gratour.jtcommon.{JTMessages, JTUtils}
 
+/**
+ * 消息名称解析器 
+ */
 trait MsgNameResolver {
 
+  /**
+   * 获取消息名称
+   * @param msgId 消息ID
+   * @param locale 区域
+   * @return 消息名称
+   */
   def nameOf(msgId: Int, locale: Locale): String
 
+  /**
+   * 获取消息名称
+   * @param msgId 消息ID
+   * @param locale 区域
+   * @return 消息名称
+   */
   def nameOf(msgId: String, locale: Locale): String = nameOf(Integer.parseInt(msgId, 16), locale)
 }
 
+/**
+ * 默认消息名称解析器
+ */
 object DefaultMsgNameResolver extends MsgNameResolver {
 
   private def jt808MsgNameBundle(locale: Locale): ResourceBundle = ResourceBundle.getBundle("info.gratour.jt808common.protocol.jt808-msg-names", if (locale != null) locale else Locale.getDefault)

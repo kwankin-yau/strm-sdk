@@ -11,27 +11,75 @@ import java.util.{Locale, ResourceBundle}
 
 import info.gratour.jtcommon.{JTMessages, JTUtils}
 
-
+/**
+ * 终端参数类型
+ */
 sealed trait JT808TermParamType
+
+/**
+ * 字符串类型
+ */
 case object PARAM_STRING extends JT808TermParamType
+
+/**
+ * 双字类型
+ */
 case object PARAM_DWORD extends JT808TermParamType
+
+/**
+ * 字类型
+ */
 case object PARAM_WORD extends JT808TermParamType
+
+/**
+ * 字节类型
+ */
 case object PARAM_BYTE extends JT808TermParamType
+
+/**
+ * 二进制类型
+ */
 case object PARAM_BINARY extends JT808TermParamType
 
+/**
+ * 终端参数定义
+ */
 case class JT808TermParamDef(id: String, typ: JT808TermParamType, name: String)
 
+/**
+ * 终端参数操作
+ */
 object JT808TermParams {
 
+  /**
+   * 终端参数ID：服务器主机地址
+   * @deprecated 使用 PARAM_PRIMARY_SERVER_HOST__REV2013 代替
+   */
   val pHOST = "0013"
+
+  /**
+   * 终端参数ID：端口号
+   * @deprecated 使用 PARAM_SERVER_PORT__REV2013 代替
+   */
   val pPORT = "0018"
 
+  /**
+   * 取资源包
+   * @param locale 区域
+   * @return 资源包
+   */
   def resourceBundle(locale: Locale): ResourceBundle =
     ResourceBundle.getBundle(
       "info.gratour.jt808common.protocol.term-param-names",
       if (locale != null) locale else Locale.getDefault
     )
 
+  /**
+   * 取字符串
+   * @param locale 区域
+   * @param key 字符串键
+   * @return 字符串
+   */
   def getOpt(locale: Locale, key: String): Option[String] = {
     val bundle = resourceBundle(locale)
     if (bundle.containsKey(key))
@@ -40,23 +88,34 @@ object JT808TermParams {
       None
   }
 
-  def termParamNameOf(locale: Locale, alarmId: String): String = {
-    val key = "p" + alarmId
+  /**
+   * 取终端参数名称
+   * @param locale 区域
+   * @param paramId 终端参数ID
+   * @return 终端参数名称
+   */
+  def termParamNameOf(locale: Locale, paramId: String): String = {
+    val key = "p" + paramId
     val bundle = resourceBundle(locale)
 
     if (bundle.containsKey(key))
       bundle.getString(key)
     else {
-      val intId = Integer.parseInt(alarmId, 16)
+      val intId = Integer.parseInt(paramId, 16)
       if (intId >= 0x111 && intId <= 0x1FF) {
         val v = bundle.getString("p0110")
-        return v + "(" + alarmId + ")"
+        return v + "(" + paramId + ")"
       }
 
-      JTMessages.unknown(locale) + "(" + alarmId + ")"
+      JTMessages.unknown(locale) + "(" + paramId + ")"
     }
   }
 
+  /**
+   * 转换为终端参数定义
+   * @param tup 元组
+   * @return 终端参数定义
+   */
   private def toTermParamDef(tup: Tuple2[String, JT808TermParamType]): (String, JT808TermParamDef) = {
     val id = tup._1
     val typ = tup._2
@@ -64,6 +123,9 @@ object JT808TermParams {
     id -> JT808TermParamDef(id, typ, name)
   }
 
+  /**
+   * 2011版本终端参数定义
+   */
   val Rev2011: Map[String, JT808TermParamDef] =((0x110 to 0x1FF).map(id => {
     JTUtils.intToHex(id, 4).toUpperCase -> PARAM_BINARY
   }) ++ Seq(
@@ -160,8 +222,14 @@ object JT808TermParams {
     "007C" -> PARAM_BINARY,
   ).map(toTermParamDef).toMap
 
+  /**
+   * 包含2011版和JT1078的终端参数定义
+   */
   val WithJT1078: Map[String, JT808TermParamDef] = Rev2011 ++ JT1078
 
+  /**
+   * 四川ADAS终端参数定义
+   */
   val SICHUAN: Map[String, JT808TermParamDef] = Seq(
     "F364" -> PARAM_BINARY,
     "F365" -> PARAM_BINARY,
@@ -170,19 +238,67 @@ object JT808TermParams {
     "F370" -> PARAM_BINARY
   ).map(toTermParamDef).toMap ++ WithJT1078
 
+  /**
+   * 终端参数ID：心跳间隔
+   */
   val PARAM_HEARTBEAT_INTERVAL = "0001"
+
+  /**
+   * 终端参数ID：主服务器主机地址（2013版）
+   */
   val PARAM_PRIMARY_SERVER_HOST__REV2013 = "0013"
+
+  /**
+   * 终端参数ID：主服务器端口号（2013版）
+   */
   val PARAM_SERVER_PORT__REV2013 = "0018"
 
+  /**
+   * 终端参数ID：主服务器主机地址和端口号（2019版）
+   */
   val PARAM_SERVER_HOST_AND_PORT__REV2019 = "0013"
 
+  /**
+   * 终端参数ID：默认位置报告间隔
+   */
   val PARAM_DEFAULT_LOCATION_REPORT_INTV = "0029"
 
+  /**
+   * 终端参数ID：报警抑制掩码
+   */
   val PARAM_ALM_SUPPRESS_MASK = "0050"
+
+  /**
+   * 终端参数ID：最大速度
+   */
   val PARAM_MAX_SPEED = "0055"
+
+  /**
+   * 终端参数ID：行驶里程
+   */
   val PARAM_MILE = "0080"
+
+  /**
+   * 终端参数ID：省份ID
+   */
   val PARAM_PROVINCE_ID = "0081"
+
+  /**
+   * 终端参数ID：城市ID
+   */
   val PARAM_CITY_ID = "0082"
+
+  /**
+   * 终端参数ID：车牌号
+   */
   val PARAM_PLATE_NO = "0083"
+
+  /**
+   * 终端参数ID：车牌颜色
+   */
   val PARAM_PLATE_COLOR = "0084"
+
+  /**
+   * 终端参数ID：车辆识别码
+   */
 }

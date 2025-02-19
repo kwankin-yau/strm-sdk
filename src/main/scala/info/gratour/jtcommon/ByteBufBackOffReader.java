@@ -1,10 +1,11 @@
 package info.gratour.jtcommon;
 
-import io.netty.buffer.ByteBuf;
 import org.apache.commons.codec.binary.Hex;
 
+import io.netty.buffer.ByteBuf;
+
 /**
- * An object keep current readerIndex of the ByteBuf and then read later.
+ * 保持当前的 readerIndex 的 ByteBuf 供稍后读取的类
  */
 public class ByteBufBackOffReader implements LazyBytesProvider {
 
@@ -15,6 +16,10 @@ public class ByteBufBackOffReader implements LazyBytesProvider {
     private byte[] _binary;
     private String _hex;
 
+    /**
+     * 构造函数
+     * @param buf 字节缓冲区
+     */
     public ByteBufBackOffReader(ByteBuf buf) {
         this.buf = buf;
         originalReaderIndex = buf.readerIndex();
@@ -22,8 +27,8 @@ public class ByteBufBackOffReader implements LazyBytesProvider {
     }
 
     /**
-     * Keep track for the other ByteBuf
-     * @param buf the other ByteBuf
+     * 重新设置 `buffer`
+     * @param buf 新的 buffer
      */
     public void reset(ByteBuf buf) {
         this.buf = buf;
@@ -53,9 +58,8 @@ public class ByteBufBackOffReader implements LazyBytesProvider {
     }
 
     /**
-     * Build a slice of original buffer region.
-     *
-     * @return the slice of original buffer region.
+     * 构建原始缓冲区区域的切片
+     * @return 原始缓冲区区域的切片
      */
     public ByteBuf slice() {
         return buf.slice(originalReaderIndex, sz);
