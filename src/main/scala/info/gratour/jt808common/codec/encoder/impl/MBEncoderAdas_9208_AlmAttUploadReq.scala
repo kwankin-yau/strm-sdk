@@ -15,8 +15,18 @@ import info.gratour.jtcommon.{ByteBufHelper, JTConsts}
 import io.netty.buffer.ByteBuf
 import org.apache.commons.codec.binary.Hex
 
+/**
+ * ADAS 报警附件上传请求(0x9208)消息体编码器
+ */
 object MBEncoderAdas_9208_AlmAttUploadReq extends AbstractJT808MsgBodyEncoder[JTAdasMsg_9208_AlmAttUploadReq] {
 
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 告警附件上传请求消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JTAdasMsg_9208_AlmAttUploadReq, out: ByteBuf): Unit = {
     val p = checkNotNull(m.getParams, "params")
 

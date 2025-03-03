@@ -15,6 +15,9 @@ import info.gratour.jt808common.protocol.JT808Msg;
  */
 public class JT1078Msg extends JT808Msg {
 
+    /**
+     * 构造函数
+     */
     public JT1078Msg() {
     }
 

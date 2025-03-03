@@ -7,28 +7,47 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 速度与状态日志条目
+ */
 @Expose
 public class Vtdr_SpdLogEntry implements Cloneable {
 
     private short recSpd;
     private short refSpd;
 
+    /**
+     * 取记录速度, 单位: km/h
+     * @return 记录速度
+     */
     public short getRecSpd() {
         return recSpd;
     }
 
+    /**
+     * 设置记录速度, 单位: km/h
+     * @param recSpd 记录速度
+     */
     public void setRecSpd(short recSpd) {
         this.recSpd = recSpd;
     }
 
+    /**
+     * 取参考速度, 单位: km/h
+     * @return 参考速度
+     */
     public short getRefSpd() {
         return refSpd;
     }
 
+    /**
+     * 设置参考速度, 单位: km/h
+     * @param refSpd 参考速度
+     */
     public void setRefSpd(short refSpd) {
         this.refSpd = refSpd;
     }

@@ -16,15 +16,29 @@ import info.gratour.jtcommon.JTMsgId;
 import java.time.LocalTime;
 import java.util.StringJoiner;
 
+/**
+ * CAN数据上传消息 (0x0705)
+ */
 @JTMsgId(JT808MsgConsts.CAN_DATA_0705)
 public class JT808Msg_0705_CanData extends JT808Msg {
 
+    /**
+     * 消息ID
+     */
     public static final int MSG_ID = JT808MsgConsts.CAN_DATA_0705;
 
+    /**
+     * 构造函数
+     */
     public JT808Msg_0705_CanData() {
         setMsgId(MSG_ID);
     }
 
+    /**
+     * 构造函数
+     * 
+     * @param header 帧头
+     */
     public JT808Msg_0705_CanData(JT808FrameHeader header) {
         super(header);
     }
@@ -32,18 +46,38 @@ public class JT808Msg_0705_CanData extends JT808Msg {
     private LocalTime receiveTime;
     private MQEventAddt_0705_CanData canData;
 
+    /**
+     * 获取接收时间
+     * 
+     * @return 接收时间
+     */
     public LocalTime getReceiveTime() {
         return receiveTime;
     }
 
+    /**
+     * 设置接收时间
+     * 
+     * @param receiveTime 接收时间
+     */
     public void setReceiveTime(LocalTime receiveTime) {
         this.receiveTime = receiveTime;
     }
 
+    /**
+     * 获取CAN数据
+     * 
+     * @return CAN数据
+     */
     public MQEventAddt_0705_CanData getCanData() {
         return canData;
     }
 
+    /**
+     * 设置CAN数据
+     * 
+     * @param canData CAN数据
+     */
     public void setCanData(MQEventAddt_0705_CanData canData) {
         this.canData = canData;
     }

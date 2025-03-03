@@ -50,10 +50,18 @@ public class AlmAttFileItem implements Cloneable {
         this.fileSize = fileSize;
     }
 
+    /**
+     * 取是否文件上传完成
+     * @return 是否文件上传完成
+     */
     public boolean isUploadCompleted() {
         return uploadCompleted;
     }
 
+    /**
+     * 设置是否文件上传完成
+     * @param uploadCompleted 是否文件上传完成
+     */
     public void setUploadCompleted(boolean uploadCompleted) {
         this.uploadCompleted = uploadCompleted;
     }

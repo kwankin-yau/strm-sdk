@@ -18,6 +18,16 @@ import org.checkerframework.checker.nullness.qual.{NonNull, Nullable}
 
 import java.util
 
+/**
+ * JT808 解码器抽象类
+ * 
+ * @param adasDialect ADAS 方言
+ * @param alloc 字节缓冲区分配器
+ * @param timerProvider 定时器提供者
+ * @param ignoreDecodeFrameError 是否忽略解码帧错误
+ * @param simplified 是否使用简化解码。简化解码可能会丢失一些信息，用于不严格要求消息完整性的场景。
+ * @param verifyCrc 是否验证CRC
+ */
 abstract class AbstractJT808Decoder(
                                      adasDialect           : AdasDialect,
                                      alloc                 : ByteBufAllocator,
@@ -41,6 +51,11 @@ abstract class AbstractJT808Decoder(
     }
   }
 
+  /**
+   * 收到消息回调
+   * @param m 解码后的消息
+   * @param customData 自定义数据
+   */
   def onMsgRecv(m: JT808Msg, customData: AnyRef): Unit
 
   override def close(): Unit = {
@@ -63,12 +78,12 @@ abstract class AbstractJT808Decoder(
   }
 
   /**
-   * Decode buffer to JT808Msg. Decoded message will send to `receiver`.
+   * 解码字节缓冲区到 JT808Msg。解码后的消息将发送给 `receiver`。
    *
-   * @param buf        ByteBuf contains content to decode.
-   * @param customData optional client data, this object will as the `customData` pass to `receiver.onMsgRecv(msg, customData)`.
-   * @throws CrcError   if CRC verification failed.
-   * @throws CodecError for other codec error.
+   * @param buf        ByteBuf 包含要解码的内容。
+   * @param customData 可选的客户端数据，此对象将作为 `customData` 传递给 `receiver.onMsgRecv(msg, customData)`。
+   * @throws CrcError   如果 CRC 验证失败。
+   * @throws CodecError 其他解码错误。
    *
    */
   def decode(@NonNull buf: ByteBuf, @Nullable customData: AnyRef): Unit = {
@@ -112,17 +127,44 @@ abstract class AbstractJT808Decoder(
     }
   }
 
+  /**
+   * 获取终端识别号
+   * @return 终端识别号
+   */
   def getSimNo: String = simNo
 
+  /**
+   * 获取协议版本
+   * @return 协议版本
+   */
   def getProtoVer: Option[Byte] = protoVer
 }
 
+/**
+ * JT808 消息接收器
+ */
 trait JT808MsgReceiver {
+
+  /**
+   * 收到消息回调
+   * @param m 解码后的消息
+   * @param customData 自定义数据
+   */
   def onMsgRecv(@NonNull m: JT808Msg, @Nullable customData: AnyRef): Unit
 }
 
 
-
+/**
+ * JT808 解码器
+ * 
+ * @param adasDialect ADAS 方言
+ * @param alloc 字节缓冲区分配器
+ * @param timerProvider 定时器提供者
+ * @param receiver 消息接收器
+ * @param ignoreDecodeFrameError 是否忽略解码帧错误
+ * @param simplified 是否使用简化解码。简化解码可能会丢失一些信息，用于不严格要求消息完整性的场景。
+ * @param verifyCrc 是否验证CRC
+ */
 class JT808Decoder(
                     adasDialect           : AdasDialect,
                     alloc                 : ByteBufAllocator,

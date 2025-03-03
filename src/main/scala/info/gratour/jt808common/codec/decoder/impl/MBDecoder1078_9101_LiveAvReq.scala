@@ -14,8 +14,19 @@ import info.gratour.jt808common.protocol.msg.types.cmdparams.CP_9101_LiveAvReq
 import info.gratour.jtcommon.ByteBufHelper
 import io.netty.buffer.ByteBuf
 
+/**
+ * JT/T 1078 实时音视频请求(0x9101)消息体解码器
+ */
 object MBDecoder1078_9101_LiveAvReq extends JT808MsgBodyDecoder[JT1078Msg_9101_LiveAvReq]{
 
+  /**
+   * 解码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 解码后的消息体
+   * @param body 消息体字节缓冲区
+   * @param tempBuf 临时缓冲区
+   */
   override def decodeMsgBody(protoVer: Byte, adasDialect: AdasDialect, m: JT1078Msg_9101_LiveAvReq, body: ByteBuf, tempBuf: Array[Byte]): Unit = {
     val cp = new CP_9101_LiveAvReq
     cp.setServerIp(body.readByteLenPrefixedStr())

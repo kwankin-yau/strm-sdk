@@ -5,7 +5,18 @@ import info.gratour.jt808common.protocol.msg.JT808Msg_0107_QryAttrsAck
 import info.gratour.jt808common.{AdasDialect, JT808Consts}
 import io.netty.buffer.ByteBuf
 
+/**
+ * 查询终端属性应答(0x0107)消息体编码器
+ */
 object MBEncoder808_0107_QryAttrsAck extends AbstractJT808MsgBodyEncoder[JT808Msg_0107_QryAttrsAck] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 查询终端属性应答消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(
                                      protoVer: Byte,
                                      adasDialect: AdasDialect,

@@ -13,8 +13,18 @@ import info.gratour.jt808common.protocol.msg.JTAdasMsg_9212_AlmAttFileItemComple
 import info.gratour.jtcommon.ByteBufHelper
 import io.netty.buffer.ByteBuf
 
+/**
+ * ADAS报警附件文件项完成(0x9212)消息体编码器
+ */
 object MBEncoderAdas_9212_AlmAttFileItemCompleted extends AbstractJT808MsgBodyEncoder[JTAdasMsg_9212_AlmAttFileItemCompleted]{
 
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m ADAS报警附件文件项完成消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JTAdasMsg_9212_AlmAttFileItemCompleted, out: ByteBuf): Unit = {
     val params = m.getParams
     out.writeByteLenPrefixedStr(params.getFileItem.getFileName)

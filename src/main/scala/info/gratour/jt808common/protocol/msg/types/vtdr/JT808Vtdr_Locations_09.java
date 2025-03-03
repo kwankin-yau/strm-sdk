@@ -7,25 +7,40 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集指定的位置信息应答数据(09H)
+ */
 @Expose
 public class JT808Vtdr_Locations_09 implements JT808VtdrDataBlock {
 
     private List<Vtdr_LocationInfoPerHour> locations;
 
+    /**
+     * 取位置信息列表
+     * @return 位置信息列表
+     */
     public List<Vtdr_LocationInfoPerHour> getLocations() {
         return locations;
     }
 
+    /**
+     * 设置位置信息列表
+     * @param locations 位置信息列表
+     */
     public void setLocations(List<Vtdr_LocationInfoPerHour> locations) {
         this.locations = locations;
     }
 
+    /**
+     * 添加位置信息
+     * @param locationInfoPerHour 位置信息
+     */
     public void addLocation(Vtdr_LocationInfoPerHour locationInfoPerHour) {
         if (this.locations == null)
             this.locations = new ArrayList<>();
@@ -33,6 +48,10 @@ public class JT808Vtdr_Locations_09 implements JT808VtdrDataBlock {
         this.locations.add(locationInfoPerHour);
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT808Vtdr_Locations_09 source) {
         if (source.locations != null) {
             this.locations = new ArrayList<>();

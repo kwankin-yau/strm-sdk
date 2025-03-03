@@ -7,32 +7,55 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 位置与速度信息
+ */
 @Expose
 public class Vtdr_LocationAndSpd implements Cloneable {
 
     private Vtdr_Location location;
     private short spd;
 
+    /**
+     * 取位置
+     * @return 位置
+     */
     public Vtdr_Location getLocation() {
         return location;
     }
 
+    /**
+     * 设置位置
+     * @param location 位置
+     */
     public void setLocation(Vtdr_Location location) {
         this.location = location;
     }
 
+    /**
+     * 取速度, 单位: km/h
+     * @return 速度
+     */
     public short getSpd() {
         return spd;
     }
 
+    /**
+     * 设置速度, 单位: km/h
+     * @param spd 速度
+     */
     public void setSpd(short spd) {
         this.spd = spd;
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(Vtdr_LocationAndSpd source) {
         this.location = source.location != null ? source.location.clone() : null;
         this.spd = source.spd;

@@ -6,6 +6,9 @@ import info.gratour.jtcommon.{BcdUtils, JTConsts, JTUtils}
 import io.netty.buffer.ByteBuf
 import org.apache.commons.lang3.StringUtils
 
+/**
+ * 808 帧编码器
+ */
 object JT808FrameEncoder {
 
   @inline private def escapeByte(b: Byte, out: ByteBuf): Unit = {
@@ -22,18 +25,17 @@ object JT808FrameEncoder {
   }
 
   /**
-   * Encode message to frames. The encoded frames are crc-calculated and escaped.
+   * 将消息编码为帧。编码后的帧是 CRC 计算好并经过转义的。
    *
-   * @param protoVer        protocol version, 0 for REV_2013, 1 for REV_2019, see also `PROTO_VER` serial constant
-   *                        defined in [[info.gratour.jt808common.JT808Consts.ProtocolVersions]]
-   * @param adasDialect     ADAS Dialect
-   * @param seqNumAllocator message sequence number allocator.
-   * @param m               message to encode
-   * @param bodyEncoder     message body encoder
-   * @param tempBuf         content in tempBuf will be clear
-   * @param out             output buffer
-   * @return packet/fragment count. One message may produce 1 or more packets, 1 packet may produce 1 or more fragments.
-   *         This count is count in fragments.
+   * @param protoVer        协议版本, 0 表示 2013 版本, 1 表示 2019 版本, 见 [[info.gratour.jt808common.JT808Consts.ProtocolVersions]] 中的 `PROTO_VER` 常量
+   * @param adasDialect     ADAS 方言
+   * @param seqNumAllocator 消息序列号分配器
+   * @param m              需要编码的消息
+   * @param bodyEncoder    消息体编码器
+   * @param tempBuf         tempBuf 中的内容将被清空
+   * @param out            输出字节缓冲区
+   * @return 包/片段数量。一个消息可能产生 1 个或多个包, 一个包可能产生 1 个或多个片段。
+   *         这个数量是片段的数量。
    */
   def encode(
               protoVer: Byte,

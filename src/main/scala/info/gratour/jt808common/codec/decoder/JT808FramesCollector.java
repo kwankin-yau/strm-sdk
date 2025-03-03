@@ -1,13 +1,17 @@
 package info.gratour.jt808common.codec.decoder;
 
+import java.io.Closeable;
+
 import info.gratour.jt808common.codec.decoder.fragment.CollectedFragment;
 import info.gratour.jt808common.protocol.FrameSplitInfo;
 import info.gratour.jt808common.protocol.JT808Frame;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.CompositeByteBuf;
 
-import java.io.Closeable;
 
+/**
+ * JT808 帧分片收集器
+ */
 public class JT808FramesCollector implements Closeable, CollectedFragment {
 
 
@@ -17,17 +21,21 @@ public class JT808FramesCollector implements Closeable, CollectedFragment {
     private int recvCount;
     private final ByteBufAllocator allocator;
 
+    /**
+     * 构造函数
+     * @param allocator 字节缓冲区分配器
+     * @param msgId 消息ID
+     */
     public JT808FramesCollector(ByteBufAllocator allocator, int msgId) {
         this.allocator = allocator;
         this.msgId = msgId;
     }
 
     /**
-     * Collect packet fragment. The ownership of `frame` will be transfer to this JT808FramesCollector after method
-     * returns.
+     * 收集分片。方法返回后，`frame` 的所有权将转移到 JT808FramesCollector。
      *
-     * @param frame The fragment to be collected.
-     * @return true if all fragments received.
+     * @param frame 要收集的分片
+     * @return 是否所有分片已接收
      */
     public boolean collect(JT808Frame frame) {
         FrameSplitInfo splitInfo = frame.getHeader().getSplitInfo();
@@ -58,6 +66,10 @@ public class JT808FramesCollector implements Closeable, CollectedFragment {
         return isAllFragmentReceived();
     }
 
+    /**
+     * 构建完整消息包
+     * @return 完整消息包
+     */
     public JT808Frame buildWholePacket() {
         if (recvCount == 0)
             throw new IllegalStateException();

@@ -14,7 +14,7 @@ import java.util.StringJoiner;
 import com.lucendar.strm.common.types.Expose;
 
 /**
- * 事故疑点记录
+ * 采集事故疑点记录应答数据(10H)
  */
 @Expose
 public class JT808Vtdr_AccidentPoints_10 implements JT808VtdrDataBlock {

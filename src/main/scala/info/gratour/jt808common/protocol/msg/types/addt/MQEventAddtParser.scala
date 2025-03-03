@@ -11,6 +11,9 @@ import info.gratour.jt808common.protocol.msg.types.trk.Trk
 import info.gratour.jt808common.protocol.{JT1078MsgConsts, JT808MsgConsts}
 import info.gratour.jtcommon.JTUtils
 
+/**
+ * 事件附加信息解析器
+ */
 object MQEventAddtParser {
 
   private val map: Map[String, Class[_ <: MQEventAddt]] = Seq(
@@ -30,9 +33,19 @@ object MQEventAddtParser {
     JTUtils.msgIdToHex(t._1) -> t._2
   }).toMap
 
+  /**
+   * 根据消息ID取得事件附加信息类
+   * @param msgId 消息ID
+   * @return 事件附加信息类
+   */
   def clazzOf(msgId: Int): Class[_] =
     map.get(JTUtils.msgIdToHex(msgId)).orNull
 
+  /**
+   * 根据消息ID取得事件附加信息类
+   * @param msgIdHex 消息ID, 十六进制字符串
+   * @return 事件附加信息类
+   */
   def clazzOf(msgIdHex: String): Class[_] =
     map.get(msgIdHex).orNull
 

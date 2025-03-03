@@ -7,19 +7,30 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集当前驾驶员信息应答数据(01H)
+ */
 @Expose
 public class JT808Vtdr_DriverInfo_01 implements JT808VtdrDataBlock {
 
     private String licenseNo;
 
+    /**
+     * 取驾驶证号
+     * @return 驾驶证号
+     */
     public String getLicenseNo() {
         return licenseNo;
     }
 
+    /**
+     * 设置驾驶证号
+     * @param licenseNo 驾驶证号
+     */
     public void setLicenseNo(String licenseNo) {
         this.licenseNo = licenseNo;
     }

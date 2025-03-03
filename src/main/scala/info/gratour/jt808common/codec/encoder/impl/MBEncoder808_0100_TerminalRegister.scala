@@ -13,10 +13,20 @@ import info.gratour.jt808common.protocol.msg.JT808Msg_0100_TerminalRegister
 import io.netty.buffer.ByteBuf
 
 
+/**
+ * 终端注册(0x0100)消息体编码器
+ */
 object MBEncoder808_0100_TerminalRegister extends AbstractJT808MsgBodyEncoder[JT808Msg_0100_TerminalRegister]{
 
   import info.gratour.jtcommon.ByteBufHelper
 
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 终端注册消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_0100_TerminalRegister, out: ByteBuf): Unit = {
     val info = m.getInfo
     out.writeShort(info.getProvinceId)

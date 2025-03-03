@@ -3,6 +3,11 @@ package info.gratour.jt808common.codec.decoder
 import info.gratour.jt808common.AdasDialect
 import info.gratour.jt808common.protocol.{JT808Frame, JT808Msg}
 
+/**
+ * JT808 消息解码器
+ * @param adasDialect ADAS 方言
+ * @param simplified 是否使用简化解码
+ */
 class JT808MsgDecoder(adasDialect: AdasDialect, simplified: Boolean) {
 
   private val registry: JT808MsgBodyDecoderRegistry =
@@ -12,10 +17,10 @@ class JT808MsgDecoder(adasDialect: AdasDialect, simplified: Boolean) {
       DefaultMsgBodyDecoderRegistry
 
   /**
-   *
-   * @param frame   frame to decode
-   * @param tempBuf temp buffer used for decoding, should allocated by [[JT808MsgDecoder.allocDecodeTempBuf]]
-   * @return null if decode failed
+   * 解码消息
+   * @param frame 要解码的帧
+   * @param tempBuf 用于解码的临时缓冲区，应由 [[JT808MsgDecoder.allocDecodeTempBuf]] 分配
+   * @return 解码后的消息。如果解码失败，返回 null
    */
   def decode(frame: JT808Frame, tempBuf: Array[Byte]): JT808Msg = {
     val bodyDecoder = registry.get(frame.getHeader.getMsgId)
@@ -26,6 +31,14 @@ class JT808MsgDecoder(adasDialect: AdasDialect, simplified: Boolean) {
   }
 }
 
+/**
+ * JT808 消息解码器 Companion Object
+ */
 object JT808MsgDecoder {
+  
+  /**
+   * 分配用于解码的临时缓冲区
+   * @return 临时缓冲区
+   */
   def allocDecodeTempBuf: Array[Byte] = JT808FrameDecoder.allocTempBuf()
 }

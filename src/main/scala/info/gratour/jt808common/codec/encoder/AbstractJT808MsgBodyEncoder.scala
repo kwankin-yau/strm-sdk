@@ -8,12 +8,18 @@ import io.netty.buffer.ByteBuf
 
 import scala.reflect.ClassTag
 
+/**
+ * 808 消息体编码器
+ */
 trait JT808MsgBodyEncoder extends JTCodecHelper {
   def msgId: Int
 
   def encBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg, out: ByteBuf): Unit
 }
 
+/**
+ * 808 消息体编码器抽象类
+ */
 abstract class AbstractJT808MsgBodyEncoder[T <: JT808Msg](implicit classTag: ClassTag[T]) extends JT808MsgBodyEncoder {
 
   def msgId: Int = JTUtils.jtMsgIdOf(classTag.runtimeClass.asSubclass(classOf[JT808Msg]))
@@ -26,14 +32,23 @@ abstract class AbstractJT808MsgBodyEncoder[T <: JT808Msg](implicit classTag: Cla
 }
 
 
-
+/**
+ * 808 消息体编码器空实现
+ */
 case class JT808MsgBodyEncoderEmpty(msgId: Int) extends JT808MsgBodyEncoder {
   override def encBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg, out: ByteBuf): Unit = {
     // nop
   }
 }
 
+/**
+ * 808 消息体编码器工厂
+ */
 object JT808MsgBodyEncoders {
+
+  /**
+   * 2013 版本消息体编码器
+   */
   val REV_2013: Seq[JT808MsgBodyEncoder] = Seq(
     // 808 - terminal
     MBEncoder808_0001_TerminalGeneralAck,
@@ -110,11 +125,17 @@ object JT808MsgBodyEncoders {
     MBEncoder1078_1206_AvUploadCompleted
   )
 
+  /**
+   * 2019 版本消息体编码器
+   */
   val REV_2019: Seq[JT808MsgBodyEncoder] = Seq(
     JT808MsgBodyEncoderEmpty(JT808MsgConsts.QRY_SERVER_TIME_0004),
     MBEncoder808_8004_QryServerTimeAck
   )
 
+  /**
+   * ADAS 消息体编码器
+   */
   val ADAS: Seq[JT808MsgBodyEncoder] = Seq(
     // Adas - terminal
     MBEncoderAdas_1210_FileList,
@@ -127,5 +148,8 @@ object JT808MsgBodyEncoders {
   )
 
 
+  /**
+   * 所有消息体编码器
+   */
   val ALL: Seq[JT808MsgBodyEncoder] = REV_2013 ++ REV_2019 ++ ADAS
 }

@@ -7,12 +7,15 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 速度与状态日志
+ */
 @Expose
 public class Vtdr_LogRec implements Cloneable {
 
@@ -21,38 +24,74 @@ public class Vtdr_LogRec implements Cloneable {
     private String endTime;
     private List<Vtdr_SpdLogEntry> spdLogEntries;
 
+    /**
+     * 取速度与状态, 0x01: 正常, 0x02: 异常
+     * @return 速度与状态
+     */
     public byte getSpdState() {
         return spdState;
     }
 
+    /**
+     * 设置速度与状态
+     * @param spdState 速度与状态
+     */
     public void setSpdState(byte spdState) {
         this.spdState = spdState;
     }
 
+    /**
+     * 取状态判断的开始时间, yyyy-MM-dd HH:mm:ss
+     * @return 状态判断的开始时间
+     */
     public String getStartTime() {
         return startTime;
     }
 
+    /**
+     * 设置状态判断的开始时间, yyyy-MM-dd HH:mm:ss
+     * @param startTime 状态判断的开始时间
+     */
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
+    /**
+     * 取状态判断的结束时间, yyyy-MM-dd HH:mm:ss
+     * @return 状态判断的结束时间
+     */
     public String getEndTime() {
         return endTime;
     }
 
+    /**
+     * 设置状态判断的结束时间, yyyy-MM-dd HH:mm:ss
+     * @param endTime 状态判断的结束时间
+     */
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
+    /**
+     * 取速度与状态日志条目列表
+     * @return 速度与状态日志条目列表
+     */
     public List<Vtdr_SpdLogEntry> getSpdLogEntries() {
         return spdLogEntries;
     }
 
+    /**
+     * 设置速度与状态日志条目列表
+     * @param spdLogEntries 速度与状态日志条目列表
+     */
     public void setSpdLogEntries(List<Vtdr_SpdLogEntry> spdLogEntries) {
         this.spdLogEntries = spdLogEntries;
     }
 
+    /**
+     * 添加速度与状态日志条目
+     * @param entry 速度与状态日志条目
+     */
     public void addSpdLogEntry(Vtdr_SpdLogEntry entry) {
         if (this.spdLogEntries == null)
             this.spdLogEntries = new ArrayList<>();
@@ -60,6 +99,10 @@ public class Vtdr_LogRec implements Cloneable {
         this.spdLogEntries.add(entry);
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(Vtdr_LogRec source) {
         this.spdState = source.spdState;
         this.startTime = source.startTime;

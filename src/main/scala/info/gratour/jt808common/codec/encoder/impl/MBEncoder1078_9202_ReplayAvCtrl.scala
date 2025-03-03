@@ -14,7 +14,18 @@ import info.gratour.jt808common.protocol.msg.JT1078Msg_9202_ReplayAvCtrl
 import info.gratour.jtcommon.JTConsts
 import io.netty.buffer.ByteBuf
 
+/**
+ * 音视频回放控制(0x9202)消息体编码器
+ */
 object MBEncoder1078_9202_ReplayAvCtrl extends AbstractJT808MsgBodyEncoder[JT1078Msg_9202_ReplayAvCtrl] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 音视频回放控制消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT1078Msg_9202_ReplayAvCtrl, out: ByteBuf): Unit = {
     val p = checkNotNull(m.getParams, "params")
 

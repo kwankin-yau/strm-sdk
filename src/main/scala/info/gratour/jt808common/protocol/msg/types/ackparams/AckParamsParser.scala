@@ -12,6 +12,9 @@ import info.gratour.jt808common.protocol.msg.types.addt.MQEventAddt_0702_DriverI
 import info.gratour.jt808common.protocol.msg.{JT1078Msg_1003_QryAvAttrsAck, JT1078Msg_1205_QryAvResAck, JT1078Msg_9003_QryAvAttrs, JT1078Msg_9205_QryAvRes, JT808Msg_0104_QryParamsAck, JT808Msg_0107_QryAttrsAck, JT808Msg_0201_QryLocationAck, JT808Msg_0302_InquestAnswer, JT808Msg_0500_VehCtrlAck, JT808Msg_0700_VtdrData, JT808Msg_0702_DriverIdentity, JT808Msg_0802_StoredMediaSearchAck, JT808Msg_0805_TakePhotoAck, JT808Msg_8104_QryAllParams, JT808Msg_8106_QrySpecialParams, JT808Msg_8107_QryAttrs, JT808Msg_8201_QryLocation, JT808Msg_8302_Inquest, JT808Msg_8500_VehCtrl, JT808Msg_8700_VtdrDataCollectReq, JT808Msg_8702_DriverIdentityReq, JT808Msg_8801_TakePhoto, JT808Msg_8802_StoredMediaSearch}
 import info.gratour.jtcommon.JTUtils
 
+/**
+ * 应答参数解析器
+ */
 object AckParamsParser extends JT808AckParamsParser {
 
   private val map: Map[Int, Class[_ <: JT808AckParams]] = Seq(
@@ -32,9 +35,21 @@ object AckParamsParser extends JT808AckParamsParser {
     JTUtils.jtMsgIdOf(c) -> c
   }).toMap
 
+  /**
+   * 获取应答参数类
+   * @param msgId 消息 ID
+   * @return 应答参数类
+   */
   def clazzOf(msgId: Int): Class[_] =
     map.get(msgId).orNull
 
+  /**
+   * 根据源消息 ID，解释给定的 JSON 字符串，获取应答参数
+   * @param srcMsgId 源消息 ID
+   * @param json 应答参数 JSON 字符串
+   * @param gson Gson 实例
+   * @return 应答参数
+   */
   @Override
   def fromJsonBySrcMsgId(srcMsgId: Int, json: String, gson: Gson): JT808AckParams = {
     if (json == null)
@@ -89,7 +104,13 @@ object AckParamsParser extends JT808AckParamsParser {
     gson.fromJson(json, clzz)
   }
 
-
+  /**
+   * 根据应答消息 ID，解释给定的 JSON 字符串，获取应答参数
+   * @param ackMsgId 应答消息 ID
+   * @param json 应答参数 JSON 字符串
+   * @param gson Gson 实例
+   * @return 应答参数
+   */
   @Override
   def fromJson(ackMsgId: Int, json: String, gson: Gson): JT808AckParams = {
     if (json == null)

@@ -16,7 +16,18 @@ import info.gratour.jt808common.protocol.msg.types.cmdparams.CP_8105_TerminalCtr
 import info.gratour.jtcommon.ByteBufHelper
 import io.netty.buffer.ByteBuf
 
+/**
+ * 终端控制(0x8105)消息体编码器
+ */
 object MBEncoder808_8105_TerminalCtrl extends AbstractJT808MsgBodyEncoder[JT808Msg_8105_TerminalCtrl] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 终端控制消息
+   * @param out 输出字节缓冲区
+   */
   override def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8105_TerminalCtrl, out: ByteBuf): Unit = {
     val params = m.getParams
     if (params == null)

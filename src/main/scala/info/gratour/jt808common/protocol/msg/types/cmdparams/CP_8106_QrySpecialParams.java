@@ -7,22 +7,34 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import java.util.Arrays;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
-import java.util.Arrays;
-
+/**
+ * 查询特殊参数(0x8106)命令参数
+ */
 @JTMsgId(JT808MsgConsts.QRY_SPECIAL_PARAMS_8106)
 @Expose
 public class CP_8106_QrySpecialParams implements JT808CmdParams {
 
     private String[] paramIds;
 
+    /**
+     * 获取参数ID列表
+     * @return 参数ID列表
+     */
     public String[] getParamIds() {
         return paramIds;
     }
 
+    /**
+     * 设置参数ID列表
+     * @param paramIds 参数ID列表
+     */
     public void setParamIds(String[] paramIds) {
         this.paramIds = paramIds;
     }

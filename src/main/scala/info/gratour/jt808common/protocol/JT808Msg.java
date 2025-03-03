@@ -115,6 +115,11 @@ public class JT808Msg implements JTMsg {
         this.headers = headers;
     }
 
+    /**
+     * 将消息转换为字符串
+     * @param joiner 字符串连接器
+     * @return 字符串连接器
+     */
     public StringJoiner toString(StringJoiner joiner) {
         joiner.add("msgId=" + JTUtils.msgIdToHex(msgId))
                 .add("simNo='" + simNo + "'")

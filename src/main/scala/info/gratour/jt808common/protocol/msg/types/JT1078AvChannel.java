@@ -11,52 +11,105 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
 
+/**
+ * JT/T 1078 音视频通道
+ */
 public class JT1078AvChannel {
 
+    /**
+     * 音视频通道
+     */
     public static final byte MEDIA_TYPE__AV = 0;
+
+    /**
+     * 音频通道
+     */
     public static final byte MEDIA_TYPE__AUDIO_ONLY = 1;
 
     private byte channelId;
     private byte mediaType;
     private boolean custom;
 
+    /**
+     * 构造函数
+     */
     public JT1078AvChannel() {
     }
 
+    /**
+     * 构造函数
+     * @param channelId 通道 ID
+     * @param mediaType 媒体类型
+     * @param custom 是否自定义
+     */
     public JT1078AvChannel(byte channelId, byte mediaType, boolean custom) {
         this.channelId = channelId;
         this.mediaType = mediaType;
         this.custom = custom;
     }
 
+    /**
+     * 取通道 ID
+     * @return 通道 ID
+     */
     public byte getChannelId() {
         return channelId;
     }
 
+    /**
+     * 设置通道 ID
+     * @param channelId 通道 ID
+     */
     public void setChannelId(byte channelId) {
         this.channelId = channelId;
     }
 
+    /**
+     * 取通道名称
+     * @param locale 区域
+     * @return 通道名称
+     */
     public String getChannelName(Locale locale) {
         return channelName(channelId, locale);
     }
 
+    /**
+     * 取媒体类型
+     * @return 媒体类型
+     */
     public byte getMediaType() {
         return mediaType;
     }
 
+    /**
+     * 设置媒体类型
+     * @param mediaType 媒体类型
+     */
     public void setMediaType(byte mediaType) {
         this.mediaType = mediaType;
     }
 
+    /**
+     * 是否自定义通道
+     * @return 是否自定义通道
+     */
     public boolean isCustom() {
         return custom;
     }
 
+    /**
+     * 设置是否自定义通道
+     * @param custom 是否自定义通道
+     */
     public void setCustom(boolean custom) {
         this.custom = custom;
     }
 
+    /**
+     * 取通道文本
+     * @param locale 区域
+     * @return 通道文本
+     */
     public String channelText(Locale locale) {
         return getChannelName(locale) + " (" + channelId + ")";
     }
@@ -70,10 +123,21 @@ public class JT1078AvChannel {
                 .toString();
     }
 
+    /**
+     * 取资源包
+     * @param locale 区域
+     * @return 资源包
+     */
     public static final ResourceBundle resourceBundle(Locale locale) {
         return ResourceBundle.getBundle("info.gratour.jt808common.protocol.channel-names", locale != null ? locale : Locale.getDefault());
     }
 
+    /**
+     * 取通道名称
+     * @param channelId 通道 ID
+     * @param locale 区域
+     * @return 通道名称
+     */
     public static String channelName(int channelId, Locale locale) {
         String key = "ch" + channelId;
         ResourceBundle bundle = resourceBundle(locale);
@@ -83,11 +147,20 @@ public class JT1078AvChannel {
             return key;
     }
 
+    /**
+     * 创建标准通道
+     * @param channelId 通道 ID
+     * @param av 是否音视频通道
+     * @return 标准通道
+     */
     private static JT1078AvChannel ch(int channelId, boolean av) {
         byte mediaType = av ? MEDIA_TYPE__AV : MEDIA_TYPE__AUDIO_ONLY;
         return new JT1078AvChannel((byte) channelId, mediaType, false);
     }
 
+    /**
+     * 标准通道
+     */
     public final static JT1078AvChannel[] standardChannels = new JT1078AvChannel[]{
             ch(1, true),
             ch(2, true),

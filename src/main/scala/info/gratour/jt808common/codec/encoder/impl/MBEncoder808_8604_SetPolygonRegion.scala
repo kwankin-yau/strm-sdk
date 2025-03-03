@@ -13,7 +13,18 @@ import info.gratour.jt808common.protocol.msg.JT808Msg_8604_SetPolygonRegion
 import info.gratour.jtcommon.{ByteBufHelper, JTUtils}
 import io.netty.buffer.ByteBuf
 
+/**
+ * 设置多边形区域(0x8604)消息体编码器
+ */
 object MBEncoder808_8604_SetPolygonRegion extends AbstractJT808MsgBodyEncoder[JT808Msg_8604_SetPolygonRegion] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 设置多边形区域消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8604_SetPolygonRegion, out: ByteBuf): Unit = {
     val params = checkNotNull(m.getParams, "params")
 

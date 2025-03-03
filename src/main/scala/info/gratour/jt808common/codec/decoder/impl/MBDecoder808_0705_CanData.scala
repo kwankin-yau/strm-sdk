@@ -17,8 +17,19 @@ import info.gratour.jt808common.protocol.msg.types.addt.MQEventAddt_0705_CanData
 import info.gratour.jtcommon.{BcdUtils, JTUtils}
 import io.netty.buffer.ByteBuf
 
-object MBDecoder808_0705_CanData extends JT808MsgBodyDecoder[JT808Msg_0705_CanData]{
+/**
+ * 车辆CAN数据(0x0705)消息体解码器
+ */
+object MBDecoder808_0705_CanData extends JT808MsgBodyDecoder[JT808Msg_0705_CanData] {
 
+  /**
+   * 解码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 解码后的消息体
+   * @param body 消息体字节缓冲区
+   * @param tempBuf 临时缓冲区
+   */
   override def decodeMsgBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_0705_CanData, body: ByteBuf, tempBuf: Array[Byte]): Unit = {
     val cnt = body.readUnsignedShort()
     body.readBytes(tempBuf, 0, 5)

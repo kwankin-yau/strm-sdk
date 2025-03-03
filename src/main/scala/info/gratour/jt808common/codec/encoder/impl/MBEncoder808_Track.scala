@@ -15,8 +15,17 @@ import info.gratour.jtcommon.{ByteBufHelper, JTCodecHelper}
 import io.netty.buffer.ByteBuf
 import org.apache.commons.codec.binary.Hex
 
+/**
+ * 轨迹消息体编码器
+ */
 object MBEncoder808_Track extends JTCodecHelper {
 
+  /**
+   * 编码轨迹基本信息
+   * @param protoVer 协议版本
+   * @param t 轨迹消息
+   * @param out 输出字节缓冲区
+   */
   def encodeTrackBasicInfo(protoVer: Byte, t: Trk, out: ByteBuf): Unit = {
     out.writeInt(t.getAlm)
     out.writeInt(t.getSt)
@@ -28,6 +37,13 @@ object MBEncoder808_Track extends JTCodecHelper {
     JT808Utils.timestampToBcd6(t.getGpsTm, out)
   }
 
+  /**
+   * 编码轨迹消息
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param t 轨迹消息
+   * @param out 输出字节缓冲区
+   */
   def encodeTrack(protoVer: Byte, adasDialect: AdasDialect, t: Trk, out: ByteBuf): Unit = {
     encodeTrackBasicInfo(protoVer, t, out)
 

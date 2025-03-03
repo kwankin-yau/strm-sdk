@@ -7,25 +7,40 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集记录仪参数修改记录应答数据(14H)
+ */
 @Expose
 public class JT808Vtdr_RevEvents_14 implements JT808VtdrDataBlock {
 
     private List<Vtdr_RevEvent> revEvents;
 
+    /**
+     * 取参数修改事件记录列表
+     * @return 参数修改事件记录列表
+     */
     public List<Vtdr_RevEvent> getRevEvents() {
         return revEvents;
     }
 
+    /**
+     * 设置参数修改事件记录列表
+     * @param revEvents 参数修改事件记录列表
+     */
     public void setRevEvents(List<Vtdr_RevEvent> revEvents) {
         this.revEvents = revEvents;
     }
 
+    /**
+     * 添加参数修改事件记录
+     * @param event 参数修改事件记录
+     */
     public void addRevEvent(Vtdr_RevEvent event) {
         if (this.revEvents == null)
             this.revEvents = new ArrayList<>();
@@ -33,6 +48,10 @@ public class JT808Vtdr_RevEvents_14 implements JT808VtdrDataBlock {
         this.revEvents.add(event);
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT808Vtdr_RevEvents_14 source) {
         if (source.revEvents != null) {
             this.revEvents = new ArrayList<>();

@@ -12,7 +12,18 @@ import info.gratour.jt808common.codec.encoder.AbstractJT808MsgBodyEncoder
 import info.gratour.jt808common.protocol.msg.JT808Msg_8601_DelCircleRegion
 import io.netty.buffer.ByteBuf
 
+/**
+ * 删除圆形区域(0x8601)消息体编码器
+ */
 object MBEncoder808_8601_DelCircleRegion extends AbstractJT808MsgBodyEncoder[JT808Msg_8601_DelCircleRegion] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 删除圆形区域消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8601_DelCircleRegion, out: ByteBuf): Unit = {
     val params = checkNotNull(m.getParams, "params")
     val list = checkNotEmpty(params.getRegionIds, "regionIds")

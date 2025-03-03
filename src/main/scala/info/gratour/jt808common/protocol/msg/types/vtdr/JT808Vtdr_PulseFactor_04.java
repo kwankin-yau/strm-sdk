@@ -7,28 +7,47 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集记录仪脉冲系数应答数据(04H)
+ */
 @Expose
 public class JT808Vtdr_PulseFactor_04 implements JT808VtdrDataBlock {
 
     private String dateTime;
     private int factor;
 
+    /**
+     * 取记录仪时间, yyyy-MM-dd HH:mm:ss
+     * @return 记录仪时间
+     */
     public String getDateTime() {
         return dateTime;
     }
 
+    /**
+     * 设置记录仪时间, yyyy-MM-dd HH:mm:ss
+     * @param dateTime 记录仪时间
+     */
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
+    /**
+     * 取脉冲系数
+     * @return 脉冲系数
+     */
     public int getFactor() {
         return factor;
     }
 
+    /**
+     * 设置脉冲系数
+     * @param factor 脉冲系数
+     */
     public void setFactor(int factor) {
         this.factor = factor;
     }

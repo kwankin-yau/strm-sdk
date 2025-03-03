@@ -9,7 +9,18 @@ import info.gratour.jt808common.codec.encoder.AbstractJT808MsgBodyEncoder
 import info.gratour.jt808common.protocol.msg.JT808Msg_0800_MultiMediaEvent
 import io.netty.buffer.ByteBuf
 
+/**
+ * 多媒体事件消息体编码器(0x0800)
+ */
 object MBEncoder808_0800_MultiMediaEvent extends AbstractJT808MsgBodyEncoder[JT808Msg_0800_MultiMediaEvent] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 多媒体事件消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(
                                      protoVer: Byte,
                                      adasDialect: AdasDialect,

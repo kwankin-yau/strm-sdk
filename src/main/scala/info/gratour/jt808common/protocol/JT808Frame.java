@@ -8,7 +8,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.util.ReferenceCounted;
 
 /**
- * JT808 帧
+ * JT808 帧。JT808Frame 是一个 ReferenceCounted 对象。包含有帧头和数据体。
  */
 public class JT808Frame implements Closeable, ReferenceCounted {
 
@@ -99,6 +99,10 @@ public class JT808Frame implements Closeable, ReferenceCounted {
         return body.release(decrement);
     }
 
+    /**
+     * 获取回退读取器
+     * @return 回退读取器
+     */
     public ByteBufBackOffReader getBackOffReader() {
         return backOffReader;
     }
