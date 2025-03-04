@@ -18,6 +18,16 @@ import org.apache.commons.codec.binary.Hex
 trait Vtdr_DecodeHelper {
 
   /**
+   * 解码2位BCD数字
+   * @param buf 输入字节缓冲区
+   * @return 解码后的数值
+   */
+  def decode2DigitBcd(buf: ByteBuf): Int = {
+    val b = buf.readByte()
+    BcdUtils.decodeByte(b)
+  }
+
+  /**
    * 解码2位BCD字符串
    * @param buf 输入字节缓冲区
    * @return 解码后的字符串

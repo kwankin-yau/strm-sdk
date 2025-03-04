@@ -6,6 +6,10 @@
 ## 修正
 - 修正`9208`消息的解码不兼容川标的情况
 
+## 不兼容修改
+- `JT808Vtdr_Id_07` 的 `prodYear`, `prodMonth`, `prodDay` 属性改为 `int` 类型
+- `JT808Vtdr_VerInfo_00` 的 `year`, `rev` 属性改为 `int` 类型
+
 # 4.0.0 [2024-01-16]
 ## 完善
 - 引入 GNSS 驱动

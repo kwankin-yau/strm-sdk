@@ -44,6 +44,7 @@ trait JTCodecHelper {
    * 将轴值转换为双精度浮点数
    * @param axis 轴值
    * @return 双精度浮点数
+   */
   def intAxisToDouble(axis: Int): Double = JTUtils.intAxisToDouble(axis)
 
   /**

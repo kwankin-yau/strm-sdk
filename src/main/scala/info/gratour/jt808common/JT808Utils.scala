@@ -215,12 +215,13 @@ object JT808Utils {
   /**
    * VTDR 日期时间格式化器
    */
-  val VTDR_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+  val VTDR_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("yyMMddHHmmss")
 
   /**
    * 将 VTDR 日期时间字符串转换为 `LocalDateTime`
    * @param s VTDR 日期时间字符串
    * @return `LocalDateTime`
+   */
   def vtdrStrToLocalDateTime(s: String): LocalDateTime = {
     if (s == null)
       throw new RuntimeException("Invalid parameter: `vtdr string`.");

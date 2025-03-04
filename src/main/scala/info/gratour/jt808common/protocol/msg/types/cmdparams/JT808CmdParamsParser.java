@@ -17,6 +17,15 @@ public interface JT808CmdParamsParser {
      * @param gson Gson实例
      * @return 命令参数
      */
+    JT808CmdParams fromJson(int msgId, String json, Gson gson);
+
+    /**
+     * 从JSON字符串解析命令参数
+     * @param msgIdHex 消息ID
+     * @param json JSON字符串
+     * @param gson Gson实例
+     * @return 命令参数
+     */
     default JT808CmdParams fromJson(String msgIdHex, String json, Gson gson) {
         return fromJson(JTUtils.hexToMsgId(msgIdHex), json, gson);
     }

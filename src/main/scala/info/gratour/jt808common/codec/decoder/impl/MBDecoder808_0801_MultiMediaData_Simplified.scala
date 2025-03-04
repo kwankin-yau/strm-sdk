@@ -7,7 +7,7 @@ import io.netty.buffer.ByteBuf
 
 /**
  * 多媒体数据上报(0x0801)简化消息体解码器
- 
+ */
 object MBDecoder808_0801_MultiMediaData_Simplified extends JT808MsgBodyDecoder[JT808Msg_0801_MultiMediaData_Simplified] {
 
   /**

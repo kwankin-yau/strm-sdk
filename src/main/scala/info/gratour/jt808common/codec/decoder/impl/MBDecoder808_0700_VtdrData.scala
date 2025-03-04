@@ -51,8 +51,8 @@ object MBDecoder808_0700_VtdrData extends JT808MsgBodyDecoder[JT808Msg_0700_Vtdr
       cmd match {
         case VtdrCmdConsts.QRY_VER_INFO_00 =>
           val verInfo = new JT808Vtdr_VerInfo_00
-          verInfo.setYear(decode2DigitBcdStr(body))
-          verInfo.setRev(decode2DigitBcdStr(body))
+          verInfo.setYear(decode2DigitBcd(body))
+          verInfo.setRev(decode2DigitBcd(body))
           verInfo
 
         case VtdrCmdConsts.QRY_DRIVER_INFO_01 =>
@@ -104,9 +104,9 @@ object MBDecoder808_0700_VtdrData extends JT808MsgBodyDecoder[JT808Msg_0700_Vtdr
           val id = new JT808Vtdr_Id_07
           id.setCcc(readFixedLenCStr(body, 7))
           id.setModel(readFixedLenCStr(body, 16))
-          id.setProdYear(decode2DigitBcdStr(body))
-          id.setProdMonth(decode2DigitBcdStr(body))
-          id.setProdDay(decode2DigitBcdStr(body))
+          id.setProdYear(decode2DigitBcd(body))
+          id.setProdMonth(decode2DigitBcd(body))
+          id.setProdDay(decode2DigitBcd(body))
           id.setSerialNum(decode8DigitBcdStr(body).toInt)
           body.skipBytes(5)
           id
