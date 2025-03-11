@@ -83,6 +83,10 @@ public class JT808AckParams_0700_VtdrData implements JT808AckParams, Cloneable {
                 .toString();
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT808AckParams_0700_VtdrData source) {
         this.cmd = source.cmd;
         this.dataBlock = source.dataBlock != null ? source.dataBlock.clone() : null;

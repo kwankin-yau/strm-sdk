@@ -1,12 +1,13 @@
 package com.lucendar.gnss.sdk.strm;
 
+import java.util.StringJoiner;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.lucendar.gnss.sdk.GnssConsts;
 import com.lucendar.strm.common.strm.AudioConfig;
 import com.lucendar.strm.common.strm.OpenStrmReq;
 import com.lucendar.strm.common.strm.ServerHint;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import java.util.StringJoiner;
 
 /**
  * 打开实时音视频请求
@@ -210,6 +211,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         this.dataType = dataType;
     }
 
+    /**
+     * 取数据类型, 默认值为 0
+     * @return 数据类型
+     */
     public byte dataTypeDef() {
         if (dataType == null)
             return 0;
@@ -283,6 +288,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return connIdx;
     }
 
+    /**
+     * 设置连接索引
+     * @param connIdx 连接索引
+     */
     public void setConnIdx(byte connIdx) {
         this.connIdx = connIdx;
     }
@@ -292,14 +301,30 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return strmServerHint;
     }
 
+    /**
+     * 设置流媒体服务器提示
+     * @param strmServerHint 流媒体服务器提示
+     */
     public void setStrmServerHint(ServerHint strmServerHint) {
         this.strmServerHint = strmServerHint;
     }
 
+    /**
+     * 取推流时使用的通讯协议
+     * @return 推流时使用的通讯协议
+     * @deprecated 
+     */
+    @Deprecated
     public int getTermProto() {
         return termProto;
     }
 
+    /**
+     * 设置推流时使用的通讯协议
+     * @param termProto 推流时使用的通讯协议
+     * @deprecated 
+     */
+    @Deprecated
     public void setTermProto(int termProto) {
         this.termProto = termProto;
     }
@@ -319,6 +344,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return exclusive;
     }
 
+    /**
+     * 设置是否独占打开方式
+     * @param exclusive 是否独占打开方式
+     */
     public void setExclusive(boolean exclusive) {
         this.exclusive = exclusive;
     }
@@ -347,6 +376,11 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return detectMediaTyp;
     }
 
+    /**
+     * 设置是否执行媒体类型检测
+     * @param detectMediaTyp 是否执行媒体类型检测
+     * @deprecated 已废除，服务端总是执行媒体类型检测
+     */
     @Deprecated
     public void setDetectMediaTyp(Boolean detectMediaTyp) {
         this.detectMediaTyp = detectMediaTyp;
@@ -357,6 +391,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return keepInterval;
     }
 
+    /**
+     * 设置保持间隔, 单位为秒
+     * @param keepInterval 保持间隔
+     */
     public void setKeepInterval(Integer keepInterval) {
         this.keepInterval = keepInterval;
     }
@@ -384,6 +422,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return inputAudioCfg;
     }
 
+    /**
+     * 设置输入音频配置
+     * @param inputAudioCfg 输入音频配置
+     */
     public void setInputAudioCfg(AudioConfig inputAudioCfg) {
         this.inputAudioCfg = inputAudioCfg;
     }
@@ -393,6 +435,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return audioCfg;
     }
 
+    /**
+     * 设置输出音频配置
+     * @param audioCfg 输出音频配置
+     */
     public void setAudioCfg(AudioConfig audioCfg) {
         this.audioCfg = audioCfg;
     }
@@ -402,6 +448,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return timedToken;
     }
 
+    /**
+     * 设置时效令牌
+     * @param timedToken 时效令牌
+     */
     public void setTimedToken(String timedToken) {
         this.timedToken = timedToken;
     }
@@ -428,6 +478,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return scheme;
     }
 
+    /**
+     * 设置媒体播放URL的协议
+     * @param scheme 媒体播放URL的协议
+     */
     public void setScheme(String scheme) {
         this.scheme = scheme;
     }
@@ -437,6 +491,10 @@ public class GnssOpenLiveStrmReq implements GnssOpenStrmReq {
         return dontSendCloseIfInterrupt;
     }
 
+    /**
+     * 设置是否禁止在流中断时发送流关闭命令到终端
+     * @param dontSendCloseIfInterrupt 是否禁止在流中断时发送流关闭命令到终端
+     */
     public void setDontSendCloseIfInterrupt(Boolean dontSendCloseIfInterrupt) {
         this.dontSendCloseIfInterrupt = dontSendCloseIfInterrupt;
     }

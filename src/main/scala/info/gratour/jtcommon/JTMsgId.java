@@ -12,10 +12,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * 消息ID注解
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JTMsgId {
 
+    /**
+     * 取消息ID
+     * @return 消息ID
+     */
     int value();
 
 }

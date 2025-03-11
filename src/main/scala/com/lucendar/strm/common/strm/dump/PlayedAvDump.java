@@ -7,12 +7,12 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.dump;
 
+import java.util.StringJoiner;
+
 import com.lucendar.strm.common.StreamingApi;
 import com.lucendar.strm.common.StrmMsg;
 import com.lucendar.strm.common.StrmMsgs;
 import com.lucendar.strm.common.types.RelativeFileNameProvider;
-
-import java.util.StringJoiner;
 
 /**
  * 终端音视频播放或回放时，服务端同时存储在服务器本地的转录文件
@@ -31,9 +31,25 @@ public class PlayedAvDump implements StrmMsg, RelativeFileNameProvider {
     private String url;
     private String mediaTyp;
 
+    /**
+     * 构造函数
+     */
     public PlayedAvDump() {
     }
 
+    /**
+     * 构造函数
+     * @param reqId 请求ID
+     * @param reqTm 请求时间
+     * @param appId 应用ID
+     * @param simNo 终端识别号
+     * @param chan 通道号
+     * @param live 是否实时音视频
+     * @param path 文件路径
+     * @param ext 文件扩展名
+     * @param sz 文件大小
+     * @param mediaTyp 媒体类型
+     */
     public PlayedAvDump(
             String reqId,
             String reqTm,

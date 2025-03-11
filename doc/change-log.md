@@ -9,6 +9,7 @@
 ## 不兼容修改
 - `JT808Vtdr_Id_07` 的 `prodYear`, `prodMonth`, `prodDay` 属性改为 `int` 类型
 - `JT808Vtdr_VerInfo_00` 的 `year`, `rev` 属性改为 `int` 类型
+- `JT808AckParams_0500_VehCtrlAck` 的 `assinFrom` 方法名修正为 `assignFrom`
 
 # 4.0.0 [2024-01-16]
 ## 完善

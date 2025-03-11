@@ -91,8 +91,8 @@ public class CP_8300_SendText implements JT808CmdParams {
     }
 
     /**
-     * 获取类型
-     * @return 类型
+     * 设置类型
+     * @param opts 类型
      */
     public void setOpts(int opts) {
         this.opts = (byte) opts;

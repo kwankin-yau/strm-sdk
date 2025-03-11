@@ -7,12 +7,20 @@ import java.util.StringJoiner;
  */
 public class ScopedSimNo {
 
-    // This character is not allowed appears in both appId and simNo
+    /**
+     * 应用ID和终端识别号之间的分隔符。
+     * This character is not allowed appears in both appId and simNo.
+     */
     public static final String AppIdSimNoSeparator = "|";
 
     private final String appId;
     private final String simNo;
 
+    /**
+     * 构造函数
+     * @param appId 应用ID
+     * @param simNo 终端识别号
+     */
     public ScopedSimNo(String appId, String simNo) {
         if (appId == null)
             throw new NullPointerException("appId");
@@ -23,26 +31,52 @@ public class ScopedSimNo {
         this.simNo = simNo;
     }
 
+    /**
+     * 获取应用ID
+     * @return 应用ID
+     */
     public String getAppId() {
         return appId;
     }
 
+    /**
+     * 获取终端识别号
+     * @return 终端识别号
+     */
     public String getSimNo() {
         return simNo;
     }
 
+    /**
+     * 获取应用ID
+     * @return 应用ID
+     */
     public String appId() {
         return appId;
     }
 
+    /**
+     * 获取终端识别号
+     * @return 终端识别号
+     */
     public String simNo() {
         return simNo;
     }
 
+    /**
+     * 格式化 `AppID|终端识别号` 键
+     * @param appId 应用ID
+     * @param simNo 终端识别号
+     * @return `AppID|终端识别号` 键
+     */
     public static String formatKey(String appId, String simNo) {
         return appId + AppIdSimNoSeparator + simNo;
     }
 
+    /**
+     * 获取 `AppID|终端识别号` 键
+     * @return `AppID|终端识别号` 键
+     */
     public String key() {
         return formatKey(appId, simNo);
     }

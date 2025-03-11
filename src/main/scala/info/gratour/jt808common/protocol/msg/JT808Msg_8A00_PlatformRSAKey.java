@@ -45,7 +45,7 @@ public class JT808Msg_8A00_PlatformRSAKey extends JT808Msg {
     /**
      * 获取E
      * 
-     * @return
+     * @return E
      */
     public long getE() {
         return e;
@@ -54,7 +54,7 @@ public class JT808Msg_8A00_PlatformRSAKey extends JT808Msg {
     /**
      * 设置E
      * 
-     * @param e
+     * @param e E
      */
     public void setE(long e) {
         this.e = e;
@@ -63,7 +63,7 @@ public class JT808Msg_8A00_PlatformRSAKey extends JT808Msg {
     /**
      * 获取N
      * 
-     * @return n
+     * @return N
      */
     public byte[] getN() {
         return n;
@@ -72,7 +72,7 @@ public class JT808Msg_8A00_PlatformRSAKey extends JT808Msg {
     /**
      * 设置N
      * 
-     * @param n
+     * @param n N
      */
     public void setN(byte[] n) {
         this.n = n;

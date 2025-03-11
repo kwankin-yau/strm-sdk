@@ -113,7 +113,6 @@ public class TermCmdParamsParser {
      * 从JSON字符串解析应答参数
      * @param srcMsgId 源消息ID
      * @param json JSON字符串
-     * @param gson Gson实例
      * @return 应答参数
      */
     public JT808AckParams ackParamsFromJsonBySrcMsgId(int srcMsgId, String json) {
@@ -132,7 +131,7 @@ public class TermCmdParamsParser {
 
     /**
      * 从JSON字符串解析应答参数
-     * @param ackMsgId 应答消息ID
+     * @param ackMsgIdHex 应答消息ID十六进制字符串
      * @param json JSON字符串
      * @param gson Gson实例
      * @return 应答参数

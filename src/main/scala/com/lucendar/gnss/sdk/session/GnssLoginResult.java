@@ -1,22 +1,34 @@
 package com.lucendar.gnss.sdk.session;
 
-import com.google.gson.reflect.TypeToken;
-import com.lucendar.common.utils.DateTimeUtils;
-import com.lucendar.gnss.sdk.gateway.ServerInfo;
-import info.gratour.common.types.rest.Reply;
-
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import com.google.gson.reflect.TypeToken;
+import com.lucendar.common.utils.DateTimeUtils;
+import com.lucendar.gnss.sdk.gateway.ServerInfo;
+
+import info.gratour.common.types.rest.Reply;
+
 /**
  * 登录返回项
  */
 public class GnssLoginResult extends ServerInfo {
+
+    /**
+     * 登录返回项类型
+     */
     public static final Type REPLY_TYPE = new TypeToken<Reply<GnssLoginResult>>(){}.getType();
+
+    /**
+     * 鉴权令牌
+     */
     private String authToken;
 
+    /**
+     * 构造函数
+     */
     public GnssLoginResult() {
     }
 

@@ -5,6 +5,7 @@
 package com.lucendar.strm.common.strm;
 
 /**
+ * 保持流请求结果
  * @deprecated  Use {@link KeepStrmResult} instead.
  */
 @Deprecated

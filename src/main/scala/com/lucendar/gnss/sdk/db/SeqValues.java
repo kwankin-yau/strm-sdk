@@ -26,7 +26,14 @@ public class SeqValues {
      */
     public static final String SEQ_ALM_ID = "s_alm_id";
 
+    /**
+     * 轨迹ID sequence 配置
+     */
     public static final SeqValueConfig TrkIdConfig = new SeqValueConfig(SEQ_TRK_ID, 100000);
+
+    /**
+     * 报警ID sequence 配置
+     */
     public static final SeqValueConfig AlmIdConfig = new SeqValueConfig(SEQ_ALM_ID, 15000);
 
 }

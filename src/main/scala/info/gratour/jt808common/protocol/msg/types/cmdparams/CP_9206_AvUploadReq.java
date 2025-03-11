@@ -233,6 +233,10 @@ public class CP_9206_AvUploadReq implements JT808CmdParams {
         this.almFilter808 = almFilter808;
     }
 
+    /**
+     * 取808报警标志位
+     * @return 808报警标志位
+     */
     @Deprecated
     public int almSt808() {
         if (almFilter808 != null)
@@ -257,6 +261,10 @@ public class CP_9206_AvUploadReq implements JT808CmdParams {
         this.almFilter1078 = almFilter1078;
     }
 
+    /**
+     * 取1078报警标志位
+     * @return 1078报警标志位
+     */
     @Deprecated
     public int almSt1078() {
         if (almFilter1078 != null)
@@ -265,6 +273,10 @@ public class CP_9206_AvUploadReq implements JT808CmdParams {
             return 0;
     }
 
+    /**
+     * 取报警状态(808报警标志位和1078报警标志位)
+     * @return 报警状态
+     */
     @Deprecated
     public long almState() {
         int st808 = almSt808();

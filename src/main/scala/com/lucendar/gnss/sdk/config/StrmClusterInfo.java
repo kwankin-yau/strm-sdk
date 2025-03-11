@@ -12,19 +12,35 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
+/**
+ * 流媒体集群配置信息
+ */
 @Deprecated
 public class StrmClusterInfo implements Cloneable {
 
     private List<StrmServerInfo> serverList = new ArrayList<>();
 
+    /**
+     * 获取服务器列表
+     * @return 服务器列表
+     */
     public List<StrmServerInfo> getServerList() {
         return serverList;
     }
 
+    /**
+     * 设置服务器列表
+     * @param serverList 服务器列表
+     */
     public void setServerList(List<StrmServerInfo> serverList) {
         this.serverList = serverList;
     }
 
+    /**
+     * 查找服务器配置信息
+     * @param instanceId 服务器实例ID
+     * @return 服务器配置信息
+     */
     public StrmServerInfo find(String instanceId) {
         if (this.serverList == null)
             return null;
@@ -36,6 +52,10 @@ public class StrmClusterInfo implements Cloneable {
         return null;
     }
 
+    /**
+     * 从集群配置信息中赋值
+     * @param clusterConfig 集群配置信息
+     */
     public void assign(StrmMediaClusterConfig clusterConfig) {
         serverList.clear();
 
@@ -48,6 +68,10 @@ public class StrmClusterInfo implements Cloneable {
         }
     }
 
+    /**
+     * 从源集群配置信息中赋值
+     * @param source 源集群配置信息
+     */
     public void assignFrom(StrmClusterInfo source) {
         List<StrmServerInfo> serverList = source.serverList;
         if (serverList != null) {
@@ -59,6 +83,11 @@ public class StrmClusterInfo implements Cloneable {
             this.serverList = null;
     }
 
+    /**
+     * 初始化集群配置信息
+     * @param clusterConfig 集群配置信息
+     * @return 集群配置信息
+     */
     public static StrmClusterInfo init(StrmMediaClusterConfig clusterConfig) {
         StrmClusterInfo r = new StrmClusterInfo();
         r.assign(clusterConfig);

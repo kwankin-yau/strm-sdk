@@ -24,8 +24,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 
+/**
+ * WebSocket(stomp 协议) 事件源
+ */
 public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs {
 
+    /**
+     * 日志记录器
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(WsEventSource.class);
 
     /**
@@ -44,10 +50,20 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
 
     private final int reconnectInterval;
 
+    /**
+     * 管理的监听器
+     */
     static class ManagedListener {
+        /**
+         * 监听器
+         */
         GnssEventListener listener;
+        /**
+         * 是否已通知订阅成功
+         */
         AtomicBoolean afterSubscribeNotified = new AtomicBoolean();
     }
+
     private final ManagedListener[] listeners = new ManagedListener[GnssEventType.values().length];
 
     private final AtomicBoolean active = new AtomicBoolean();
@@ -86,6 +102,11 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
         doSubscribe(session);
     }
 
+    /**
+     * 处理异常
+     * @param session 会话
+     * @param throwable 异常
+     */
     protected void onException(StompSession session, Throwable throwable) {
         LOGGER.error("Error occurred in stomp session handler: " + throwable.getMessage(), throwable);
         disconnect();
@@ -117,9 +138,16 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
         onException(session, exception);
     }
 
+    /**
+     * STOMP帧处理器
+     */
     class GnssStompFrameHandler implements StompFrameHandler {
         private final GnssEventType eventType;
 
+        /**
+         * 构造函数
+         * @param eventType 事件类型
+         */
         public GnssStompFrameHandler(GnssEventType eventType) {
             this.eventType = eventType;
         }
@@ -142,6 +170,14 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
     }
 
 
+    /**
+     * 构造函数
+     * @param taskScheduler 任务调度器
+     * @param connParams 连接参数
+     * @param token 令牌
+     * @param listenerRegs 监听器注册项
+     * @param reconnectInterval 重连间隔
+     */
     public WsEventSource(
             TaskScheduler taskScheduler,
             GnssApiConnParams connParams,
@@ -179,6 +215,13 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
         stompClient.setTaskScheduler(taskScheduler);
     }
 
+    /**
+     * 构造函数
+     * @param taskScheduler 任务调度器
+     * @param connParams 连接参数
+     * @param token 令牌
+     * @param listenerRegs 监听器注册项
+     */
     public WsEventSource(
             TaskScheduler taskScheduler,
             GnssApiConnParams connParams,
@@ -191,6 +234,10 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
                 DEFAULT_RECONNECT_INTERVAL);
     }
 
+    /**
+     * 通知事件
+     * @param event 事件
+     */
     protected void notify(GnssEvent event) {
         LOGGER.debug("notify " + event);
         for (ManagedListener l : listeners) {
@@ -229,6 +276,9 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
         }
     }
 
+    /**
+     * 连接
+     */
     protected void connect() {
         Headers headers = new Headers();
         headers.add(HttpConsts.HEADER_X_APP_ID, appId);
@@ -239,6 +289,9 @@ public class WsEventSource extends StompSessionHandlerAdapter implements GnssWs 
         stompClient.connect(wsUrl, headers, this);
     }
 
+    /**
+     * 断开连接
+     */
     protected void disconnect() {
         StompSession sess = this.session.get();
         if (sess != null) {

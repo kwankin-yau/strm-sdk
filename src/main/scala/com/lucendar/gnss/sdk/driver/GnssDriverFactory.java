@@ -4,16 +4,19 @@
  */
 package com.lucendar.gnss.sdk.driver;
 
+import java.util.Map;
+
 import info.gratour.jt808common.AdasDialect;
 import io.netty.buffer.ByteBuf;
-
-import java.util.Map;
 
 /**
  * 终端驱动
  */
 public interface GnssDriverFactory {
 
+    /**
+     * 驱动ID，JT808
+     */
     String DRIVER_ID__JT808 = "jt808";
 
     /**
@@ -53,6 +56,13 @@ public interface GnssDriverFactory {
             boolean simplifiedDecoder,
             GnssDriverContext ctx);
 
+    /**
+     * 创建驱动实例
+     * @param config 驱动配置
+     * @param adasDialect ADAS方言
+     * @param ctx 驱动上下文
+     * @return 驱动实例
+     */
     default GnssDriver createDriver(
             Map<String, String> config,
             AdasDialect adasDialect,

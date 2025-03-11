@@ -15,5 +15,9 @@ import com.lucendar.strm.common.types.Expose;
 @Expose
 public interface JT808VtdrDataBlock extends Cloneable {
 
+    /**
+     * 克隆
+     * @return 克隆对象
+     */
     JT808VtdrDataBlock clone();
 }

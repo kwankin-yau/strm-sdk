@@ -102,56 +102,90 @@ public class Event {
     private MQEventAddt addt;
 
     /**
-     * jt808/jt1078 message id or `ONLINE` or `OFFLINE`
+     * 获取消息ID
      *
-     * @return message id of the event
+     * @return 消息ID, 或者 `ONLINE` 或 `OFFLINE`
      */
     public String getMsgId() {
         return msgId;
     }
 
+    /**
+     * 设置消息ID
+     * @param msgId 消息ID
+     */
     public void setMsgId(String msgId) {
         this.msgId = msgId;
     }
 
+    /**
+     * 获取AppId
+     * @return AppId
+     */
     public String getAppId() {
         return appId;
     }
 
+    /**
+     * 设置AppId
+     * @param appId AppId
+     */
     public void setAppId(String appId) {
         this.appId = appId;
     }
 
+    /**
+     * 获取终端识别号
+     * @return 终端识别号
+     */
     public String getSimNo() {
         return simNo;
     }
 
+    /**
+     * 设置终端识别号
+     * @param simNo 终端识别号
+     */
     public void setSimNo(String simNo) {
         this.simNo = simNo;
     }
 
+    /**
+     * 获取接收时间, epoch-millis
+     * @return 接收时间
+     */
     public long getRecvTm() {
         return recvTm;
     }
 
+    /**
+     * 设置接收时间
+     * @param recvTm 接收时间
+     */
     public void setRecvTm(long recvTm) {
         this.recvTm = recvTm;
     }
 
     /**
-     * String value of {@link info.gratour.jt808common.AdasDialect}. Indicates the event is received from
-     * the `JT/T 808` end point with the adasDialect.
-     *
-     * @return adasDialect using by the `JT/T 808` end point.
+     * 获取ADAS方言，为 AdasDialect 的 name() 值
+     * @return ADAS方言
      */
     public String getAdasDialect() {
         return adasDialect;
     }
 
+    /**
+     * 设置ADAS方言
+     * @param adasDialect ADAS方言
+     */
     public void setAdasDialect(String adasDialect) {
         this.adasDialect = adasDialect;
     }
 
+    /**
+     * 获取ADAS方言
+     * @return ADAS方言
+     */
     public AdasDialect adasDialect() {
         return AdasDialect.valueOf(adasDialect);
     }
@@ -165,14 +199,26 @@ public class Event {
         return protoVer;
     }
 
+    /**
+     * 设置协议版本号
+     * @param protoVer 协议版本号
+     */
     public void setProtoVer(String protoVer) {
         this.protoVer = protoVer;
     }
 
+    /**
+     * 获取附加数据
+     * @return 附加数据
+     */
     public MQEventAddt getAddt() {
         return addt;
     }
 
+    /**
+     * 设置附加数据
+     * @param addt 附加数据
+     */
     public void setAddt(MQEventAddt addt) {
         this.addt = addt;
     }

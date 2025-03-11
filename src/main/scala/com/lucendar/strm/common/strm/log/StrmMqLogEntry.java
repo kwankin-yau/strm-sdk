@@ -7,11 +7,34 @@ import java.util.StringJoiner;
  */
 public class StrmMqLogEntry {
 
+    /**
+     * 消息队列类型：RabbitMQ
+     */
     public static final String CHANNEL__RABBIT = "rabbit";
+
+    /**
+     * 消息队列类型：Apache MQ
+     */
     public static final String CHANNEL__APACHE_MQ = "apacheMq";
+
+    /**
+     * 消息队列类型：Artemis
+     */
     public static final String CHANNEL__ARTEMIS = "artemis";
+
+    /**
+     * 消息队列类型：Kafka
+     */
     public static final String CHANNEL__KAFKA = "kafka";
+
+    /**
+     * 消息队列类型：MQTT
+     */
     public static final String CHANNEL__MQTT = "mqtt";
+
+    /**
+     * 消息队列类型：Redis
+     */
     public static final String CHANNEL__REDIS = "redis";
 
     /**

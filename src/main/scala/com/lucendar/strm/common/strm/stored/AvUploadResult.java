@@ -22,6 +22,11 @@ public class AvUploadResult {
         return reqId;
     }
 
+    /**
+     * 设置请求ID。由服务端产生或调用者在`AvUploadReq`中指定。
+     *
+     * @param reqId 请求ID。
+     */
     public void setReqId(String reqId) {
         this.reqId = reqId;
     }

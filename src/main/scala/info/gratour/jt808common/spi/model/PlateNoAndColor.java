@@ -65,14 +65,16 @@ public class PlateNoAndColor implements IPlateNoAndColor {
     }
 
     /**
-     * 取车牌颜色短整型
+     * 取车牌颜色代码(short 类型)
+     * @return 车牌颜色代码
      */
     public short plateColorShort() {
         return (short) plateColor;
     }
 
     /**
-     * 取车牌颜色字节
+     * 取车牌颜色代码(byte 类型)
+     * @return 车牌颜色代码
      */
     public byte plateColorByte() {
         return (byte) plateColor;

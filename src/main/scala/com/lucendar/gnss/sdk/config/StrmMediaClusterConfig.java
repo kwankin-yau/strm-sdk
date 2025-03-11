@@ -15,8 +15,12 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * 媒体集群配置
+ */
 @Deprecated
 public class StrmMediaClusterConfig {
+
 
     private static class ClusterConfig {
 
@@ -26,6 +30,10 @@ public class StrmMediaClusterConfig {
         private Map<String, StrmMediaConfig> map = new TreeMap<>();
         private List<StrmMediaConfig> list = new ArrayList<>();
 
+        /**
+         * 获取媒体配置列表
+         * @return 媒体配置列表
+         */
         public List<StrmMediaConfig> getList() {
             return new ArrayList<>(map.values());
         }
@@ -40,26 +48,48 @@ public class StrmMediaClusterConfig {
             list.add(c);
         }
 
+        /**
+         * 获取媒体配置
+         * @param instanceId 实例ID
+         * @return 媒体配置
+         */
         public StrmMediaConfig getByInstanceId(String instanceId) {
             return map.get(instanceId);
         }
 
 
+        /**
+         * 设置媒体配置列表
+         * @param configs 媒体配置列表
+         */
         public void set(Collection<StrmMediaConfig> configs) {
             clear();
             configs.forEach(this::put);
         }
 
+        /**
+         * 设置媒体配置列表
+         * @param configs 媒体配置列表
+         */
         public void set(StrmMediaConfig[] configs) {
             clear();
             for (StrmMediaConfig c : configs)
                 put(c);
         }
 
+        /**
+         * 获取媒体配置列表大小
+         * @return 媒体配置列表大小
+         */
         public int size() {
             return list.size();
         }
 
+        /**
+         * 获取媒体配置
+         * @param index 索引
+         * @return 媒体配置
+         */
         public StrmMediaConfig getByIndex(int index) {
             return list.get(index);
         }
@@ -68,6 +98,11 @@ public class StrmMediaClusterConfig {
     private final AtomicReference<ClusterConfig> configRef = new AtomicReference<>(new ClusterConfig());
     private final AtomicInteger lastIndex = new AtomicInteger(0);
 
+    /**
+     * 获取媒体配置
+     * @param instanceId 实例ID
+     * @return 媒体配置
+     */
     public StrmMediaConfig getByInstanceId(String instanceId) {
         ClusterConfig config = configRef.get();
         if (config == null)
@@ -80,6 +115,10 @@ public class StrmMediaClusterConfig {
             return null;
     }
 
+    /**
+     * 设置媒体配置列表
+     * @param clusterConfig 媒体配置列表
+     */
     public void set(Collection<StrmMediaConfig> clusterConfig) {
         List<StrmMediaConfig> list = new ArrayList<>();
         for (StrmMediaConfig config : clusterConfig) {
@@ -93,6 +132,10 @@ public class StrmMediaClusterConfig {
         configRef.set(config);
     }
 
+    /**
+     * 设置媒体配置列表
+     * @param clusterConfig 媒体配置列表
+     */
     public void set(StrmMediaConfig[] clusterConfig) {
         List<StrmMediaConfig> list = new ArrayList<>();
         for (StrmMediaConfig config : clusterConfig) {
@@ -106,11 +149,19 @@ public class StrmMediaClusterConfig {
         configRef.set(config);
     }
 
+    /**
+     * 获取媒体配置列表
+     * @return 媒体配置列表
+     */
     public List<StrmMediaConfig> getList() {
         ClusterConfig config = configRef.get();
         return config.getList();
     }
 
+    /**
+     * 获取媒体配置
+     * @return 媒体配置
+     */
     public StrmMediaConfig acquire() {
         ClusterConfig config = configRef.get();
         int sz = config.size();

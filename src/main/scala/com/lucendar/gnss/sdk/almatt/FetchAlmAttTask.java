@@ -34,9 +34,17 @@ public class FetchAlmAttTask implements Cloneable {
     private int state;
     private int retryTimes;
 
+    /**
+     * 构造函数
+     */
     public FetchAlmAttTask() {
     }
 
+    /**
+     * 构造函数
+     * @param req 提取主动安全附件请求
+     * @param taskId 任务ID
+     */
     public FetchAlmAttTask(FetchAlmAttReq req, String taskId) {
         this.taskId = taskId;
         this.almNo = req.getAlmNo();
@@ -140,6 +148,11 @@ public class FetchAlmAttTask implements Cloneable {
         this.recvFileCount = recvFileCount;
     }
 
+    /**
+     * 增加已经成功接收的文件数
+     *
+     * @return 当前对象
+     */
     public FetchAlmAttTask incRecvFileCount() {
         recvFileCount += 1;
         return this;
@@ -217,6 +230,11 @@ public class FetchAlmAttTask implements Cloneable {
         this.retryTimes = retryTimes;
     }
 
+    /**
+     * 增加重试次数
+     *
+     * @return 当前对象
+     */
     public FetchAlmAttTask incRetryTimes() {
         retryTimes += 1;
         return this;

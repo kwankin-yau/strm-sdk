@@ -70,6 +70,9 @@ public class StrmMediaNotif implements Cloneable {
      */
     public static final int CLOSE_CAUSE__connectStrmServerFailed = 3;
 
+    /**
+     * 关闭原因：服务端发生未处理的异常
+     */
     @Deprecated
     public static final int CLOSE_CAUSE__exceptionCaught = 4; // internal error
 
@@ -121,17 +124,17 @@ public class StrmMediaNotif implements Cloneable {
     /**
      * 媒体类型：音视频
      */
-    public static final String MEDIA_TYP__AUDIO_AND_VIDEO = "av";
+    public static final String MEDIA_TYP__AUDIO_AND_VIDEO = StreamingApi.MEDIA_TYP__AUDIO_AND_VIDEO;
 
     /**
      * 媒体类型：音频
      */
-    public static final String MEDIA_TYP__AUDIO_ONLY = "a";
+    public static final String MEDIA_TYP__AUDIO_ONLY = StreamingApi.MEDIA_TYP__AUDIO_ONLY;
 
     /**
      * 媒体类型：视频
      */
-    public static final String MEDIA_TYP__VIDEO_ONLY = "v";
+    public static final String MEDIA_TYP__VIDEO_ONLY = StreamingApi.MEDIA_TYP__VIDEO_ONLY;
 
     private String instId;
     private String act;
@@ -157,6 +160,9 @@ public class StrmMediaNotif implements Cloneable {
     private String frameRate;
 
 
+    /**
+     * 构造函数
+     */
     public StrmMediaNotif() {
     }
 

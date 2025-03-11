@@ -162,6 +162,7 @@ public abstract class ApiClient {
      * 调用GET请求
      * @param resp 响应
      * @param converter 转换器
+     * @param <T> 响应类型
      * @return 响应
      */
     public static <T> Reply<T> get(
@@ -191,6 +192,7 @@ public abstract class ApiClient {
      * @param client OkHttpClient 实例
      * @param req 请求
      * @param converter 转换器
+     * @param <T> 响应类型
      * @return 响应
      */
     public static <T> T call(
@@ -224,6 +226,7 @@ public abstract class ApiClient {
      * 调用请求
      * @param req 请求
      * @param converter 转换器
+     * @param <T> 响应类型
      * @return 响应
      */
     public <T> T call(@NonNull Request req, @NonNull ReplyConverter<T> converter) {
@@ -254,6 +257,7 @@ public abstract class ApiClient {
      * 调用请求
      * @param req 请求
      * @param typeOfReplyElmt 响应类型
+     * @param <T> 响应类型
      * @return 响应
      */
     public <T> Reply<T> call(@NonNull Request req, @NonNull Type typeOfReplyElmt) {
@@ -264,6 +268,7 @@ public abstract class ApiClient {
      * 调用请求
      * @param req 请求
      * @param clzz 响应类型
+     * @param <T> 响应类型
      * @return 响应
      */
     public <T> T call(@NonNull Request req, @NonNull Class<T> clzz) {
@@ -273,6 +278,7 @@ public abstract class ApiClient {
     /**
      * 调用请求，返回 JSON 元素
      * @param req 请求
+     * @param <T> 响应类型
      * @return JSON 元素
      */
     public <T> JsonElement callForJson(@NonNull Request req) {
@@ -308,6 +314,7 @@ public abstract class ApiClient {
      * @param reqHooker 请求钩子
      * @param pagination 分页
      * @param params 参数
+     * @param <T> 响应类型
      * @return 响应
      */
     public <T> Reply<T> get(
@@ -333,6 +340,7 @@ public abstract class ApiClient {
      * @param typeOfReplyElmt 响应类型
      * @param reqHooker 请求钩子
      * @param params 参数
+     * @param <T> 响应类型
      * @return 响应
      */
     public <T> Reply<T> get(
@@ -348,6 +356,7 @@ public abstract class ApiClient {
      * @param path 路径
      * @param typeOfReplyElmt 响应类型
      * @param params 参数
+     * @param <T> 响应类型
      * @return 响应
      */
     public <T> Reply<T> get(
@@ -363,6 +372,7 @@ public abstract class ApiClient {
      * @param typeOfReplyElmt 响应类型
      * @param reqHooker 请求钩子
      * @param body 请求体
+     * @param <T> 响应类型
      * @return 响应
      */
     public <T> Reply<T> post(

@@ -1,17 +1,18 @@
 package com.lucendar.gnss.sdk.almatt;
 
-import com.lucendar.common.utils.DateTimeUtils;
-import com.lucendar.gnss.sdk.GnssConsts;
-import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttFileItemWithType;
-import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttFileList;
-import info.gratour.jt808common.spi.model.TermCmd;
-import info.gratour.jt808common.spi.model.TermCmdStateChanged;
-
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+
+import com.lucendar.common.utils.DateTimeUtils;
+import com.lucendar.gnss.sdk.GnssConsts;
+
+import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttFileItemWithType;
+import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttFileList;
+import info.gratour.jt808common.spi.model.TermCmd;
+import info.gratour.jt808common.spi.model.TermCmdStateChanged;
 
 /**
  * 提取主动安全附件日志记录
@@ -72,6 +73,10 @@ public class FetchAlmAttLog {
             this.attList = attList;
         }
 
+        /**
+         * 添加报警附件
+         * @param att 报警附件
+         */
         public void add(AlmAtt att) {
             if (attList == null)
                 attList = new ArrayList<>();
@@ -229,6 +234,10 @@ public class FetchAlmAttLog {
         return evtTm;
     }
 
+    /**
+     * 取事件时间
+     * @return 事件时间, 为 OffsetDateTime 类型
+     */
     public OffsetDateTime evtTm() {
         return OffsetDateTime.ofInstant(Instant.ofEpochMilli(evtTm), DateTimeUtils.defaultZoneOffset());
     }
@@ -257,60 +266,113 @@ public class FetchAlmAttLog {
         this.evtData = evtData;
     }
 
+    /**
+     * 设置事件类型为提取附件请求
+     * @param req 提取附件请求
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_req(FetchAlmAttReq req) {
         this.evtTyp = EVT_TYP__REQ;
         this.evtData = GnssConsts.GSON.toJson(req);
         return this;
     }
 
+    /**
+     * 设置事件类型为提取附件请求，但请求当前正在执行
+     * @param req 提取附件请求
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_reqDuplicated(FetchAlmAttReq req) {
         this.evtTyp = EVT_TYP__REQ_DUP;
         this.evtData = GnssConsts.GSON.toJson(req);
         return this;
     }
 
+    /**
+     * 设置事件类型为下发指令
+     * @param termCmd 下发指令
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_cmd(TermCmd termCmd) {
         this.evtTyp = EVT_TYP__CMD;
         this.evtData = GnssConsts.GSON.toJson(termCmd);
         return this;
     }
 
+    /**
+     * 设置事件类型为指令应答
+     * @param cmdStateChanged 指令应答
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_ack(TermCmdStateChanged cmdStateChanged) {
         this.evtTyp = EVT_TYP__ACK;
         this.evtData = GnssConsts.GSON.toJson(cmdStateChanged);
         return this;
     }
 
+    /**
+     * 设置事件类型为收到文件列表
+     * @param fileList 文件列表
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_fileList(AlmAttFileList fileList) {
         this.evtTyp = EVT_TYP__FILE_LIST;
         this.evtData = GnssConsts.GSON.toJson(fileList);
         return this;
     }
 
+    /**
+     * 设置事件类型为开始传输文件
+     * @param file 文件
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_file(AlmAttFileItemWithType file) {
         this.evtTyp = EVT_TYP__FILE;
         this.evtData = GnssConsts.GSON.toJson(file);
         return this;
     }
 
+    /**
+     * 设置事件类型为单个文件传输结束
+     * @param file 文件
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_fileReceived(AlmAttFileItemWithType file) {
         this.evtTyp = EVT_TYP__FILE_RECEIVED;
         this.evtData = GnssConsts.GSON.toJson(file);
         return this;
     }
 
+    /**
+     * 设置事件类型为提取任务结束
+     * @param evtData 提取任务结束事件数据
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_jobEnd(FetchAlmAttJobEndEvtData evtData) {
         this.evtTyp = EVT_TYP__JOB_END;
         this.evtData = GnssConsts.GSON.toJson(evtData);
         return this;
     }
 
+    /**
+     * 设置事件类型为告警
+     * @param message 告警消息
+     * @return 当前对象
+     */
     public FetchAlmAttLog setEvtTyp_warning(String message) {
         this.evtTyp = EVT_TYP__WARNING;
         this.evtData = message;
         return this;
     }
 
+    /**
+     * 创建提取附件日志记录
+     * @param almNo 报警标识号(HEX)
+     * @param simNo 终端识别号
+     * @param taskId 提取任务ID
+     * @param evtTm 事件时间
+     * @return 提取附件日志记录
+     */
     public static FetchAlmAttLog create(String almNo, String simNo, String taskId, long evtTm) {
         FetchAlmAttLog r = new FetchAlmAttLog();
         r.setAlmNo(almNo);
@@ -321,14 +383,32 @@ public class FetchAlmAttLog {
         return r;
     }
 
+    /**
+     * 创建提取附件日志记录
+     * @param almNo 报警标识号(HEX)
+     * @param simNo 终端识别号
+     * @param taskId 提取任务ID
+     * @return 提取附件日志记录
+     */
     public static FetchAlmAttLog create(String almNo, String simNo, String taskId) {
         return create(almNo, simNo, taskId, System.currentTimeMillis());
     }
 
+    /**
+     * 创建提取附件日志记录
+     * @param task 提取附件任务
+     * @param evtTm 事件时间
+     * @return 提取附件日志记录
+     */
     public static FetchAlmAttLog create(FetchAlmAttTask task, long evtTm) {
         return create(task.getAlmNo(), task.getSimNo(), task.getTaskId(), evtTm);
     }
 
+    /**
+     * 创建提取附件日志记录
+     * @param task 提取附件任务
+     * @return 提取附件日志记录
+     */
     public static FetchAlmAttLog create(FetchAlmAttTask task) {
         return create(task, System.currentTimeMillis());
     }

@@ -56,18 +56,34 @@ public class CP_9105_LiveAvStatus implements JT808CmdParams {
         this.lossRate = lossRate;
     }
 
+    /**
+     * 获取通道号
+     * @return 通道号
+     */
     public int chan() {
         return channelId;
     }
 
+    /**
+     * 设置通道号
+     * @param value 通道号
+     */
     public void chan(int value) {
         this.channelId = (byte) value;
     }
 
+    /**
+     * 获取丢包率
+     * @return 丢包率
+     */
     public int lossRate() {
         return lossRate;
     }
 
+    /**
+     * 设置丢包率
+     * @param value 丢包率
+     */
     public void lossRate(int value) {
         this.lossRate = (byte) value;
     }

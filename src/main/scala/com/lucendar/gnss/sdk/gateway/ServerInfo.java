@@ -32,10 +32,19 @@ public class ServerInfo {
         this.ver = ver;
     }
 
+    /**
+     * 取服务端启动时间
+     *
+     * @return 服务端启动时间, epoch millis
+     */
     public long getStartTm() {
         return startTm;
     }
 
+    /**
+     * 设置服务端启动时间
+     * @param startTm 服务端启动时间, epoch millis
+     */
     public void setStartTm(long startTm) {
         this.startTm = startTm;
     }
