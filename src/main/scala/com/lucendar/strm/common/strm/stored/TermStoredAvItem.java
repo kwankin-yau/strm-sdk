@@ -42,14 +42,49 @@ public class TermStoredAvItem implements Cloneable {
      */
     public static final int STG_TYP___SECONDARY = 2;
 
+    /**
+     * 终端识别号
+     */
     protected String simNo;
+
+    /**
+     * 通道号
+     */
     protected int channel;
+
+    /**
+     * 录像的开始时间
+     */
     protected String startTime;
+
+    /**
+     * 录像的结束时间
+     */
     protected String endTime;
+
+    /**
+     * 报警状态
+     */
     protected String almState;
+
+    /** 
+     * 音视频资源类型, 为 MEDIA_TYP__ 系列常量之一
+     */
     protected int mediaType;
+
+    /**
+     * 码流类型, 为 CODE_STRM__ 系列常量之一
+     */
     protected int codeStream;
+
+    /**
+     * 存储类型, 为 STG_TYP__ 系列常量之一
+     */
     protected int storageType;
+
+    /**
+     * 文件大小
+     */
     protected Long fileSz;
 
     /**

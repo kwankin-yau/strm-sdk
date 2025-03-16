@@ -1,17 +1,20 @@
 package com.lucendar.gnss.sdk.types;
 
-import com.google.gson.reflect.TypeToken;
-import com.lucendar.strm.common.StreamingApi;
-
 import java.lang.reflect.Type;
 import java.util.Set;
 import java.util.StringJoiner;
+
+import com.google.gson.reflect.TypeToken;
+import com.lucendar.strm.common.StreamingApi;
 
 /**
  * 令牌验证结果
  */
 public class TokenValidateResult {
 
+    /**
+     * 令牌验证结果的类型
+     */
     public static final Type TYPE = new TypeToken<TokenValidateResult>() {
     }.getType();
 

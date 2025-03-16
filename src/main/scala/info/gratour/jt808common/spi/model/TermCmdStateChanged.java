@@ -208,14 +208,26 @@ public class TermCmdStateChanged {
         this.reqId = reqId;
     }
 
+    /**
+     * 获取指令的请求时间
+     * @return 指令的请求时间, 格式: yyyy-MM-dd HH:mm:ss, 北京时间
+     */
     public String getReqTm() {
         return reqTm;
     }
 
+    /**
+     * 设置指令的请求时间
+     * @param reqTm 指令的请求时间, 格式: yyyy-MM-dd HH:mm:ss, 北京时间
+     */
     public void setReqTm(long reqTm) {
         this.reqTm = DateTimeUtils.BeijingConv.millisToString(reqTm);
     }
 
+    /**
+     * 设置指令的请求时间
+     * @param reqTm 指令的请求时间, 格式: yyyy-MM-dd HH:mm:ss, 北京时间
+     */
     public void setReqTm(String reqTm) {
         this.reqTm = reqTm;
     }

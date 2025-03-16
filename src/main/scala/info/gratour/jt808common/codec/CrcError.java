@@ -14,6 +14,9 @@ import info.gratour.jtcommon.LazyBytesProvider;
  */
 public class CrcError extends CodecError {
 
+    /**
+     * 惰性字节提供者
+     */
     private LazyBytesProvider bytes;
 
     /**

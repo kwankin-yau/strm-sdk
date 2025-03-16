@@ -506,6 +506,12 @@ public class StrmApiClient {
         return postWithBody("/strm/keep", req, ReplyTypes.REPLY_TYPE__KEEP_STRM_RESULT);
     }
 
+    /**
+     * 保持流。
+     *
+     * @param reqId 媒体请求ID
+     * @return 请求响应。
+     */
     public Reply<KeepStrmResult> keep(String reqId) {
         KeepStrmReq req = new KeepStrmReq(reqId);
         return keep(req);

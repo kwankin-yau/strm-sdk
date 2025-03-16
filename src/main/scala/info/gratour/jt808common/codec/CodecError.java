@@ -14,6 +14,9 @@ import info.gratour.jtcommon.LazyBytesProvider;
  */
 public class CodecError extends RuntimeException {
 
+    /**
+     * 惰性字节提供者
+     */
     private LazyBytesProvider bytes;
 
     /**
@@ -27,7 +30,7 @@ public class CodecError extends RuntimeException {
     /**
      * 构造函数
      * @param message 异常消息
-     * @param bytes 字节提供者
+     * @param bytes 惰性字节提供者
      */
     public CodecError(String message, LazyBytesProvider bytes) {
         super(message);
@@ -54,7 +57,7 @@ public class CodecError extends RuntimeException {
         this.bytes = bytes;
     }
 
-    /**
+    /** 
      * 获取惰性字节提供者
      * @return 惰性字节提供者
      */

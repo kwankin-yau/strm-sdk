@@ -7,21 +7,23 @@
  *******************************************************************************/
 package info.gratour.jt808common.spi.model;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.lucendar.common.utils.CommonUtils;
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.msg.types.ackparams.AckParamsParser;
 import info.gratour.jt808common.protocol.msg.types.ackparams.JT808AckParams;
 import info.gratour.jt808common.protocol.msg.types.cmdparams.CmdParamsParser;
 import info.gratour.jt808common.protocol.msg.types.cmdparams.JT808CmdParams;
 import info.gratour.jtcommon.JTConsts;
 import info.gratour.jtcommon.JTUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * 终端指令实体对象
@@ -29,6 +31,11 @@ import java.util.ResourceBundle;
 @Expose
 public class TermCmd implements Cloneable {
 
+    /**
+     * 获取资源包
+     * @param locale 区域
+     * @return 资源包
+     */
     public static final ResourceBundle resourceBundle(Locale locale) {
         return ResourceBundle.getBundle(
                 "info.gratour.jt808common.spi.model.term-cmds",

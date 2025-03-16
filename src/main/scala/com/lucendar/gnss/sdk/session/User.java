@@ -7,8 +7,6 @@
  *******************************************************************************/
 package com.lucendar.gnss.sdk.session;
 
-import com.lucendar.strm.common.StreamingApi;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +15,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.TreeSet;
+
+import com.lucendar.strm.common.StreamingApi;
 
 /**
  * 用户对象
@@ -80,6 +80,11 @@ public class User implements Cloneable {
         return pwdSeed;
     }
 
+    /**
+     * 设置密码的 seed
+     *
+     * @param pwdSeed 密码的 seed
+     */
     public void setPwdSeed(String pwdSeed) {
         this.pwdSeed = pwdSeed;
     }

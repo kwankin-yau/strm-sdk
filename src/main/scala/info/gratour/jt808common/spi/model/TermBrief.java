@@ -29,6 +29,11 @@ public interface TermBrief {
      */
     int TERM_PROTO__ADAS = 1 << 2;
 
+    /**
+     * 判断终端是否支持1078协议
+     * @param protoTyp 终端协议类型
+     * @return 是否支持1078协议
+     */
     static boolean termProtoSupport1078(int protoTyp) {
         return (protoTyp & TERM_PROTO__1078) != 0;
     }

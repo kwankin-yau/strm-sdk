@@ -7,10 +7,12 @@
  *******************************************************************************/
 package com.lucendar.gnss.sdk.db;
 
-import com.lucendar.gnss.sdk.types.TermAppIdResolver;
-import info.gratour.jt808common.spi.model.TermBrief;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.lucendar.gnss.sdk.types.TermAppIdResolver;
+
+import info.gratour.jt808common.spi.model.TermBrief;
 
 /**
  * 终端 Repo
@@ -21,6 +23,9 @@ public interface TermRepo extends TermAppIdResolver {
      * 终端注册结果
      */
     enum TermRegResult {
+        /**
+         * 成功
+         */
         OK,
 
         /**
@@ -43,6 +48,10 @@ public interface TermRepo extends TermAppIdResolver {
          */
         TERM_REGISTERED;
 
+        /**
+         * 是否成功
+         * @return 是否成功
+         */
         public boolean isOk() {
             return this == OK;
         }
@@ -69,6 +78,9 @@ public interface TermRepo extends TermAppIdResolver {
      * 终端注销返回结果
      */
     enum TermUnRegResult {
+        /**
+         * 成功
+         */
         OK,
 
         /**
@@ -76,6 +88,10 @@ public interface TermRepo extends TermAppIdResolver {
          */
         TERM_NOT_FOUND;
 
+        /**
+         * 是否成功
+         * @return 是否成功
+         */
         public boolean isOk() {
             return this == OK;
         }

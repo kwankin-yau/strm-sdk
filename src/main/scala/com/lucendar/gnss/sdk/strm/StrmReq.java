@@ -424,7 +424,7 @@ public class StrmReq implements CompoundStrmReqId {
 
     /**
      * 获取流媒体请求状态
-     * @return 流媒体请求状态, 为 {@link #STATE__xxx} 常量之一
+     * @return 流媒体请求状态, 为 #STATE__xxx 常量之一
      */
     public int getState() {
         return state;
@@ -432,7 +432,7 @@ public class StrmReq implements CompoundStrmReqId {
 
     /**
      * 设置流媒体请求状态
-     * @param state 流媒体请求状态, 为 {@link #STATE__xxx} 常量之一
+     * @param state 流媒体请求状态, 为 #STATE__xxx 常量之一
      */
     public void setState(int state) {
         this.state = state;

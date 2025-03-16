@@ -6,12 +6,20 @@ package com.lucendar.gnss.sdk.trace;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 跟踪凭据实现
+ */
 public class TraceTicketImpl implements TraceTicket, TraceStatus {
 
     private final String appId;
     private final String simNo;
     private final AtomicInteger traceCount = new AtomicInteger();
 
+    /**
+     * 构造函数
+     * @param appId appId
+     * @param simNo 终端识别号
+     */
     public TraceTicketImpl(String appId, String simNo) {
         this.appId = appId;
         this.simNo = simNo;
@@ -37,6 +45,9 @@ public class TraceTicketImpl implements TraceTicket, TraceStatus {
         traceCount.decrementAndGet();
     }
 
+    /**
+     * 跟踪
+     */
     public void trace() {
         traceCount.incrementAndGet();
     }
