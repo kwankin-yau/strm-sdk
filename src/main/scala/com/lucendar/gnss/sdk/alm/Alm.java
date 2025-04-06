@@ -549,16 +549,16 @@ public class Alm {
     }
 
     /**
-     * 返回当前是否未关闭（关闭后 actv 为 false）
-     * @return 当前是否未关闭（关闭后 actv 为 false）
+     * 返回当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
+     * @return 当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
      */
     public boolean isActv() {
         return actv;
     }
 
     /**
-     * 设置当前是否未关闭（关闭后 actv 为 false）
-     * @param actv 当前是否未关闭（关闭后 actv 为 false）
+     * 设置当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
+     * @param actv 当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
      */
     public void setActv(boolean actv) {
         this.actv = actv;
