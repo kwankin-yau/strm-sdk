@@ -2,6 +2,7 @@ package info.gratour.jt808common.codec.decoder;
 
 import java.io.Closeable;
 
+import info.gratour.jt808common.codec.CodecError;
 import info.gratour.jt808common.codec.decoder.fragment.CollectedFragment;
 import info.gratour.jt808common.protocol.FrameSplitInfo;
 import info.gratour.jt808common.protocol.JT808Frame;
@@ -44,7 +45,7 @@ public class JT808FramesCollector implements Closeable, CollectedFragment {
             totalCount = splitInfo.getTotalPacket();
             if (totalCount == 0) {
                 frame.release();
-                throw new RuntimeException("Invalid total packet count.");
+                throw new CodecError("Invalid total packet count: " + totalCount);
             }
 
             frames = new JT808Frame[totalCount];
@@ -53,7 +54,8 @@ public class JT808FramesCollector implements Closeable, CollectedFragment {
         int index = splitInfo.getPacketSeqNo() - 1;
         if (index >= totalCount) {
             frame.release();
-            throw new RuntimeException("Invalid packet index.");
+            String msg = String.format("Invalid packet sequence number: %d, total packet: %d.", index + 1, totalCount);
+            throw new CodecError(msg);
         }
 
         if (frames[index] == null) {
