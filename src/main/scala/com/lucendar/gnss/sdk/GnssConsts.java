@@ -17,6 +17,7 @@ import info.gratour.jt808common.spi.model.TermCmd;
 import info.gratour.jt808common.spi.model.TermCmdStateChanged;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 常量类
@@ -84,6 +85,11 @@ public class GnssConsts {
          * 是否不支持查询定位指令
          */
         public static final String FEATURE__NO_QRY_LOCATE_CMD = "noQryLocateCmd";
+
+        /**
+         * 是否支持主动安全附件服务统计接口
+         */
+        public static final String FEATURE__ALM_ATT_UPLOAD_STAT = "almAttUploadStat";
 
         private final String[] features;
 
@@ -166,6 +172,15 @@ public class GnssConsts {
          */
         public boolean noQryLocationCmd() {
             return noQryLocationCmd;
+        }
+
+        /**
+         * 检查是否支持指定的功能特征
+         * @param feature 所要检查的功能特征ID
+         * @return 是否支持
+         */
+        public boolean hasFeature(String feature) {
+            return features != null && Arrays.asList(features).contains(feature);
         }
 
         /**

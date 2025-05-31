@@ -1,8 +1,8 @@
 package com.lucendar.gnss.sdk.almatt;
 
-import info.gratour.jt808common.protocol.msg.types.AdasAlmNo;
-
 import java.util.StringJoiner;
+
+import info.gratour.jt808common.protocol.msg.types.AdasAlmNo;
 
 /**
  * 提取主动安全附件任务
@@ -20,13 +20,50 @@ public class FetchAlmAttTask implements Cloneable {
     public static final int STATE__SUCCESS = 1;
 
     /**
+     * 任务状态：排队中
+     */
+    public static final int STATE__QUEUED = 2;
+
+    /**
      * 任务状态：重试次数过多，任务已终止
      */
     public static final int STATE__TOO_MANY_RETRIES = -1;
 
+    /**
+     * 任务状态：由系统取消，任务已终止
+     */
+    public static final int STATE__SYSTEM_CANCELLED = -2;
+
+    /**
+     * 任务状态：由用户取消，任务已终止
+     */
+    public static final int STATE__USER_CANCELLED = -3;
+
     private String taskId;
     private String almNo;
     private String simNo;
+
+    /**
+     * 报警类型
+     * 
+     * @since 4.0.2
+     */
+    private String almTyp;
+
+    /**
+     * 报警级别
+     * 
+     * @since 4.0.2
+     */
+    private Integer almLvl;
+
+    /**
+     * 报警时间, epoch millis
+     * 
+     * @since 4.0.2
+     */
+    private Long tm1;
+
     private int fileCount;
     private int recvFileCount;
     private long reqTm;
@@ -44,11 +81,15 @@ public class FetchAlmAttTask implements Cloneable {
      * 构造函数
      * @param req 提取主动安全附件请求
      * @param taskId 任务ID
+     * @param tm1 报警时间, epoch millis
      */
-    public FetchAlmAttTask(FetchAlmAttReq req, String taskId) {
+    public FetchAlmAttTask(FetchAlmAttReq req, String taskId, Long tm1) {
         this.taskId = taskId;
         this.almNo = req.getAlmNo();
         this.simNo = req.getSimNo();
+        this.almTyp = req.getAlmTyp();
+        this.almLvl = req.getAlmLvl();
+        this.tm1 = tm1;
         AdasAlmNo adasAlmNo = AdasAlmNo.decodeFromHex(req.getAlmNo());
         this.fileCount = adasAlmNo.getAttFileCount();
         this.recvFileCount = 0;
@@ -110,6 +151,72 @@ public class FetchAlmAttTask implements Cloneable {
      */
     public void setSimNo(String simNo) {
         this.simNo = simNo;
+    }
+
+    /**
+     * 取报警类型
+     * 
+     * @return 报警类型
+     * 
+     * @since 4.0.2
+     */
+    public String getAlmTyp() {
+        return almTyp;
+    }
+
+    /**
+     * 设置报警类型
+     * 
+     * @param almTyp 报警类型
+     * 
+     * @since 4.0.2
+     */
+    public void setAlmTyp(String almTyp) {
+        this.almTyp = almTyp;
+    }
+
+    /**
+     * 取报警级别
+     * 
+     * @return 报警级别
+     * 
+     * @since 4.0.2
+     */
+    public Integer getAlmLvl() {
+        return almLvl;
+    }
+
+    /**
+     * 设置报警级别
+     * 
+     * @param almLvl 报警级别
+     * 
+     * @since 4.0.2
+     */
+    public void setAlmLvl(Integer almLvl) {
+        this.almLvl = almLvl;
+    }
+
+    /**
+     * 取报警时间, epoch millis
+     * 
+     * @return 报警时间, epoch millis
+     * 
+     * @since 4.0.2
+     */
+    public Long getTm1() {
+        return tm1;
+    }
+
+    /**
+     * 设置报警时间, epoch millis
+     * 
+     * @param tm1 报警时间, epoch millis
+     * 
+     * @since 4.0.2
+     */
+    public void setTm1(Long tm1) {
+        this.tm1 = tm1;
     }
 
     /**
@@ -246,6 +353,9 @@ public class FetchAlmAttTask implements Cloneable {
                 .add("taskId='" + taskId + "'")
                 .add("almNo='" + almNo + "'")
                 .add("simNo='" + simNo + "'")
+                .add("almTyp='" + almTyp + "'")
+                .add("almLvl=" + almLvl)
+                .add("tm1=" + tm1)
                 .add("fileCount=" + fileCount)
                 .add("recvFileCount=" + recvFileCount)
                 .add("reqTm=" + reqTm)
@@ -262,5 +372,22 @@ public class FetchAlmAttTask implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 从任务信息创建提取附件请求
+     * @return 提取附件请求
+     */
+    public FetchAlmAttReq toReq() {
+        return new FetchAlmAttReq(simNo, almNo, almTyp, almLvl);
+    }
+
+    /**
+     * 判断任务状态是否是一个结束态
+     *
+     * @return 是否是一个结束态
+     */
+    public boolean isEndingState() {
+        return state != STATE__EXECUTING && state != STATE__QUEUED;
     }
 }

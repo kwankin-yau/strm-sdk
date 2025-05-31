@@ -84,6 +84,20 @@ public class ServerInfo {
     }
 
     /**
+     * 增加功能特征标识字符串
+     *
+     * @param feature 功能特征标识字符串
+     */
+    public void addFeature(String feature) {
+        if (this.features == null) {
+            this.features = new String[]{feature};
+        } else {
+            this.features = Arrays.copyOf(this.features, this.features.length + 1);
+            this.features[this.features.length - 1] = feature;
+        }
+    }
+
+    /**
      * 取服务端配置
      *
      * @return 服务端配置

@@ -25,13 +25,15 @@ public class StrmReqStatus {
      * 构造函数
      * @param reqId 媒体请求ID
      * @param userId 用户ID
-     * @param reqTm 请求时间
+     * @param reqTm 请求时间, epoch milli-seconds
+     * @param fmt 格式/客户端协议
+     * @param lastKeepTm 最后保持时间, epoch milli-seconds
+     * @param readyTm 媒体准备好时间, epoch milli-seconds
+     * @param closeTm 流关闭时间, epoch milli-seconds
      * @param closeCause 关闭原因
+     *
      */
-    public StrmReqStatus(String reqId,
-                         String userId,
-                         long reqTm,
-                         Integer closeCause) {
+    public StrmReqStatus(String reqId, String userId, long reqTm, int fmt, long lastKeepTm, Long readyTm, Long closeTm, Integer closeCause) {
         this.reqId = reqId;
         this.userId = userId;
         this.reqTm = reqTm;

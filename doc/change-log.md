@@ -2,6 +2,9 @@
 ## 完善
 - 补充遗漏的终端状态位定义
 - 补充源码注释
+- FetchAlmAttTask 增加 `排队中`、`由系统取消`、`由用户取消` 的任务状态定义，增加 `almTyp`, `almLvl`, `tm1` 属性，增加 `toReq`, `isEndingState` 方法
+- QryFetchAlmAttTaskReq 增加 `almTyp`, `almLvl`, `tm1Start`, `tm1End`, `states` 属性
+- 引入 `AlmAttUploaderStat`
 
 ## 修正
 - 修正`9208`消息的解码不兼容川标的情况

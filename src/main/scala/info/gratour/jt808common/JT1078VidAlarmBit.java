@@ -75,6 +75,14 @@ public enum JT1078VidAlarmBit {
      */
     VID_OTHER_EQUIP_FAULT(3),
     /**
+     * 客车超员报警
+     */
+    PASSENGER_OVERLOAD(4),
+    /**
+     * 异常驾驶行为报警
+     */
+    UNUSUAL_DRIVE_BEHAV(5),
+    /**
      * 特殊报警录像达到存储阈值报警
      */
     SPECIAL_REC_STG_RUN_OUT(6);

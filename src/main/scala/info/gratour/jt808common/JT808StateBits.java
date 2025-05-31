@@ -107,6 +107,11 @@ public class JT808StateBits {
     public static final JT808StateBits ACC_ON_LOCATED = new JT808StateBits().set(JT808StateBit.BEIDOU).set(JT808StateBit.ACC_ON).set(JT808StateBit.LOCATED);
 
     /**
+     * 终端状态位：北斗+ACC OFF+已定位
+     */
+    public static final JT808StateBits ACC_OFF_LOCATED = new JT808StateBits().set(JT808StateBit.BEIDOU).set(JT808StateBit.LOCATED);
+
+    /**
      * 终端状态位：北斗+已定位
      */
     public static final JT808StateBits BEIDOU_LOCATED = new JT808StateBits().set(JT808StateBit.BEIDOU).set(JT808StateBit.LOCATED);
