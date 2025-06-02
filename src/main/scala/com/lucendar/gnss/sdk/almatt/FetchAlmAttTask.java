@@ -48,7 +48,7 @@ public class FetchAlmAttTask implements Cloneable {
      */
     public static ResourceBundle resourceBundle(Locale locale) {
         return ResourceBundle.getBundle(
-                "com.lucendar.gnss.sdk.almatt",
+                "com.lucendar.gnss.sdk.almatt.almatt",
                 locale != null ? locale : Locale.getDefault()
         );
     }
