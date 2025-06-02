@@ -133,9 +133,15 @@ public class AdasAlmNo {
         if (m < 0 || m > 12)
             return null;
 
+        if (m == 0)
+            m = 1;
+
         int d = BcdUtils.decodeByte(bcd[offset + 2]);
         if (d < 0 || d > 31)
             return null;
+
+        if (d == 0)
+            d = 1;
 
         int h = BcdUtils.decodeByte(bcd[offset + 3]);
         if (h < 0 || h > 23)

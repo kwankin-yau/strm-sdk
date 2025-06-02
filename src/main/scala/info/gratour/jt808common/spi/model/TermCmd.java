@@ -36,7 +36,7 @@ public class TermCmd implements Cloneable {
      * @param locale 区域
      * @return 资源包
      */
-    public static final ResourceBundle resourceBundle(Locale locale) {
+    public static ResourceBundle resourceBundle(Locale locale) {
         return ResourceBundle.getBundle(
                 "info.gratour.jt808common.spi.model.term-cmds",
                 locale != null ? locale : Locale.getDefault()
@@ -73,7 +73,7 @@ public class TermCmd implements Cloneable {
     /**
      * 指令状态: 指令不支持，服务不支持此指令
      */
-    public static final int CMD_STATUS__NOT_SUPPORTED = -3;    
+    public static final int CMD_STATUS__NOT_SUPPORTED = -3;
     /**
      * 指令状态: 指令已取消，指令被用户或服务取消
      */
@@ -89,7 +89,7 @@ public class TermCmd implements Cloneable {
 
     /**
      * 获取指令状态的描述字符串的key
-     * 
+     *
      * @param status 指令状态代码
      * @return 指令状态的描述字符串的key
      */
@@ -129,7 +129,7 @@ public class TermCmd implements Cloneable {
 
     /**
      * 获取指令状态的描述字符串
-     * 
+     *
      * @param locale 区域
      * @param status 指令状态代码
      * @return 指令状态的描述字符串
@@ -144,7 +144,7 @@ public class TermCmd implements Cloneable {
 
     /**
      * 获取指令状态的描述字符串
-     * 
+     *
      * @param status 指令状态代码
      * @return 指令状态的描述字符串
      */
@@ -154,7 +154,7 @@ public class TermCmd implements Cloneable {
 
     /**
      * 判断指令状态是否为已应答或已完成
-     * 
+     *
      * @param status 指令状态代码
      * @return 是否为已应答或已完成
      */
@@ -345,7 +345,7 @@ public class TermCmd implements Cloneable {
 
     /**
      * 将 epoch millis 转换为 OffsetDateTime 对象
-     * 
+     *
      * @param tm epoch millis
      * @return OffsetDateTime 对象
      */
@@ -358,7 +358,7 @@ public class TermCmd implements Cloneable {
 
     /**
      * 将 OffsetDateTime 对象转换为 epoch millis
-     * 
+     *
      * @param odt OffsetDateTime 对象
      * @return epoch millis
      */

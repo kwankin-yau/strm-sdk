@@ -1,5 +1,7 @@
 package com.lucendar.gnss.sdk.almatt;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.StringJoiner;
 
 import info.gratour.jt808common.protocol.msg.types.AdasAlmNo;
@@ -39,27 +41,54 @@ public class FetchAlmAttTask implements Cloneable {
      */
     public static final int STATE__USER_CANCELLED = -3;
 
+    /**
+     * 获取资源包
+     * @param locale 区域
+     * @return 资源包
+     */
+    public static ResourceBundle resourceBundle(Locale locale) {
+        return ResourceBundle.getBundle(
+                "com.lucendar.gnss.sdk.almatt",
+                locale != null ? locale : Locale.getDefault()
+        );
+    }
+
+    /**
+     * 获取状态文本
+     * @param state 任务状态代码，STATE__xxx 之一
+     * @return 状态文本
+     */
+    public static String getStateText(int state) {
+        String key;
+        if (state >= 0)
+            key = "fetchAlmAttTask.state." + state;
+        else
+            key = "fetchAlmAttTask.state._" + (-state);
+
+        return resourceBundle(Locale.getDefault()).getString(key);
+    }
+
     private String taskId;
     private String almNo;
     private String simNo;
 
     /**
      * 报警类型
-     * 
+     *
      * @since 4.0.2
      */
     private String almTyp;
 
     /**
      * 报警级别
-     * 
+     *
      * @since 4.0.2
      */
     private Integer almLvl;
 
     /**
      * 报警时间, epoch millis
-     * 
+     *
      * @since 4.0.2
      */
     private Long tm1;
@@ -155,9 +184,9 @@ public class FetchAlmAttTask implements Cloneable {
 
     /**
      * 取报警类型
-     * 
+     *
      * @return 报警类型
-     * 
+     *
      * @since 4.0.2
      */
     public String getAlmTyp() {
@@ -166,9 +195,9 @@ public class FetchAlmAttTask implements Cloneable {
 
     /**
      * 设置报警类型
-     * 
+     *
      * @param almTyp 报警类型
-     * 
+     *
      * @since 4.0.2
      */
     public void setAlmTyp(String almTyp) {
@@ -177,9 +206,9 @@ public class FetchAlmAttTask implements Cloneable {
 
     /**
      * 取报警级别
-     * 
+     *
      * @return 报警级别
-     * 
+     *
      * @since 4.0.2
      */
     public Integer getAlmLvl() {
@@ -188,9 +217,9 @@ public class FetchAlmAttTask implements Cloneable {
 
     /**
      * 设置报警级别
-     * 
+     *
      * @param almLvl 报警级别
-     * 
+     *
      * @since 4.0.2
      */
     public void setAlmLvl(Integer almLvl) {
@@ -199,9 +228,9 @@ public class FetchAlmAttTask implements Cloneable {
 
     /**
      * 取报警时间, epoch millis
-     * 
+     *
      * @return 报警时间, epoch millis
-     * 
+     *
      * @since 4.0.2
      */
     public Long getTm1() {
@@ -210,9 +239,9 @@ public class FetchAlmAttTask implements Cloneable {
 
     /**
      * 设置报警时间, epoch millis
-     * 
+     *
      * @param tm1 报警时间, epoch millis
-     * 
+     *
      * @since 4.0.2
      */
     public void setTm1(Long tm1) {
@@ -345,6 +374,14 @@ public class FetchAlmAttTask implements Cloneable {
     public FetchAlmAttTask incRetryTimes() {
         retryTimes += 1;
         return this;
+    }
+
+    /**
+     * 获取状态文本
+     * @return 状态文本
+     */
+    public String stateText() {
+        return getStateText(state);
     }
 
     @Override

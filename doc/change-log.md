@@ -1,3 +1,9 @@
+# 4.0.3 [2025-05-31]
+## 完善
+- `StrmMediaNotif` 增加 `playedAvDumpUrl` 属性
+- `FetchAlmAttTask` 增加 `getStateText`, `stateText` 方法
+- `AdasAlmNo` 解码兼容一些时间日期有问题的终端
+
 # 4.0.2 [2025-01-08]
 ## 完善
 - 补充遗漏的终端状态位定义

@@ -182,16 +182,16 @@ public class PlayedAvDump implements StrmMsg, RelativeFileNameProvider {
     }
 
     /**
-     * 取文件路径
+     * 取文件的相对路径（无前面的 `/`）
      *
-     * @return 文件路径
+     * @return 文件相对路径
      */
     public String getPath() {
         return path;
     }
 
     /**
-     * 设置文件路径
+     * 设置文件相对路径（无前面的 `/`）
      *
      * @param path 文件路径
      */

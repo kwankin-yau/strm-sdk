@@ -158,6 +158,7 @@ public class StrmMediaNotif implements Cloneable {
     private Integer sampleRate;
     private Integer vc;
     private String frameRate;
+    private String playedAvDumpUrl;
 
 
     /**
@@ -415,6 +416,26 @@ public class StrmMediaNotif implements Cloneable {
     }
 
     /**
+     * 取转储文件下载URL，仅当播放请求时指定了 `saveOnServer` 且 act == `closed  时返回。
+     * 下载此 URL 时，和下载其他资源一样，需提供 token
+     *
+     * @return 转储文件下载URL
+     * @since 4.0.2 (server side: 4.0.10)
+     */
+    public String getPlayedAvDumpUrl() {
+        return playedAvDumpUrl;
+    }
+
+    /**
+     * 设置转储文件下载URL
+     * @param playedAvDumpUrl 转储文件下载URL
+     * @since 4.0.2 (server side: 4.0.10)
+     */
+    public void setPlayedAvDumpUrl(String playedAvDumpUrl) {
+        this.playedAvDumpUrl = playedAvDumpUrl;
+    }
+
+    /**
      * 将 流关闭的原因代码转换成描述字符串
      * @param closeCause 流关闭的原因代码
      * @return 流关闭的原因描述字符串
@@ -607,6 +628,7 @@ public class StrmMediaNotif implements Cloneable {
                 .add("sampleRate=" + sampleRate)
                 .add("vc=" + vc)
                 .add("frameRate='" + frameRate + "'")
+                .add("playedAvDumpUrl='" + playedAvDumpUrl + "'")
                 .toString();
     }
 }
