@@ -1,10 +1,10 @@
 package info.gratour.jt808common;
 
-import info.gratour.jtcommon.JTMessages;
-import info.gratour.jtcommon.JTUtils;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import info.gratour.jtcommon.JTMessages;
+import info.gratour.jtcommon.JTUtils;
 
 class JT808StateNames {
     public static final String MESSAGE_KEY_ACC_ON = "state.acc_on.0";
@@ -89,29 +89,115 @@ class JT808StateNames {
 
 }
 
+/**
+ * JT/T 808 状态位
+ */
 public enum JT808StateBit {
 
+    /**
+     * ACC ON
+     */
     ACC_ON(0),
+
+    /**
+     * 已定位
+     */
     LOCATED(1),
+
+    /**
+     * 南纬
+     */
     SOUTH(2),
+
+    /**
+     * 西经
+     */
     WEST(3),
+
+    /**
+     * 停运
+     */
     OUT_OF_SERVICE(4),
+
+    /**
+     * 经纬度已加密
+     */
     ENCRYPT(5),
 
+    /**
+     * 紧急刹车系统采集的前撞预警
+     */
+    CRASH_EARLY_WARNING(6),
+
+    /**
+     * 满载
+     */
     FULL(8),
+
+    /**
+     * 半载或满载（满载时，FULL位同时置位）
+     */
     LOADING(9),
+
+    /**
+     * 油路断开
+     */
     OIL_CUT(10),
+
+    /**
+     * 电路断开
+     */
     CIRCUIT_CUT(11),
+
+    /**
+     * 车门锁闭
+     */
     DOOR_LOCKED(12),
+
+    /**
+     * 前车门开启
+     */
     FRONT_DOOR_OPEN(13),
-    MID_DOOR_OPEN(14),
-    END_DOOR_OPEN(15),
+
+    /**
+     * 驾驶员车门开启（2013版）、中门开启（2019版）
+     */
     DRIVER_DOOR_OPEN(16),
+
+    /**
+     * 后车门开启
+     */
+    END_DOOR_OPEN(15),
+
+    /**
+     * 自定义车门开启
+     */
     DOOR5_OPEN(17),
+
+    /**
+     * 使用GPS卫星定位
+     */
     GPS(18),
+
+    /**
+     * 使用北斗卫星定位
+     */
     BEIDOU(19),
+
+    /**
+     * 使用GLONASS卫星定位
+     */
     GLONASS(20),
-    GALILEO(21);
+
+    /**
+     * 使用伽利略卫星定位
+     */
+    GALILEO(21),
+    
+    /**
+     * 车辆行驶状态
+     */
+    MOTION(22);
 
 
     private int index;
@@ -123,14 +209,29 @@ public enum JT808StateBit {
 //        this.stateName = JT808StateNames.getStateName(bitIndex);
     }
 
+    /**
+     * 获取位索引
+     * @return 位索引
+     */
     public int bitIndex() {
         return index;
     }
 
+    /**
+     * 获取状态名称
+     * @param locale 区域
+     * @return 状态名称
+     */
     public String getStateName(Locale locale) {
         return JT808StateNames.getStateName(index, locale);
     }
 
+    /**
+     * 格式化车辆状态文本
+     * @param vehStateBits 车辆状态位
+     * @param locale 区域
+     * @return 车辆状态文本
+     */
     public static String vehStateText(int vehStateBits, Locale locale) {
         StringBuilder str = new StringBuilder();
         boolean first = true;

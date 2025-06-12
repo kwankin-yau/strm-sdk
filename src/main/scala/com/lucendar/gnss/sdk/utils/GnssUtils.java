@@ -2,6 +2,9 @@ package com.lucendar.gnss.sdk.utils;
 
 import com.lucendar.common.utils.CommonUtils;
 
+/**
+ * 工具类
+ */
 public class GnssUtils {
 
     /**

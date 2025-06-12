@@ -14,7 +14,18 @@ import info.gratour.jt808common.protocol.msg.JT808Msg_8108_UpgradePacket
 import info.gratour.jtcommon.ByteBufHelper
 import io.netty.buffer.ByteBuf
 
+/**
+ * 升级包(0x8108)消息体编码器
+ */
 object MBEncoder808_8108_UpgradePacket extends AbstractJT808MsgBodyEncoder[JT808Msg_8108_UpgradePacket] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 升级包消息
+   * @param out 输出字节缓冲区
+   */
   override def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8108_UpgradePacket, out: ByteBuf): Unit = {
     val data = m.getData
     if (data == null || data.isEmpty)

@@ -12,10 +12,18 @@ public class QryStrmCommLogReq {
     private int __limit;
     private int __page;
 
+    /**
+     * 获取请求ID
+     * @return 请求ID
+     */
     public String getReqId() {
         return reqId;
     }
 
+    /**
+     * 设置请求ID
+     * @param reqId 请求ID
+     */
     public void setReqId(String reqId) {
         this.reqId = reqId;
     }
@@ -36,18 +44,34 @@ public class QryStrmCommLogReq {
         this.retData = retData;
     }
 
+    /**
+     * 取分页的每页记录数
+     * @return 分页的每页记录数
+     */
     public int get__limit() {
         return __limit;
     }
 
+    /**
+     * 设置分页的每页记录数
+     * @param __limit 分页的每页记录数
+     */
     public void set__limit(int __limit) {
         this.__limit = __limit;
     }
 
+    /**
+     * 取分页的页码, 从1开始
+     * @return 分页的页码
+     */
     public int get__page() {
         return __page;
     }
 
+    /**
+     * 设置分页的页码
+     * @param __page 分页的页码
+     */
     public void set__page(int __page) {
         this.__page = __page;
     }

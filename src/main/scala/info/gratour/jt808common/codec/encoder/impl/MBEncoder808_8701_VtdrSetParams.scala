@@ -16,8 +16,18 @@ import io.netty.buffer.ByteBuf
 import org.apache.commons.codec.binary.Hex
 import org.apache.commons.lang3.StringUtils
 
+/**
+ * 行驶记录仪设置参数(0x8701)消息体编码器
+ */
 object MBEncoder808_8701_VtdrSetParams extends AbstractJT808MsgBodyEncoder[JT808Msg_8701_VtdrSetParams] {
 
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 行驶记录仪设置参数消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8701_VtdrSetParams, out: ByteBuf): Unit = {
     val p = checkNotNull(m.getParams, "params")
 

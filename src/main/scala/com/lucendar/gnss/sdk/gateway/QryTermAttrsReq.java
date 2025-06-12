@@ -12,10 +12,18 @@ import java.util.StringJoiner;
 public class QryTermAttrsReq {
     private String simNos;
 
+    /**
+     * 获取终端识别号
+     * @return 终端识别号
+     */
     public String getSimNos() {
         return simNos;
     }
 
+    /**
+     * 设置终端识别号
+     * @param simNos 终端识别号
+     */
     public void setSimNos(String simNos) {
         this.simNos = simNos;
     }

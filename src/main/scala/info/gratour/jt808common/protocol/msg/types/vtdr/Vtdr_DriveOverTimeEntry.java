@@ -7,10 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 超速行驶记录
+ */ 
 @Expose
 public class Vtdr_DriveOverTimeEntry implements Cloneable {
 
@@ -20,47 +23,90 @@ public class Vtdr_DriveOverTimeEntry implements Cloneable {
     private Vtdr_Location startLocation;
     private Vtdr_Location endLocation;
 
-
-    public String getLicenseNo() {
+    /**
+     * 取驾驶证号
+     * @return 驾驶证号
+     */
+    public String getLicenseNo() {    
         return licenseNo;
     }
 
+    /**
+     * 设置驾驶证号
+     * @param licenseNo 驾驶证号
+     */
     public void setLicenseNo(String licenseNo) {
         this.licenseNo = licenseNo;
     }
 
+    /**
+     * 取连续驾驶开始时间, yyyy-MM-dd HH:mm:ss
+     * @return 连续驾驶开始时间
+     */
     public String getStartTime() {
         return startTime;
     }
 
+    /**
+     * 设置连续驾驶开始时间
+     * @param startTime 连续驾驶开始时间
+     */
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
+    /**
+     * 取连续驾驶结束时间, yyyy-MM-dd HH:mm:ss
+     * @return 连续驾驶结束时间
+     */
     public String getEndTime() {
         return endTime;
     }
 
+    /**
+     * 设置连续驾驶结束时间
+     * @param endTime 连续驾驶结束时间
+     */
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
+    /**
+     * 取连续驾驶开始位置   
+     * @return 连续驾驶开始位置
+     */
     public Vtdr_Location getStartLocation() {
         return startLocation;
     }
 
+    /**
+     * 设置连续驾驶开始位置
+     * @param startLocation 连续驾驶开始位置
+     */
     public void setStartLocation(Vtdr_Location startLocation) {
         this.startLocation = startLocation;
     }
 
+    /**
+     * 取连续驾驶结束位置
+     * @return 连续驾驶结束位置
+     */
     public Vtdr_Location getEndLocation() {
         return endLocation;
     }
 
+    /**
+     * 设置连续驾驶结束位置
+     * @param endLocation 连续驾驶结束位置
+     */
     public void setEndLocation(Vtdr_Location endLocation) {
         this.endLocation = endLocation;
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(Vtdr_DriveOverTimeEntry source) {
         this.licenseNo = source.licenseNo;
         this.startTime = source.startTime;

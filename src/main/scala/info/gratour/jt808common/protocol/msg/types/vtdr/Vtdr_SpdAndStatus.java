@@ -7,28 +7,47 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 速度和状态
+ */
 @Expose
 public class Vtdr_SpdAndStatus implements Cloneable {
 
     private short spd;
     private byte status;
 
+    /**
+     * 取速度
+     * @return 速度
+     */
     public short getSpd() {
-        return spd;
+        return spd; 
     }
 
+    /**
+     * 设置速度
+     * @param spd 速度
+     */
     public void setSpd(short spd) {
         this.spd = spd;
     }
 
+    /**
+     * 取状态
+     * @return 状态
+     */
     public byte getStatus() {
         return status;
     }
 
+    /**
+     * 设置状态
+     * @param status 状态
+     */
     public void setStatus(byte status) {
         this.status = status;
     }

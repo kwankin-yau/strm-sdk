@@ -10,6 +10,9 @@ package info.gratour.jt808common.protocol.msg.types.cmdparams
 import com.google.gson.Gson
 import info.gratour.jtcommon.{JTConsts, JTUtils}
 
+/**
+ * 命令参数解析器
+ */
 object CmdParamsParser extends JT808CmdParamsParser {
 
   private val map: Map[Int, Class[_ <: JT808CmdParams]] = Seq(
@@ -70,6 +73,11 @@ object CmdParamsParser extends JT808CmdParamsParser {
     JTUtils.jtMsgIdOf(clzz) -> clzz
   }).toMap
 
+  /**
+   * 根据消息ID取得命令参数类
+   * @param msgId 消息ID
+   * @return 命令参数类
+   */
   def clazzOf(msgId: Int): Class[_] =
     map.get(msgId).orNull
 

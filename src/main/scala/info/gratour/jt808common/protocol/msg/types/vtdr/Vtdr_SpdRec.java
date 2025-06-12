@@ -11,27 +11,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+/**
+ * 行驶速度记录
+ */
 public class Vtdr_SpdRec implements Cloneable {
 
     private String startTime;
     private List<Vtdr_SpdAndStatus> spdAndStatus;
 
+    /**
+     * 取开始时间, yyyy-MM-dd HH:mm:ss
+     * @return 开始时间
+     */
     public String getStartTime() {
         return startTime;
     }
 
+    /**
+     * 设置开始时间, yyyy-MM-dd HH:mm:ss
+     * @param startTime 开始时间
+     */
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
+    /**
+     * 取速度与状态列表
+     * @return 速度与状态列表
+     */
     public List<Vtdr_SpdAndStatus> getSpdAndStatus() {
         return spdAndStatus;
     }
 
+    /**
+     * 设置速度与状态列表
+     * @param spdAndStatus 速度与状态列表
+     */
     public void setSpdAndStatus(List<Vtdr_SpdAndStatus> spdAndStatus) {
         this.spdAndStatus = spdAndStatus;
     }
 
+    /**
+     * 添加速度与状态
+     * @param spdAndStatus 速度与状态
+     */
     public void addSpdAndStatus(Vtdr_SpdAndStatus spdAndStatus) {
         if (this.spdAndStatus == null)
             this.spdAndStatus = new ArrayList<>();
@@ -39,6 +62,10 @@ public class Vtdr_SpdRec implements Cloneable {
         this.spdAndStatus.add(spdAndStatus);
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(Vtdr_SpdRec source) {
         this.startTime = source.startTime;
         if (source.spdAndStatus != null) {

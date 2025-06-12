@@ -7,6 +7,8 @@
  *******************************************************************************/
 package info.gratour.jt808common.mat;
 
+import java.lang.reflect.Type;
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -14,12 +16,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
 import info.gratour.jt808common.protocol.msg.types.ackparams.AckParamsParser;
 import info.gratour.jt808common.protocol.msg.types.ackparams.JT808AckParams;
 import info.gratour.jt808common.spi.model.TermCmdStateChanged;
 import info.gratour.jtcommon.JTConsts;
-
-import java.lang.reflect.Type;
 
 /**
  * TermCmdStateChanged 对象 GSON 自定义序列化器
@@ -27,6 +28,13 @@ import java.lang.reflect.Type;
 public class TermCmdStateChangedMaterializer
         implements JsonSerializer<TermCmdStateChanged>, JsonDeserializer<TermCmdStateChanged> {
 
+    /**
+     * 反序列化
+     * @param json 序列化结果
+     * @param typeOfT 目标对象类型
+     * @param context 反序列化上下文
+     * @return 反序列化结果
+     */
     @Override
     public TermCmdStateChanged deserialize(
             JsonElement json,
@@ -83,6 +91,13 @@ public class TermCmdStateChangedMaterializer
         return r;
     }
 
+    /**
+     * 序列化
+     * @param src 源对象
+     * @param typeOfSrc 源对象类型
+     * @param context 序列化上下文
+     * @return 序列化结果
+     */
     @Override
     public JsonElement serialize(TermCmdStateChanged src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject obj = new JsonObject();

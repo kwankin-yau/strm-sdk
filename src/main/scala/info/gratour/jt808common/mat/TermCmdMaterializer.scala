@@ -19,6 +19,14 @@ import info.gratour.jtcommon.JTConsts
  * TermCmd 对象 GSON 自定义序列化器
  */
 class TermCmdMaterializer extends JsonSerializer[TermCmd] with JsonDeserializer[TermCmd] {
+
+  /**
+   * 序列化
+   * @param src 源对象
+   * @param typeOfSrc 源对象类型
+   * @param context 序列化上下文
+   * @return 序列化结果
+   */
   override def serialize(src: TermCmd, typeOfSrc: Type, context: JsonSerializationContext): JsonElement = {
     val obj = new JsonObject
 
@@ -107,6 +115,13 @@ class TermCmdMaterializer extends JsonSerializer[TermCmd] with JsonDeserializer[
     obj
   }
 
+  /**
+   * 反序列化
+   * @param json 序列化结果
+   * @param typeOfT 目标对象类型
+   * @param context 反序列化上下文
+   * @return 反序列化结果
+   */
   override def deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): TermCmd = {
     val r = new TermCmd
     val obj = json.asInstanceOf[JsonObject]

@@ -7,21 +7,23 @@
  *******************************************************************************/
 package info.gratour.jt808common.spi.model;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.lucendar.common.utils.CommonUtils;
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.msg.types.ackparams.AckParamsParser;
 import info.gratour.jt808common.protocol.msg.types.ackparams.JT808AckParams;
 import info.gratour.jt808common.protocol.msg.types.cmdparams.CmdParamsParser;
 import info.gratour.jt808common.protocol.msg.types.cmdparams.JT808CmdParams;
 import info.gratour.jtcommon.JTConsts;
 import info.gratour.jtcommon.JTUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * 终端指令实体对象
@@ -29,15 +31,29 @@ import java.util.ResourceBundle;
 @Expose
 public class TermCmd implements Cloneable {
 
-    public static final ResourceBundle resourceBundle(Locale locale) {
+    /**
+     * 获取资源包
+     * @param locale 区域
+     * @return 资源包
+     */
+    public static ResourceBundle resourceBundle(Locale locale) {
         return ResourceBundle.getBundle(
                 "info.gratour.jt808common.spi.model.term-cmds",
                 locale != null ? locale : Locale.getDefault()
         );
     }
 
+    /**
+     * 指令状态: 初始，请求指令下发时指令即处于此状态
+     */
     public static final int CMD_STATUS__INIT = 0;
+    /**
+     * 指令状态: 已发送，指令已发送给终端
+     */
     public static final int CMD_STATUS__SENT = 1;
+    /**
+     * 指令状态: 已应答，终端已应答指令
+     */
     public static final int CMD_STATUS__ACK = 2;
 
     /**
@@ -45,13 +61,38 @@ public class TermCmd implements Cloneable {
      */
     @Deprecated
     public static final int CMD_STATUS__EXCEPTION = -1;
+
+    /**
+     * 指令状态: 执行失败，指令执行失败
+     */
     public static final int CMD_STATUS__EXECUTE_FAILED = -1;
+    /**
+     * 指令状态: 指令错误，指令格式错误
+     */
     public static final int CMD_STATUS__BAD_CMD = -2;
+    /**
+     * 指令状态: 指令不支持，服务不支持此指令
+     */
     public static final int CMD_STATUS__NOT_SUPPORTED = -3;
+    /**
+     * 指令状态: 指令已取消，指令被用户或服务取消
+     */
     public static final int CMD_STATUS__CANCELED = -4;
+    /**
+     * 指令状态: 无连接，终端无连接
+     */
     public static final int CMD_STATUS__NO_CONNECTION = -5;
+    /**
+     * 指令状态: 超时，指令超过指定时间未收到终端应答
+     */
     public static final int CMD_STATUS__TIMEOUT = -6;
 
+    /**
+     * 获取指令状态的描述字符串的key
+     *
+     * @param status 指令状态代码
+     * @return 指令状态的描述字符串的key
+     */
     protected static String getStatusStringKey(int status) {
         switch (status) {
             case CMD_STATUS__INIT:
@@ -86,6 +127,13 @@ public class TermCmd implements Cloneable {
         }
     }
 
+    /**
+     * 获取指令状态的描述字符串
+     *
+     * @param locale 区域
+     * @param status 指令状态代码
+     * @return 指令状态的描述字符串
+     */
     public static String getStatusString(Locale locale, int status) {
         String key = getStatusStringKey(status);
         if (key == null)
@@ -94,10 +142,22 @@ public class TermCmd implements Cloneable {
         return resourceBundle(locale).getString(key);
     }
 
+    /**
+     * 获取指令状态的描述字符串
+     *
+     * @param status 指令状态代码
+     * @return 指令状态的描述字符串
+     */
     public static String getStatusString(int status) {
         return getStatusString(null, status);
     }
 
+    /**
+     * 判断指令状态是否为已应答或已完成
+     *
+     * @param status 指令状态代码
+     * @return 是否为已应答或已完成
+     */
     public static boolean isAckOrCompletedStatus(int status) {
         switch (status) {
             case CMD_STATUS__ACK:
@@ -114,6 +174,9 @@ public class TermCmd implements Cloneable {
         }
     }
 
+    /**
+     * APP ID
+     */
     private String appId = "";
 
     /**
@@ -280,6 +343,12 @@ public class TermCmd implements Cloneable {
         return reqTm;
     }
 
+    /**
+     * 将 epoch millis 转换为 OffsetDateTime 对象
+     *
+     * @param tm epoch millis
+     * @return OffsetDateTime 对象
+     */
     private static OffsetDateTime toOffsetDateTime(Long tm) {
         if (tm != null)
             return OffsetDateTime.ofInstant(Instant.ofEpochMilli(tm), JTConsts.ZONE_OFFSET_BEIJING());
@@ -287,6 +356,12 @@ public class TermCmd implements Cloneable {
             return null;
     }
 
+    /**
+     * 将 OffsetDateTime 对象转换为 epoch millis
+     *
+     * @param odt OffsetDateTime 对象
+     * @return epoch millis
+     */
     private static Long toEpochMilli(OffsetDateTime odt) {
         if (odt != null)
             return odt.toInstant().toEpochMilli();

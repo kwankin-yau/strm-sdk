@@ -13,8 +13,18 @@ import info.gratour.jt808common.protocol.msg.JT808Msg_8304_InfoService
 import info.gratour.jtcommon.ByteBufHelper
 import io.netty.buffer.ByteBuf
 
+/**
+ * 信息服务(0x8304)消息体编码器
+ */
 object MBEncoder808_8304_InfoService extends AbstractJT808MsgBodyEncoder[JT808Msg_8304_InfoService] {
 
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 信息服务消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8304_InfoService, out: ByteBuf): Unit = {
     val params = checkNotNull(m.getParams, "params")
 

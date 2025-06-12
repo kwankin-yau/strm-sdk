@@ -12,6 +12,9 @@ public class GnssLoginReq {
     private String userName;
     private String password;
 
+    /**
+     * 构造函数
+     */
     public GnssLoginReq() {
     }
 

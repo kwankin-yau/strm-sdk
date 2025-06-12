@@ -12,7 +12,18 @@ import info.gratour.jt808common.codec.encoder.AbstractJT808MsgBodyEncoder
 import info.gratour.jt808common.protocol.msg.JTAdasMsg_1210_FileList
 import io.netty.buffer.ByteBuf
 
+/**
+ * 文件列表(0x1210)消息体编码器
+ */
 object MBEncoderAdas_1210_FileList extends AbstractJT808MsgBodyEncoder[JTAdasMsg_1210_FileList] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 文件列表消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JTAdasMsg_1210_FileList, out: ByteBuf): Unit = {
     import info.gratour.jtcommon.ByteBufHelper
 

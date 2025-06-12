@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.lucendar'
-version '4.1.0-SNAPSHOT'
+version '4.0.3'
 
 compileJava.options.encoding = 'UTF-8'
 compileScala.options.encoding = 'UTF-8'

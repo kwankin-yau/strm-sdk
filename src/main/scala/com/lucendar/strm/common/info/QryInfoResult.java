@@ -23,38 +23,75 @@ public class QryInfoResult implements Cloneable {
     private String nc;
     private Map<String, String> attrs;
 
+    /**
+     * 获取媒体服务的版本号
+     * @return 版本号
+     */
     public String getVer() {
         return ver;
     }
 
+    /**
+     * 设置媒体服务的版本号
+     * @param ver 版本号
+     */
     public void setVer(String ver) {
         this.ver = ver;
     }
 
+    /**
+     * 获取媒体服务启动时间, epoch millis
+     * @return 启动时间
+     */
     public long getStartTm() {
         return startTm;
     }
 
+    /**
+     * 设置媒体服务启动时间, epoch millis
+     * @param startTm 启动时间
+     */
     public void setStartTm(long startTm) {
         this.startTm = startTm;
     }
 
+    /**
+     * nc
+     * @return nc
+     */
     public String getNc() {
         return nc;
     }
 
+    /**
+     * 设置nc
+     * @param nc nc
+     */
     public void setNc(String nc) {
         this.nc = nc;
     }
 
+    /**
+     * 获取属性
+     * @return 属性
+     */
     public Map<String, String> getAttrs() {
         return attrs;
     }
 
+    /**
+     * 设置属性
+     * @param attrs 属性
+     */
     public void setAttrs(Map<String, String> attrs) {
         this.attrs = attrs;
     }
 
+    /**
+     * 设置属性
+     * @param name 属性名
+     * @param value 属性值
+     */
     public void setAttr(String name, String value) {
         if (this.attrs == null)
             this.attrs = new HashMap<>();

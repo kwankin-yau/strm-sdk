@@ -11,12 +11,22 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * 帧分片收集器管理条目
+ */
 class FramesCollectorManagementEntry {
     int msgId;
     JT808FramesCollector collector;
     Timer cleanupTimer;
     FragmentTimeoutCallback timeoutCallback;
 
+    /**
+     * 构造函数
+     * @param msgId 消息ID
+     * @param collector 帧分片收集器
+     * @param timerProvider 定时器提供者
+     * @param timeoutCallback 分片收集超时回调
+     */
     public FramesCollectorManagementEntry(int msgId, JT808FramesCollector collector, TimerProvider timerProvider, FragmentTimeoutCallback timeoutCallback) {
         this.msgId = msgId;
         this.collector = collector;
@@ -33,6 +43,9 @@ class FramesCollectorManagementEntry {
         }
     };
 
+    /**
+     * 取消定时器
+     */
     void cancelTimer() {
         if (cleanupTimer != null) {
             cleanupTimer.cancel();
@@ -42,12 +55,20 @@ class FramesCollectorManagementEntry {
 
 }
 
+/**
+ * JT808 数据包分片管理器
+ */
 public class JT808PacketFragmentManager implements Closeable {
 
     private final ByteBufAllocator allocator;
     private final Map<Integer, FramesCollectorManagementEntry> collectorMap = new HashMap<>();
     private final TimerProvider timerProvider;
 
+    /**
+     * 构造函数
+     * @param allocator 字节缓冲区分配器
+     * @param timerProvider 定时器提供者
+     */
     public JT808PacketFragmentManager(ByteBufAllocator allocator, TimerProvider timerProvider) {
         this.allocator = allocator;
         this.timerProvider = timerProvider;
@@ -70,7 +91,7 @@ public class JT808PacketFragmentManager implements Closeable {
      *
      * @param frame 数据包分片。本方法调用后，此JT808Frame对象的所有权转移JT808PacketFragmentManager。
      * @param timeoutCallback 收集超时回调。
-     * @return non-null if all fragment is collected.
+     * @return 如果所有分片已收集，返回非 null。
      */
     public JT808Frame collect(JT808Frame frame, FragmentTimeoutCallback timeoutCallback) {
         int msgId = frame.getHeader().getMsgId();

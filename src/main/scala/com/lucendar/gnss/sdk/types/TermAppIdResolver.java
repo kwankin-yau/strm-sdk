@@ -6,6 +6,9 @@ package com.lucendar.gnss.sdk.types;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+/**
+ * 终端所属AppID解析器
+ */
 public interface TermAppIdResolver {
 
     /**

@@ -12,7 +12,18 @@ import info.gratour.jt808common.codec.encoder.AbstractJT808MsgBodyEncoder
 import info.gratour.jt808common.protocol.msg.JT808Msg_8801_TakePhoto
 import io.netty.buffer.ByteBuf
 
+/**
+ * 拍照(0x8801)消息体编码器
+ */
 object MBEncoder808_8801_TakePhoto extends AbstractJT808MsgBodyEncoder[JT808Msg_8801_TakePhoto] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 拍照消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8801_TakePhoto, out: ByteBuf): Unit = {
     val p = checkNotNull(m.getParams, "params")
 

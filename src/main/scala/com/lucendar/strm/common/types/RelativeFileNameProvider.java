@@ -15,10 +15,17 @@ public interface RelativeFileNameProvider {
      */
     String relativeFileName();
 
+    /**
+     * 文件相对路径提供者实现
+     */
     class RelativeFileName implements RelativeFileNameProvider {
 
         private final String fileName;
 
+        /**
+         * 构造函数
+         * @param relativeFileName 文件相对路径
+         */
         public RelativeFileName(String relativeFileName) {
             this.fileName = relativeFileName;
         }

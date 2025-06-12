@@ -7,24 +7,39 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集速度与状态记录应答数据(15H)
+ */
 @Expose
 public class JT808Vtdr_SpdStatusLog_15 implements JT808VtdrDataBlock {
     private List<Vtdr_LogRec> logRecords;
 
+    /**
+     * 取速度与状态记录列表
+     * @return 速度与状态记录列表
+     */
     public List<Vtdr_LogRec> getLogRecords() {
         return logRecords;
     }
 
+    /**
+     * 设置速度与状态记录列表
+     * @param logRecords 速度与状态记录列表
+     */
     public void setLogRecords(List<Vtdr_LogRec> logRecords) {
         this.logRecords = logRecords;
     }
 
+    /**
+     * 添加速度与状态记录
+     * @param logRec 速度与状态记录
+     */
     public void addLogRecord(Vtdr_LogRec logRec) {
         if (this.logRecords == null)
             this.logRecords = new ArrayList<>();
@@ -32,6 +47,10 @@ public class JT808Vtdr_SpdStatusLog_15 implements JT808VtdrDataBlock {
         this.logRecords.add(logRec);
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT808Vtdr_SpdStatusLog_15 source) {
         if (source.logRecords != null) {
             this.logRecords = new ArrayList<>();

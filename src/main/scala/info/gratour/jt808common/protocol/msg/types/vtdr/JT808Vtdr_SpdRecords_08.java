@@ -7,25 +7,40 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集行驶速度记录应答数据(08H)
+ */
 @Expose
 public class JT808Vtdr_SpdRecords_08 implements JT808VtdrDataBlock {
 
     private List<Vtdr_SpdRec> spdRecords;
 
+    /**
+     * 取行驶速度记录列表
+     * @return 行驶速度记录列表
+     */
     public List<Vtdr_SpdRec> getSpdRecords() {
         return spdRecords;
     }
 
+    /**
+     * 设置行驶速度记录列表
+     * @param spdRecords 行驶速度记录列表
+     */
     public void setSpdRecords(List<Vtdr_SpdRec> spdRecords) {
         this.spdRecords = spdRecords;
     }
 
+    /**
+     * 添加行驶速度记录
+     * @param spdRec 行驶速度记录
+     */
     public void addSpdRec(Vtdr_SpdRec spdRec) {
         if (this.spdRecords == null)
             this.spdRecords = new ArrayList<>();
@@ -33,6 +48,10 @@ public class JT808Vtdr_SpdRecords_08 implements JT808VtdrDataBlock {
         this.spdRecords.add(spdRec);
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT808Vtdr_SpdRecords_08 source) {
         if (source.spdRecords != null) {
             this.spdRecords = new ArrayList<>();

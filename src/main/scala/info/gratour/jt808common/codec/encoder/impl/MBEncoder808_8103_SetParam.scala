@@ -18,6 +18,9 @@ import io.netty.buffer.ByteBuf
 import scala.collection.mutable
 import scala.reflect.ClassTag
 
+/**
+ * 设置参数(0x8103)消息体编码器
+ */
 object MBEncoder808_8103_SetParam extends AbstractJT808MsgBodyEncoder[JT808Msg_8103_SetParam] {
 
   private sealed trait DataType
@@ -81,6 +84,13 @@ object MBEncoder808_8103_SetParam extends AbstractJT808MsgBodyEncoder[JT808Msg_8
     m.toMap
   }
 
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 设置参数消息
+   * @param out 输出字节缓冲区
+   */
   override def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8103_SetParam, out: ByteBuf): Unit = {
     if (m.getParams == null || m.getParams.getParams == null || m.getParams.getParams.isEmpty)
       throw new CodecError("params or params.params is null/empty.")

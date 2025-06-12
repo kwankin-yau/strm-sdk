@@ -58,6 +58,12 @@ public class BcdUtils {
         return buf;
     }
 
+    /**
+     * 将字符串编码为BCD码
+     * @param s 字符串
+     * @param buf 输出缓冲区
+     * @param offset 输出偏移量
+     */
     public static void encode(String s, byte[] buf, int offset) {
         int i = 0;
         int max = s.length() - (s.length() % 2);

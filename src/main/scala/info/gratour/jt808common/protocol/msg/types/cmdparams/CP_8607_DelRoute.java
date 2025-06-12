@@ -7,22 +7,34 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import java.util.Arrays;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
-import java.util.Arrays;
-
+/**
+ * 删除路线(0x8607)命令参数
+ */
 @JTMsgId(JT808MsgConsts.DEL_ROUTE_8607)
 @Expose
 public class CP_8607_DelRoute implements JT808CmdParams {
 
     private int[] routeIds;
 
+    /**
+     * 获取路线ID列表
+     * @return 路线ID列表
+     */
     public int[] getRouteIds() {
         return routeIds;
     }
 
+    /**
+     * 设置路线ID列表
+     * @param routeIds 路线ID列表
+     */
     public void setRouteIds(int[] routeIds) {
         this.routeIds = routeIds;
     }

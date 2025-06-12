@@ -1,34 +1,51 @@
 package info.gratour.jt808common.protocol;
 
-import info.gratour.jtcommon.ByteBufBackOffReader;
-import info.gratour.jtcommon.LazyBytesProvider;
-import io.netty.buffer.ByteBuf;
-import io.netty.util.ReferenceCounted;
-
 import java.io.Closeable;
 import java.util.StringJoiner;
 
+import info.gratour.jtcommon.ByteBufBackOffReader;
+import io.netty.buffer.ByteBuf;
+import io.netty.util.ReferenceCounted;
+
+/**
+ * JT808 帧。JT808Frame 是一个 ReferenceCounted 对象。包含有帧头和数据体。
+ */
 public class JT808Frame implements Closeable, ReferenceCounted {
 
     private final JT808FrameHeader header;
     private final ByteBuf body;
     private final ByteBufBackOffReader backOffReader;
 
+    /**
+     * 构造函数
+     * @param header 帧头
+     * @param body 数据体 buffer
+     */
     public JT808Frame(JT808FrameHeader header, ByteBuf body) {
         this.header = header;
         this.body = body;
         this.backOffReader = new ByteBufBackOffReader(body);
     }
 
+    /**
+     * 取帧头
+     * @return 帧头
+     */
     public JT808FrameHeader getHeader() {
         return header;
     }
 
+    /**
+     * 取数据体 buffer
+     * @return 数据体 buffer
+     */
     public ByteBuf getBody() {
         return body;
     }
 
-
+    /**
+     * 关闭，释放数据体 buffer
+     */
     @Override
     public void close() {
         body.release();
@@ -82,6 +99,10 @@ public class JT808Frame implements Closeable, ReferenceCounted {
         return body.release(decrement);
     }
 
+    /**
+     * 获取回退读取器
+     * @return 回退读取器
+     */
     public ByteBufBackOffReader getBackOffReader() {
         return backOffReader;
     }

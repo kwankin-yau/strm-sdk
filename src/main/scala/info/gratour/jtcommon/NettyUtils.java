@@ -7,11 +7,21 @@
  *******************************************************************************/
 package info.gratour.jtcommon;
 
-import io.netty.buffer.ByteBuf;
 import org.apache.commons.codec.binary.Hex;
 
+import io.netty.buffer.ByteBuf;
+
+/**
+ * Netty 工具类
+ */
 public class NettyUtils {
 
+    /**
+     * 解码长度字节前置的字符串
+     * @param buf 字节缓冲区
+     * @param trimTrailingNullChar 是否修剪尾部空(0x00)字符
+     * @return 解码后的字符串
+     */
     public static String decodeLenPrefixedString(ByteBuf buf, boolean trimTrailingNullChar) {
         int l = buf.readUnsignedByte();
         byte[] bytes = new byte[l];
@@ -23,10 +33,20 @@ public class NettyUtils {
             return new String(bytes, JTConsts$.MODULE$.DEFAULT_CHARSET());
     }
 
+    /**
+     * 解码长度字节前置的字符串
+     * @param buf 字节缓冲区
+     * @return 解码后的字符串
+     */
     public static String decodeLenPrefixedString(ByteBuf buf) {
         return decodeLenPrefixedString(buf, false);
     }
 
+    /**
+     * 编码长度字节前置的字符串
+     * @param s 字符串
+     * @param out 字节缓冲区
+     */
     public static void encodeLenPrefixedString(String s, ByteBuf out) {
         byte[] bytes = s.getBytes(JTConsts$.MODULE$.DEFAULT_CHARSET());
         int l = bytes.length;
@@ -47,11 +67,10 @@ public class NettyUtils {
 //    }
 
     /**
-     * Short name for byteBufToHexStringKeepReaderIndex
-     *
-     * @param buf buf to format
-     * @param keepReaderIndex whether keep the `readerIndex` of the `buf`
-     * @return the formatted string.
+     * 将字节缓冲区转换为十六进制字符串
+     * @param buf 字节缓冲区
+     * @param keepReaderIndex 是否保持 buf 的 readerIndex
+     * @return 转换后的十六进制字符串
      */
     public static String bufToHex(ByteBuf buf, boolean keepReaderIndex) {
         if (keepReaderIndex) {
@@ -69,10 +88,20 @@ public class NettyUtils {
         }
     }
 
+    /**
+     * 将字节缓冲区转换为十六进制字符串
+     * @param buf 字节缓冲区，默认保持 readerIndex
+     * @return 转换后的十六进制字符串
+     */
     public static String bufToHex(ByteBuf buf) {
         return bufToHex(buf, true);
     }
 
+    /**
+     * 读取字节缓冲区的剩余内容
+     * @param buf 字节缓冲区
+     * @return 字节缓冲区的剩余内容(字节数组)
+     */
     public static byte[] toByteArray(ByteBuf buf) {
         if (buf.hasArray())
             return buf.array();

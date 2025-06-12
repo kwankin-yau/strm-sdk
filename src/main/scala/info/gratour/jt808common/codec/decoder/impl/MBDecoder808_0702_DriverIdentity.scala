@@ -17,6 +17,9 @@ import io.netty.buffer.ByteBuf
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+/**
+ * 驾驶员身份简报(0x0702)消息体解码器
+ */
 object MBDecoder808_0702_DriverIdentity extends JT808MsgBodyDecoder[JT808Msg_0702_DriverIdentity] {
 
   private def parseMsgBodyOldFormat(m: JT808Msg_0702_DriverIdentity, body: ByteBuf): Unit = {
@@ -33,6 +36,14 @@ object MBDecoder808_0702_DriverIdentity extends JT808MsgBodyDecoder[JT808Msg_070
     m.setInfo(p)
   }
 
+  /**
+   * 解码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 解码后的消息体
+   * @param body 消息体字节缓冲区
+   * @param tempBuf 临时缓冲区
+   */
   override def decodeMsgBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_0702_DriverIdentity, body: ByteBuf, tempBuf: Array[Byte]): Unit = {
     val pos = body.readerIndex()
     try {

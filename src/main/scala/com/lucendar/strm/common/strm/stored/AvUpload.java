@@ -7,11 +7,11 @@
  *******************************************************************************/
 package com.lucendar.strm.common.strm.stored;
 
+import java.util.StringJoiner;
+
 import com.lucendar.strm.common.StreamingApi;
 import com.lucendar.strm.common.types.RelativeFileNameProvider;
 import com.lucendar.strm.common.utils.StrmUtils;
-
-import java.util.StringJoiner;
 
 /**
  * 本类用于表示终端的远程录像上传请求以及这个上传的状态。与 `AvUpload2` 用于内部存储不同，本类用于客户端请求和返回信息给客户端（即用于与客户端
@@ -328,7 +328,7 @@ public class AvUpload extends TermStoredAvItem implements Cloneable, RelativeFil
      * 1. 查询获得的 url 在两小时后失效
      * 2. 两次查询同一个 AvUpload，返回的 url 可能不一样
      *
-     * @return
+     * @return 文件的下载 URL
      */
     public String getUrl() {
         return url;

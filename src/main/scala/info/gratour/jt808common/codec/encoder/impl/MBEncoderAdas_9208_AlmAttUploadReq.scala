@@ -15,8 +15,18 @@ import info.gratour.jtcommon.{ByteBufHelper, JTConsts}
 import io.netty.buffer.ByteBuf
 import org.apache.commons.codec.binary.Hex
 
+/**
+ * ADAS 报警附件上传请求(0x9208)消息体编码器
+ */
 object MBEncoderAdas_9208_AlmAttUploadReq extends AbstractJT808MsgBodyEncoder[JTAdasMsg_9208_AlmAttUploadReq] {
 
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 告警附件上传请求消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JTAdasMsg_9208_AlmAttUploadReq, out: ByteBuf): Unit = {
     val p = checkNotNull(m.getParams, "params")
 
@@ -28,8 +38,11 @@ object MBEncoderAdas_9208_AlmAttUploadReq extends AbstractJT808MsgBodyEncoder[JT
       if (bytes.length != 16)
         throw new CodecError("Invalid `almNo`: %s.".format(p.getAlmNo))
     } else {
-      if (bytes.length != 40 && bytes.length != 16) // compatible with old
-        throw new CodecError("Invalid `almNo`: %s.".format(p.getAlmNo))
+      // compatible with old
+      if (bytes.length != 40 && bytes.length != 16) {
+        if (adasDialect == AdasDialect.SI_CHUAN && bytes.length != 39) // 川标(2021-9)39字节
+          throw new CodecError("Invalid `almNo`: %s.".format(p.getAlmNo))
+      }
     }
     out.writeBytes(bytes)
     //    out.writeFixedLenStr(StringUtils.leftPad(p.getAlmId.toString, 32, '0'), 32)

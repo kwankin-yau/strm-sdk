@@ -7,23 +7,42 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.almatt;
 
+/**
+ * 主动安全报警附件信息重传文件块
+ */
 public class AlmAttReTransFileBlock implements Cloneable {
 
     private int offset;
     private int size;
 
+    /**
+     * 获取偏移量
+     * @return 偏移量
+     */
     public int getOffset() {
         return offset;
     }
 
+    /**
+     * 设置偏移量
+     * @param offset 偏移量
+     */
     public void setOffset(int offset) {
         this.offset = offset;
     }
 
+    /**
+     * 获取大小
+     * @return 大小
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * 设置大小
+     * @param size 大小
+     */
     public void setSize(int size) {
         this.size = size;
     }

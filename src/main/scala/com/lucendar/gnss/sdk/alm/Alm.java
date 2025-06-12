@@ -7,15 +7,17 @@
  *******************************************************************************/
 package com.lucendar.gnss.sdk.alm;
 
-import com.lucendar.gnss.sdk.GnssConsts;
-import info.gratour.jt808common.adas.AdasAlmTypes;
-import info.gratour.jt808common.protocol.msg.types.trk.TrkAddt;
-import info.gratour.jtcommon.JTMessages;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.lucendar.gnss.sdk.GnssConsts;
+
+import info.gratour.jt808common.adas.AdasAlmTypes;
+import info.gratour.jt808common.protocol.msg.types.trk.TrkAddt;
+import info.gratour.jtcommon.JTMessages;
 
 /**
  * 报警信息
@@ -547,16 +549,16 @@ public class Alm {
     }
 
     /**
-     * 返回当前是否未关闭（关闭后 actv 为 false）
-     * @return 当前是否未关闭（关闭后 actv 为 false）
+     * 返回当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
+     * @return 当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
      */
     public boolean isActv() {
         return actv;
     }
 
     /**
-     * 设置当前是否未关闭（关闭后 actv 为 false）
-     * @param actv 当前是否未关闭（关闭后 actv 为 false）
+     * 设置当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
+     * @param actv 当前是否处于报警状态中（报警未结束）（关闭后 actv 为 false）
      */
     public void setActv(boolean actv) {
         this.actv = actv;
@@ -1098,6 +1100,10 @@ public class Alm {
         return AdasAlmTypes.isAdasAlmType(typ);
     }
 
+    /**
+     * 将 addt1 转换为 JSON 字符串
+     * @return addt1 的 JSON 字符串
+     */
     public String addt1ToJson() {
         if (addt1 != null)
             return GnssConsts.GSON.toJson(addt1);
@@ -1105,7 +1111,10 @@ public class Alm {
             return null;
     }
 
-
+    /**
+     * 将 addt0 转换为 JSON 字符串
+     * @return addt0 的 JSON 字符串
+     */
     public String addt0ToJson() {
         if (addt0 != null)
             return GnssConsts.GSON.toJson(addt0);

@@ -14,8 +14,16 @@ package info.gratour.jt808common.codec.encoder.impl
 //import org.apache.commons.codec.binary.Hex
 //import org.apache.commons.lang3.StringUtils
 
+/**
+ * 车辆行驶记录仪数据块编码器
+ */
 object VtdrDataBlockEncoder {
 
+//  /**
+//    * 编码数据块
+//    * @param dataBlock 数据块
+//    * @param out 输出字节缓冲区
+//    */
 //  def encode(dataBlock: JT808VTDRDataBlock, out: ByteBuf): Unit = {
 //
 //    def checkDateTime(dt: String, propName: String): Unit = {

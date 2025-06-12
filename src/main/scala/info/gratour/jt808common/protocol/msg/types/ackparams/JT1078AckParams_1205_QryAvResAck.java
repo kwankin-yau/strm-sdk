@@ -7,15 +7,17 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
-import com.lucendar.strm.common.types.Expose;
-import info.gratour.jt808common.protocol.JT1078MsgConsts;
-import info.gratour.jt808common.protocol.msg.types.JT1078AvRes;
-import info.gratour.jtcommon.JTMsgId;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.lucendar.strm.common.types.Expose;
+
+import info.gratour.jt808common.protocol.JT1078MsgConsts;
+import info.gratour.jt808common.protocol.msg.types.JT1078AvRes;
+import info.gratour.jtcommon.JTMsgId;
 
 /**
  * 查询音视频资源列表指令应答参数
@@ -43,6 +45,10 @@ public class JT1078AckParams_1205_QryAvResAck implements JT808AckParams, Cloneab
         this.resList = resList;
     }
 
+    /**
+     * 设置音视频资源列表
+     * @param resList 音视频资源列表
+     */
     public void setResList(List<JT1078AvRes> resList) {
         if (resList != null)
             this.resList = resList.toArray(new JT1078AvRes[0]);
@@ -57,6 +63,10 @@ public class JT1078AckParams_1205_QryAvResAck implements JT808AckParams, Cloneab
                 .toString();
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT1078AckParams_1205_QryAvResAck source) {
         if (source.resList != null) {
             resList = new JT1078AvRes[source.resList.length];

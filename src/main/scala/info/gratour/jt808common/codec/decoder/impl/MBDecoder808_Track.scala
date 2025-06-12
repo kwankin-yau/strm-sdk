@@ -18,6 +18,9 @@ import io.netty.buffer.ByteBuf
 
 private class MBDecoder808_Track
 
+/**
+ * JT/T 808 定位数据解码器
+ */
 object MBDecoder808_Track extends JTCodecHelper {
 
   private final val LOGGER = Logger[MBDecoder808_Track]
@@ -48,6 +51,17 @@ object MBDecoder808_Track extends JTCodecHelper {
 //  }
 
 
+  /**
+   * 解码定位数据
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 解码后的消息体
+   * @param buf 消息体字节缓冲区
+   * @param tempBuf 临时缓冲区
+   * @param recvTime 接收时间
+   * @param retransmit 是否重发
+   * @return 轨迹
+   */
   def decodeTrack(
                    protoVer   : Byte,
                    adasDialect: AdasDialect,

@@ -13,6 +13,10 @@ import java.util.StringJoiner;
  */
 public interface AppInfo {
 
+    /**
+     * 获取AppId
+     * @return AppId
+     */
     String getAppId();
 
     /**
@@ -21,6 +25,10 @@ public interface AppInfo {
     class SimpleAppInfo implements AppInfo {
         private final String appId;
 
+        /**
+         * 构造函数
+         * @param appId AppId
+         */
         public SimpleAppInfo(@NonNull String appId) {
             this.appId = appId;
         }

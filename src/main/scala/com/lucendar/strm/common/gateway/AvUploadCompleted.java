@@ -14,7 +14,14 @@ import java.util.StringJoiner;
  */
 public class AvUploadCompleted {
 
+    /**
+     * 上传成功
+     */
     public static final byte RESULT__SUCCESS = 0;
+
+    /**
+     * 上传失败
+     */
     public static final byte RESULT__FAILED = 1;
 
     private int ackSeqNo;
@@ -29,10 +36,20 @@ public class AvUploadCompleted {
         return ackSeqNo;
     }
 
+    /**
+     * 设置应答流水号
+     *
+     * @param ackSeqNo 应答流水号
+     */
     public void setAckSeqNo(int ackSeqNo) {
         this.ackSeqNo = ackSeqNo;
     }
 
+    /**
+     * 判断上传是否成功
+     *
+     * @return 上传是否成功
+     */
     public boolean isSuccess() {
         return result == RESULT__SUCCESS;
     }
@@ -46,10 +63,20 @@ public class AvUploadCompleted {
         return result;
     }
 
+    /**
+     * 设置上传结果
+     *
+     * @param result 上传结果
+     */
     public void setResult(byte result) {
         this.result = result;
     }
 
+    /**
+     * 设置上传结果
+     *
+     * @param success 上传是否成功
+     */
     public void setResult(boolean success) {
         this.result = success ? RESULT__SUCCESS : RESULT__FAILED;
     }

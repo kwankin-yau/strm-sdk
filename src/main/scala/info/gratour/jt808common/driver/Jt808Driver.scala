@@ -20,6 +20,14 @@ import io.netty.buffer.ByteBuf
 import java.util
 
 
+/**
+ * JT/T 808 驱动程序
+ * @param config 配置
+ * @param adasDialect ADAS 方言
+ * @param verifyCrc 是否验证 CRC
+ * @param simplifiedDecoder 是否简化解码
+ * @param ctx 上下文
+ */
 class Jt808Driver(
                    config           : util.Map[String, String],
                    adasDialect: AdasDialect,
@@ -44,6 +52,9 @@ class Jt808Driver(
   private var protoVer: Option[Int] = None
   private var simNo: String = _
 
+  /**
+   * 重置驱动程序
+   */
   override def reset(): Unit = {
     super.reset()
 
@@ -64,6 +75,9 @@ class Jt808Driver(
     }
   }
 
+  /**
+   * 关闭驱动程序
+   */
   override def close(): Unit = {
     if (frameDecoder != null) {
       frameDecoder.close()
@@ -100,6 +114,10 @@ class Jt808Driver(
     }
   }
 
+  /**
+   * 解码
+   * @param buf 字节缓冲区
+   */
   override def decode(buf: ByteBuf): Unit = {
     val dr = frameDecoder.splitAndUnescape(buf)
     if (dr == DecodeState.UNRECOGNIZED)
@@ -167,6 +185,11 @@ class Jt808Driver(
     }
   }
 
+  /**
+   * 构建检查在线终端消息
+   * @param simNo 终端 SIM 号
+   * @return 检查在线终端消息
+   */
   override def buildCheckAliveMsg(simNo: String): JT808Msg = {
     val r = new JT808Msg_8107_QryAttrs()
     r.setSimNo(simNo)
@@ -174,6 +197,11 @@ class Jt808Driver(
     r
   }
 
+  /**
+   * 编码
+   * @param msg 消息
+   * @param out 输出字节缓冲区
+   */
   override def encode(msg: JT808Msg, out: ByteBuf): Unit = {
     msg.setSeqNo(msgSeqNoSeed.nextSeqNo())
 
@@ -190,6 +218,9 @@ class Jt808Driver(
   }
 }
 
+/**
+ * JT/T 808 驱动程序 Companion Object
+ */
 object Jt808Driver {
   private final val LOGGER = Logger("jt808.driver")
 }

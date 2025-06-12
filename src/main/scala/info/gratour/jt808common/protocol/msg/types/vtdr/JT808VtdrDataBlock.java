@@ -9,8 +9,15 @@ package info.gratour.jt808common.protocol.msg.types.vtdr;
 
 import com.lucendar.strm.common.types.Expose;
 
+/**
+ * 采集记录仪数据块接口
+ */
 @Expose
 public interface JT808VtdrDataBlock extends Cloneable {
 
+    /**
+     * 克隆
+     * @return 克隆对象
+     */
     JT808VtdrDataBlock clone();
 }

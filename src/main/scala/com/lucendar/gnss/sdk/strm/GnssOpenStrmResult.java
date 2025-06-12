@@ -7,17 +7,21 @@
  * ***************************************************************************** */
 package com.lucendar.gnss.sdk.strm;
 
-import com.google.gson.reflect.TypeToken;
-import info.gratour.common.types.rest.Reply;
-
 import java.lang.reflect.Type;
 import java.util.StringJoiner;
+
+import com.google.gson.reflect.TypeToken;
+
+import info.gratour.common.types.rest.Reply;
 
 /**
  * 打开媒体流结果
  */
 public class GnssOpenStrmResult {
 
+    /**
+     * 打开媒体流结果类型
+     */
     public static final Type REPLY_TYPE = new TypeToken<Reply<GnssOpenStrmResult>>(){}.getType();
 
     private String reqId;
@@ -58,11 +62,18 @@ public class GnssOpenStrmResult {
         this.reqId = reqId;
     }
 
-
+    /**
+     * 取实例ID
+     * @return 实例ID
+     */
     public String getInstanceId() {
         return instanceId;
     }
 
+    /**
+     * 设置实例ID
+     * @param instanceId 实例ID
+     */
     public void setInstanceId(String instanceId) {
         this.instanceId = instanceId;
     }
@@ -102,17 +113,21 @@ public class GnssOpenStrmResult {
     }
 
     /**
-     * 此字段已废弃
+     * 获取当前用户是否有流的控制权， 此字段已废弃
      * @return 当前用户是否有流的控制权
+     * @deprecated 已废弃
      */
+    @Deprecated
     public boolean getCtrl() {
         return ctrl;
     }
 
     /**
-     * 此字段已废弃
-     * @param ctrl
+     * 设置当前用户是否有流的控制权， 此字段已废弃
+     * @param ctrl 当前用户是否有流的控制权
+     * @deprecated 已废弃
      */
+    @Deprecated
     public void setCtrl(boolean ctrl) {
         this.ctrl = ctrl;
     }

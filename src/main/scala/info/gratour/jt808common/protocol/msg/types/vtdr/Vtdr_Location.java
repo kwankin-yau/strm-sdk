@@ -7,36 +7,63 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 行驶记录仪位置信息
+ */
 @Expose
 public class Vtdr_Location implements Cloneable {
     private double lng;
     private double lat;
     private short alt;
 
+    /**
+     * 取经度
+     * @return 经度
+     */
     public double getLng() {
         return lng;
     }
 
+    /**
+     * 设置经度
+     * @param lng 经度
+     */
     public void setLng(double lng) {
         this.lng = lng;
     }
 
+    /**
+     * 取纬度
+     * @return 纬度
+     */
     public double getLat() {
         return lat;
     }
 
+    /**
+     * 设置纬度
+     * @param lat 纬度
+     */
     public void setLat(double lat) {
         this.lat = lat;
     }
 
+    /**
+     * 取海拔高度
+     * @return 海拔高度
+     */
     public short getAlt() {
         return alt;
     }
 
+    /**
+     * 设置海拔高度
+     * @param alt 海拔高度
+     */
     public void setAlt(short alt) {
         this.alt = alt;
     }

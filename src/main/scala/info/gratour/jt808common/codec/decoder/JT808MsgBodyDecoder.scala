@@ -8,18 +8,36 @@ import io.netty.buffer.ByteBuf
 
 import scala.reflect.ClassTag
 
+/**
+ * JT808 消息体解码器
+ * @param T 消息类型
+ * @param classTag 类标签
+ */
 abstract class JT808MsgBodyDecoder[T <: JT808Msg](implicit classTag: ClassTag[T]) extends JTCodecHelper {
 
+  /**
+   * 消息ID
+   * @return 消息ID
+   */
   def msgId: Int = JTUtils.jtMsgIdOf(classTag.runtimeClass.asSubclass(classOf[JT808Msg]))
 
+  /**
+   * 解码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 消息对象
+   * @param body 消息体
+   * @param tempBuf 临时缓冲区
+   */
   def decodeMsgBody(protoVer: Byte, adasDialect: AdasDialect, m: T, body: ByteBuf, tempBuf: Array[Byte]): Unit
 
   /**
-   *
-   * @param adasDialect ADAS Dialect
-   * @param header frame header
-   * @param body message body
-   * @return null if decode failed
+   * 解码消息体
+   * @param adasDialect ADAS 方言
+   * @param header 帧头
+   * @param body 消息体
+   * @param tempBuf 临时缓冲区
+   * @return 解码后的消息对象。如果解码失败，返回 null
    */
   def decodeMsgBody(adasDialect: AdasDialect, header: JT808FrameHeader, body: ByteBuf, tempBuf: Array[Byte]): T = {
     val m = classTag.runtimeClass.getDeclaredConstructor().newInstance().asInstanceOf[T]
@@ -34,7 +52,14 @@ abstract class JT808MsgBodyDecoder[T <: JT808Msg](implicit classTag: ClassTag[T]
 
 }
 
+/**
+ * JT808 消息体解码器工厂
+ */
 object JT808MsgBodyDecoders {
+
+  /**
+   * 2013 版本解码器
+   */
   val REV_2013: Seq[JT808MsgBodyDecoder[_ <: JT808Msg]] = Seq(
     // 808 - terminal
     MBDecoder808_0001_TerminalGeneralAck,
@@ -85,6 +110,9 @@ object JT808MsgBodyDecoders {
     MBDecoder1078_9207_AvUploadCtrl
   )
 
+  /**
+   * 2013 版本简化解码器
+   */
   val REV_2013_SIMPLIFIED: Seq[JT808MsgBodyDecoder[_ <: JT808Msg]] = Seq(
     // 808 - terminal
     MBDecoder808_0001_TerminalGeneralAck,
@@ -135,16 +163,29 @@ object JT808MsgBodyDecoders {
     MBDecoder1078_9207_AvUploadCtrl
   )
 
+  /**
+   * 2019 版本解码器
+   */
   val REV_2019: Seq[JT808MsgBodyDecoder[_ <: JT808Msg]] = Seq(
     MBDecoder808_0004_QryServerTime,
     MBDecoder808_8004_QryServerTimeAck
   )
 
+  /**
+   * ADAS 解码器
+   */
   val ADAS: Seq[JT808MsgBodyDecoder[_ <: JT808Msg]] = Seq(
     MBDecoderAdas_9208_AlmAttUploadReq,
     MBDecoderAdas_9212_AlmAttFileItemCompleted
   )
 
+  /**
+   * 所有解码器
+   */
   val ALL: Seq[JT808MsgBodyDecoder[_ <: JT808Msg]] = REV_2013 ++ REV_2019 ++ ADAS
+
+  /**
+   * 所有简化解码器
+   */
   val ALL_SIMPLIFIED: Seq[JT808MsgBodyDecoder[_ <: JT808Msg]] = REV_2013_SIMPLIFIED ++ REV_2019 ++ ADAS
 }

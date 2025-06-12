@@ -9,6 +9,9 @@ package info.gratour.jt808common.protocol.msg.types.termparams;
 
 import java.util.Arrays;
 
+/**
+ * 定时抓拍控制参数(0x0064)
+ */
 public class TP_0064_TimedCaptureCtrlParams {
 
     private boolean[] chanEnabledFlags;
@@ -16,22 +19,43 @@ public class TP_0064_TimedCaptureCtrlParams {
     private byte timeUnit;
     private short interval;
 
+    /**
+     * 取通道启用标志
+     * @return 通道启用标志
+     */
     public boolean[] getChanEnabledFlags() {
         return chanEnabledFlags;
     }
 
+    /**
+     * 设置通道启用标志
+     * @param chanEnabledFlags 通道启用标志
+     */
     public void setChanEnabledFlags(boolean[] chanEnabledFlags) {
         this.chanEnabledFlags = chanEnabledFlags;
     }
 
+    /**
+     * 取通道存储标志
+     * @return 通道存储标志
+     */
     public boolean[] getChanStoredFlags() {
         return chanStoredFlags;
     }
 
+    /**
+     * 设置通道存储标志
+     * @param chanStoredFlags 通道存储标志
+     */
     public void setChanStoredFlags(boolean[] chanStoredFlags) {
         this.chanStoredFlags = chanStoredFlags;
     }
 
+    /**
+     * 取通道启用标志
+     * @param chanId 通道ID
+     * @return 通道启用标志
+     */
     public boolean chanEnabled(int chanId) {
         if (chanId >= 1 && chanId <= 5) {
             int index = chanId - 1;
@@ -43,6 +67,11 @@ public class TP_0064_TimedCaptureCtrlParams {
             return false;
     }
 
+    /**
+     * 取通道存储标志
+     * @param chanId 通道ID
+     * @return 通道存储标志
+     */
     public boolean chanStored(int chanId) {
         if (chanId >= 1 && chanId <= 5) {
             int index = chanId - 1;
@@ -54,18 +83,34 @@ public class TP_0064_TimedCaptureCtrlParams {
             return false;
     }
 
+    /**
+     * 取时间单位
+     * @return 时间单位
+     */
     public byte getTimeUnit() {
         return timeUnit;
     }
 
+    /**
+     * 设置时间单位
+     * @param timeUnit 时间单位
+     */
     public void setTimeUnit(byte timeUnit) {
         this.timeUnit = timeUnit;
     }
 
+    /**
+     * 取时间间隔
+     * @return 时间间隔
+     */
     public short getInterval() {
         return interval;
     }
 
+    /**
+     * 设置时间间隔
+     * @param interval 时间间隔
+     */
     public void setInterval(short interval) {
         this.interval = interval;
     }

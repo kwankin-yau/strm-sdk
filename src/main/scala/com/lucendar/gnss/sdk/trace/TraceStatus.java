@@ -9,7 +9,16 @@ package com.lucendar.gnss.sdk.trace;
  */
 public interface TraceStatus {
 
+    /**
+     * 所属 appId
+     * @return appId
+     */
     String appId();
+
+    /**
+     * 终端识别号
+     * @return 终端识别号
+     */
     String simNo();
 
     /**
@@ -19,10 +28,18 @@ public interface TraceStatus {
      */
     boolean isActive();
 
+    /**
+     * 不跟踪的（未启用的）TraceStatus 实现
+     */
     class InactiveTraceStatus implements TraceStatus {
         private final String appId;
         private final String simNo;
 
+        /**
+         * 构造函数
+         * @param appId appId
+         * @param simNo 终端识别号
+         */
         public InactiveTraceStatus(String appId, String simNo) {
             this.appId = appId;
             this.simNo = simNo;

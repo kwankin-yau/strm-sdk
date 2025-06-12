@@ -141,10 +141,18 @@ public class AvUploadNotif {
         this.uploadTm = uploadTm;
     }
 
+    /**
+     * 是否为进度通知
+     * @return 是否为进度通知
+     */
     public boolean isProgressNotif() {
         return progressNotif;
     }
 
+    /**
+     * 设置是否为进度通知
+     * @param progressNotif 是否为进度通知
+     */
     public void setProgressNotif(boolean progressNotif) {
         this.progressNotif = progressNotif;
     }

@@ -10,23 +10,42 @@ package info.gratour.jt808common.protocol.msg.types.addt;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
+/**
+ * 透传上行事件(0x0900)
+ */
 public class MQEventAddt_0900_PassThroughUl implements MQEventAddt {
 
     private byte typ;
     private byte[] data;
 
+    /**
+     * 获取类型
+     * @return 类型
+     */
     public byte getTyp() {
         return typ;
     }
 
+    /**
+     * 设置类型
+     * @param typ 类型
+     */
     public void setTyp(byte typ) {
         this.typ = typ;
     }
 
+    /**
+     * 获取数据
+     * @return 数据
+     */
     public byte[] getData() {
         return data;
     }
 
+    /**
+     * 设置数据
+     * @param data 数据
+     */
     public void setData(byte[] data) {
         this.data = data;
     }

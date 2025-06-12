@@ -6,11 +6,11 @@
 <dependency>
     <groupId>com.lucendar</groupId>
     <artifactId>strm-sdk</artifactId>
-    <version>4.0.1</version>
+    <version>4.0.2</version>
 </dependency>
 ```
 
 ## Gradle
 ```groovy
-implementation 'com.lucendar:strm-sdk:4.0.1'
+implementation 'com.lucendar:strm-sdk:4.0.2'
 ```

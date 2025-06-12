@@ -45,6 +45,10 @@ public class AlmAttFileList {
         this.reTransfer = reTransfer;
     }
 
+    /**
+     * 添加文件
+     * @param fileItem 文件
+     */
     public void add(AlmAttFileItem fileItem) {
         if (fileItems == null)
             fileItems = new ArrayList<>();
@@ -52,6 +56,11 @@ public class AlmAttFileList {
         fileItems.add(fileItem);
     }
 
+    /**
+     * 根据文件名获取文件项对象
+     * @param fileName 文件名
+     * @return 文件项对象
+     */
     public AlmAttFileItem itemOf(String fileName) {
         if (fileItems != null) {
             for (AlmAttFileItem item : fileItems) {
@@ -63,11 +72,18 @@ public class AlmAttFileList {
         return null;
     }
 
+    /**
+     * 清空文件列表
+     */
     public void clear() {
         if (fileItems != null)
             fileItems.clear();
     }
 
+    /**
+     * 将文件列表转换为字符串
+     * @return 文件列表字符串
+     */
     private String fileListToString() {
         if (fileItems != null) {
             StringBuilder str = new StringBuilder("[");
@@ -82,6 +98,10 @@ public class AlmAttFileList {
         }
     }
 
+    /**
+     * 判断所有文件是否上传完成
+     * @return 是否所有文件上传完成
+     */
     public boolean allFileCompleted() {
         if (fileItems == null)
             return false;

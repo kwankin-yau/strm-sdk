@@ -7,25 +7,28 @@ import info.gratour.jtcommon.{JTConsts, JTUtils}
 import io.netty.buffer.ByteBuf
 
 /**
- *
- * @param protoVer JT/T 808 protocol version, 0 for REV_2013, 1 for REV_2019, see also `PROTO_VER` serial constant defined in [[JTConsts]]
- * @param adasDialect ADAS dialect
+ * 808 消息编码器
+ * @param protoVer JT/T 808 协议版本, 0 表示 2013 版本, 1 表示 2019 版本, 见 [[JTConsts]] 中的 `PROTO_VER` 常量
+ * @param adasDialect ADAS 方言
  */
 class JT808MsgEncoder(protoVer: Byte, adasDialect: AdasDialect) {
 
   import JT808MsgEncoder.LOGGER
 
+  /**
+   * 808 消息体编码器注册表
+   */
   final val MsgBodyEncoderRegistry: JT808MsgBodyEncoderRegistry = DefaultJT808MsgBodyEncoderRegistry
 
   /**
-   * Encode message to `out` buffer. The method call JT808FrameEncoder to do frame level encoding.
+   * 将消息编码到 `out` 缓冲区。方法调用 JT808FrameEncoder 进行帧级编码。
    *
-   * @param seqNumAllocator message sequence number allocator
-   * @param msg message to encode
-   * @param tempBuf temporary buffer used for encoding
-   * @param out output buffer
+   * @param seqNumAllocator 消息序列号分配器
+   * @param msg 需要编码的消息
+   * @param tempBuf 用于编码的临时缓冲区
+   * @param out 输出字节缓冲区
    *
-   * @return fragment/packet count
+   * @return 片段/包数量
    */
   def encode(seqNumAllocator: SeqNumAllocator, msg: JT808Msg, tempBuf: ByteBuf, out: ByteBuf): Int = {
     val msgId = msg.getMsgId
@@ -39,6 +42,9 @@ class JT808MsgEncoder(protoVer: Byte, adasDialect: AdasDialect) {
   }
 }
 
+/**
+ * 808 消息编码器 Companion Object
+ */
 object JT808MsgEncoder {
   final val LOGGER: Logger = Logger[JT808MsgEncoder]
 }

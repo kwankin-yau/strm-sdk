@@ -7,10 +7,13 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集累计行驶里程信息应答数据(03H)
+ */
 @Expose
 public class JT808Vtdr_Mileage_03 implements JT808VtdrDataBlock {
 
@@ -19,34 +22,66 @@ public class JT808Vtdr_Mileage_03 implements JT808VtdrDataBlock {
     private float initMile;
     private float mile;
 
+    /**
+     * 取记录仪时间, yyyy-MM-dd HH:mm:ss
+     * @return 记录仪时间
+     */
     public String getDateTime() {
         return dateTime;
     }
 
+    /**
+     * 设置记录仪时间, yyyy-MM-dd HH:mm:ss
+     * @param dateTime 记录仪时间
+     */
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
+    /**
+     * 取安装时间, yyyy-MM-dd HH:mm:ss
+     * @return 安装时间
+     */
     public String getInstallTime() {
         return installTime;
     }
 
+    /**
+     * 设置安装时间, yyyy-MM-dd HH:mm:ss
+     * @param installTime 安装时间
+     */
     public void setInstallTime(String installTime) {
         this.installTime = installTime;
     }
 
+    /**
+     * 取初始里程, 单位: km
+     * @return 初始里程
+     */
     public float getInitMile() {
         return initMile;
     }
 
+    /**
+     * 设置初始里程, 单位: km
+     * @param initMile 初始里程
+     */
     public void setInitMile(float initMile) {
         this.initMile = initMile;
     }
 
+    /**
+     * 取累计里程, 单位: km
+     * @return 累计里程
+     */
     public float getMile() {
         return mile;
     }
 
+    /**
+     * 设置累计里程, 单位: km
+     * @param mile 累计里程
+     */
     public void setMile(float mile) {
         this.mile = mile;
     }

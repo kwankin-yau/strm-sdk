@@ -9,6 +9,9 @@ package info.gratour.jt808common.protocol.msg.types.termparams;
 
 import java.util.Arrays;
 
+/**
+ * 距离抓拍控制参数(0x0065)
+ */
 public class TP_0065_DistancedCaptureCtrlParams {
 
     private boolean[] chanEnabledFlags;
@@ -16,22 +19,43 @@ public class TP_0065_DistancedCaptureCtrlParams {
     private byte distanceUnit;
     private short distance;
 
+    /**
+     * 取通道启用标志
+     * @return 通道启用标志
+     */
     public boolean[] getChanEnabledFlags() {
         return chanEnabledFlags;
     }
 
+    /**
+     * 设置通道启用标志
+     * @param chanEnabledFlags 通道启用标志
+     */
     public void setChanEnabledFlags(boolean[] chanEnabledFlags) {
         this.chanEnabledFlags = chanEnabledFlags;
     }
 
+    /**
+     * 取通道存储标志
+     * @return 通道存储标志
+     */
     public boolean[] getChanStoredFlags() {
         return chanStoredFlags;
     }
 
+    /**
+     * 设置通道存储标志
+     * @param chanStoredFlags 通道存储标志
+     */
     public void setChanStoredFlags(boolean[] chanStoredFlags) {
         this.chanStoredFlags = chanStoredFlags;
     }
 
+    /**
+     * 取某通道启用标志
+     * @param chanId 通道ID
+     * @return 通道启用标志
+     */
     public boolean chanEnabled(int chanId) {
         if (chanId >= 1 && chanId <= 5) {
             int index = chanId - 1;
@@ -43,6 +67,11 @@ public class TP_0065_DistancedCaptureCtrlParams {
             return false;
     }
 
+    /**
+     * 取某通道存储标志
+     * @param chanId 通道ID
+     * @return 通道存储标志
+     */
     public boolean chanStored(int chanId) {
         if (chanId >= 1 && chanId <= 5) {
             int index = chanId - 1;
@@ -54,18 +83,34 @@ public class TP_0065_DistancedCaptureCtrlParams {
             return false;
     }
 
+    /**
+     * 取距离单位
+     * @return 距离单位
+     */
     public byte getDistanceUnit() {
         return distanceUnit;
     }
 
+    /**
+     * 设置距离单位
+     * @param distanceUnit 距离单位
+     */
     public void setDistanceUnit(byte distanceUnit) {
         this.distanceUnit = distanceUnit;
     }
 
+    /**
+     * 取距离
+     * @return 距离
+     */
     public short getDistance() {
         return distance;
     }
 
+    /**
+     * 设置距离
+     * @param distance 距离
+     */
     public void setDistance(short distance) {
         this.distance = distance;
     }

@@ -1,0 +1,10 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.runtimes": [
+        {            
+            "default": true,
+            "name": "JavaSE-17",
+            "path": "C:\\Program Files\\java\\jdk-17"
+        }
+    ]
+}

@@ -12,7 +12,11 @@ import info.gratour.jt808common.codec.encoder.AbstractJT808MsgBodyEncoder
 import info.gratour.jt808common.protocol.msg.JT808Msg_0002_Heartbeat
 import io.netty.buffer.ByteBuf
 
+/**
+ * 心跳(0x0002)消息体编码器
+ */
 object MBEncoder808_0002_Heartbeat extends AbstractJT808MsgBodyEncoder[JT808Msg_0002_Heartbeat]{
+
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_0002_Heartbeat, out: ByteBuf): Unit = {
     // nop
   }

@@ -7,29 +7,48 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.vtdr;
 
-import com.lucendar.strm.common.types.Expose;
-
 import java.util.StringJoiner;
 
+import com.lucendar.strm.common.types.Expose;
+
+/**
+ * 采集记录仪执行标准版本应答数据(00H)
+ */
 @Expose
 public class JT808Vtdr_VerInfo_00 implements JT808VtdrDataBlock {
 
-    private String year;
-    private String rev;
+    private int year;
+    private int rev;
 
-    public String getYear() {
+    /**
+     * 取年份, 后两位
+     * @return 年份
+     */
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    /**
+     * 设置年份, 后两位
+     * @param year 年份
+     */
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public String getRev() {
+    /**
+     * 取修改单号
+     * @return 修改单号
+     */
+    public int getRev() {
         return rev;
     }
 
-    public void setRev(String rev) {
+    /**
+     * 设置修改单号
+     * @param rev 修改单号
+     */
+    public void setRev(int rev) {
         this.rev = rev;
     }
 

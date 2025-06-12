@@ -1,7 +1,16 @@
 package info.gratour.jt808common
 
+/**
+ * JT/T 1078 媒体包负载类型
+ */
 object JT1078MediaPacketPayloadTypes {
 
+  /**
+   * JT/T 1078 媒体包负载类型
+   * @param typ 类型ID
+   * @param typeName 类型名称
+   * @param enumName 类型枚举名称
+   */
   case class JT1078MediaPacketPayloadType(typ: Int, typeName: String, enumName: String) {
     def adpcm: Boolean = typ == ADPCMA_VALUE
     def g726: Boolean = typ == G726_VALUE
@@ -84,6 +93,9 @@ object JT1078MediaPacketPayloadTypes {
   final val AVS: JT1078MediaPacketPayloadType = JT1078MediaPacketPayloadType(AVS_VALUE, "AVS (100)", "AVS")
   final val SVAC: JT1078MediaPacketPayloadType = JT1078MediaPacketPayloadType(SVAC_VALUE, "SVAC (101)", "SVAC")
 
+  /**
+   * JT/T 1078 媒体包负载类型序列
+   */
   val PayloadTypes: Seq[JT1078MediaPacketPayloadType] = Seq(
     G721,
     G722,
@@ -128,10 +140,10 @@ object JT1078MediaPacketPayloadTypes {
     Types.get(typ).orNull
 
   /**
-   * Get type name of given type ID.
+   * 获取给定类型ID的类型名称
    *
-   * @param typ type ID
-   * @return type name of given type, or `typ` to string if the type not found.
+   * @param typ 类型ID
+   * @return 给定类型的类型名称，如果类型未找到，则返回 `typ` 的字符串表示
    */
   def typeNameOf(typ: Int): String = {
     val t = Types.get(typ).orNull
@@ -142,10 +154,10 @@ object JT1078MediaPacketPayloadTypes {
   }
 
   /**
-   * Get type enum name of given type ID.
+   * 获取给定类型ID的类型枚举名称
    *
-   * @param typ type ID
-   * @return type enum name of given type, or `typ` to string if the type not found.
+   * @param typ 类型ID
+   * @return 给定类型的类型枚举名称，如果类型未找到，则返回 `typ` 的字符串表示
    */
   def typeEnumNameOf(typ: Int): String = {
     val t = Types.get(typ).orNull
@@ -157,10 +169,10 @@ object JT1078MediaPacketPayloadTypes {
 
 
   /**
-   * Get type ID of given enum name.
+   * 获取给定枚举名称的类型ID
    *
-   * @param enumName the enum name
-   * @return corresponding type ID, 0 for unknown
+   * @param enumName 枚举名称
+   * @return 对应的类型ID，如果类型未找到，则返回0
    */
   def typeOfEnumName(enumName: String): Int =
     EnumNameMap.getOrElse(enumName, 0)

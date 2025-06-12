@@ -32,10 +32,19 @@ public class ServerInfo {
         this.ver = ver;
     }
 
+    /**
+     * 取服务端启动时间
+     *
+     * @return 服务端启动时间, epoch millis
+     */
     public long getStartTm() {
         return startTm;
     }
 
+    /**
+     * 设置服务端启动时间
+     * @param startTm 服务端启动时间, epoch millis
+     */
     public void setStartTm(long startTm) {
         this.startTm = startTm;
     }
@@ -72,6 +81,20 @@ public class ServerInfo {
      */
     public void setFeatures(String[] features) {
         this.features = features;
+    }
+
+    /**
+     * 增加功能特征标识字符串
+     *
+     * @param feature 功能特征标识字符串
+     */
+    public void addFeature(String feature) {
+        if (this.features == null) {
+            this.features = new String[]{feature};
+        } else {
+            this.features = Arrays.copyOf(this.features, this.features.length + 1);
+            this.features[this.features.length - 1] = feature;
+        }
     }
 
     /**

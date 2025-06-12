@@ -1,5 +1,8 @@
 package info.gratour.jt808common.protocol;
 
+/**
+ * JT808 消息常量
+ */
 public class JT808MsgConsts {
 
     /**
@@ -52,6 +55,10 @@ public class JT808MsgConsts {
      * 终端注册
      */
     public static final int TERMINAL_REGISTER_0100 = 0x0100;
+
+    /**
+     * 终端注册的HEX字符串
+     */
     public static final String HEX_MSG_ID__TERMINAL_REGISTER_0100 = "0100";
 
     /**
@@ -78,6 +85,10 @@ public class JT808MsgConsts {
      * 终端控制
      */
     public static final int TERMINAL_CTRL_8105 = 0x8105;
+
+    /**
+     * 终端控制的HEX字符串
+     */
     public static final String HEX_MSG_ID__TERMINAL_CTRL_8105 = "8105";
 
     /**
@@ -85,17 +96,29 @@ public class JT808MsgConsts {
      */
     public static final int QRY_SPECIAL_PARAMS_8106 =  0x8106;
 
+    /**
+     * 查询指定终端参数的HEX字符串
+     */
+    public static final String HEX_MSG_ID__QRY_SPECIAL_PARAMS_8106 = "8106";
 
     /**
      * 查询终端属性
      */
     public static final int QRY_TERMINAL_ATTRS_8107 = 0x8107;
+
+    /**
+     * 查询终端属性的HEX字符串
+     */
     public static final String HEX_MSG_ID__QRY_TERMINAL_ATTRS_8107 = "8107";
 
     /**
      * 查询终端属性应答
      */
     public static final int QRY_TERMINAL_ATTRS_ACK_0107 = 0x0107;
+
+    /**
+     * 查询终端属性应答的HEX字符串
+     */
     public static final String HEX_MSG_ID__QRY_TERMINAL_ATTRS_ACK_0107 = "0107";
 
     /**
@@ -112,6 +135,10 @@ public class JT808MsgConsts {
      * 位置上报
      */
     public static final int LOCATION_0200 = 0x0200;
+
+    /**
+     * 位置上报的HEX字符串
+     */
     public static final String HEX_MSG_ID__LOCATION_0200 = "0200";
 
     /**
@@ -123,6 +150,10 @@ public class JT808MsgConsts {
      * 位置信息查询应答
      */
     public static final int QRY_LOCATION_ACK_0201 = 0x0201;
+
+    /**
+     * 位置信息查询应答的HEX字符串
+     */
     public static final String HEX_MSG_ID__QRY_LOCATION_ACK_0201 = "0201";
 
     /**
@@ -139,6 +170,10 @@ public class JT808MsgConsts {
      * 文本信息下发
      */
     public static final int SEND_TEXT_8300 =  0x8300;
+
+    /**
+     * 文本信息下发的HEX字符串
+     */
     public static final String HEX_MSG_ID__SEND_TEXT_8300 = "8300";
 
     /**
@@ -180,6 +215,10 @@ public class JT808MsgConsts {
      * 电话回拨
      */
     public static final int PHONE_CALLBACK_8400 = 0x8400;
+
+    /**
+     * 电话回拨的HEX字符串
+     */
     public static final String HEX_MSG_ID__PHONE_CALLBACK_8400 = "8400";
 
     /**
@@ -241,6 +280,10 @@ public class JT808MsgConsts {
      * 行驶记录数据采集命令
      */
     public static final int VTDR_DATA_COLLECT_REQ_8700 = 0x8700;
+
+    /**
+     * 行驶记录数据采集命令的HEX字符串
+     */
     public static final String HEX_MSG_ID__VTDR_DATA_COLLECT_REQ_8700 = "8700";
 
     /**
@@ -267,12 +310,20 @@ public class JT808MsgConsts {
      * 驾驶员身份信息采集上报
      */
     public static final int DRIVER_IDENTITY_0702 =  0x0702;
+
+    /**
+     * 驾驶员身份信息采集上报的HEX字符串
+     */
     public static final String HEX_MSG_ID__DRIVER_IDENTITY_0702 = "0702";
 
     /**
      * 定位数据批量上传
      */
     public static final int BATCH_LOCATION_0704 =  0x0704;
+
+    /**
+     * 定位数据批量上传的HEX字符串
+     */
     public static final String HEX_MSG_ID__BATCH_LOCATION_0704 = "0704";
 
     /**
@@ -284,6 +335,10 @@ public class JT808MsgConsts {
      * 多媒体数据上传
      */
     public static final int MULTI_MEDIA_DATA_0801 = 0x0801;
+
+    /**
+     * 多媒体数据上传的HEX字符串
+     */
     public static final String HEX_MSG_ID__MULTI_MEDIA_DATA_0801 = "0801";
 
     /**
@@ -300,6 +355,10 @@ public class JT808MsgConsts {
      * 摄像头立即拍摄命令
      */
     public static final int TAKE_PHOTO_8801 =  0x8801;
+
+    /**
+     * 摄像头立即拍摄命令的HEX字符串
+     */
     public static final String HEX_MSG_ID__TAKE_PHOTO_8801 = "8801";
 
     /**
@@ -358,6 +417,11 @@ public class JT808MsgConsts {
     public static final int TERMINAL_RSA_KEY_0x0A00 = 0x0A00;
 
 
+    /**
+     * 判断是否为平台应答
+     * @param msgId 消息ID
+     * @return 是否为平台应答
+     */
     public static boolean isPlatformAck(int msgId) {
         switch (msgId) {
             case SERVER_GENERIC_ACK_8001:

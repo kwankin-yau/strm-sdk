@@ -7,6 +7,9 @@
  *******************************************************************************/
 package info.gratour.jt808common.codec.encoder;
 
+/**
+ * 默认流水号分配器
+ */
 public class DefaultSeqNumAllocator implements SeqNumAllocator {
 
     private int seed = 1;
@@ -16,6 +19,9 @@ public class DefaultSeqNumAllocator implements SeqNumAllocator {
         return seed++;
     }
 
+    /**
+     * 重置流水号
+     */
     public void reset() {
         seed = 1;
     }

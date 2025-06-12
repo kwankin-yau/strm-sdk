@@ -7,37 +7,64 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JTAdasMsgConsts;
 import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttFileItemWithType;
 import info.gratour.jt808common.protocol.msg.types.almatt.AlmAttReTransFileBlock;
 import info.gratour.jtcommon.JTMsgId;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * ADAS报警附件上传完成(0x9212)命令参数
+ */
 @JTMsgId(JTAdasMsgConsts.ALM_ATT_FILE_ITEM_COMPLETED_9212)
 @Expose
 public class CP_9212_AlmAttFileItemCompleted implements JT808CmdParams {
 
+    /**
+     * 结果：完成
+     */
     public static final byte RESULT__COMPLETED = 0;
+
+    /**
+     * 结果：重传需要
+     */
     public static final byte RESULT__RETRANSMIT_NEEDED = 1;
 
     private AlmAttFileItemWithType fileItem;
     private List<AlmAttReTransFileBlock> reTransFileBlocks;
 
+    /**
+     * 取附件文件
+     * @return 附件文件
+     */
     public AlmAttFileItemWithType getFileItem() {
         return fileItem;
     }
 
+    /**
+     * 设置附件文件
+     * @param fileItem 附件文件
+     */
     public void setFileItem(AlmAttFileItemWithType fileItem) {
         this.fileItem = fileItem;
     }
 
+    /**
+     * 取重传需要附件文件块
+     * @return 重传需要附件文件块
+     */
     public List<AlmAttReTransFileBlock> getReTransFileBlocks() {
         return reTransFileBlocks;
     }
 
+    /**
+     * 设置重传需要附件文件块
+     * @param reTransFileBlocks 重传需要附件文件块
+     */
     public void setReTransFileBlocks(List<AlmAttReTransFileBlock> reTransFileBlocks) {
         this.reTransFileBlocks = reTransFileBlocks;
     }
@@ -50,6 +77,10 @@ public class CP_9212_AlmAttFileItemCompleted implements JT808CmdParams {
                 '}';
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(CP_9212_AlmAttFileItemCompleted source) {
         this.fileItem = source.fileItem != null ? source.fileItem.clone() : null;
         if (source.reTransFileBlocks != null) {

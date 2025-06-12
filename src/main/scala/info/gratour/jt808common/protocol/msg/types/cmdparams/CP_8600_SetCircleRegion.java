@@ -7,13 +7,17 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import java.util.Arrays;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.JT808CircleRegion;
 import info.gratour.jtcommon.JTMsgId;
 
-import java.util.Arrays;
-
+/**
+ * 设置圆形区域(0x8600)命令参数
+ */
 @JTMsgId(JT808MsgConsts.SET_CIRCLE_REGION_8600)
 @Expose
 public class CP_8600_SetCircleRegion implements JT808CmdParams {
@@ -21,22 +25,42 @@ public class CP_8600_SetCircleRegion implements JT808CmdParams {
     private byte action;
     private JT808CircleRegion[] regions;
 
+    /**
+     * 获取操作类型
+     * @return 操作类型
+     */
     public byte getAction() {
         return action;
     }
 
+    /**
+     * 设置操作类型
+     * @param action 操作类型
+     */
     public void setAction(byte action) {
         this.action = action;
     }
 
+    /**
+     * 获取圆形区域列表
+     * @return 圆形区域列表
+     */
     public JT808CircleRegion[] getRegions() {
         return regions;
     }
 
+    /**
+     * 设置圆形区域列表
+     * @param regions 圆形区域列表
+     */
     public void setRegions(JT808CircleRegion[] regions) {
         this.regions = regions;
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(CP_8600_SetCircleRegion source) {
         this.action = source.action;
         if (source.regions != null) {

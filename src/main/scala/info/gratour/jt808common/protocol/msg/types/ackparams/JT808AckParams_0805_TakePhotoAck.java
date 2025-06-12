@@ -7,12 +7,16 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import java.util.Arrays;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
-import java.util.Arrays;
-
+/**
+ * 拍照应答参数(0x0805)
+ */
 @JTMsgId(JT808MsgConsts.TAKE_PHOTO_ACK_0805)
 @Expose
 public class JT808AckParams_0805_TakePhotoAck implements JT808AckParams, Cloneable {
@@ -20,18 +24,34 @@ public class JT808AckParams_0805_TakePhotoAck implements JT808AckParams, Cloneab
     private byte result;
     private long[] mediaIds;
 
+    /**
+     * 获取结果
+     * @return 结果
+     */
     public byte getResult() {
         return result;
     }
 
+    /**
+     * 设置结果
+     * @param result 结果
+     */
     public void setResult(byte result) {
         this.result = result;
     }
 
+    /**
+     * 获取媒体 ID 列表
+     * @return 媒体 ID 列表
+     */
     public long[] getMediaIds() {
         return mediaIds;
     }
 
+    /**
+     * 设置媒体 ID 列表
+     * @param mediaIds 媒体 ID 列表
+     */
     public void setMediaIds(long[] mediaIds) {
         this.mediaIds = mediaIds;
     }

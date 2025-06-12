@@ -17,16 +17,31 @@ import info.gratour.jt808common.spi.model.TermCmd;
 import info.gratour.jt808common.spi.model.TermCmdStateChanged;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+/**
+ * 常量类
+ */
 public class GnssConsts {
 
+    /**
+     * 构造GsonBuilder实例
+     * @return GsonBuilder实例
+     */
     public static GsonBuilder GSON_BUILDER() {
         return Consts.defaultGsonBuilder()
                 .registerTypeAdapter(TermCmd.class, new TermCmdMaterializer())
                 .registerTypeAdapter(TermCmdStateChanged.class, new TermCmdStateChangedMaterializer());
     }
 
+    /**
+     * Gson实例
+     */
     public static final Gson GSON = GSON_BUILDER().create();
+
+    /**
+     * 格式化Gson实例
+     */
     public static final Gson GSON_PRETTY = GSON_BUILDER().setPrettyPrinting().create();
 
 
@@ -35,6 +50,9 @@ public class GnssConsts {
      */
     public static final String DEFAULT_APP_ID = "";
 
+    /**
+     * 功能特征类
+     */
     public static class Features {
 
         private final boolean externalGateway;
@@ -43,25 +61,47 @@ public class GnssConsts {
         private final boolean avAttrsQry;
         private final boolean noQryLocationCmd;
 
-
+        /**
+         * 是否使用外部网关
+         */
         public static final String FEATURE__EXTERNAL_GATEWAY = "externalGateway";
 
+        /**
+         * 是否禁用批量查询在线终端
+         */
         public static final String FEATURE__BATCH_ONLINE_TERMS_QRY_DISABLED = "batchOnlineTermsQryDisabled";
 
         /**
-         * Whether terminal attributes query (8107) is supported.
+         * 是否支持终端属性查询（8107）
          */
         public static final String FEATURE__ATTRS_QRY = "attrsQry";
 
         /**
-         * Whether A/V attribute query (9003) is supported.
+         * 是否支持A/V属性查询（9003）
          */
         public static final String FEATURE__AV_ATTRS_QRY = "avAttrsQry";
 
+        /**
+         * 是否不支持查询定位指令
+         */
         public static final String FEATURE__NO_QRY_LOCATE_CMD = "noQryLocateCmd";
+
+        /**
+         * 是否支持主动安全附件服务统计接口
+         */
+        public static final String FEATURE__ALM_ATT_UPLOAD_STAT = "almAttUploadStat";
 
         private final String[] features;
 
+        /**
+         * 构造函数
+         * @param externalGateway 是否使用外部网关
+         * @param batchOnlineTermsQryDisabled 是否禁用批量查询在线终端
+         * @param attrsQry 是否支持终端属性查询（8107）
+         * @param avAttrsQry 是否支持A/V属性查询（9003）
+         * @param noQryLocationCmd 是否不支持查询定位指令
+         * @param extraFeatures 额外功能
+         */
         public Features(
                 boolean externalGateway,
                 boolean batchOnlineTermsQryDisabled,
@@ -94,26 +134,59 @@ public class GnssConsts {
             features = list.toArray(new String[0]);
         }
 
+        /**
+         * 是否使用外部网关
+         * @return 是否使用外部网关
+         */
         public boolean externalGateway() {
             return externalGateway;
         }
 
+        /**
+         * 是否禁用批量查询在线终端
+         * @return 是否禁用批量查询在线终端
+         */
         public boolean batchOnlineTermsQryDisabled() {
             return batchOnlineTermsQryDisabled;
         }
 
+        /**
+         * 是否支持终端属性查询（8107）
+         * @return 是否支持终端属性查询（8107）
+         */
         public boolean attrsQry() {
             return attrsQry;
         }
 
+        /**
+         * 是否支持A/V属性查询（9003）
+         * @return 是否支持A/V属性查询（9003）
+         */
         public boolean avAttrsQry() {
             return avAttrsQry;
         }
 
+        /**
+         * 是否不支持查询定位指令
+         * @return 是否不支持查询定位指令
+         */
         public boolean noQryLocationCmd() {
             return noQryLocationCmd;
         }
 
+        /**
+         * 检查是否支持指定的功能特征
+         * @param feature 所要检查的功能特征ID
+         * @return 是否支持
+         */
+        public boolean hasFeature(String feature) {
+            return features != null && Arrays.asList(features).contains(feature);
+        }
+
+        /**
+         * 获取特征名称列表
+         * @return 特征名称列表
+         */
         public String[] features() {
             String[] r = new String[features.length];
             System.arraycopy(features, 0, r, 0, features.length);
@@ -196,6 +269,11 @@ public class GnssConsts {
          */
         public static final String TONG_LI = "72302";
 
+        /**
+         * 取厂商的短名称
+         * @param factoryId 制造商ID
+         * @return 短名称
+         */
         public static String shortName(String factoryId) {
             if (factoryId == null)
                 return null;

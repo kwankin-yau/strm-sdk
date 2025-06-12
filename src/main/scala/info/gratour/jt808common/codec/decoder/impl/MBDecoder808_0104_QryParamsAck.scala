@@ -17,10 +17,21 @@ import info.gratour.jt808common.protocol.msg.types.termparams._
 import info.gratour.jtcommon.{ByteBufHelper, JTUtils}
 import io.netty.buffer.ByteBuf
 
+/**
+ * 查询参数应答(0x0104)消息体解码器
+ */
 object MBDecoder808_0104_QryParamsAck extends JT808MsgBodyDecoder[JT808Msg_0104_QryParamsAck] {
 
   private val logger = Logger(MBDecoder808_0104_QryParamsAck.getClass.getName)
 
+  /**
+   * 解码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 解码后的消息体
+   * @param body 消息体字节缓冲区
+   * @param tempBuf 临时缓冲区
+   */
   override def decodeMsgBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_0104_QryParamsAck, body: ByteBuf, tempBuf: Array[Byte]): Unit = {
     m.setAckSeqNo(body.readUnsignedShort())
     val count = body.readUnsignedByte()

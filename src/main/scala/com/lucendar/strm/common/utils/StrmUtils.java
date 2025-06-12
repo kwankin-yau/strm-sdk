@@ -4,9 +4,18 @@ import java.nio.ByteBuffer;
 import java.util.Base64;
 import java.util.UUID;
 
+/**
+ * 流媒体工具类
+ */
 public class StrmUtils {
 
     private static final char[] HEX_CHARS = "0123456789abcdef".toCharArray();
+
+    /**
+     * 将字节数组转换为十六进制字符串
+     * @param bytes 字节数组
+     * @return 十六进制字符串
+     */
     public static String bytesToHex(byte[] bytes) {
         if (bytes == null)
             throw new NullPointerException("bytes");
@@ -22,6 +31,11 @@ public class StrmUtils {
         return new String(r);
     }
 
+    /**
+     * 生成时间编码的ID
+     * @param time 时间
+     * @return 时间编码的ID
+     */
     public static String timeCodedId(long time) {
         UUID uuid = UUID.randomUUID();
         byte[] bytes = new byte[16 + 8];
@@ -34,6 +48,11 @@ public class StrmUtils {
         return Base64.getUrlEncoder().encodeToString(bytes);
     }
 
+    /**
+     * 从时间编码的ID中提取时间
+     * @param id 时间编码的ID
+     * @return 时间
+     */
     public static long extractTimeFromId(String id) {
         byte[] bytes = Base64.getUrlDecoder().decode(id);
         ByteBuffer bb = ByteBuffer.wrap(bytes);

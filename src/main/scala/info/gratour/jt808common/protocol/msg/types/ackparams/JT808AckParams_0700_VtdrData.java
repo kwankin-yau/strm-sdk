@@ -7,13 +7,17 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.ackparams;
 
+import java.util.StringJoiner;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.vtdr.JT808VtdrDataBlock;
 import info.gratour.jtcommon.JTMsgId;
 
-import java.util.StringJoiner;
-
+/**
+ * 行驶记录数据应答参数(0x0700)
+ */
 @JTMsgId(JT808MsgConsts.VTDR_DATA_0700)
 @Expose
 public class JT808AckParams_0700_VtdrData implements JT808AckParams, Cloneable {
@@ -22,26 +26,50 @@ public class JT808AckParams_0700_VtdrData implements JT808AckParams, Cloneable {
     private JT808VtdrDataBlock dataBlock;
     private String raw;
 
+    /**
+     * 获取命令
+     * @return 命令
+     */
     public byte getCmd() {
         return cmd;
     }
 
+    /**
+     * 设置命令
+     * @param cmd 命令
+     */
     public void setCmd(byte cmd) {
         this.cmd = cmd;
     }
 
+    /**
+     * 获取数据块
+     * @return 数据块
+     */
     public JT808VtdrDataBlock getDataBlock() {
         return dataBlock;
     }
 
+    /**
+     * 设置数据块
+     * @param dataBlock 数据块
+     */
     public void setDataBlock(JT808VtdrDataBlock dataBlock) {
         this.dataBlock = dataBlock;
     }
 
+    /**
+     * 获取原始数据
+     * @return 原始数据
+     */
     public String getRaw() {
         return raw;
     }
 
+    /**
+     * 设置原始数据
+     * @param raw 原始数据
+     */
     public void setRaw(String raw) {
         this.raw = raw;
     }
@@ -55,6 +83,10 @@ public class JT808AckParams_0700_VtdrData implements JT808AckParams, Cloneable {
                 .toString();
     }
 
+    /**
+     * 从源对象赋值
+     * @param source 源对象
+     */
     public void assignFrom(JT808AckParams_0700_VtdrData source) {
         this.cmd = source.cmd;
         this.dataBlock = source.dataBlock != null ? source.dataBlock.clone() : null;

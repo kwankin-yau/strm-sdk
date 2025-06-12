@@ -13,15 +13,29 @@ import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jt808common.protocol.msg.types.ackparams.JT808AckParams_0805_TakePhotoAck;
 import info.gratour.jtcommon.JTMsgId;
 
+/**
+ * 拍照应答消息(0x0805)
+ */
 @JTMsgId(JT808MsgConsts.TAKE_PHOTO_ACK_0805)
 public class JT808Msg_0805_TakePhotoAck extends JT808Msg {
 
+    /**
+     * 消息ID
+     */
     public static final int MSG_ID = JT808MsgConsts.TAKE_PHOTO_ACK_0805;
 
+    /**
+     * 构造函数
+     */
     public JT808Msg_0805_TakePhotoAck() {
         setMsgId(MSG_ID);
     }
 
+    /**
+     * 构造函数
+     * 
+     * @param header 帧头
+     */
     public JT808Msg_0805_TakePhotoAck(JT808FrameHeader header) {
         super(header);
     }
@@ -29,18 +43,38 @@ public class JT808Msg_0805_TakePhotoAck extends JT808Msg {
     private int ackSeqNo;
     private JT808AckParams_0805_TakePhotoAck ackParams;
 
+    /**
+     * 获取应答流水号
+     * 
+     * @return 应答流水号
+     */
     public int getAckSeqNo() {
         return ackSeqNo;
     }
 
+    /**
+     * 设置应答流水号
+     * 
+     * @param ackSeqNo 应答流水号
+     */
     public void setAckSeqNo(int ackSeqNo) {
         this.ackSeqNo = ackSeqNo;
     }
 
+    /**
+     * 获取应答参数
+     * 
+     * @return 应答参数
+     */
     public JT808AckParams_0805_TakePhotoAck getAckParams() {
         return ackParams;
     }
 
+    /**
+     * 设置应答参数
+     * 
+     * @param ackParams 应答参数
+     */
     public void setAckParams(JT808AckParams_0805_TakePhotoAck ackParams) {
         this.ackParams = ackParams;
     }

@@ -9,24 +9,43 @@ package info.gratour.jt808common.protocol.msg.types;
 
 import com.lucendar.strm.common.types.Expose;
 
+/**
+ * JT/T 808 信息点播信息项
+ */
 @Expose
 public class JT808InfoMenuItem implements Cloneable {
 
     private byte infoType;
     private String infoName;
 
+    /**
+     * 取信息类型
+     * @return 信息类型
+     */
     public byte getInfoType() {
         return infoType;
     }
 
+    /**
+     * 设置信息类型
+     * @param infoType 信息类型
+     */
     public void setInfoType(byte infoType) {
         this.infoType = infoType;
     }
 
+    /**
+     * 取信息名称
+     * @return 信息名称
+     */
     public String getInfoName() {
         return infoName;
     }
 
+    /**
+     * 设置信息名称
+     * @param infoName 信息名称
+     */
     public void setInfoName(String infoName) {
         this.infoName = infoName;
     }

@@ -7,11 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import java.util.StringJoiner;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
-
-import java.util.StringJoiner;
 
 /**
  * 音视频传输请求指令参数。参数的具体意义，请参阅 JT/T 1078 文本的指令部分
@@ -20,14 +21,44 @@ import java.util.StringJoiner;
 @Expose
 public class CP_9101_LiveAvReq implements JT808CmdParams {
 
+    /**
+     * 数据类型：音视频
+     */
     public static final byte DATA_TYPE__AV = 0;
+
+    /**
+     * 数据类型：视频
+     */
     public static final byte DATA_TYPE__VIDEO = 1;
+
+    /**
+     * 数据类型：对讲
+     */
     public static final byte DATA_TYPE__TALK = 2;
+
+    /**
+     * 数据类型：监听
+     */
     public static final byte DATA_TYPE__LISTEN = 3;
+
+    /**
+     * 数据类型：广播
+     */
     public static final byte DATA_TYPE__BROADCAST = 4;
+
+    /**
+     * 数据类型：透传
+     */
     public static final byte DATA_TYPE__PASS_THOUGH = 5;
 
+    /**
+     * 码流：主码流
+     */
     public static final byte CODE_STREAM__PRIMARY = 0;
+
+    /**
+     * 码流：子码流
+     */
     public static final byte CODE_STREAM__SUB = 1;
 
     private String serverIp;
@@ -175,6 +206,10 @@ public class CP_9101_LiveAvReq implements JT808CmdParams {
         this.codeStrm = codeStrm;
     }
 
+    /**
+     * 获取数据类型默认值
+     * @return 数据类型默认值
+     */
     public byte getDataTypeDef() {
         if (dataTyp != null)
             return dataTyp;
@@ -182,6 +217,10 @@ public class CP_9101_LiveAvReq implements JT808CmdParams {
             return DATA_TYPE__AV;
     }
 
+    /**
+     * 获取码流默认值
+     * @return 码流默认值
+     */
     public byte getCodeStreamDef() {
         if (codeStrm != null)
             return codeStrm;
@@ -189,70 +228,138 @@ public class CP_9101_LiveAvReq implements JT808CmdParams {
             return CODE_STREAM__PRIMARY;
     }
 
+    /**
+     * 获取调试标志
+     * @return 调试标志
+     */
     public int getDebug() {
         return debug;
     }
 
+    /**
+     * 设置调试标志
+     * @param debug 调试标志
+     */
     public void setDebug(int debug) {
         this.debug = debug;
     }
 
+    /**
+     * 获取服务器ID
+     * @return 服务器ID
+     */
     public String getServerId() {
         return serverId;
     }
 
+    /**
+     * 设置服务器ID
+     * @param serverId 服务器ID
+     */
     public void setServerId(String serverId) {
         this.serverId = serverId;
     }
 
+    /**
+     * 获取服务器IP地址
+     * @return 服务器IP地址
+     */
     public String serverIp() {
         return serverIp;
     }
 
+    /**
+     * 设置服务器IP地址
+     * @param value 服务器IP地址
+     */
     public void serverIp(String value) {
         this.serverIp = value;
     }
 
+    /**
+     * 获取2013协议的TCP端口号
+     * @return 2013协议的TCP端口号
+     */
     public int tcpPort() {
         return tcpPort;
     }
 
+    /**
+     * 设置2013协议的TCP端口号
+     * @param value 2013协议的TCP端口号
+     */
     public void tcpPort(int value) {
         this.tcpPort = value;
     }
 
+    /**
+     * 获取2019协议的TCP端口号
+     * @return 2019协议的TCP端口号
+     */
     public int tcpPort2019() {
         return tcpPort2019;
     }
 
+    /**
+     * 设置2019协议的TCP端口号
+     * @param value 2019协议的TCP端口号
+     */
     public void tcpPort2019(int value) {
         this.tcpPort2019 = value;
     }
 
+    /**
+     * 获取2013协议的UDP端口号
+     * @return 2013协议的UDP端口号
+     */
     public int udpPort() {
         return udpPort;
     }
 
+    /**
+     * 设置2013协议的UDP端口号
+     * @param value 2013协议的UDP端口号
+     */
     public void udpPort(int value) {
         this.udpPort = value;
     }
 
+    /**
+     * 获取2019协议的UDP端口号
+     * @return 2019协议的UDP端口号
+     */
     public int udpPort2019() {
         return udpPort2019;
     }
 
+    /**
+     * 设置2019协议的UDP端口号
+     * @param value 2019协议的UDP端口号
+     */
     public void udpPort2019(int value) {
         this.udpPort2019 = value;
     }
 
+    /**
+     * 获取通道号
+     * @return 通道号
+     */
     public int chan() {
         return chan;
     }
 
+    /**
+     * 设置通道号
+     * @param value 通道号
+     */
     public void chan(int value) {
         this.chan = (byte) value;
     }
 
+    /**
+     * 获取数据类型默认值
+     * @return 数据类型默认值
+     */
     public int dataTypDef() {
         if (dataTyp != null)
             return dataTyp;
@@ -260,10 +367,18 @@ public class CP_9101_LiveAvReq implements JT808CmdParams {
             return DATA_TYPE__AV;
     }
 
+    /**
+     * 设置数据类型
+     * @param value 数据类型
+     */
     public void dataTyp(int value) {
         this.dataTyp = (byte) value;
     }
 
+    /**
+     * 获取码流默认值
+     * @return 码流默认值
+     */
     public int codeStrmDef() {
         if (codeStrm != null)
             return codeStrm;
@@ -271,22 +386,42 @@ public class CP_9101_LiveAvReq implements JT808CmdParams {
             return CODE_STREAM__PRIMARY;
     }
 
+    /**
+     * 设置码流
+     * @param value 码流
+     */
     public void codeStrm(int value) {
         this.codeStrm = (byte) value;
     }
 
+    /**
+     * 获取调试标志
+     * @return 调试标志
+     */
     public int debug() {
         return debug;
     }
 
+    /**
+     * 设置调试标志
+     * @param value 调试标志
+     */
     public void debug(int value) {
         this.debug = debug;
     }
 
+    /**
+     * 获取服务器ID
+     * @return 服务器ID
+     */
     public String serverId() {
         return serverId;
     }
 
+    /**
+     * 设置服务器ID
+     * @param value 服务器ID
+     */
     public void serverId(String value) {
         this.serverId = value;
     }

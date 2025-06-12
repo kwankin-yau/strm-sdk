@@ -7,10 +7,10 @@
  *******************************************************************************/
 package info.gratour.jt808common;
 
-import info.gratour.jtcommon.JTUtils;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import info.gratour.jtcommon.JTUtils;
 
 class JT808SignalNames {
 
@@ -156,6 +156,9 @@ class JT808SignalNames {
     }
 }
 
+/**
+ * JT/T 808 信号位
+ */
 public enum JT808SignalBit {
 
     /**
@@ -240,14 +243,29 @@ public enum JT808SignalBit {
         this.index = bitIndex;
     }
 
+    /**
+     * 获取位索引
+     * @return 位索引
+     */
     public int bitIndex() {
         return index;
     }
 
+    /**
+     * 获取信号名称
+     * @param locale 区域
+     * @return 信号名称
+     */
     public String signalName(Locale locale) {
         return JT808SignalNames.getSignalName(index, locale);
     }
 
+    /**
+     * 格式化车辆信号文本
+     * @param vehSignalBits 车辆信号位
+     * @param locale 区域
+     * @return 车辆信号文本
+     */
     public static String vehSignalText(int vehSignalBits, Locale locale) {
         StringBuilder str = new StringBuilder();
         boolean first = true;

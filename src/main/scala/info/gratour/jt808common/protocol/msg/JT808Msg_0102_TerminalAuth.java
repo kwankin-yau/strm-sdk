@@ -12,15 +12,29 @@ import info.gratour.jt808common.protocol.JT808Msg;
 import info.gratour.jt808common.protocol.JT808MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
 
+/**
+ * 终端鉴权消息 (0x0102)
+ */
 @JTMsgId(JT808MsgConsts.TERMINAL_AUTH_0102)
 public class JT808Msg_0102_TerminalAuth extends JT808Msg {
 
+    /**
+     * 消息ID
+     */
     public static final int MSG_ID = JT808MsgConsts.TERMINAL_AUTH_0102;
 
+    /**
+     * 构造函数
+     */
     public JT808Msg_0102_TerminalAuth() {
         setMsgId(MSG_ID);
     }
 
+    /**
+     * 构造函数
+     * 
+     * @param header 帧头
+     */
     public JT808Msg_0102_TerminalAuth(JT808FrameHeader header) {
         super(header);
     }
@@ -29,36 +43,56 @@ public class JT808Msg_0102_TerminalAuth extends JT808Msg {
     private String imei;
     private String softwareVer;
 
+    /**
+     * 获取鉴权码
+     * 
+     * @return 鉴权码
+     */
     public String getAuthCode() {
         return authCode;
     }
 
+    /**
+     * 设置鉴权码
+     * 
+     * @param authCode 鉴权码
+     */
     public void setAuthCode(String authCode) {
         this.authCode = authCode;
     }
 
     /**
-     *
-     * @return imei
-     * @since REV_2019
+     * 获取IMEI
+     * 
+     * @return IMEI
      */
     public String getImei() {
         return imei;
     }
 
+    /**
+     * 设置IMEI
+     * 
+     * @param imei IMEI
+     */
     public void setImei(String imei) {
         this.imei = imei;
     }
 
     /**
-     *
-     * @return software version
-     * @since REV_2019
+     * 获取固件版本
+     * 
+     * @return 固件版本
      */
     public String getSoftwareVer() {
         return softwareVer;
     }
 
+    /**
+     * 设置固件版本
+     * 
+     * @param softwareVer 固件版本
+     */
     public void setSoftwareVer(String softwareVer) {
         this.softwareVer = softwareVer;
     }

@@ -7,11 +7,12 @@
  *******************************************************************************/
 package info.gratour.jt808common.protocol.msg.types.cmdparams;
 
+import java.util.StringJoiner;
+
 import com.lucendar.strm.common.types.Expose;
+
 import info.gratour.jt808common.protocol.JT1078MsgConsts;
 import info.gratour.jtcommon.JTMsgId;
-
-import java.util.StringJoiner;
 
 /**
  * 查询音视频资源列表指令参数
@@ -110,6 +111,10 @@ public class CP_9205_QryAvRes implements JT808CmdParams {
         this.almFilter1078 = almFilter1078;
     }
 
+    /**
+     * 设置报警状态(808报警标志位和1078报警标志位)
+     * @param almState 报警状态
+     */
     public void setAlarmState(long almState) {
         this.almFilter808 = (int) almState;
         almState >>>= 32;
@@ -165,30 +170,58 @@ public class CP_9205_QryAvRes implements JT808CmdParams {
         this.stgTyp = stgTyp;
     }
 
+    /**
+     * 取逻辑通道号
+     * @return 逻辑通道号
+     */
     public int chan() {
         return chan;
     }
 
+    /**
+     * 设置逻辑通道号
+     * @param value 逻辑通道号
+     */
     public void chan(int value) {
         this.chan = (byte) value;
     }
 
+    /**
+     * 取808报警标志位
+     * @return 808报警标志位
+     */
     public int almFilter808() {
         return almFilter808 != null ? almFilter808 : 0;
     }
 
+    /**
+     * 设置808报警标志位
+     * @param value 808报警标志位
+     */
     public void almFilter808(int value) {
         this.almFilter808 = value;
     }
 
+    /**
+     * 取1078报警标志位
+     * @return 1078报警标志位
+     */
     public int almFilter1078() {
         return almFilter1078 != null ? almFilter1078 : 0;
     }
 
+    /**
+     * 设置1078报警标志位
+     * @param value 1078报警标志位
+     */
     public void almFilter1078(int value) {
         this.almFilter1078 = value;
     }
 
+    /**
+     * 取报警状态(808报警标志位和1078报警标志位)
+     * @return 报警状态
+     */
     public long almFilterLong() {
         long r = almFilter1078;
         r <<= 32;
@@ -197,32 +230,60 @@ public class CP_9205_QryAvRes implements JT808CmdParams {
         return r;
     }
 
+    /**
+     * 设置报警状态(808报警标志位和1078报警标志位)
+     * @param value 报警状态
+     */
     public void almFilterLong(long value) {
         long t = value >>> 32;
         this.almFilter1078 = (int) t;
         this.almFilter808 = (int) (value & 0xFFFF_FFFFL);
     }
 
+    /**
+     * 取音视频资源类型
+     * @return 音视频资源类型
+     */
     public int mediaTyp() {
         return mediaTyp;
     }
 
+    /**
+     * 设置音视频资源类型
+     * @param value 音视频资源类型
+     */
     public void mediaTyp(int value) {
         this.mediaTyp = (byte) value;
     }
 
+    /**
+     * 取码流类型
+     * @return 码流类型
+     */
     public int codeStrm() {
         return codeStrm;
     }
 
+    /**
+     * 设置码流类型
+     * @param value 码流类型
+     */
     public void codeStrm(int value) {
         this.codeStrm = (byte) value;
     }
 
+    /**
+     * 取存储器类型
+     * @return 存储器类型
+     */
     public int stgTyp() {
         return stgTyp;
     }
 
+    /**
+     * 设置存储器类型
+     * @param value 存储器类型
+     */
     public void stgTyp(int value) {
         this.stgTyp = (byte) value;
     }

@@ -14,7 +14,18 @@ import info.gratour.jt808common.protocol.msg.types.vtdr.JT808Vtdr_CmdArgs
 import io.netty.buffer.ByteBuf
 import org.apache.commons.codec.binary.Hex
 
+/**
+ * 行驶记录仪数据采集请求(0x8700)消息体编码器
+ */
 object MBEncoder808_8700_VtdrDataCollectReq extends AbstractJT808MsgBodyEncoder[JT808Msg_8700_VtdrDataCollectReq] {
+
+  /**
+   * 编码消息体
+   * @param protoVer 协议版本
+   * @param adasDialect ADAS 方言
+   * @param m 行驶记录仪数据采集请求消息
+   * @param out 输出字节缓冲区
+   */
   override protected def encodeBody(protoVer: Byte, adasDialect: AdasDialect, m: JT808Msg_8700_VtdrDataCollectReq, out: ByteBuf): Unit = {
     val p = checkNotNull(m.getParams, "params")
 
