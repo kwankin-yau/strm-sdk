@@ -25,6 +25,7 @@ public class OpenStrmResult {
     private Boolean recording;
     private AudioConfig audioConfig;
     private Boolean detectMediaTyp;
+    private Integer trace;
 
     /**
      * 构造函数
@@ -52,12 +53,13 @@ public class OpenStrmResult {
      * @param recording 是否录音
      * @param audioConfig 音频配置
      * @param detectMediaTyp 是否检测媒体类型
+     * @param trace 跟踪级别
      */
     public OpenStrmResult(String reqId, int channel, int proto, boolean ctrl, boolean ready, String mediaTyp, String playUrl, String wsUrl,
                           String taUrl,
                           int keepIntv, String host, int port, boolean tcp,
                           int port2019, boolean tcp2019, Boolean recording, AudioConfig audioConfig,
-                          Boolean detectMediaTyp) {
+                          Boolean detectMediaTyp, Integer trace) {
         this.reqId = reqId;
         this.channel = channel;
         this.proto = proto;
@@ -76,6 +78,7 @@ public class OpenStrmResult {
         this.recording = recording;
         this.audioConfig = audioConfig;
         this.detectMediaTyp = detectMediaTyp;
+        this.trace = trace;
     }
 
     /**
@@ -327,7 +330,7 @@ public class OpenStrmResult {
     }
 
     /**
-     * 设置服务端是否在播放的同时将媒体转储成录像文件。 
+     * 设置服务端是否在播放的同时将媒体转储成录像文件。
      * @param recording 服务端是否在播放的同时将媒体转储成录像文件
      */
     public void setRecording(Boolean recording) {
@@ -368,6 +371,22 @@ public class OpenStrmResult {
         this.detectMediaTyp = detectMediaTyp;
     }
 
+    /**
+     * 取跟踪级别
+     * @return 跟踪级别
+     */
+    public Integer getTrace() {
+        return trace;
+    }
+
+    /**
+     * 设置跟踪级别
+     * @param trace 跟踪级别
+     */
+    public void setTrace(Integer trace) {
+        this.trace = trace;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", OpenStrmResult.class.getSimpleName() + "[", "]")
@@ -389,6 +408,7 @@ public class OpenStrmResult {
                 .add("recording=" + recording)
                 .add("audioConfig=" + audioConfig)
                 .add("detectMediaTyp=" + detectMediaTyp)
+                .add("trace=" + trace)
                 .toString();
     }
 }

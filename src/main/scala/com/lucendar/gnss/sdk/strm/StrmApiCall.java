@@ -6,6 +6,9 @@ import java.util.StringJoiner;
  * 流媒体API调用记录
  */
 public class StrmApiCall {
+
+    private String callId;
+    private String appId;
     private String reqId;
     private long reqTm;
     private String apiName;
@@ -14,6 +17,38 @@ public class StrmApiCall {
     private String reqBody;
     private String resp;
     private Integer err;
+
+    /**
+     * 取日志ID
+     * @return 日志ID
+     */
+    public String getCallId() {
+        return callId;
+    }
+
+    /**
+     * 设置日志ID
+     * @param callId 日志ID
+     */
+    public void setCallId(String callId) {
+        this.callId = callId;
+    }
+
+    /**
+     * 返回 AppId
+     * @return AppId
+     */
+    public String getAppId() {
+        return appId;
+    }
+
+    /**
+     * 设置 AppId
+     * @param appId AppId
+     */
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     /**
      * 获取请求ID
@@ -146,6 +181,8 @@ public class StrmApiCall {
     @Override
     public String toString() {
         return new StringJoiner(", ", StrmApiCall.class.getSimpleName() + "[", "]")
+                .add("callId=" + callId)
+                .add("appId='" + appId + "'")
                 .add("reqId='" + reqId + "'")
                 .add("reqTm=" + reqTm)
                 .add("apiName='" + apiName + "'")

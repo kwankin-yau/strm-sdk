@@ -3,24 +3,16 @@ package com.lucendar.strm.common.strm;
 import java.util.StringJoiner;
 
 import com.lucendar.strm.common.StreamingApi;
-import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__LIVE;
-import static com.lucendar.strm.common.StreamingApi.CHANNEL_TYPE__REPLAY;
-import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__FLV;
-import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__HLS;
-import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTMP;
-import static com.lucendar.strm.common.StreamingApi.STRM_FORMAT__RTSP;
-import static com.lucendar.strm.common.StreamingApi.STRM_SUB_FORMAT__FMP4;
-import static com.lucendar.strm.common.StreamingApi.STRM_SUB_FORMAT__MPEGTS;
-import static com.lucendar.strm.common.StreamingApi.encodeStreamName;
-import static com.lucendar.strm.common.StreamingApi.isValidReqId;
-import static com.lucendar.strm.common.StreamingApi.isValidSimNo;
 import com.lucendar.strm.common.StrmMsg;
 import com.lucendar.strm.common.StrmMsgs;
+import info.gratour.common.error.ErrorWithCode;
+
+import static com.lucendar.strm.common.StreamingApi.*;
 
 /**
  * 打开流请求
  */
-public class OpenStrmReq implements StrmMsg {
+public class OpenStrmReq implements StrmMsg, Cloneable {
 
     /**
      * 流类型: 实时流
@@ -175,6 +167,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 数据类型是否包含服务器音频
+     *
      * @param dataType 数据类型
      * @return 是否包含服务器音频
      */
@@ -197,13 +190,14 @@ public class OpenStrmReq implements StrmMsg {
     /**
      * RTSP源
      */
-    public static class RtspSource {
+    public static class RtspSource implements Cloneable {
         private String url;
         private String user;
         private String pwd;
 
         /**
          * 获取RTSP源的URL
+         *
          * @return RTSP源的URL
          */
         public String getUrl() {
@@ -212,6 +206,7 @@ public class OpenStrmReq implements StrmMsg {
 
         /**
          * 设置RTSP源的URL
+         *
          * @param url RTSP源的URL
          */
         public void setUrl(String url) {
@@ -220,6 +215,7 @@ public class OpenStrmReq implements StrmMsg {
 
         /**
          * 获取RTSP源的访问用户名
+         *
          * @return RTSP源的访问用户名
          */
         public String getUser() {
@@ -228,6 +224,7 @@ public class OpenStrmReq implements StrmMsg {
 
         /**
          * 设置RTSP源的访问用户名
+         *
          * @param user RTSP源的访问用户名
          */
         public void setUser(String user) {
@@ -236,6 +233,7 @@ public class OpenStrmReq implements StrmMsg {
 
         /**
          * 获取RTSP源的访问密码
+         *
          * @return RTSP源的访问密码
          */
         public String getPwd() {
@@ -244,10 +242,20 @@ public class OpenStrmReq implements StrmMsg {
 
         /**
          * 设置RTSP源的访问密码
+         *
          * @param pwd RTSP源的访问密码
          */
         public void setPwd(String pwd) {
             this.pwd = pwd;
+        }
+
+        @Override
+        public RtspSource clone() {
+            try {
+                return (RtspSource) super.clone();
+            } catch (CloneNotSupportedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         @Override
@@ -298,7 +306,7 @@ public class OpenStrmReq implements StrmMsg {
     private Boolean detectMediaTyp;
     private Integer keepIntv;
     private String scheme;
-//    private Integer talkSendProtoVer;
+    //    private Integer talkSendProtoVer;
     private AudioConfig inputAudioCfg;
     private AudioConfig audioCfg;
     private RtspSource rtspSrc;
@@ -313,29 +321,30 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 构造函数
-     * @param appId 应用ID
-     * @param reqId 请求ID
-     * @param cb 回调函数
-     * @param user 用户信息
-     * @param typ 类型
-     * @param simNo 终端识别号
-     * @param chanId 通道ID
-     * @param fmt 格式，为 `StreamingApi.STRM_FORMAT__xxx` 常量之一 
-     * @param subFmt 子格式，为 `StreamingApi.STRM_SUB_FORMAT__xxx` 常量之一
-     * @param connIdx 连接索引
-     * @param clientData 客户端数据
-     * @param dataTyp 数据类型
-     * @param codeStrm 码流类型
-     * @param exclusive 是否独占
-     * @param record 是否记录
+     *
+     * @param appId          应用ID
+     * @param reqId          请求ID
+     * @param cb             回调函数
+     * @param user           用户信息
+     * @param typ            类型
+     * @param simNo          终端识别号
+     * @param chanId         通道ID
+     * @param fmt            格式，为 `StreamingApi.STRM_FORMAT__xxx` 常量之一
+     * @param subFmt         子格式，为 `StreamingApi.STRM_SUB_FORMAT__xxx` 常量之一
+     * @param connIdx        连接索引
+     * @param clientData     客户端数据
+     * @param dataTyp        数据类型
+     * @param codeStrm       码流类型
+     * @param exclusive      是否独占
+     * @param record         是否记录
      * @param detectMediaTyp 是否检测媒体类型
-     * @param keepIntv 保持间隔
-     * @param scheme 方案
-     * @param inputAudioCfg 输入音频配置
-     * @param audioCfg 音频配置
-     * @param rtspSrc RTSP源
-     * @param timedToken 时间令牌
-     * @param trace 跟踪模式
+     * @param keepIntv       保持间隔
+     * @param scheme         方案
+     * @param inputAudioCfg  输入音频配置
+     * @param audioCfg       音频配置
+     * @param rtspSrc        RTSP源
+     * @param timedToken     时间令牌
+     * @param trace          跟踪模式
      */
     public OpenStrmReq(
             String appId,
@@ -388,6 +397,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取应用ID
+     *
      * @return 应用ID
      */
     public String getAppId() {
@@ -396,6 +406,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置应用ID
+     *
      * @param appId 应用ID
      */
     public void setAppId(String appId) {
@@ -404,6 +415,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取请求ID
+     *
      * @return 请求ID
      */
     public String getReqId() {
@@ -412,6 +424,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置请求ID
+     *
      * @param reqId 请求ID
      */
     public void setReqId(String reqId) {
@@ -420,6 +433,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取通知回调地址
+     *
      * @return 通知回调地址
      */
     public String getCb() {
@@ -428,6 +442,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置通知回调地址
+     *
      * @param cb 通知回调地址
      */
     public void setCb(String cb) {
@@ -436,6 +451,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取用户信息
+     *
      * @return 用户信息
      */
     public StrmUserInfo getUser() {
@@ -444,6 +460,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置用户信息
+     *
      * @param user 用户信息
      */
     public void setUser(StrmUserInfo user) {
@@ -452,6 +469,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取流类型，为 `STRM_TYPE__LIVE` 或 `STRM_TYPE__REPLAY`
+     *
      * @return 流类型
      */
     public String getTyp() {
@@ -460,6 +478,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置流类型, 为 `STRM_TYPE__LIVE` 或 `STRM_TYPE__REPLAY`
+     *
      * @param typ 流类型
      */
     public void setTyp(String typ) {
@@ -468,6 +487,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取终端识别号
+     *
      * @return 终端识别号
      */
     public String getSimNo() {
@@ -476,6 +496,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置终端识别号
+     *
      * @param simNo 终端识别号
      */
     public void setSimNo(String simNo) {
@@ -484,6 +505,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取通道ID
+     *
      * @return 通道ID
      */
     public short getChanId() {
@@ -492,6 +514,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置通道ID
+     *
      * @param chanId 通道ID
      */
     public void setChanId(short chanId) {
@@ -500,6 +523,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取格式, 为 `StreamingApi.STRM_FORMAT__xxx` 常量之一
+     *
      * @return 格式
      */
     public byte getFmt() {
@@ -508,6 +532,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置格式, 为 `StreamingApi.STRM_FORMAT__xxx` 常量之一
+     *
      * @param fmt 格式
      */
     public void setFmt(byte fmt) {
@@ -516,6 +541,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取子格式, 为 `StreamingApi.STRM_SUB_FORMAT__xxx` 常量之一
+     *
      * @return 子格式
      */
     public String getSubFmt() {
@@ -524,6 +550,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置子格式, 为 `StreamingApi.STRM_SUB_FORMAT__xxx` 常量之一
+     *
      * @param subFmt 子格式
      */
     public void setSubFmt(String subFmt) {
@@ -533,6 +560,7 @@ public class OpenStrmReq implements StrmMsg {
     /**
      * 获取子格式, 为 `StreamingApi.STRM_SUB_FORMAT__xxx` 常量之一。
      * 如果子格式为空, 则返回 `STRM_SUB_FORMAT__FMP4`
+     *
      * @return 子格式
      */
     public String subFmtDef() {
@@ -544,6 +572,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取子格式, 为 `StreamingApi.STRM_SUB_FORMAT__xxx` 常量之一。
+     *
      * @param defaultMpeg2Ts 是否默认返回 `STRM_SUB_FORMAT__MPEGTS`
      * @return 子格式
      */
@@ -559,6 +588,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取连接索引
+     *
      * @return 连接索引
      */
     public byte getConnIdx() {
@@ -567,6 +597,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置连接索引
+     *
      * @param connIdx 连接索引
      */
     public void setConnIdx(byte connIdx) {
@@ -575,6 +606,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取客户端数据
+     *
      * @return 客户端数据
      */
     public String getClientData() {
@@ -583,6 +615,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置客户端数据，由调用者设置，用于记录调用者的上下文信息
+     *
      * @param clientData 客户端数据
      */
     public void setClientData(String clientData) {
@@ -591,6 +624,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 判断是否为实时流
+     *
      * @return 是否为实时流
      */
     public boolean isLive() {
@@ -599,6 +633,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 判断是否为对讲流
+     *
      * @return 是否为对讲流
      */
     public boolean isTalk() {
@@ -607,6 +642,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 判断是否为回放流
+     *
      * @return 是否为回放流
      */
     public boolean isReplay() {
@@ -615,6 +651,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取流名称
+     *
      * @return 流名称
      */
     public String streamName() {
@@ -636,6 +673,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置数据类型
+     *
      * @param dataTyp 数据类型
      */
     public void setDataTyp(int dataTyp) {
@@ -644,6 +682,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取码流类型
+     *
      * @return 码流类型
      */
     public byte getCodeStrm() {
@@ -652,6 +691,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置码流类型
+     *
      * @param codeStrm 码流类型
      */
     public void setCodeStrm(byte codeStrm) {
@@ -660,6 +700,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 判断是否独占打开流
+     *
      * @return 是否独占打开流
      */
     public boolean isExclusive() {
@@ -668,6 +709,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置是否独占打开流
+     *
      * @param exclusive 是否独占打开流
      */
     public void setExclusive(boolean exclusive) {
@@ -676,6 +718,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 取是否在播放的同时存储到服务器上
+     *
      * @return 是否在播放的同时存储到服务器上
      */
     public boolean isRecord() {
@@ -684,6 +727,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置是否在播放的同时存储到服务器上
+     *
      * @param record 是否在播放的同时存储到服务器上
      */
     public void setRecord(boolean record) {
@@ -692,24 +736,29 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取是否检测媒体类型
+     *
      * @return 是否检测媒体类型
      * @deprecated 已废弃，服务端总是检测媒体类型
      */
+    @Deprecated
     public Boolean getDetectMediaTyp() {
         return detectMediaTyp;
     }
 
     /**
      * 设置是否检测媒体类型
+     *
      * @param detectMediaTyp 是否检测媒体类型
      * @deprecated 已废弃，服务端总是检测媒体类型
      */
+    @Deprecated
     public void setDetectMediaTyp(Boolean detectMediaTyp) {
         this.detectMediaTyp = detectMediaTyp;
     }
 
     /**
      * 获取保持间隔, 单位为秒
+     *
      * @return 保持间隔
      */
     public Integer getKeepIntv() {
@@ -718,6 +767,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置保持间隔, 单位为秒
+     *
      * @param keepIntv 保持间隔
      */
     public void setKeepIntv(Integer keepIntv) {
@@ -726,6 +776,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取url的scheme（协议）
+     *
      * @return url的scheme
      */
     public String getScheme() {
@@ -734,6 +785,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置url的scheme（协议）
+     *
      * @param scheme url的scheme
      */
     public void setScheme(String scheme) {
@@ -742,6 +794,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取url的scheme（协议）
+     *
      * @param defaultValue 默认值
      * @return url的scheme
      */
@@ -762,6 +815,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取输入音频配置
+     *
      * @return 输入音频配置
      */
     public AudioConfig getInputAudioCfg() {
@@ -770,6 +824,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置输入音频配置
+     *
      * @param inputAudioCfg 输入音频配置
      */
     public void setInputAudioCfg(AudioConfig inputAudioCfg) {
@@ -778,6 +833,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取输出音频配置
+     *
      * @return 输出音频配置
      */
     public AudioConfig getAudioCfg() {
@@ -786,6 +842,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置输出音频配置
+     *
      * @param audioCfg 输出音频配置
      */
     public void setAudioCfg(AudioConfig audioCfg) {
@@ -794,6 +851,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取RTSP源
+     *
      * @return RTSP源
      */
     public RtspSource getRtspSrc() {
@@ -802,6 +860,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置RTSP源
+     *
      * @param rtspSrc RTSP源
      */
     public void setRtspSrc(RtspSource rtspSrc) {
@@ -810,6 +869,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取时间令牌
+     *
      * @return 时间令牌
      */
     public String getTimedToken() {
@@ -818,6 +878,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置时间令牌
+     *
      * @param timedToken 时间令牌
      */
     public void setTimedToken(String timedToken) {
@@ -826,6 +887,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取跟踪模式
+     *
      * @return 跟踪模式
      */
     public Integer getTrace() {
@@ -834,6 +896,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 设置跟踪模式
+     *
      * @param trace 跟踪模式
      */
     public void setTrace(Integer trace) {
@@ -842,6 +905,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取应用ID，如果为空，则返回默认应用ID
+     *
      * @return 应用ID
      */
     public String appIdDef() {
@@ -853,6 +917,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取跟踪模式，如果为空，则返回默认跟踪模式(禁止跟踪)
+     *
      * @return 跟踪模式
      */
     public int traceDef() {
@@ -864,6 +929,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 验证请求参数
+     *
      * @return 错误信息，如果无错误，则返回null
      */
     public String validate() {
@@ -1016,6 +1082,7 @@ public class OpenStrmReq implements StrmMsg {
 
     /**
      * 获取默认保持间隔
+     *
      * @param proto 协议
      * @return 默认保持间隔
      */
@@ -1044,6 +1111,45 @@ public class OpenStrmReq implements StrmMsg {
     public void normalizeAppId() {
         if (this.appId == null)
             this.appId = StreamingApi.DEFAULT_APP_ID;
+    }
+
+    /**
+     * 取请求的媒体类型
+     *
+     * @return 请求的媒体类型
+     */
+    public String getMediaType() {
+        if (isLive()) {
+            return switch (dataTyp) {
+                case DATA_TYPE__AV -> MEDIA_TYP__AUDIO_AND_VIDEO;
+                case DATA_TYPE__VIDEO -> MEDIA_TYP__VIDEO_ONLY;
+                case DATA_TYPE__TALK, DATA_TYPE__LISTEN -> MEDIA_TYP__AUDIO_ONLY;
+                default -> throw ErrorWithCode.internalError("Unsupported data type: " + dataTyp);
+            };
+        } else {
+            return switch (dataTyp) {
+                case REPLAY_MEDIA_TYPE__AV, REPLAY_MEDIA_TYPE__AUDIO_OR_VIDEO -> MEDIA_TYP__AUDIO_AND_VIDEO;
+                case REPLAY_MEDIA_TYPE__AUDIO -> MEDIA_TYP__AUDIO_ONLY;
+                case REPLAY_MEDIA_TYPE__VIDEO -> MEDIA_TYP__VIDEO_ONLY;
+                default -> throw ErrorWithCode.internalError("Unsupported data type: " + dataTyp);
+            };
+        }
+    }
+
+    @Override
+    public OpenStrmReq clone() {
+        try {
+            OpenStrmReq r = (OpenStrmReq) super.clone();
+            if (inputAudioCfg != null)
+                r.inputAudioCfg = inputAudioCfg.clone();
+            if (audioCfg != null)
+                r.audioCfg = audioCfg.clone();
+            if (rtspSrc != null)
+                r.rtspSrc = rtspSrc.clone();
+            return r;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -201,6 +201,24 @@ public class StrmReq implements CompoundStrmReqId {
     }
 
     /**
+     * 取是否实时播放请求
+     *
+     * @return 是否实时播放请求
+     */
+    public boolean isLive() {
+        return typ == TYP__LIVE;
+    }
+
+    /**
+     * 取是否回放请求
+     *
+     * @return 是否回放请求
+     */
+    public boolean isReplay() {
+        return typ == TYP__REPLAY;
+    }
+
+    /**
      * 获取流媒体请求时间
      * @return 流媒体请求时间, epoch millis
      */
@@ -212,7 +230,7 @@ public class StrmReq implements CompoundStrmReqId {
     /**
      * 设置流媒体请求时间
      * @param reqTm 流媒体请求时间, epoch millis
-     */ 
+     */
     public void setReqTm(long reqTm) {
         this.reqTm = reqTm;
     }

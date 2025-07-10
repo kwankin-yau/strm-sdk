@@ -1,3 +1,15 @@
+# 4.0.4 [2025-06-09]
+## 完善
+- 新增`VidInspectTask`, `VidInspectEvt` 等类的视频抓怕巡检相关类型定义
+- `OpenStrmResult` 增加 `trace` 属性
+- `StrmCtrlResult` 增加 `trace` 属性
+- `StrmReq` 增加 `isLive`, `isReplay` 方法
+- `StrmLogEntry` 的 `chanId` 属性的类型改为 `int`
+- `OpenStrmReq`、`RtspSrc` 支持 `Cloneable` 接口
+- `OpenStrmReq` 增加 `getMediaType` 方法
+- `StrmApiCall` 增加 `callId`, `appId` 属性
+
+
 # 4.0.3 [2025-05-31]
 ## 完善
 - `StrmMediaNotif` 增加 `playedAvDumpUrl` 属性

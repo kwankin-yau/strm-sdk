@@ -42,6 +42,11 @@ public class StrmLogEntry {
      */
     public static final String EVT__SRC_CLOSED = "srcClosed";
 
+    /**
+     * 下发终端指令
+     */
+    public static final String EVT__TERM_CMD = "termCmd";
+
 
     /**
      * 数据键：首次请求
@@ -88,10 +93,20 @@ public class StrmLogEntry {
      */
     public static final String DATA_KEY__CTRL = "ctrl";
 
+    /**
+     * 数据键：指令ID，消息号
+     */
+    public static final String DATA_KEY__CMD_ID = "cmdId";
+
+    /**
+     * 数据键：指令或请求参数
+     */
+    public static final String DATA_KEY__PARAMS = "params";
+
     private long time;
     private String appId;
     private String simNo;
-    private short chanId;
+    private int chanId;
     private boolean live;
     private String reqId;
     private String evtTyp;
@@ -149,7 +164,7 @@ public class StrmLogEntry {
      * 获取通道ID
      * @return 通道ID
      */
-    public short getChanId() {
+    public int getChanId() {
         return chanId;
     }
 
@@ -157,7 +172,7 @@ public class StrmLogEntry {
      * 设置通道ID
      * @param chanId 通道ID
      */
-    public void setChanId(short chanId) {
+    public void setChanId(int chanId) {
         this.chanId = chanId;
     }
 
