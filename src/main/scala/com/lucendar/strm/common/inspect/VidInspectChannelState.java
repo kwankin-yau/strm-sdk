@@ -58,6 +58,7 @@ public class VidInspectChannelState {
     private int state;
     private String path;
     private String url;
+    private String createTm;
     private Integer sz;
 
     /**
@@ -94,7 +95,7 @@ public class VidInspectChannelState {
 
     /**
      * 取结束时间
-     * @return 结束时间
+     * @return 结束时间，格式：yyyy-MM-dd HH:MM:SS
      */
     public String getEndTm() {
         return endTm;
@@ -102,7 +103,7 @@ public class VidInspectChannelState {
 
     /**
      * 设置结束时间
-     * @param endTm 结束时间
+     * @param endTm 结束时间，格式：yyyy-MM-dd HH:MM:SS
      */
     public void setEndTm(String endTm) {
         this.endTm = endTm;
@@ -154,6 +155,22 @@ public class VidInspectChannelState {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * 取截图文件的创建时间，仅当 `state` 为 `1` 时有效
+     * @return 截图文件的创建时间，格式：yyyy-MM-dd HH:MM:SS
+     */
+    public String getCreateTm() {
+        return createTm;
+    }
+
+    /**
+     * 设置截图文件的创建时间
+     * @param createTm 截图文件的创建时间，格式：yyyy-MM-dd HH:MM:SS
+     */
+    public void setCreateTm(String createTm) {
+        this.createTm = createTm;
     }
 
     /**

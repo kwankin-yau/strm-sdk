@@ -8,6 +8,7 @@
 - `OpenStrmReq`、`RtspSrc` 支持 `Cloneable` 接口
 - `OpenStrmReq` 增加 `getMediaType` 方法
 - `StrmApiCall` 增加 `callId`, `appId` 属性
+- 新增 `CombinedTraceLog`, `QryCombinedTraceLogReq` 类
 
 
 # 4.0.3 [2025-05-31]

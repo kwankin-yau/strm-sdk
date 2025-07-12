@@ -20,7 +20,7 @@ public class VidInspectTask {
     private String endTm;
     private int successCount;
 
-    private List<VidInspectChannelState> tasks;
+    private List<VidInspectChannelState> states;
 
     /**
      * 取任务ID
@@ -95,6 +95,35 @@ public class VidInspectTask {
     }
 
     /**
+     * 将通道ID列表转换成以逗号分隔的字符串
+     * @return 字符串
+     */
+    public String channelsStr() {
+        if (channels == null)
+            return null;
+
+        if (channels.length == 0) {
+            return "";
+        }
+
+        return Arrays.stream(channels).mapToObj(String::valueOf).collect(Collectors.joining(","));
+    }
+
+    /**
+     * 以逗号分隔的字符串设置通道ID列表
+     * @param s 字符串
+     */
+    public void channelsStr(String s) {
+        if (s == null)
+            channels = null;
+        else if (s.isEmpty())
+            channels = new int[0];
+        else {
+            channels = Arrays.stream(s.split(",")).mapToInt(Integer::parseInt).toArray();
+        }
+    }
+
+    /**
      * 设置通道 ID 列表
      * @param channels 通道 ID 列表
      */
@@ -154,16 +183,16 @@ public class VidInspectTask {
      * 取任务列表
      * @return 任务列表
      */
-    public List<VidInspectChannelState> getTasks() {
-        return tasks;
+    public List<VidInspectChannelState> getStates() {
+        return states;
     }
 
     /**
      * 设置任务列表
-     * @param tasks 任务列表
+     * @param states 任务列表
      */
-    public void setTasks(List<VidInspectChannelState> tasks) {
-        this.tasks = tasks;
+    public void setStates(List<VidInspectChannelState> states) {
+        this.states = states;
     }
 
     @Override
@@ -177,7 +206,7 @@ public class VidInspectTask {
                 .add("reqTm=" + reqTm)
                 .add("endTm=" + endTm)
                 .add("successCount=" + successCount)
-                .add("tasks=" + (tasks != null ? tasks.stream().map(Objects::toString).collect(Collectors.joining(", ")) : "null"))
+                .add("states=" + (states != null ? states.stream().map(Objects::toString).collect(Collectors.joining(", ")) : "null"))
                 .toString();
     }
 }
