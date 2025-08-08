@@ -20,16 +20,22 @@ public class GnssApiConnParams {
 
     /**
      * 构造函数
-     * @param apiBasePath API基础路径
+     * @param apiBasePath API基础路径，如果 apiBasePath 不是以 `/v1` 结尾，则自动添加
      * @param appId 应用ID
      * @param username 用户名
      * @param password 密码
      */
     public GnssApiConnParams(String apiBasePath, String appId, String username, String password) {
+        String path;
         if (apiBasePath.endsWith("/"))
-            this.apiBasePath = apiBasePath.substring(0, apiBasePath.length()-1);
+            path = apiBasePath.substring(0, apiBasePath.length()-1);
         else
-            this.apiBasePath = apiBasePath;
+            path = apiBasePath;
+
+        if (!path.endsWith("/v1"))
+            path = path + "/v1";
+
+        this.apiBasePath = path;
         this.appId = appId;
         this.username = username;
         this.password = password;

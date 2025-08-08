@@ -41,10 +41,11 @@ public class GnssLoginResult extends ServerInfo {
      * @param instance 实例ID
      * @param features 特征列表
      * @param config 配置
-     * @param api API URL
+     * @param api HTTP API URL
+     * @param wsApi Websocket API URL
      */
     public GnssLoginResult(String authToken, String ver, long startTm, String instance, String[] features, Map<String, String> config,
-                           String api) {
+                           String api, String wsApi) {
         this.authToken = authToken;
         setVer(ver);
         setStartTm(startTm);
@@ -52,6 +53,7 @@ public class GnssLoginResult extends ServerInfo {
         setFeatures(features);
         setConfig(config);
         setApi(api);
+        setWsApi(wsApi);
     }
 
     /**

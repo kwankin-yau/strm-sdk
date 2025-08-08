@@ -10,6 +10,9 @@
 - `StrmApiCall` 增加 `callId`, `appId` 属性
 - 新增 `CombinedTraceLog`, `QryCombinedTraceLogReq` 类
 
+## 不兼容变更
+- `GnssApiConnParams` 构造函数增加 apiBasePath 是否以 `/v1` 结尾的检查，如不是，则自动添加  
+
 
 # 4.0.3 [2025-05-31]
 ## 完善

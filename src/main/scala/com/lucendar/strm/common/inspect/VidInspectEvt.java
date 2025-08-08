@@ -1,5 +1,6 @@
 package com.lucendar.strm.common.inspect;
 
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 /**
@@ -8,39 +9,34 @@ import java.util.StringJoiner;
 public class VidInspectEvt {
 
     /**
-     * 事件类型: 任务创建
+     * 事件类型(任务事件): 任务创建成功
      */
     public static final String CREATED = "CREATED";
 
     /**
-     * 事件类型: 指令已下发
+     * 事件类型(任务事件)：由于其他原因，任务创建失败，可检查 errMsg 以获得错误信息。注意，创建失败事件后无 `END` 事件
      */
-    public static final String CMD_SENT = "CMD_SENT";
+    public static final String CREATE_FAILED = "CREATE_FAILED";
 
     /**
-     * 事件类型: 指令已应答（成功）
+     * 事件类型(任务事件)：创建任务失败，当前执行任务数已经达到限制数。注意，创建失败事件后无 `END` 事件
      */
-    public static final String CMD_ACK = "CMD_ACK";
+    public static final String TOO_MANY_REQUEST = "TOO_MANY_REQUEST";
 
     /**
-     * 事件类型: 指令已应答（失败）。出现这个事件后，最后还会有一个 `FAILED` 事件
+     * 事件类型(通道执行事件): （通道）截图已经完成
      */
-    public static final String CMD_FAILED = "CMD_FAILED";
+    public static final String CHANNEL_SUCCESS = "CHANNEL_SUCCESS";
 
     /**
-     * 事件类型: 开始接收码流
+     * 事件类型(通道执行事件): （通道）截图已经失败
      */
-    public static final String RECOGNIZED = "RECOGNIZED";
+    public static final String CHANNEL_FAILED = "CHANNEL_FAILED";
 
     /**
-     * 事件类型: 任务成功，已截图保存（结束态）
+     * 事件类型(任务事件): 任务已经结束
      */
-    public static final String SUCCESS = "SUCCESS";
-
-    /**
-     * 事件类型: 任务失败
-     */
-    public static final String FAILED = "FAILED";
+    public static final String END = "END";
 
     private String id;
 
@@ -50,9 +46,13 @@ public class VidInspectEvt {
 
     private String taskId;
 
+    private Integer taskState;
+
     private String simNo;
 
     private Integer chan;
+
+    private int[] channels;
 
     private long evtTm;
 
@@ -63,6 +63,8 @@ public class VidInspectEvt {
     private String errMsg;
 
     private String path;
+
+    private String url;
 
     /**
      * 取事件 ID
@@ -130,7 +132,7 @@ public class VidInspectEvt {
 
     /**
      * 取通道 ID
-     * @return 通道 ID
+     * @return 通道 ID。当事件类型为通道执行事件时，此属性才有效
      */
     public Integer getChan() {
         return chan;
@@ -138,10 +140,26 @@ public class VidInspectEvt {
 
     /**
      * 设置通道 ID
-     * @param chan 通道 ID
+     * @param chan 通道 ID。当事件类型为通道执行事件时，此属性才有效
      */
     public void setChan(Integer chan) {
         this.chan = chan;
+    }
+
+    /**
+     * 取通道ID列表
+     * @return 通道ID列表，。当事件类型为任务事件时，此属性才有效
+     */
+    public int[] getChannels() {
+        return channels;
+    }
+
+    /**
+     * 通道ID列表
+     * @param channels 通道ID列表，。当事件类型为任务时，此属性才有效
+     */
+    public void setChannels(int[] channels) {
+        this.channels = channels;
     }
 
     /**
@@ -158,6 +176,22 @@ public class VidInspectEvt {
      */
     public void setTaskId(String taskId) {
         this.taskId = taskId;
+    }
+
+    /**
+     * 取事件发生时任务的状态，见 `VidInspectTask.STATE__xxx` 系列常量
+     * @return 事件发生时任务的状态
+     */
+    public Integer getTaskState() {
+        return taskState;
+    }
+
+    /**
+     * 设置事件发生时任务的状态
+     * @param taskState 事件发生时任务的状态
+     */
+    public void setTaskState(Integer taskState) {
+        this.taskState = taskState;
     }
 
     /**
@@ -225,19 +259,35 @@ public class VidInspectEvt {
     }
 
     /**
-     * 取文件路径或下载URL
-     * @return 文件路径或下载URL
+     * 取文件路径
+     * @return 文件路径
      */
     public String getPath() {
         return path;
     }
 
     /**
-     * 设置文件路径或下载URL
-     * @param path 文件路径或下载URL
+     * 设置文件路径
+     * @param path 文件路径
      */
     public void setPath(String path) {
         this.path = path;
+    }
+
+    /**
+     * 取下载URL
+     * @return 下载URL
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * 设置下载URL
+     * @param url 下载URL
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -247,13 +297,16 @@ public class VidInspectEvt {
                 .add("instId='" + instId + "'")
                 .add("appId='" + appId + "'")
                 .add("taskId='" + taskId + "'")
+                .add("taskState=" + taskState)
                 .add("simNo='" + simNo + "'")
                 .add("chan=" + chan)
+                .add("channels=" + (channels != null ? Arrays.toString(channels) : "null"))
                 .add("evtTm=" + evtTm)
                 .add("evtTyp='" + evtTyp + "'")
                 .add("ackCode=" + ackCode)
                 .add("errMsg='" + errMsg + "'")
                 .add("path='" + path + "'")
+                .add("url='" + url + "'")
                 .toString();
     }
 }

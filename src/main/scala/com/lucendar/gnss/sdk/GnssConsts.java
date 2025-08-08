@@ -91,6 +91,11 @@ public class GnssConsts {
          */
         public static final String FEATURE__ALM_ATT_UPLOAD_STAT = "almAttUploadStat";
 
+        /**
+         * 是否支持视频巡检功能
+         */
+        public static final String FEATURE__VID_INSPECT = "vidInspect";
+
         private final String[] features;
 
         /**

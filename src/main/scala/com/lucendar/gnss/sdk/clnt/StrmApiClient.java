@@ -14,6 +14,7 @@ import info.gratour.common.error.ErrorWithCode;
 import info.gratour.common.types.rest.Reply;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.http.HttpClient;
 import java.time.Duration;
 
 import static com.lucendar.gnss.sdk.HttpConsts.HEADER_X_APP_ID;
@@ -31,7 +33,6 @@ import static info.gratour.common.types.rest.Reply.RAW_REPLY_TYPE;
  * HTTP API 客户端
  */
 public class StrmApiClient {
-
 
     /**
      * 日志记录器
@@ -64,19 +65,20 @@ public class StrmApiClient {
     private final MediaType JSON = MediaType.get("application/json");
 
     /**
-     * 创建HTTP客户端
-     * @param logging 是否记录HTTP调用
-     * @return HTTP客户端
+     * 创建 HTTP 客户端简便方法
+     *
+     * @param logger 日志器，不为 null 时，记录此客户端的调用日志
+     * @return HTTP 客户端
      */
-    protected OkHttpClient createHttpClient(boolean logging) {
+    public static OkHttpClient createHttpClient(@Nullable Logger logger) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(Duration.ofSeconds(15));
 
-        if (logging) {
+        if (logger != null) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(@NotNull String s) {
-                    LOGGER.info(s);
+                    logger.info(s);
                 }
             });
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -84,6 +86,15 @@ public class StrmApiClient {
         }
 
         return builder.build();
+    }
+
+    /**
+     * 创建HTTP客户端
+     * @param logging 是否记录HTTP调用
+     * @return HTTP客户端
+     */
+    protected static OkHttpClient createHttpClient(boolean logging) {
+        return createHttpClient(logging ? LOGGER : null);
     }
 
     /**
@@ -109,16 +120,25 @@ public class StrmApiClient {
     /**
      * 构造函数
      * @param connParams 连接参数
+     * @param httpClient HTTP 客户端
+     */
+    public StrmApiClient(
+            GnssApiConnParams connParams,
+            OkHttpClient httpClient) {
+        this.connParams = connParams;
+        this.httpClient = httpClient;
+        authHeaderValue = connParams.authorizationHeaderValue();
+    }
+
+    /**
+     * 构造函数
+     * @param connParams 连接参数
      * @param logging    是否记录HTTP调用
      */
     public StrmApiClient(
             GnssApiConnParams connParams,
             boolean logging) {
-
-        this.connParams = connParams;
-
-        httpClient = createHttpClient(logging);
-        authHeaderValue = connParams.authorizationHeaderValue();
+        this(connParams, createHttpClient(logging));
     }
 
     /**

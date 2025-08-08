@@ -14,6 +14,7 @@ public class ServerInfo {
     private String[] features;
     private Map<String, String> config;
     private String api;
+    private String wsApi;
 
     /**
      * 取服务端版本号
@@ -116,7 +117,7 @@ public class ServerInfo {
     }
 
     /**
-     * 取HTTP API地址，形如：`https://n11.gratour.info:7012`
+     * 取HTTP API地址，形如：`https://wx.gratour.info:7200`
      *
      * @return HTTP API地址
      */
@@ -132,6 +133,22 @@ public class ServerInfo {
         this.api = api;
     }
 
+    /**
+     * 取 Websocket API 地址，形如：`wss://wx.gratour.info:7211/ws2`
+     * @return Websocket API 地址
+     */
+    public String getWsApi() {
+        return wsApi;
+    }
+
+    /**
+     * 设置Websocket API 地址
+     * @param wsApi Websocket API 地址
+     */
+    public void setWsApi(String wsApi) {
+        this.wsApi = wsApi;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", ServerInfo.class.getSimpleName() + "[", "]")
@@ -141,6 +158,7 @@ public class ServerInfo {
                 .add("features=" + Arrays.toString(features))
                 .add("config=" + config)
                 .add("api='" + api + "'")
+                .add("wsApi='" + wsApi + "'")
                 .toString();
     }
 }

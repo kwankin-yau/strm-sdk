@@ -33,6 +33,15 @@ public class CombinedTraceLog {
     private String typ;
 
     /**
+     * 日志记录子类型
+     * 当 typ 为 `code-strm` 时，存放 `CommLog.evtTyp` 属性
+     * 当 typ 为 `strm-notif` 时，存放 `StrmMediaNotif.act` 属性
+     * 当 typ 为 `term-cmd` 时， 存放 `TermCmd.msgId` 属性
+     * 当 typ 为 `api-call` 时，存放 `StrmApiCall.apiName` 属性
+     */
+    private String subTyp;
+
+    /**
      * 日志时间，实际类型 long， epoch millis
      */
     private String ts;
@@ -45,7 +54,7 @@ public class CombinedTraceLog {
     private String desc;
 
     /**
-     * 日志数据，HEX 格式，可能不出现此属性，而仅出现 dataSz
+     * 日志数据，可能不出现此属性，而仅出现 dataSz
      */
     private String data;
 
@@ -68,6 +77,28 @@ public class CombinedTraceLog {
      */
     public void setTyp(String typ) {
         this.typ = typ;
+    }
+
+    /**
+     * 取日志记录子类型
+     * <ul>
+     *     <li>当 typ 为 `code-strm` 时，存放 `CommLog.evtTyp` 属性</li>
+     *     <li>当 typ 为 `strm-notif` 时，存放 `StrmMediaNotif.act` 属性</li>
+     *     <li>当 typ 为 `term-cmd` 时， 存放 `TermCmd.msgId` 属性</li>
+     *     <li>当 typ 为 `api-call` 时，存放 `StrmApiCall.apiName` 属性</li>
+     * </ul>
+     * @return 日志记录子类型
+     */
+    public String getSubTyp() {
+        return subTyp;
+    }
+
+    /**
+     * 设置日志记录子类型
+     * @param subTyp 日志记录子类型
+     */
+    public void setSubTyp(String subTyp) {
+        this.subTyp = subTyp;
     }
 
     /**
@@ -156,6 +187,7 @@ public class CombinedTraceLog {
     public String toString() {
         return new StringJoiner(", ", CombinedTraceLog.class.getSimpleName() + "[", "]")
                 .add("typ='" + typ + "'")
+                .add("subTyp='" + subTyp + "'")
                 .add("ts='" + ts + "'")
                 .add("ord='" + ord + "'")
                 .add("desc='" + desc + "'")

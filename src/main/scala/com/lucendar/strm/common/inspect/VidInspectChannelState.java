@@ -7,22 +7,32 @@ import java.util.StringJoiner;
 /**
  * 巡检抓拍任务通道执行状态
  */
-public class VidInspectChannelState {
+public class VidInspectChannelState implements Cloneable {
 
     /**
-     * 任务状态：执行中
+     * 通道任务状态：等待执行
      */
-    public static final int STATE__EXECUTING = 0;
+    public static final int STATE__WAIT_FOR_EXEC = 0;
 
     /**
-     * 任务状态：成功
+     * 通道任务状态：执行中
      */
-    public static final int STATE__SUCCESS = 1;
+    public static final int STATE__EXECUTING = 1;
 
     /**
-     * 任务状态：失败
+     * 通道任务状态：成功
+     */
+    public static final int STATE__SUCCESS = 2;
+
+    /**
+     * 通道任务状态：失败
      */
     public static final int STATE__FAILED = -1;
+
+    /**
+     * 通道任务状态：已取消
+     */
+    public static final int STATE__CANCELED = -2;
 
     /**
      * 获取资源包
@@ -94,16 +104,16 @@ public class VidInspectChannelState {
     }
 
     /**
-     * 取结束时间
-     * @return 结束时间，格式：yyyy-MM-dd HH:MM:SS
+     * 取执行结束时间，仅当 `state` 为 `2` 或 `-1`, `-2` 时有效
+     * @return 执行结束时间，格式：yyyy-MM-dd HH:MM:SS
      */
     public String getEndTm() {
         return endTm;
     }
 
     /**
-     * 设置结束时间
-     * @param endTm 结束时间，格式：yyyy-MM-dd HH:MM:SS
+     * 设置执行结束时间
+     * @param endTm 执行结束时间，格式：yyyy-MM-dd HH:MM:SS
      */
     public void setEndTm(String endTm) {
         this.endTm = endTm;
@@ -126,7 +136,7 @@ public class VidInspectChannelState {
     }
 
     /**
-     * 取截图的文件路径
+     * 取截图的文件路径，仅当 `state` 为 `2` 时有效
      * @return 截图的文件路径
      */
     public String getPath() {
@@ -142,7 +152,7 @@ public class VidInspectChannelState {
     }
 
     /**
-     * 取截图文件的下载URL
+     * 取截图文件的下载URL，仅当 `state` 为 `2` 时有效
      * @return 截图文件的下载URL
      */
     public String getUrl() {
@@ -158,7 +168,7 @@ public class VidInspectChannelState {
     }
 
     /**
-     * 取截图文件的创建时间，仅当 `state` 为 `1` 时有效
+     * 取截图文件的创建时间，仅当 `state` 为 `2` 时有效
      * @return 截图文件的创建时间，格式：yyyy-MM-dd HH:MM:SS
      */
     public String getCreateTm() {
@@ -174,7 +184,7 @@ public class VidInspectChannelState {
     }
 
     /**
-     * 取文件大小
+     * 取文件大小，仅当 `state` 为 `2` 时有效
      * @return 文件大小
      */
     public Integer getSz() {
@@ -189,6 +199,22 @@ public class VidInspectChannelState {
         this.sz = sz;
     }
 
+    /**
+     * 取是否结束态（成功或失败或已取消）
+     * @return 是否结束态
+     */
+    public boolean isFinalState() {
+        return state == STATE__SUCCESS || state == STATE__FAILED || state == STATE__CANCELED;
+    }
+
+    /**
+     * 取是否成功
+     * @return 是否成功
+     */
+    public boolean isSuccess() {
+        return state == STATE__SUCCESS;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", VidInspectChannelState.class.getSimpleName() + "[", "]")
@@ -200,5 +226,14 @@ public class VidInspectChannelState {
                 .add("url='" + url + "'")
                 .add("sz=" + sz)
                 .toString();
+    }
+
+    @Override
+    public VidInspectChannelState clone() {
+        try {
+            return  (VidInspectChannelState) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

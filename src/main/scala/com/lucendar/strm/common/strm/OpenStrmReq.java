@@ -1027,6 +1027,10 @@ public class OpenStrmReq implements StrmMsg, Cloneable {
             case STRM_FORMAT__RTMP:
                 break;
 
+            case STRM_FORMAT__RAW:
+                break;
+
+
             default:
                 return "fmt";
         }
@@ -1089,6 +1093,7 @@ public class OpenStrmReq implements StrmMsg, Cloneable {
     public static int defaultKeepInterval(int proto) {
         switch (proto) {
             case STRM_FORMAT__FLV:
+            case STRM_FORMAT__RAW:
                 return DEFAULT_INTERVAL__FLV;
 
             case STRM_FORMAT__HLS:
